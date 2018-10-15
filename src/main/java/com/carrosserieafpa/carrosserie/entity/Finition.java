@@ -10,14 +10,10 @@ public class Finition  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_finition;
-    private String finition;
+    private String libelle;
 
     @OneToMany(mappedBy = "finition")
     private Collection<Prestation> prestations;
-
-    public Finition(String finition) {
-        this.finition = finition;
-    }
 
     public Long getId_finition() {
         return id_finition;
@@ -27,19 +23,24 @@ public class Finition  implements Serializable {
         this.id_finition = id_finition;
     }
 
-    public String getFinition() {
-        return finition;
+    public String getLibelle() {
+        return libelle;
     }
 
-    public void setFinition(String finition) {
-        this.finition = finition;
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
     }
 
-    public Finition() {
+    public Collection<Prestation> getPrestations() {
+        return prestations;
+    }
+
+    public void setPrestations(Collection<Prestation> prestations) {
+        this.prestations = prestations;
     }
 
     @Override
     public String toString() {
-        return finition;
+        return libelle;
     }
 }

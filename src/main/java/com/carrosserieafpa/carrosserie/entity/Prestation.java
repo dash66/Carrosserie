@@ -39,18 +39,6 @@ public class Prestation {
     public Prestation() {
     }
 
-    public void setActe(Acte acte) {
-        this.acte = acte;
-    }
-
-   /* public Collection<Facturation> getFacturations() {
-        return facturations;
-    }
-
-    public void setFacturations(Collection<Facturation> facturations) {
-        this.facturations = facturations;
-    }*/
-
     public Long getId_presta() {
         return id_presta;
     }
@@ -71,12 +59,24 @@ public class Prestation {
         return acte;
     }
 
+    public void setActe(Acte acte) {
+        this.acte = acte;
+    }
+
     public Finition getFinition() {
         return finition;
     }
 
-    public void setFinition(Finition finitions) {
-        this.finition = finitions;
+    public void setFinition(Finition finition) {
+        this.finition = finition;
+    }
+
+    public Collection<Facturation> getFacturations() {
+        return facturations;
+    }
+
+    public void setFacturations(Collection<Facturation> facturations) {
+        this.facturations = facturations;
     }
 
     @Override
