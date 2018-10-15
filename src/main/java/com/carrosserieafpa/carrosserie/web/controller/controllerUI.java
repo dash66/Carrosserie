@@ -34,7 +34,7 @@ public class controllerUI {
     FacturationDao facturationDao;
 
 
-    @RequestMapping(value={"/menu", "/"})
+    @RequestMapping(value = {"/menu", "/"})
 
     public String menu(Model model) {
 
@@ -48,12 +48,18 @@ public class controllerUI {
     }
 
     @GetMapping("/enregistrer")
-    public String enregistrer(Model model, HttpServletRequest request) {
+    public String enregistrer(Model model) {
 
+        /*
+        Pour listes déroulantes
+         */
         List<Finition> finitions = finitionDao.findAll();
         List<Acte> actes = acteDao.findAll();
+
+        /*
+        Pour tableau de prestations
+         */
         List<Facturation> factures = facturationDao.findAll();
-        Facturation facture = new Facturation();
         Prestation prestation = new Prestation();
 
         model.addAttribute("prestation", prestation);
@@ -65,7 +71,7 @@ public class controllerUI {
     }
 
     @PostMapping("/enregistrer")
-    public String ajouterPresta(Prestation prestation, HttpServletRequest request) {
+    public String ajouterPresta(Prestation prestation) {
 
         System.out.println(prestation.toString());
 
@@ -75,10 +81,9 @@ public class controllerUI {
         Finition finition = prestation.getFinition();
         System.out.println(finition.toString());
 
-        Facturation facture = new Facturation();
-
         prestation.setId_presta(prestationDao.FindIdByActeAndFinition(acte, finition));
 
+        Facturation facture = new Facturation();
         facture.setPrestation(prestation);
         facturationDao.save(facture);
 
