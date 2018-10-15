@@ -81,11 +81,6 @@ public class Prestation {
 
     @Override
     public String toString() {
-        return "Prestation{" +
-                "id_presta=" + id_presta +
-                ", prix=" + prix +
-                ", acte=" + acte +
-                ", finition=" + finition +
-                '}';
+        return "Acte effectué : " + acte + ". Vous avez choisi en finition : " + finition + ". Le prix de cette prestation est de : " + prix + " euros";
     }
 }

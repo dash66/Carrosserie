@@ -44,9 +44,6 @@ public class Acte implements Serializable {
 
     @Override
     public String toString() {
-        return "Acte{" +
-                "id_acte=" + id_acte +
-                ", acte='" + acte + '\'' +
-                '}';
+        return acte;
     }
 }
