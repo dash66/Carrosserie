@@ -18,7 +18,7 @@ public class Prestation {
     private double prix;
 
     @ManyToOne()
-    @JoinColumn(name = "id_acte", referencedColumnName = "acte")
+    @JoinColumn(name = "id_acte", referencedColumnName = "id_acte")
     private Acte acte;
 
     @ManyToOne()
@@ -33,7 +33,7 @@ public class Prestation {
         this.prix = prix;
         this.acte = acte;
         this.finition = finition;
-//        this.facturations = facturations;
+
     }
 
     public Prestation() {

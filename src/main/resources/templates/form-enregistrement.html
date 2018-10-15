@@ -221,8 +221,8 @@
                 <div class="col-md-10">
                     <select id="TypeActe" th:field="*{acte}" class="select2">
                         <option hidden="" value="">Choisissez une intervention</option>
-                        <option th:each="acte : ${actes}" id="idActeSaMere" th:value="${acte.id_acte}"
-                                th:text="${acte.acte}"></option>
+                        <option th:each="libelle : ${actes}" id="idActeSaMere" th:value="${libelle.id_acte}"
+                                th:text="${libelle.libelle}"></option>
                     </select>
                 </div>
             </div>
