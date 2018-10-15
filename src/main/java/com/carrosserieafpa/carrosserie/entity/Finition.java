@@ -15,6 +15,10 @@ public class Finition  implements Serializable {
     @OneToMany(mappedBy = "finition")
     private Collection<Prestation> prestations;
 
+    public Finition(String finition) {
+        this.finition = finition;
+    }
+
     public Long getId_finition() {
         return id_finition;
     }
