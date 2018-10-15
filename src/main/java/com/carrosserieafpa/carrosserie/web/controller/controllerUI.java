@@ -34,11 +34,8 @@ public class controllerUI {
     FacturationDao facturationDao;
 
 
-<<<<<<< HEAD
     @RequestMapping(value={"/menu", "/"})
-=======
-    @RequestMapping("/menu")
->>>>>>> BrancheManu
+
     public String menu(Model model) {
 
         return "form-menu";
