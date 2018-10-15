@@ -1,0 +1,99 @@
+INSERT INTO Acte (acte) VALUES ('Complet intérieur extérieur');
+INSERT INTO Acte (acte) VALUES ('Complet extérieur');
+INSERT INTO Acte (acte) VALUES ('Complet sans peinture');
+INSERT INTO Acte (acte) VALUES ('Peinture 1 élément');
+INSERT INTO Acte (acte) VALUES ('Peinture 2 éléments');
+INSERT INTO Acte (acte) VALUES ('Peinture 3 éléments');
+INSERT INTO Acte (acte) VALUES ('Peinture 4 éléments');
+INSERT INTO Acte (acte) VALUES ('Capot');
+INSERT INTO Acte (acte) VALUES ('Pavillon');
+INSERT INTO Acte (acte) VALUES ('Peinture d''un bouclier');
+INSERT INTO Acte (acte) VALUES ('Raccord adjacent à l''élément');
+INSERT INTO Acte (acte) VALUES ('Réfection de phares');
+INSERT INTO Acte (acte) VALUES ('Moto, scooter');
+INSERT INTO Acte (acte) VALUES ('Vélomoteur');
+INSERT INTO Acte (acte) VALUES ('Cadre de vélo');
+INSERT INTO Acte (acte) VALUES ('Réparation plastique');
+INSERT INTO Acte (acte) VALUES ('Rénovation VO complète');
+
+INSERT INTO Finition (finition) VALUES ('Opaque brillant direct');
+INSERT INTO Finition (finition) VALUES ('Opaque brillant direct');
+INSERT INTO Finition (finition) VALUES ('Nacrées');
+INSERT INTO Finition (finition) VALUES ('Nacrées tricouches, teintes à effet');
+INSERT INTO Finition (finition) VALUES ('Pas de finition');
+
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (1, 1, 900.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (1, 2, 1100.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (1, 3, 1300.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (1, 4, 1500.00);
+
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (2, 1, 650.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (2, 2, 750.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (2, 3, 850.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (2, 4, 950.00);
+
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (3, 1, 177.90);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (3, 2, 177.90);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (3, 3, 177.90);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (3, 4, 177.90);
+
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (4, 1, 70.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (4, 2, 80.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (4, 3, 90.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (4, 4, 100.00);
+
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (5, 1, 140.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (5, 2, 150.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (5, 3, 160.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (5, 4, 170.00);
+
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (6, 1, 190.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (6, 2, 210.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (6, 3, 230.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (6, 4, 250.00);
+
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (7, 1, 240.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (7, 2, 270.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (7, 3, 300.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (7, 4, 350.00);
+
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (8, 1, 90.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (8, 2, 100.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (8, 3, 110.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (8, 4, 150.00);
+
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (9, 1, 99.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (9, 2,110.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (9, 3, 115.50);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (9, 4, 144.3);
+
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (10, 1, 70.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (10, 2, 80.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (10, 3, 90.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (10, 4, 100.00);
+
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (11, 1, 40.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (11, 2, 50.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (11, 3, 60.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (11, 4, 80.00);
+
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (12, 1, 15.00);
+
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (13, 1, 200.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (13, 2, 300.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (13, 3, 350.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (13, 4, 450.00);
+
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (14, 1, 100.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (14, 2, 110.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (14, 3, 120.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (14, 4, 150.00);
+
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (15, 1, 80.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (15, 2, 90.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (15, 3, 100.00);
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (15, 4, 130.00);
+
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (16, 5, 40.00);
+
+INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (17, 5, 100.00);
