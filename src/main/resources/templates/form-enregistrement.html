@@ -230,9 +230,9 @@
             <div class="form-group col-md-6">
                 <div class="col-md-10">
                     <select id="TypeFinition" th:field="*{finition}" class="select2">
-                        <option hidden="" value="">Choisissez un type de finition</option>
-                        <option th:each="finition : ${finitions}" id="idFinitionSaMere"
-                                th:value="${finition.id_finition}" th:text="${finition.finition}"></option>
+                        <option hidden="" value="">Choisissez un type de libelle</option>
+                        <option th:each="libelle : ${finitions}" id="idFinitionSaMere"
+                                th:value="${libelle.id_finition}" th:text="${libelle.libelle}"></option>
                     </select>
                 </div>
                 <script>
