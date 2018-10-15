@@ -221,13 +221,8 @@
                 <div class="col-md-10">
                     <select id="TypeActe" th:field="*{acte}" class="select2">
                         <option hidden="" value="">Choisissez une intervention</option>
-<<<<<<< Updated upstream
-                        <option th:each="libelle : ${actes}" id="idActeSaMere" th:value="${libelle.id_acte}"
-                                th:text="${libelle.libelle}"></option>
-=======
-                        <option th:each="acte : ${actes}" id="idActeSaMere" th:value="${acte.id_acte}"
+                        <option th:each="acte : ${actes}" th:value="${acte.id_acte}"
                                 th:text="${acte.libelle}"></option>
->>>>>>> Stashed changes
                     </select>
                 </div>
             </div>
@@ -236,7 +231,7 @@
                 <div class="col-md-10">
                     <select id="TypeFinition" th:field="*{finition}" class="select2">
                         <option hidden="" value="">Choisissez un type de finition</option>
-                        <option th:each="finition : ${finitions}" id="idFinitionSaMere"
+                        <option th:each="finition : ${finitions}"
                                 th:value="${finition.id_finition}" th:text="${finition.libelle}"></option>
                     </select>
                 </div>
@@ -247,8 +242,7 @@
         </div>
         <div class="col-md-1">
             <div class="form-group col-md-5 mt-5">
-                <input class="glyphicon glyphicon-plus btn btn-info" type="submit"
-                       value="Ajouter une intervention"/>
+                <input class="btn btn-info" type="submit" value="Ajouter une intervention"/>
             </div>
         </div>
 

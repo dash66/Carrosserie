@@ -16,11 +16,11 @@ INSERT INTO Acte (libelle) VALUES ('Cadre de vélo');
 INSERT INTO Acte (libelle) VALUES ('Réparation plastique');
 INSERT INTO Acte (libelle) VALUES ('Rénovation VO complète');
 
-INSERT INTO Finition (finition) VALUES ('Opaque brillant direct');
-INSERT INTO Finition (finition) VALUES ('Opaque brillant direct');
-INSERT INTO Finition (finition) VALUES ('Nacrées');
-INSERT INTO Finition (finition) VALUES ('Nacrées tricouches, teintes à effet');
-INSERT INTO Finition (finition) VALUES ('Pas de finition');
+INSERT INTO Finition (libelle) VALUES ('Opaque brillant direct');
+INSERT INTO Finition (libelle) VALUES ('Opaque et métallisées revernies');
+INSERT INTO Finition (libelle) VALUES ('Nacrées');
+INSERT INTO Finition (libelle) VALUES ('Nacrées tricouches, teintes à effet');
+INSERT INTO Finition (libelle) VALUES ('Pas de finition');
 
 INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (1, 1, 900.00);
 INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (1, 2, 1100.00);
