@@ -53,7 +53,7 @@ public class controllerUI {
         List<Finition> finitions = finitionDao.findAll();
         List<Acte> actes = acteDao.findAll();
         List<Facturation> factures = facturationDao.findAll();
-        Facturation facture = new Facturation();
+        //Facturation facture = new Facturation();
         Prestation prestation = new Prestation();
 
         model.addAttribute("prestation", prestation);
