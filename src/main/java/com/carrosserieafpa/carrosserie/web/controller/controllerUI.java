@@ -60,6 +60,10 @@ public class controllerUI {
         Pour tableau de prestations
          */
         List<Facturation> factures = facturationDao.findAll();
+<<<<<<< HEAD
+=======
+        //Facturation facture = new Facturation();
+>>>>>>> master
         Prestation prestation = new Prestation();
 
         model.addAttribute("prestation", prestation);

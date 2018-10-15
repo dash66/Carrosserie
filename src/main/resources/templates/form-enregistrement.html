@@ -220,7 +220,7 @@
             <div class="form-group col-md-6">
                 <div class="col-md-10">
                     <select id="TypeActe" th:field="*{acte}" class="select2">
-                        <option hidden="" value="">Choisissez un type d'intervention</option>
+                        <option hidden="" value="">Choisissez une intervention</option>
                         <option th:each="acte : ${actes}" id="idActeSaMere" th:value="${acte.id_acte}"
                                 th:text="${acte.acte}"></option>
                     </select>

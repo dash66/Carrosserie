@@ -40,9 +40,6 @@ public class Finition  implements Serializable {
 
     @Override
     public String toString() {
-        return "Finition{" +
-                "id_finition=" + id_finition +
-                ", finition='" + finition + '\'' +
-                '}';
+        return finition;
     }
 }
