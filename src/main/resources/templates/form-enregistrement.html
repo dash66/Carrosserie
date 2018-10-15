@@ -221,7 +221,7 @@
                 <label class="col-md-8" control-label for="TypeActe">Choisissez un type d'intervention</label>
                 <div class="col-md-10">
                     <select id="TypeActe" th:field="*{acte}" class="select2">
-                        <option th:each="acte : ${actes}" th:value="${acte.id_acte}" th:text="${acte.acte}"></option>
+                        <option th:each="acte : ${actes}" id="idActeSaMere" th:value="${acte.id_acte}" th:text="${acte.acte}"></option>
                     </select>
                 </div>
             </div>
@@ -231,7 +231,7 @@
 
                 <div class="col-md-10">
                     <select id="TypeFinition" th:field="*{finition}" class="select2">
-                        <option th:each="finition : ${finitions}" th:value="${finition.id_finition}" th:text="${finition.finition}"></option>
+                        <option th:each="finition : ${finitions}" id="idFinitionSaMere" th:value="${finition.id_finition}" th:text="${finition.finition}"></option>
                     </select>
                 </div>
                 <script>
