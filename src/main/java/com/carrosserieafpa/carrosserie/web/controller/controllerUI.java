@@ -68,12 +68,18 @@ public class controllerUI {
     public String ajouterPresta(Prestation prestation, HttpServletRequest request) {
 
         System.out.println(prestation.toString());
-        Long idActe = Long.valueOf(request.getParameter("idActeSaMere"));
-        Long idFinition = Long.valueOf(request.getParameter("idFinitionSaMere"));
+
+        Acte acte = prestation.getActe();
+        System.out.println(acte.toString());
+
+        Finition finition = prestation.getFinition();
+        System.out.println(finition.toString());
+
         Facturation facture = new Facturation();
-        Collection<Prestation> listeprestas = new ArrayList<>();
-        prestation.setId_presta(prestationDao.FindIdByActeAndFinition(idActe, idFinition));
-        listeprestas.add(prestation);
+
+        prestation.setId_presta(prestationDao.FindIdByActeAndFinition(acte, finition));
+
+        facture.setPrestation(prestation);
         facturationDao.save(facture);
 
         return "form-enregistrement";
