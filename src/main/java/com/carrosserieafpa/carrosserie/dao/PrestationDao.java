@@ -9,13 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface PrestationDao extends JpaRepository<Prestation, Long> {
 
-<<<<<<< HEAD
-
     @Query("SELECT id_presta FROM Prestation WHERE id_acte = :acte AND id_finition = :finition")
     Long FindIdByActeAndFinition(@Param("acte") Acte acte, @Param("finition") Finition finition);
 
-=======
-  @Query("SELECT id_presta FROM Prestation WHERE id_acte = :acte AND id_finition = :finition")
-  Long FindIdByActeAndFinition(@Param("acte") Acte acte, @Param("finition") Finition finition);
->>>>>>> master
 }

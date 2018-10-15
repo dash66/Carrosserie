@@ -81,6 +81,6 @@ public class Prestation {
 
     @Override
     public String toString() {
-        return "Acte effectué : " + acte + ". Vous avez choisi en finition : " + finition + ". Le prix de cette prestation est de : " + prix + " euros";
+        return "Acte effectué : " + acte + ". Vous avez choisi comme finition : " + finition + ". Le prix de cette prestation est de : " + prix + " euros";
     }
 }

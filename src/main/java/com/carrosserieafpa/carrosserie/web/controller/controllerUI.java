@@ -60,10 +60,7 @@ public class controllerUI {
         Pour tableau de prestations
          */
         List<Facturation> factures = facturationDao.findAll();
-<<<<<<< HEAD
-=======
-        //Facturation facture = new Facturation();
->>>>>>> master
+
         Prestation prestation = new Prestation();
 
         model.addAttribute("prestation", prestation);
@@ -80,10 +77,10 @@ public class controllerUI {
         System.out.println(prestation.toString());
 
         Acte acte = prestation.getActe();
-        System.out.println(acte.toString());
+      //  System.out.println(acte.toString());
 
         Finition finition = prestation.getFinition();
-        System.out.println(finition.toString());
+      //  System.out.println(finition.toString());
 
         prestation.setId_presta(prestationDao.FindIdByActeAndFinition(acte, finition));
 
