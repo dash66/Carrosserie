@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface PrestationDao extends JpaRepository<Prestation, Long> {
 
-    @Query("SELECT a.acte FROM Acte AS a JOIN Prestation AS p ON p.acte=a.id_acte WHERE a.id_acte = :id_acte")
-    String findJointureActe(@Param("id_acte") Long id_acte);
+    @Query("SELECT id_presta FROM Prestation WHERE id_acte = :id_acte AND id_finition = :id_finition")
+    Long FindIdByActeAndFinition(@Param("id_acte") Long id_acte, @Param("id_finition") Long id_finition);
+
 }
