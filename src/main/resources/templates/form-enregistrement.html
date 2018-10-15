@@ -213,25 +213,26 @@
 <!-- -------------         LISTES DÉROULANTES PRESTA         ---------------- -->
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
-<form class="form-horizontal mt-5 " th:action="@{/enregistrer}" method="post" id="prestaOk" th:object="${prestation}" >
+<form class="form-horizontal mt-5 " th:action="@{/enregistrer}" method="post" id="prestaOk" th:object="${prestation}">
     <div class="container">
         <div class="row">
             <legend>Enregistrement prestation</legend>
             <div class="form-group col-md-6">
-                <label class="col-md-8" control-label for="TypeActe">Choisissez un type d'intervention</label>
                 <div class="col-md-10">
                     <select id="TypeActe" th:field="*{acte}" class="select2">
-                        <option th:each="acte : ${actes}" id="idActeSaMere" th:value="${acte.id_acte}" th:text="${acte.acte}"></option>
+                        <option hidden="" value="">Choisissez un type d'intervention</option>
+                        <option th:each="acte : ${actes}" id="idActeSaMere" th:value="${acte.id_acte}"
+                                th:text="${acte.acte}"></option>
                     </select>
                 </div>
             </div>
             <!-- Select Basic -->
             <div class="form-group col-md-6">
-                <label class="col-md-8 control-label" for="TypeFinition">Choississez un type de finition</label>
-
                 <div class="col-md-10">
                     <select id="TypeFinition" th:field="*{finition}" class="select2">
-                        <option th:each="finition : ${finitions}" id="idFinitionSaMere" th:value="${finition.id_finition}" th:text="${finition.finition}"></option>
+                        <option hidden="" value="">Choisissez un type de finition</option>
+                        <option th:each="finition : ${finitions}" id="idFinitionSaMere"
+                                th:value="${finition.id_finition}" th:text="${finition.finition}"></option>
                     </select>
                 </div>
                 <script>
@@ -249,18 +250,18 @@
 </form>
 
 <!--<div th:if="${!prestations.isEmpty()}">-->
-    <table class="table table-bordered table-striped table-md">
-        <thead class="table-info">
-        <tr>
-            <th>Prestation</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="facture : ${factures}">
-            <td th:text="${facture.prestation}"></td>
-        </tr>
-        </tbody>
-    </table>
+<table class="table table-bordered table-striped table-md">
+    <thead class="table-info">
+    <tr>
+        <th>Prestation</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="facture : ${factures}">
+        <td th:text="${facture.prestation}"></td>
+    </tr>
+    </tbody>
+</table>
 <!--</div>-->
 
 <div class="row">

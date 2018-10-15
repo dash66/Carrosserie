@@ -85,10 +85,4 @@ public class controllerUI {
         return "form-enregistrement";
     }
 
-
-
-  /*public double prixFacture() {
-double prixFinal += presta.getPrix();
-    return prixFinal;
-  }*/
 }
