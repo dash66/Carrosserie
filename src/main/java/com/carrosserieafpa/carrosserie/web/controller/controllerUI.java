@@ -69,11 +69,15 @@ public class controllerUI {
   @PostMapping("/enregistrer")
   public String ajouterPresta(Prestation prestation) {
 
-    System.out.println(prestation.toString());
-
     Acte acte = prestation.getActe();
 
     Finition finition = prestation.getFinition();
+    Long id = prestationDao.FindIdByActeAndFinition(acte, finition);
+
+    prestation.setId_presta(id);
+    Facturation facture = new Facturation();
+    facture.setPrestation(prestation);
+    facturationDao.save(facture);
 
     return "form-enregistrement";
   }
@@ -87,14 +91,14 @@ public class controllerUI {
     return "form-enregistrement";
   }
 
-    @PostMapping("/ajouterFinition")
-    public String ajouterFinition(Finition finition, HttpServletRequest httpServletRequest) {
+  @PostMapping("/ajouterFinition")
+  public String ajouterFinition(Finition finition, HttpServletRequest httpServletRequest) {
 
-        finition.setLibelle(httpServletRequest.getParameter("libelle2"));
-        finitionDao.save(finition);
+    finition.setLibelle(httpServletRequest.getParameter("libelle2"));
+    finitionDao.save(finition);
 
-        return "form-enregistrement";
-    }
+    return "form-enregistrement";
+  }
 
   @PostMapping("/saveClientAndCar")
   public String ajouterClientEtVoiture(Client client, Voiture voiture, HttpServletRequest request) {
@@ -127,5 +131,17 @@ public class controllerUI {
     return "form-enregistrement";
   }
 
+  @GetMapping("/recherche")
+  public String effectuerUnerecherche(Client client, HttpServletRequest httpServletRequest) {
 
+   /* Long clientId =
+        clientDao.rechercherClientParNometPrenom(
+            httpServletRequest.getParameter("nom"), httpServletRequest.getParameter("prenom"));
+
+    Facturation resultatRecherche =
+        facturationDao.rechercheClientEtInfoParId(
+            Long.valueOf(httpServletRequest.getParameter("id")));*/
+
+    return "form-enregistrement";
+  }
 }
