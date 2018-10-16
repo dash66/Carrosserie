@@ -14,9 +14,9 @@ public class Facturation {
     private double prix;
     private String codeCouleur;
 
-    @ManyToOne()
-    @JoinColumn(name = "tamerelapute", referencedColumnName = "id")
-    private Client client;
+  @ManyToOne()
+  @JoinColumn(name = "client_id", referencedColumnName = "id")
+  private Client client;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_presta", referencedColumnName = "id_presta")
