@@ -133,8 +133,6 @@ public class controllerUI {
     return "form-enregistrement";
   }
 
-  //QUERY SQL
-    
 
   }
     return "form-enregistrement";
