@@ -6,16 +6,17 @@ import java.util.Collection;
 @Entity
 public class Facturation {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Column(nullable = true)
-  private double prix;
-  private String codeCouleur;
+    @Column(nullable = true)
+    private double prix;
+    private String codeCouleur;
 
-  @ManyToOne()
-  private Client client;
+    @ManyToOne()
+    @JoinColumn(name = "tamerelapute", referencedColumnName = "id")
+    private Client client;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_presta", referencedColumnName = "id_presta")

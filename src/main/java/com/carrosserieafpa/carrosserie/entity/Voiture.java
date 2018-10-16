@@ -20,6 +20,7 @@ public class Voiture {
     private String codeCouleur;
 
     @ManyToOne()
+    @JoinColumn(name = "client_id", referencedColumnName = "id")
     private Client client;
 
     public Voiture() {
