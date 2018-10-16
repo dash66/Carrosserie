@@ -3,6 +3,7 @@ package com.carrosserieafpa.carrosserie.web.controller;
 import com.carrosserieafpa.carrosserie.dao.*;
 import com.carrosserieafpa.carrosserie.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,30 +20,37 @@ import java.util.List;
 @Controller
 public class controllerUI {
 
-    @Autowired
-    ActeDao acteDao;
-    @Autowired
-    FinitionDao finitionDao;
-    @Autowired
-    PrestationDao prestationDao;
-    @Autowired
-    FacturationDao facturationDao;
-    @Autowired
-    VoitureDao voitureDao;
-    @Autowired
-    ClientDao clientDao;
+  @Autowired ActeDao acteDao;
+  @Autowired FinitionDao finitionDao;
+  @Autowired PrestationDao prestationDao;
+  @Autowired FacturationDao facturationDao;
+  @Autowired VoitureDao voitureDao;
+  @Autowired ClientDao clientDao;
+
+  @RequestMapping(value = "/rechercher")
+  public String recherche(Model model) {
+
+      List<Prestation> prestations = prestationDao.findAll();
+      model.addAttribute("prestations", prestations);
+
+      return "form-recherche";
+  }
 
 
-    @RequestMapping(value = {"/menu", "/"})
-    public String menu(Model model) {
-
-        return "form-menu";
-    }
 
 
-    @RequestMapping("/consulter")
-    public String consulter(Model model) {
 
+
+
+
+
+
+
+
+
+
+  @RequestMapping(value = {"/menu", "/"})
+  public String menu(Model model) {
         return "form-consulter";
     }
 
