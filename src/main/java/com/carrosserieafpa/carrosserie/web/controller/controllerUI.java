@@ -11,84 +11,95 @@ import com.carrosserieafpa.carrosserie.entity.Prestation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Controller
 public class controllerUI {
 
-    @Autowired
-    ActeDao acteDao;
+  @Autowired ActeDao acteDao;
 
-    @Autowired
-    FinitionDao finitionDao;
+  @Autowired FinitionDao finitionDao;
 
-    @Autowired
-    PrestationDao prestationDao;
+  @Autowired PrestationDao prestationDao;
 
-    @Autowired
-    FacturationDao facturationDao;
+  @Autowired FacturationDao facturationDao;
 
+  @RequestMapping(value = {"/menu", "/"})
+  public String menu(Model model) {
 
-    @RequestMapping(value = {"/menu", "/"})
+    return "form-menu";
+  }
 
-    public String menu(Model model) {
+  @RequestMapping("/consulter")
+  public String consulter(Model model) {
 
-        return "form-menu";
-    }
+    return "form-consulter";
+  }
 
-    @RequestMapping("/consulter")
-    public String consulter(Model model) {
+  @GetMapping("/enregistrer")
+  public String enregistrer(Model model) {
 
-        return "form-consulter";
-    }
+    /*
+    Pour listes déroulantes
+     */
+    List<Finition> finitions = finitionDao.findAll();
+    List<Acte> actes = acteDao.findAll();
 
-    @GetMapping("/enregistrer")
-    public String enregistrer(Model model) {
+    /*
+    Pour tableau de prestations
+     */
+    List<Facturation> factures = facturationDao.findAll();
 
-        /*
-        Pour listes déroulantes
-         */
-        List<Finition> finitions = finitionDao.findAll();
-        List<Acte> actes = acteDao.findAll();
+    Prestation prestation = new Prestation();
 
-        /*
-        Pour tableau de prestations
-         */
-        List<Facturation> factures = facturationDao.findAll();
+    model.addAttribute("prestation", prestation);
+    model.addAttribute("factures", factures);
+    model.addAttribute("actes", actes);
+    model.addAttribute("finitions", finitions);
 
-        Prestation prestation = new Prestation();
+    return "form-enregistrement";
+  }
 
-        model.addAttribute("prestation", prestation);
-        model.addAttribute("factures", factures);
-        model.addAttribute("actes", actes);
-        model.addAttribute("finitions", finitions);
+  @PostMapping("/enregistrer")
+  public String ajouterPresta(Prestation prestation) {
 
-        return "form-enregistrement";
-    }
+    System.out.println(prestation.toString());
 
-    @PostMapping("/enregistrer")
-    public String ajouterPresta(Prestation prestation) {
+    Acte acte = prestation.getActe();
+    //  System.out.println(acte.toString());
 
-        System.out.println(prestation.toString());
+    Finition finition = prestation.getFinition();
+    //  System.out.println(finition.toString());
 
-        Acte acte = prestation.getActe();
-      //  System.out.println(acte.toString());
+    prestation.setId_presta(prestationDao.FindIdByActeAndFinition(acte, finition));
 
-        Finition finition = prestation.getFinition();
-      //  System.out.println(finition.toString());
+    Facturation facture = new Facturation();
+    facture.setPrestation(prestation);
+    facturationDao.save(facture);
 
-        prestation.setId_presta(prestationDao.FindIdByActeAndFinition(acte, finition));
+    return "form-enregistrement";
+  }
 
-        Facturation facture = new Facturation();
-        facture.setPrestation(prestation);
-        facturationDao.save(facture);
+  @PostMapping("/ajouterActe")
+  public String ajouterActe(Acte acte, HttpServletRequest httpServletRequest) {
 
-        return "form-enregistrement";
-    }
+    acte.setLibelle(httpServletRequest.getParameter("libelle"));
+    acteDao.save(acte);
 
+    return "form-enregistrement";
+  }
+
+  @PostMapping("/ajouterFinition")
+  public String ajouterFinition(Finition finition, HttpServletRequest httpServletRequest) {
+
+    finition.setLibelle(httpServletRequest.getParameter("libelle2"));
+    finitionDao.save(finition);
+
+    return "form-enregistrement";
+  }
 }
