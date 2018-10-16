@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -28,15 +26,15 @@ public class controllerUI {
 
   @Autowired FacturationDao facturationDao;
 
-    @Autowired
-    ClientDao clientDao;
+  @Autowired ClientDao clientDao;
+
   @RequestMapping(value = {"/menu", "/"})
   public String menu(Model model) {
 
     return "form-menu";
   }
-    @Autowired
-    VoitureDao voitureDao;
+
+  @Autowired VoitureDao voitureDao;
 
   @RequestMapping("/consulter")
   public String consulter(Model model) {
@@ -79,12 +77,6 @@ public class controllerUI {
     Finition finition = prestation.getFinition();
     //  System.out.println(finition.toString());
 
-        Acte acte = prestation.getActe();
-        //  System.out.println(acte.toString());
-
-        Finition finition = prestation.getFinition();
-        //  System.out.println(finition.toString());
-
     return "form-enregistrement";
   }
 
@@ -94,35 +86,37 @@ public class controllerUI {
     acte.setLibelle(httpServletRequest.getParameter("libelle"));
     acteDao.save(acte);
 
-    @PostMapping("/saveClientAndCar")
-    public String ajouterClientEtVoiture(Client client, Voiture voiture, HttpServletRequest request) {
-        client.setPrenom(request.getParameter("prenom"));
-        client.setNom(request.getParameter("nom"));
-        client.setAdresse(request.getParameter("adresse"));
-        client.setTelephone(Integer.valueOf(request.getParameter("telephone")));
-        client.setEmail(request.getParameter("email"));
-        client.setNumAfpa(Long.valueOf(request.getParameter("numAfpa")));
+    return "form-enregistrement";
+  }
 
-        clientDao.save(client);
+  @PostMapping("/saveClientAndCar")
+  public String ajouterClientEtVoiture(Client client, Voiture voiture, HttpServletRequest request) {
+    client.setPrenom(request.getParameter("prenom"));
+    client.setNom(request.getParameter("nom"));
+    client.setAdresse(request.getParameter("adresse"));
+    client.setTelephone(Integer.valueOf(request.getParameter("telephone")));
+    client.setEmail(request.getParameter("email"));
+    client.setNumAfpa(Long.valueOf(request.getParameter("numAfpa")));
 
-        voiture.setMarque(request.getParameter("marque"));
-        voiture.setImmat(request.getParameter("immat"));
-        voiture.setModele(request.getParameter("modele"));
-        voiture.setCodeCouleur(request.getParameter("couleur"));
-        SimpleDateFormat dt = new SimpleDateFormat("yyyy-mm-dd");
-        Date date = null;
-        try {
-            date = dt.parse(request.getParameter("date"));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        voiture.setDate(date);
+    clientDao.save(client);
 
-        voitureDao.save(voiture);
-
-        return "form-enregistrement";
+    voiture.setMarque(request.getParameter("marque"));
+    voiture.setImmat(request.getParameter("immat"));
+    voiture.setModele(request.getParameter("modele"));
+    voiture.setCodeCouleur(request.getParameter("couleur"));
+    SimpleDateFormat dt = new SimpleDateFormat("yyyy-mm-dd");
+    Date date = null;
+    try {
+      date = dt.parse(request.getParameter("date"));
+    } catch (ParseException e) {
+      e.printStackTrace();
     }
+    voiture.setDate(date);
 
+    voitureDao.save(voiture);
+
+    return "form-enregistrement";
+  }
 
   @PostMapping("/ajouterFinition")
   public String ajouterFinition(Finition finition, HttpServletRequest httpServletRequest) {
@@ -132,8 +126,4 @@ public class controllerUI {
 
     return "form-enregistrement";
   }
-
-
-  }
-    return "form-enregistrement";
 }
