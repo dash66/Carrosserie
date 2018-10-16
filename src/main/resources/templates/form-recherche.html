@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.1.3/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap-glyphicons/bdd2cbfba0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" type="text/css" href="webjars/select2/4.0.5/css/select2.css"/>
+    <script type="text/javascript" src="webjars/jquery/3.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="webjars/select2/4.0.5/js/select2.js"></script>
+
+</head>
+
+<body>
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- -------------              EN-TÊTE DE PAGE              ---------------- -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <h2>Carrosserie AFPA</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                        <a th:href="@{|/menu|}" class="btn btn-block a-btn-slide-text">
+                            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                            <span><strong>Accueil</strong></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-md-2 col-md-7">
+                <img th:src="@{/images/anim2.png}" alt="Beau comme un camion tout neuf !"/>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- -------------   BOUTONS NOUVEAU CLIENT/CLIENT EXISTANT  ---------------- -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-1">
+            <a href="#rechercheClient" class="btn btn-info a-btn-slide-text m-2" data-toggle="modal"
+               data-target="#rechercheClient">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                <span><strong>Recherche un client</strong></span>
+            </a>
+        </div>
+        <div class="offset-3 col-md-1">
+            <a href="#rechercheVoiture" class="btn btn-info a-btn-slide-text m-2" data-toggle="modal"
+               data-target="#rechercheVoiture">
+                <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+                <span><strong>Recherche un véhicule</strong></span>
+            </a>
+        </div>
+        <div class="offset-4 col-md-1">
+            <a href="#rechercheFacture" class="btn btn-info a-btn-slide-text m-2" data-toggle="modal"
+               data-target="#rechercheFacture">
+                <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+                <span><strong>Recherche une facture</strong></span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- -------------         FORM MODAL RECHERCHE  CLIENT      ---------------- -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<form method="post" th:action="@{/recherche}">
+    <div class="modal" id="rechercheClient" tabindex="-1" role="dialog" href="#">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Rechercher par Client</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form class="modal-body">
+                    <form class="form-horizontal mt-5" method="post">
+                        <form>
+                            <!-- Form Name -->
+                            <div class="container">
+                                <!-- 1ere colonne du champ de saisie CLIENT-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <input id="prenom3" name="prenom" placeholder="Prénom"
+                                                       class="form-control input-md"
+                                                       type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <input id="nom3" name="nom" placeholder="Nom"
+                                                       class="form-control input-md"
+                                                       type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </form>
+                </form>
+                <div class="modal-footer">
+                    <input id="boutonSave3" class="btn btn-info glyphicon glyphicon-search" type="submit"
+                           value="Rechercher"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- -------------         FORM MODAL RECHERCHE  VOITURE     ---------------- -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<form method="post" th:action="@{/recherche}">
+    <div class="modal" id="rechercheVoiture" tabindex="-1" role="dialog" href="#">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Rechercher par véhicule</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form class="modal-body">
+                    <form class="form-horizontal mt-5" method="post">
+                        <form>
+                            <!-- Form Name -->
+                            <div class="container">
+                                <!-- 1ere colonne du champ de saisie CLIENT-->
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <input id="Immatriculation" name="immat" placeholder="Immatriculation"
+                                                       class="form-control input-md"
+                                                       type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <input id="Marque" name="marque" placeholder="Marque"
+                                                       class="form-control input-md"
+                                                       type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <input id="model" name="model" placeholder="Modèle"
+                                                       class="form-control input-md"
+                                                       type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </form>
+                </form>
+                <div class="modal-footer">
+                    <input id="boutonSave4" class="btn btn-info glyphicon glyphicon-search" type="submit"
+                           value="Rechercher"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- -------------         FORM MODAL RECHERCHE  FACTURE     ---------------- -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<form method="post" th:action="@{/recherche}">
+    <div class="modal" id="rechercheFacture" tabindex="-1" role="dialog" href="#">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Rechercher par Client</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form class="modal-body">
+                    <form class="form-horizontal mt-5" method="post">
+                        <form>
+                            <!-- Form Name -->
+                            <div class="container">
+                                <!-- 1ere colonne du champ de saisie CLIENT-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <input id="numFacture" name="id" placeholder="Numéro de facture"
+                                                       class="form-control input-md"
+                                                       type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </form>
+                </form>
+                <div class="modal-footer">
+                    <input id="boutonSave5" class="btn btn-info glyphicon glyphicon-search" type="submit"
+                           value="Rechercher"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- -------------         LISTE TARIFS & PRESTA     ---------------- -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<div class="container">
+    <table class="table table-bordered table-striped table-md">
+        <thead class="table-info">
+        <tr>
+            <th>Acte</th>
+            <th>Finition</th>
+            <th>Prix</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="presta : ${prestations}">
+            <td th:text="${presta.acte}"></td>
+            <td th:text="${presta.finition}"></td>
+            <td th:text="${presta.prix}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
