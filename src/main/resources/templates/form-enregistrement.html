@@ -135,7 +135,6 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-
                                             <div class="col-md-10">
                                                 <input id="email" name="email" placeholder="Email"
                                                        class="form-control input-md"
@@ -174,7 +173,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -211,12 +209,91 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-
                     <input id="boutonSave" class="btn btn-info" type="submit" value="&#128190; Enregistrer"/>
                 </div>
             </div>
         </div>
     </div>
+</form>
+
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- -------------         FORM MODAL RECHERCHE         ---------------- -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<form method="post" th:action="@{/recherche}">
+    <div class="modal" id="readClient" tabindex="-1" role="dialog" href="#">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Rechercher / Consulter</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form class="modal-body">
+                    <form class="form-horizontal mt-5" method="post">
+                        <form>
+                            <!-- Form Name -->
+
+                            <div class="container">
+                                <!-- 1ere colonne du champ de saisie CLIENT-->
+                                <label>Recherche par client</label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <input id="prenom2" name="prenom" placeholder="Prénom"
+                                                       class="form-control input-md"
+                                                       type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <input id="nom2" name="nom" placeholder="Nom"
+                                                       class="form-control input-md"
+                                                       type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label>Recherche par véhicule</label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <input id="Immatriculation" name="Immat" placeholder="Immatriculation"
+                                                       class="form-control input-md"
+                                                       type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label>Recherche par facture</label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <input id="facture" name="IdFacture" placeholder="Numéro de facture"
+                                                       class="form-control input-md"
+                                                       type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </form>
+                </form>
+                <div class="modal-footer">
+                    <input id="boutonSave2" class="btn btn-info glyphicon glyphicon-search" type="submit"
+                           value="Rechercher"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </form>
 
 <!-- ------------------------------------------------------------------------ -->
