@@ -134,13 +134,13 @@ public class controllerUI {
   @GetMapping("/recherche")
   public String effectuerUnerecherche(Client client, HttpServletRequest httpServletRequest) {
 
-   /* Long clientId =
+    Long clientId =
         clientDao.rechercherClientParNometPrenom(
             httpServletRequest.getParameter("nom"), httpServletRequest.getParameter("prenom"));
 
     Facturation resultatRecherche =
         facturationDao.rechercheClientEtInfoParId(
-            Long.valueOf(httpServletRequest.getParameter("id")));*/
+            Long.valueOf(httpServletRequest.getParameter("id")));
 
     return "form-enregistrement";
   }
