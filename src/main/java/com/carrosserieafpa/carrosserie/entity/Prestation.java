@@ -25,7 +25,7 @@ public class Prestation {
     @JoinColumn(name = "id_finition", referencedColumnName = "id_finition")
     private Finition finition;
 
-    @OneToMany(mappedBy = "prestation", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "prestation", cascade = CascadeType.ALL)
     private Collection<Facturation> facturations;
 
 

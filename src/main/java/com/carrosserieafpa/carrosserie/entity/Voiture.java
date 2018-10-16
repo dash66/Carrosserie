@@ -1,5 +1,7 @@
 package com.carrosserieafpa.carrosserie.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -10,20 +12,34 @@ public class Voiture {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String immat;
+    private String marque;
     private String modele;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
     private String codeCouleur;
 
     @ManyToOne()
     private Client client;
 
+    public Voiture() {
+    }
 
-    public Voiture(String immat, String modele, Date date, String codeCouleur, Client client) {
+    public Voiture(String immat, String marque, String modele, Date date, String codeCouleur, Client client) {
         this.immat = immat;
+        this.marque = marque;
         this.modele = modele;
         this.date = date;
         this.codeCouleur = codeCouleur;
         this.client = client;
+    }
+
+    public String getMarque() {
+        return marque;
+    }
+
+    public void setMarque(String marque) {
+        this.marque = marque;
     }
 
     public Long getId() {

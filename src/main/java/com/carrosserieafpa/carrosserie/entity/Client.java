@@ -40,6 +40,9 @@ public class Client {
     this.numAfpa = numAfpa;
   }
 
+  public Client() {
+  }
+
   public Long getId() {
     return id;
   }

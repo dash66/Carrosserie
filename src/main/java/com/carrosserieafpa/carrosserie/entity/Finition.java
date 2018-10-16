@@ -18,10 +18,6 @@ public class Finition  implements Serializable {
     public Finition() {
     }
 
-    public Finition(String finition) {
-        this.libelle = finition;
-    }
-
     public Long getId_finition() {
         return id_finition;
     }

@@ -74,7 +74,7 @@
 <!-- -------------         FORM MODAL NOUVEAU CLIENT         ---------------- -->
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
-<form method="post">
+<form method="post" th:action="@{/saveClientAndCar}">
     <div class="modal" id="addClient" tabindex="-1" role="dialog" href="#">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -158,7 +158,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="col-md-10">
-                                                <input id="voiture" name="voiture" placeholder="Voiture"
+                                                <input id="marque" name="marque" placeholder="Marque de la voiture"
                                                        class="form-control input-md"
                                                        type="text">
                                             </div>
@@ -191,6 +191,17 @@
                                                 <input id="couleur" name="couleur" placeholder="Couleur"
                                                        class="form-control input-md"
                                                        type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <input id="date" name="date" placeholder="Date du véhicule"
+                                                       class="form-control input-md"
+                                                       type="date">
                                             </div>
                                         </div>
                                     </div>
@@ -230,15 +241,11 @@
             <div class="form-group col-md-6">
                 <div class="col-md-10">
                     <select id="TypeFinition" th:field="*{finition}" class="select2">
-<<<<<<< HEAD
+
                         <option hidden="" value="">Choisissez un type de finition</option>
                         <option th:each="finition : ${finitions}"
                                 th:value="${finition.id_finition}" th:text="${finition.libelle}"></option>
-=======
-                        <option hidden="" value="">Choisissez un type de libelle</option>
-                        <option th:each="libelle : ${finitions}" id="idFinitionSaMere"
-                                th:value="${libelle.id_finition}" th:text="${libelle.libelle}"></option>
->>>>>>> master
+
                     </select>
                 </div>
                 <script>
