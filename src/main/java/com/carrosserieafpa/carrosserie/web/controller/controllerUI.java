@@ -63,6 +63,9 @@ public class controllerUI {
     model.addAttribute("actes", actes);
     model.addAttribute("finitions", finitions);
 
+
+    //test pull
+
     return "form-enregistrement";
   }
 
