@@ -221,6 +221,96 @@
 
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
+<!-- -------------         FORM MODAL NOUVEL ACTE         ---------------- -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<form method="post" th:action="@{/ajouterActe}">
+    <div class="modal" id="addActe" tabindex="-1" role="dialog" href="#">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Enregistrer un nouvel acte</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal mt-5" method="post">
+                        <fieldset>
+                            <!-- Form Name -->
+
+                            <div class="container">
+                                <!-- 1ere colonne du champ de saisie CLIENT-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <input id="libelle" name="libelle" placeholder="Nouvel Acte"
+                                                       class="form-control input-md"
+                                                       type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input id="boutonSaveActe" class="btn btn-info" type="submit"
+                                               value="&#128190; Enregistrer"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- -------------         FORM MODAL NOUVEL FINITION        ---------------- -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<form method="post" th:action="@{/ajouterFinition}">
+    <div class="modal" id="addFinition" tabindex="-1" role="dialog" href="#">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Enregistrer une nouvelle finition</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal mt-5" method="post">
+                        <fieldset>
+                            <!-- Form Name -->
+
+                            <div class="container">
+                                <!-- 1ere colonne du champ de saisie CLIENT-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <input id="libelle2" name="libelle2"
+                                                       placeholder="Nouveau type de finition"
+                                                       class="form-control input-md"
+                                                       type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input id="boutonSaveFinition" class="btn btn-info" type="submit"
+                                               value="&#128190; Enregistrer"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
 <!-- -------------         LISTES DÉROULANTES PRESTA         ---------------- -->
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
@@ -241,11 +331,17 @@
             <div class="form-group col-md-6">
                 <div class="col-md-10">
                     <select id="TypeFinition" th:field="*{finition}" class="select2">
+<<<<<<< HEAD
 
                         <option hidden="" value="">Choisissez un type de finition</option>
                         <option th:each="finition : ${finitions}"
                                 th:value="${finition.id_finition}" th:text="${finition.libelle}"></option>
 
+=======
+                        <option hidden="" value="">Choisissez un type de finition</option>
+                        <option th:each="finition : ${finitions}"
+                                th:value="${finition.id_finition}" th:text="${finition.libelle}"></option>
+>>>>>>> master
                     </select>
                 </div>
                 <script>
@@ -253,12 +349,31 @@
                 </script>
             </div>
         </div>
-        <div class="col-md-1">
-            <div class="form-group col-md-5 mt-5">
-                <input class="btn btn-info" type="submit" value="Ajouter une intervention"/>
+        <div>
+            <div class="col-md-1">
+                <div class="form-group col-md-5 mt-5">
+                    <input class="btn btn-info" type="submit" value="Ajouter une intervention"/>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="offset-1 col-md-3">
+                        <a href="#addCActe" class="btn btn-info a-btn-slide-text m-2" data-toggle="modal"
+                           data-target="#addActe">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            <span><strong>Ajouter un nouveau type d'acte</strong></span>
+                        </a>
+                    </div>
+                    <div class="offset-3 col-md-3">
+                        <a href="#addFinition" class="btn btn-info a-btn-slide-text m-2" data-toggle="modal"
+                           data-target="#addFinition">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            <span><strong>Ajouter un nouveau type de finition</strong></span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
 </form>
 
@@ -278,7 +393,7 @@
 <!--</div>-->
 
 <div class="row">
-    <div class="form-group col-md-5 mt-5" style="margin-left: 40%">
+    <div class="form-group offset-8 col-md-3 mt-5">
         <input class="btn btn-info" type="submit" value="&#128190; Enregistrer"/>
     </div>
 </div>
