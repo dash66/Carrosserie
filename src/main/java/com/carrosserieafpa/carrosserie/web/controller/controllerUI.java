@@ -51,7 +51,7 @@ public class controllerUI {
 
   @RequestMapping(value = {"/menu", "/"})
   public String menu(Model model) {
-        return "form-consulter";
+        return "form-menu";
     }
 
 
