@@ -5,49 +5,45 @@ import java.io.Serializable;
 import java.util.Collection;
 
 @Entity
-public class Finition  implements Serializable {
+public class Finition implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_finition;
-    private String libelle;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id_finition;
 
-    @OneToMany(mappedBy = "finition")
-    private Collection<Prestation> prestations;
+  private String libelle;
 
-    public Finition() {
-    }
+  @OneToMany(mappedBy = "finition")
+  private Collection<Prestation> prestations;
 
-    public Finition(String finition) {
-        this.libelle = finition;
-    }
+  public Finition() {}
 
-    public Long getId_finition() {
-        return id_finition;
-    }
+  public Long getId_finition() {
+    return id_finition;
+  }
 
-    public void setId_finition(Long id_finition) {
-        this.id_finition = id_finition;
-    }
+  public void setId_finition(Long id_finition) {
+    this.id_finition = id_finition;
+  }
 
-    public String getLibelle() {
-        return libelle;
-    }
+  public String getLibelle() {
+    return libelle;
+  }
 
-    public void setLibelle(String libelle) {
-        this.libelle = libelle;
-    }
+  public void setLibelle(String libelle) {
+    this.libelle = libelle;
+  }
 
-    public Collection<Prestation> getPrestations() {
-        return prestations;
-    }
+  public Collection<Prestation> getPrestations() {
+    return prestations;
+  }
 
-    public void setPrestations(Collection<Prestation> prestations) {
-        this.prestations = prestations;
-    }
+  public void setPrestations(Collection<Prestation> prestations) {
+    this.prestations = prestations;
+  }
 
-    @Override
-    public String toString() {
-        return libelle;
-    }
+  @Override
+  public String toString() {
+    return libelle;
+  }
 }
