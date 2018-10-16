@@ -18,7 +18,7 @@ public class Facturation {
   @JoinColumn(name = "client_id", referencedColumnName = "id")
   private Client client;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_presta", referencedColumnName = "id_presta")
     private Prestation prestation;
 
