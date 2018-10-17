@@ -353,8 +353,8 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="facture : ${factures}">
-        <td th:text="${facture.prestation}"></td>
+    <tr th:each="prestation : ${prestations}">
+        <td th:text="${prestation.toString()}"></td>
     </tr>
     </tbody>
 </table>
