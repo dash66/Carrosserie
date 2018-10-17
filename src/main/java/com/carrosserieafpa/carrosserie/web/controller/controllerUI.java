@@ -173,4 +173,9 @@ public class controllerUI {
 
         return "form-enregistrement";
     }
+
+    @RequestMapping("/admin")
+    public String menuAdministrateur (Model model) {
+        return "form-administrateur";
+    }
 }
