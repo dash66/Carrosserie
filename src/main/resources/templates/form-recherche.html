@@ -255,13 +255,13 @@
         <thead class="table-info">
         <tr>
             <td></td>
-            <td th:each="finition : ${finitions}" th:text="${finition}" style="font-weight: bold"></td>
+            <td th:each="finition : ${finitions}" th:text="${finition}" style="font-weight: bolder"></td>
         </tr>
         </thead>
 
         <tbody>
-        <tr th:each="acte : ${actes}">
-            <td th:text="${acte}" style="font-weight: bold"></td>
+       <tr th:each="acte : ${actes}">
+            <td th:text="${acte}" style="font-weight: bolder"></td>
             <td th:if="${prestation.acte} == ${acte}" th:each="prestation : ${prestations}"
                 th:text="${prestation.prix} =='0.0' ?  'n/a' : ${prestation.prix}" th:style="${prestation.prix} == '0.0' ? 'color: lightgrey' : 'color: black'"></td>
         </tr>
