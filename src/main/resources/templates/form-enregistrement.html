@@ -339,12 +339,24 @@
 </form>
 
 
-
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
 <!-- -------------         LISTES Prestations : Facturation  ---------------- -->
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
+<form method="post" th:action="@{/enregistrer}">
+    <table class="table table-bordered table-striped table-md">
+        <thead class="table-info">
+        <tr>
+            <th>Prestation</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="facture : ${factures}">
+            <td th:text="${facture.prestation}"></td>
+        </tr>
+        </tbody>
+    </table>
 
 <table class="table table-bordered table-striped table-md">
     <thead class="table-info">
@@ -360,19 +372,11 @@
 </table>
 <!--</div>-->
 
-
-
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- -------------         BOUTON ENREGISTRER                ---------------- -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
-
-<div class="row">
-    <div class="form-group offset-8 col-md-3 mt-5">
-        <input class="btn btn-info" type="submit" value="&#128190; Enregistrer"/>
+    <div class="row">
+        <div class="form-group offset-8 col-md-3 mt-5">
+            <input class="btn btn-info" type="submit" value="&#128190; Enregistrer"/>
+        </div>
     </div>
-</div>
-
+</form>
 </body>
 </html>
