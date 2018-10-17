@@ -28,6 +28,12 @@ public class controllerUI {
   @RequestMapping(value = "/rechercher")
   public String recherche(Model model) {
 
+    List<Finition> finitions = finitionDao.findAll();
+    model.addAttribute("finitions", finitions);
+
+    List<Acte> actes = acteDao.findAll();
+    model.addAttribute("actes", actes);
+
     List<Prestation> prestations = prestationDao.findAll();
     model.addAttribute("prestations", prestations);
 
@@ -155,14 +161,14 @@ public class controllerUI {
   }
 
   @RequestMapping("/admin")
-  public String menuAdministrateur(Model model, Acte acte, Finition finition, HttpServletRequest httpServletRequest) {
+  public String menuAdministrateur(
+      Model model, Acte acte, Finition finition, HttpServletRequest httpServletRequest) {
 
-      acte.setLibelle(httpServletRequest.getParameter("libelle"));
-      finition.setLibelle(httpServletRequest.getParameter("libelle2"));
+    acte.setLibelle(httpServletRequest.getParameter("libelle"));
+    finition.setLibelle(httpServletRequest.getParameter("libelle2"));
 
-      acteDao.save(acte);
-      finitionDao.save(finition);
-
+    acteDao.save(acte);
+    finitionDao.save(finition);
 
     return "form-administrateur";
   }

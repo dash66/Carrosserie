@@ -241,17 +241,17 @@
     <table class="table table-bordered table-striped table-md">
         <thead class="table-info">
         <tr>
-            <th>Acte</th>
-            <th>Finition</th>
-            <th>Prix</th>
+            <td></td>
+            <td th:each="finition : ${finitions}" th:text="${finition}"></td>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="presta : ${prestations}">
-            <td th:text="${presta.acte}"></td>
-            <td th:text="${presta.finition}"></td>
-            <td th:text="${presta.prix}"></td>
+        <tr th:each="acte : ${actes}">
+            <td th:text="${acte}"></td>
+            <!--<td th:each="finition : ${finitions} acte : ${actes}" th:text="${prestation.prix}"></td>-->
+            <td th:each="prestation : ${prestations}"  th:text="${prestation.prix}"></td>
         </tr>
+
         </tbody>
     </table>
 </div>

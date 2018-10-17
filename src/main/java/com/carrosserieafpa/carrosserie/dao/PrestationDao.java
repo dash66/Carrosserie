@@ -12,4 +12,6 @@ public interface PrestationDao extends JpaRepository<Prestation, Long> {
     @Query("SELECT id_presta FROM Prestation WHERE id_acte = :acte AND id_finition = :finition")
     Long FindIdByActeAndFinition(@Param("acte") Acte acte, @Param("finition") Finition finition);
 
+
+
 }
