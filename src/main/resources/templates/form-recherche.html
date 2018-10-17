@@ -251,7 +251,7 @@
         <tr th:each="acte : ${actes}">
             <td th:text="${acte}"></td>
             <td th:if="${prestation.acte} == ${acte}" th:each="prestation : ${prestations}"
-                th:text="${prestation.prix} == 0 ? 'n/a' : ${prestation.prix}"></td>
+                th:text="${prestation.prix} =='0.0' ?  'n/a' : ${prestation.prix}"></td>
         </tr>
         </tbody>
     </table>
