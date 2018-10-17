@@ -238,20 +238,21 @@
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
 <div class="container">
-    <table class="table table-bordered table-striped table-md">
+    <table class="table table-bordered table-striped table-md" th:object="${prestation}">
         <thead class="table-info">
         <tr>
             <td></td>
             <td th:each="finition : ${finitions}" th:text="${finition}"></td>
         </tr>
         </thead>
+
+
         <tbody>
         <tr th:each="acte : ${actes}">
             <td th:text="${acte}"></td>
-            <!--<td th:each="finition : ${finitions} acte : ${actes}" th:text="${prestation.prix}"></td>-->
-            <td th:each="prestation : ${prestations}"  th:text="${prestation.prix}"></td>
+            <td th:if="${prestation.acte} == ${acte}" th:each="prestation : ${prestations}"
+                th:text="${prestation.prix} == 0 ? 'n/a' : ${prestation.prix}"></td>
         </tr>
-
         </tbody>
     </table>
 </div>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -19,21 +20,15 @@ import java.util.List;
 @Controller
 public class controllerUI {
 
-    @Autowired
-    ActeDao acteDao;
-    @Autowired
-    FinitionDao finitionDao;
-    @Autowired
-    PrestationDao prestationDao;
-    @Autowired
-    FacturationDao facturationDao;
-    @Autowired
-    VoitureDao voitureDao;
-    @Autowired
-    ClientDao clientDao;
+  @Autowired ActeDao acteDao;
+  @Autowired FinitionDao finitionDao;
+  @Autowired PrestationDao prestationDao;
+  @Autowired FacturationDao facturationDao;
+  @Autowired VoitureDao voitureDao;
+  @Autowired ClientDao clientDao;
 
-    @RequestMapping(value = "/rechercher")
-    public String recherche(Model model) {
+  @RequestMapping(value = "/rechercher")
+  public String recherche(Model model) {
 
     List<Finition> finitions = finitionDao.findAll();
     model.addAttribute("finitions", finitions);
@@ -44,6 +39,9 @@ public class controllerUI {
     List<Prestation> prestations = prestationDao.findAll();
     model.addAttribute("prestations", prestations);
 
+    Prestation prestation = new Prestation();
+    model.addAttribute("prestation", prestation);
+
     return "form-recherche";
   }
 
@@ -52,11 +50,8 @@ public class controllerUI {
     return "form-menu";
   }
 
-  @RequestMapping("/enregistrer")
+  @GetMapping("/enregistrer")
   public String enregistrer(Model model) {
-
-    @GetMapping("/enregistrer")
-    public String enregistrer(Model model) {
 
     /*
     Pour listes déroulantes
@@ -67,45 +62,43 @@ public class controllerUI {
     /*
     Pour tableau de prestations
      */
-        List<Facturation> factures = facturationDao.findAll();
-        List<Prestation> prestations = null;
+    List<Facturation> factures = facturationDao.findAll();
+    List<Prestation> prestations = null;
 
     Prestation prestation = new Prestation();
 
-        model.addAttribute("prestation", prestation);
-        model.addAttribute("factures", factures);
-        model.addAttribute("actes", actes);
-        model.addAttribute("finitions", finitions);
-        model.addAttribute("prestations", prestations);
+    model.addAttribute("prestation", prestation);
+    model.addAttribute("factures", factures);
+    model.addAttribute("actes", actes);
+    model.addAttribute("finitions", finitions);
+    model.addAttribute("prestations", prestations);
 
-        /*Facturation facture = new Facturation();
-        facture.setPrestation(prestation);
-        facturationDao.save(facture);*/
+    /*Facturation facture = new Facturation();
+    facture.setPrestation(prestation);
+    facturationDao.save(facture);*/
 
-        return "form-enregistrement";
-    }
+    return "form-enregistrement";
+  }
 
-    @PostMapping("/enregistrer")
-    public String ajouterPresta(@ModelAttribute("prestation") Prestation prestation, Model model) {
+  @PostMapping("/enregistrer")
+  public String ajouterPresta(@ModelAttribute("prestation") Prestation prestation, Model model) {
 
-        List<Prestation> prestations = new ArrayList<Prestation>();
+    List<Prestation> prestations = new ArrayList<Prestation>();
 
-        Acte acte = prestation.getActe();
+    Acte acte = prestation.getActe();
 
     Finition finition = prestation.getFinition();
     Long id = prestationDao.FindIdByActeAndFinition(acte, finition);
 
-        prestation.setId_presta(id);
-        prestation.setPrix(prestationDao.findPrixById(prestation.getId_presta()));
-        prestations.add(prestation);
+    prestation.setId_presta(id);
+    prestation.setPrix(prestationDao.findPrixById(prestation.getId_presta()));
+    prestations.add(prestation);
 
-        System.out.println(prestation);
-        model.addAttribute("prestations", prestations);
+    System.out.println(prestation);
+    model.addAttribute("prestations", prestations);
 
-
-        return "form-enregistrement";
-    }
-
+    return "form-enregistrement";
+  }
 
   @PostMapping("/ajouterActe")
   public String ajouterActe(Acte acte, HttpServletRequest httpServletRequest) {

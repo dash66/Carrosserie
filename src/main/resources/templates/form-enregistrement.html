@@ -352,25 +352,12 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="facture : ${factures}">
-            <td th:text="${facture.prestation}"></td>
+        <tr th:each="prestation : ${prestations}">
+            <td th:text="${prestation.toString()}"></td>
         </tr>
         </tbody>
     </table>
-
-<table class="table table-bordered table-striped table-md">
-    <thead class="table-info">
-    <tr>
-        <th>Prestation</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="prestation : ${prestations}">
-        <td th:text="${prestation.toString()}"></td>
-    </tr>
-    </tbody>
-</table>
-<!--</div>-->
+    <!--</div>-->
 
     <div class="row">
         <div class="form-group offset-8 col-md-3 mt-5">
