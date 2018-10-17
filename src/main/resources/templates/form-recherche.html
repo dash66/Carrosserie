@@ -47,6 +47,19 @@
 
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
+<!-- -------------           ANNOTATION MAJORATION/ABATTEMENT---------------- -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<div class="alert alert-warning" style="text-align: center">
+    <p >Les tarifs présentés sont applicables aux véhicules de catégorie moyenne (Mégane, golf, etc..).</br>
+    Comptez 10% d'abattement pour les petits gabarits (Twigo, 10t, etc..). </br>
+    Comptez 10% de majoration pour les gros véhicules (berline, laguna, etc..).</br>
+    Comptez 20% de majoration pour les fourgons.</p>
+</div>
+
+
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
 <!-- -------------   BOUTONS NOUVEAU CLIENT/CLIENT EXISTANT  ---------------- -->
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
@@ -242,16 +255,15 @@
         <thead class="table-info">
         <tr>
             <td></td>
-            <td th:each="finition : ${finitions}" th:text="${finition}"></td>
+            <td th:each="finition : ${finitions}" th:text="${finition}" style="font-weight: bold"></td>
         </tr>
         </thead>
 
-
         <tbody>
         <tr th:each="acte : ${actes}">
-            <td th:text="${acte}"></td>
+            <td th:text="${acte}" style="font-weight: bold"></td>
             <td th:if="${prestation.acte} == ${acte}" th:each="prestation : ${prestations}"
-                th:text="${prestation.prix} =='0.0' ?  'n/a' : ${prestation.prix}"></td>
+                th:text="${prestation.prix} =='0.0' ?  'n/a' : ${prestation.prix}" th:style="${prestation.prix} == '0.0' ? 'color: lightgrey' : 'color: black'"></td>
         </tr>
         </tbody>
     </table>

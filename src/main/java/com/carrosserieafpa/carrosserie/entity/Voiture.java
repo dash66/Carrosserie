@@ -14,6 +14,7 @@ public class Voiture {
     private String immat;
     private String marque;
     private String modele;
+    private String categorie;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
@@ -26,21 +27,14 @@ public class Voiture {
     public Voiture() {
     }
 
-    public Voiture(String immat, String marque, String modele, Date date, String codeCouleur, Client client) {
+    public Voiture(String immat, String marque, String modele, String categorie, Date date, String codeCouleur, Client client) {
         this.immat = immat;
         this.marque = marque;
         this.modele = modele;
+        this.categorie = categorie;
         this.date = date;
         this.codeCouleur = codeCouleur;
         this.client = client;
-    }
-
-    public String getMarque() {
-        return marque;
-    }
-
-    public void setMarque(String marque) {
-        this.marque = marque;
     }
 
     public Long getId() {
@@ -59,12 +53,28 @@ public class Voiture {
         this.immat = immat;
     }
 
+    public String getMarque() {
+        return marque;
+    }
+
+    public void setMarque(String marque) {
+        this.marque = marque;
+    }
+
     public String getModele() {
         return modele;
     }
 
     public void setModele(String modele) {
         this.modele = modele;
+    }
+
+    public String getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
     }
 
     public Date getDate() {
@@ -96,7 +106,9 @@ public class Voiture {
         return "Voiture{" +
                 "id=" + id +
                 ", immat='" + immat + '\'' +
+                ", marque='" + marque + '\'' +
                 ", modele='" + modele + '\'' +
+                ", categorie='" + categorie + '\'' +
                 ", date=" + date +
                 ", codeCouleur='" + codeCouleur + '\'' +
                 ", client=" + client +
