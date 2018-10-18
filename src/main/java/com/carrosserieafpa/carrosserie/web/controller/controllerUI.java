@@ -120,7 +120,7 @@ public class controllerUI {
     client.setAdresse(request.getParameter("adresse"));
     client.setTelephone(Integer.valueOf(request.getParameter("telephone")));
     client.setEmail(request.getParameter("email"));
-    client.setNumAfpa(Long.valueOf(request.getParameter("numAfpa")));
+    client.setNumAfpa(request.getParameter("numAfpa"));
 
     clientDao.save(client);
 
