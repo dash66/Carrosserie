@@ -74,7 +74,7 @@
 <!-- -------------         FORM MODAL NOUVEAU CLIENT         ---------------- -->
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
-<form method="post" th:action="@{/saveClientAndCar}">
+<form method="post" th:action="@{/enregistrer}">
     <div class="modal" id="addClient" tabindex="-1" role="dialog" href="#">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -194,10 +194,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="col-md-10">
-                                                <input id="categorie" name="categorie"
-                                                       placeholder="Catégorie du véhicule"
-                                                       class="form-control input-md"
-                                                       type="text" required>
+                                                <select id="categorie" name="categorie" class="form-control input-md" required>
+                                                    <option hidden="" value="">Choisissez une categorie</option>
+                                                    <option value="petit">Petit gabarit</option>
+                                                    <option value="moyen">Moyen gabarit</option>
+                                                    <option value="gros">Gros gabarit</option>
+                                                    <option value="fourgon">Fourgon</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -309,7 +312,7 @@
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
 <form class="form-horizontal mt-5 " th:action="@{/enregistrer}" method="post" id="prestaOk" th:object="${prestation}">
-    <div class="container">
+    <div class="container" th:style="${client.nom == null} ? 'display: none'">
         <div class="row">
             <legend>Enregistrement prestation</legend>
             <div class="form-group col-md-6">
@@ -351,7 +354,7 @@
 <!-- -------------         LISTES Prestations : Facturation  ---------------- -->
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
-<form method="post" th:action="@{/enregistrer}">
+<form method="post" th:action="@{/enregistrer}" th:style="${prestation.acte == null} ? 'display: none'">
 
     <table class="table table-bordered table-striped table-md">
         <thead class="table-info">
