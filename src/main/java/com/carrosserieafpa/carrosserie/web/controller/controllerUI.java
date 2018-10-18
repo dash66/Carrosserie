@@ -211,4 +211,10 @@ public class controllerUI {
       this.affichageMenuAdministrateur(  model,  acte,  finition,  prestation);
     return "form-administrateur";
   }
+
+  @RequestMapping("/archive")
+    public String consulterArchive(Model model){
+
+      return "form-archive";
+  }
 }
