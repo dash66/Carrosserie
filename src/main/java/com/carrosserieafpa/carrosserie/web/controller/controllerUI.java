@@ -2,6 +2,7 @@ package com.carrosserieafpa.carrosserie.web.controller;
 
 import com.carrosserieafpa.carrosserie.dao.*;
 import com.carrosserieafpa.carrosserie.entity.*;
+import com.carrosserieafpa.carrosserie.web.controller.exceptions.ClientNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class controllerUI {
@@ -27,7 +29,7 @@ public class controllerUI {
   @Autowired VoitureDao voitureDao;
   @Autowired ClientDao clientDao;
 
-  @RequestMapping(value = "/rechercher")
+  @GetMapping(value = "/rechercher") // fonction de la page archive
   public String recherche(Model model) {
 
     List<Finition> finitions = finitionDao.findAll();
@@ -43,6 +45,67 @@ public class controllerUI {
     model.addAttribute("prestation", prestation);
 
     return "form-recherche";
+  }
+
+  @PostMapping(value = "/rechercher") // fonction de la page archive
+  public String recherche2(Model model, HttpServletRequest httpServletRequest) {
+
+    String prenom = httpServletRequest.getParameter("prenom3");
+    String nom = httpServletRequest.getParameter("nom3");
+    String immat = httpServletRequest.getParameter("Immatriculation");
+    String marque = httpServletRequest.getParameter("Marque");
+    String modele = httpServletRequest.getParameter("model");
+    Long numFacture = Long.valueOf(httpServletRequest.getParameter("numFacture"));
+
+    Long id = clientDao.rechercherClientParNometPrenom(nom, prenom);
+    Optional<Client> client = clientDao.findById(id);
+    Client michaelKnight = client.get();
+
+    Long id1 = voitureDao.rechercherVoitureparImmat(immat);
+    Optional<Voiture> voiture = voitureDao.findById(id1);
+    Voiture k2000 = voiture.get();
+
+    Long id2 = facturationDao.rechercherFactureParId(numFacture);
+    Optional<Facturation> facturation = facturationDao.findById(id2);
+    Facturation nightRider = facturation.get();
+
+    model.addAttribute("client", michaelKnight);
+    model.addAttribute("voiture", k2000);
+    model.addAttribute("facturation", nightRider);
+
+    return "form-archive";
+  }
+
+  @GetMapping(
+      "/recherche") // fonction de la page enregistrement, doit y retourner : trouver un client
+                    // existant pour préparer presta
+  public String effectuerUnerecherche(Client client, HttpServletRequest httpServletRequest) {
+
+    Long clientId =
+        clientDao.rechercherClientParNometPrenom(
+            httpServletRequest.getParameter("nom"), httpServletRequest.getParameter("prenom"));
+
+    Facturation resultatRecherche =
+        facturationDao.rechercheClientEtInfoParId(
+            Long.valueOf(httpServletRequest.getParameter("id")));
+
+    return "form-enregistrement";
+  }
+
+  @GetMapping(value = {"/admin", "/acte", "/finition"})
+  public String affichageMenuAdministrateur(
+      Model model, Acte acte, Finition finition, Prestation prestation) {
+
+    List<Finition> finitions = finitionDao.findAll();
+    List<Acte> actes = acteDao.findAll();
+
+    model.addAttribute("acte", acte);
+    model.addAttribute("finition", finition);
+    model.addAttribute("actes", actes);
+    model.addAttribute("finitions", finitions);
+    model.addAttribute("prestation", prestation);
+
+    return "form-administrateur";
   }
 
   @RequestMapping(value = {"/menu", "/"})
@@ -75,8 +138,8 @@ public class controllerUI {
     model.addAttribute("prestations", prestations);
     model.addAttribute("client", client);
 
-        return "form-enregistrement";
-    }
+    return "form-enregistrement";
+  }
 
   @PostMapping("/enregistrer")
   public String ajouterPresta(@ModelAttribute("prestation") Prestation prestation, Model model) {
@@ -88,12 +151,12 @@ public class controllerUI {
     Finition finition = prestation.getFinition();
     Long id = prestationDao.FindIdByActeAndFinition(acte, finition);
 
-        prestation.setId_presta(id);
-        prestation.setPrix(prestationDao.findPrixById(prestation.getId_presta()));
-        prestations.add(prestation);
-        model.addAttribute("prestations", prestations);
-        return "form-enregistrement";
-    }
+    prestation.setId_presta(id);
+    prestation.setPrix(prestationDao.findPrixById(prestation.getId_presta()));
+    prestations.add(prestation);
+    model.addAttribute("prestations", prestations);
+    return "form-enregistrement";
+  }
 
   @PostMapping("/ajouterActe")
   public String ajouterActe(Acte acte, HttpServletRequest httpServletRequest) {
@@ -120,7 +183,7 @@ public class controllerUI {
     client.setAdresse(request.getParameter("adresse"));
     client.setTelephone(Integer.valueOf(request.getParameter("telephone")));
     client.setEmail(request.getParameter("email"));
-    client.setNumAfpa(Long.valueOf(request.getParameter("numAfpa")));
+    client.setNumAfpa(request.getParameter("numAfpa"));
 
     clientDao.save(client);
 
@@ -144,36 +207,6 @@ public class controllerUI {
     return "form-enregistrement";
   }
 
-  @GetMapping("/recherche")
-  public String effectuerUnerecherche(Client client, HttpServletRequest httpServletRequest) {
-
-    Long clientId =
-        clientDao.rechercherClientParNometPrenom(
-            httpServletRequest.getParameter("nom"), httpServletRequest.getParameter("prenom"));
-
-    Facturation resultatRecherche =
-        facturationDao.rechercheClientEtInfoParId(
-            Long.valueOf(httpServletRequest.getParameter("id")));
-
-    return "form-enregistrement";
-  }
-
-  @GetMapping(value={"/admin", "/acte", "/finition"})
-  public String affichageMenuAdministrateur(
-      Model model, Acte acte, Finition finition, Prestation prestation) {
-
-    List<Finition> finitions = finitionDao.findAll();
-    List<Acte> actes = acteDao.findAll();
-
-    model.addAttribute("acte", acte);
-    model.addAttribute("finition", finition);
-    model.addAttribute("actes", actes);
-    model.addAttribute("finitions", finitions);
-    model.addAttribute("prestation", prestation);
-
-    return "form-administrateur";
-  }
-
   @PostMapping("/admin")
   public String ajouterPrix(HttpServletRequest httpServletRequest, Prestation prestation) {
 
@@ -185,29 +218,37 @@ public class controllerUI {
 
   @PostMapping("/acte")
   public String ajouterNouveauActe(
-      Model model, Finition finition, HttpServletRequest httpServletRequest, Acte acte, Prestation prestation) {
+      Model model,
+      Finition finition,
+      HttpServletRequest httpServletRequest,
+      Acte acte,
+      Prestation prestation) {
 
     acte.setLibelle(httpServletRequest.getParameter("libelle"));
 
     acteDao.save(acte);
-      this.affichageMenuAdministrateur(  model,  acte,  finition,  prestation);
+    this.affichageMenuAdministrateur(model, acte, finition, prestation);
     return "form-administrateur";
   }
 
   @PostMapping("/finition")
   public String ajouterNouveauFinition(
-      Model model, Acte acte, HttpServletRequest httpServletRequest, Finition finition, Prestation prestation) {
+      Model model,
+      Acte acte,
+      HttpServletRequest httpServletRequest,
+      Finition finition,
+      Prestation prestation) {
 
     finition.setLibelle(httpServletRequest.getParameter("libelle2"));
     finitionDao.save(finition);
 
-      this.affichageMenuAdministrateur(  model,  acte,  finition,  prestation);
+    this.affichageMenuAdministrateur(model, acte, finition, prestation);
     return "form-administrateur";
   }
 
   @RequestMapping("/archive")
-    public String consulterArchive(Model model){
+  public String consulterArchive(Model model) {
 
-      return "form-archive";
+    return "form-archive";
   }
 }
