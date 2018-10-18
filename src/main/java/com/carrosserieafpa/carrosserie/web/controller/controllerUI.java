@@ -173,16 +173,21 @@ public class controllerUI {
         return "form-enregistrement";
     }
 
-    @RequestMapping("/admin")
-    public String menuAdministrateur(
-            Model model, Acte acte, Finition finition, HttpServletRequest httpServletRequest) {
+    @GetMapping("/admin")
+    public String affichageMenuAdministrateur() {
+
+        return "form-administrateur";
+    }
+
+    @PostMapping("/admin")
+    public String ajouterNouveauActeEtFinition(
+            Model model, HttpServletRequest httpServletRequest, Acte acte, Finition finition) {
 
         acte.setLibelle(httpServletRequest.getParameter("libelle"));
         finition.setLibelle(httpServletRequest.getParameter("libelle2"));
 
         acteDao.save(acte);
         finitionDao.save(finition);
-
         return "form-administrateur";
     }
-}
+ }
