@@ -47,7 +47,7 @@
         <!-- -------------           FORM MODAL NOUVEL ACTE          ---------------- -->
         <!-- ------------------------------------------------------------------------ -->
         <!-- ------------------------------------------------------------------------ -->
-        <form method="post" th:action="@{/admin}">
+        <form method="post" th:action="@{/acte}">
             <div class="modal" id="addActe" tabindex="-1" role="dialog" href="#">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
@@ -91,7 +91,7 @@
         <!-- -------------         FORM MODAL NOUVEL FINITION        ---------------- -->
         <!-- ------------------------------------------------------------------------ -->
         <!-- ------------------------------------------------------------------------ -->
-        <form method="post" th:action="@{/admin}">
+        <form method="post" th:action="@{/finition}">
             <div class="modal" id="addFinition" tabindex="-1" role="dialog" href="#">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
@@ -130,34 +130,110 @@
                 </div>
             </div>
         </form>
-
-        </div>
     </div>
+
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- -------------           FORM MODAL NOUVEAU PRIX          ---------------- -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <form method="post" th:action="@{/admin}">
+        <div class="modal" id="addPrix" tabindex="-1" role="dialog" href="#">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Définir un prix</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal mt-5" method="post" th:object="${prestation}">
+                            <fieldset>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <div class="col-md-10">
+                                                <select id="TypeActe1" th:field="*{acte}" class="select2">
+                                                    <option hidden="" value="">Choisissez une intervention</option>
+                                                    <option th:each="acte : ${actes}" th:value="${acte.id_acte}"
+                                                            th:text="${acte.libelle}"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <div class="col-md-10">
+                                                <select id="TypeFinition1" th:field="*{finition}" class="select2">
+                                                    <option hidden="" value="">Choisissez un type de finition</option>
+                                                    <option th:each="finition : ${finitions}"
+                                                            th:value="${finition.id_finition}"
+                                                            th:text="${finition.libelle}"></option>
+                                                </select>
+                                            </div>
+                                            <script>
+                                                $('.select2').select2();
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div class="col-md-10">
+                                                        <input id="libelle3" name="libelle3"
+                                                               placeholder="Définir un prix"
+                                                               class="form-control input-md"
+                                                               type="text">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <input id="boutonSavePrix" class="btn btn-info" type="submit"
+                                                       value="&#128190; Enregistrer"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
+
 
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
 <!-- -------------   BOUTONS NOUVEL ACTE/NOUVELLE FINITION   ---------------- -->
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
- <div class="container">
-                <div class="row">
-                    <div class="offset-1 col-md-3">
-                        <a href="#addActe" class="btn btn-info a-btn-slide-text m-2" data-toggle="modal"
-                           data-target="#addActe">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                            <span><strong>Ajouter un nouveau type d'acte</strong></span>
-                        </a>
-                    </div>
-                    <div class="offset-3 col-md-3">
-                        <a href="#addFinition" class="btn btn-info a-btn-slide-text m-2" data-toggle="modal"
-                           data-target="#addFinition">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                            <span><strong>Ajouter un nouveau type de finition</strong></span>
-                        </a>
-                    </div>
-                </div>
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="offset-1 col-md-3">
+            <a href="#addActe" class="btn btn-info a-btn-slide-text m-2" data-toggle="modal"
+               data-target="#addActe">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                <span><strong>Ajouter un nouveau type d'acte</strong></span>
+            </a>
+        </div>
+        <div class="offset-3 col-md-3">
+            <a href="#addFinition" class="btn btn-info a-btn-slide-text m-2" data-toggle="modal"
+               data-target="#addFinition">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                <span><strong>Ajouter un nouveau type de finition</strong></span>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="offset-4 col-md-3">
+            <a href="#addPrix" class="btn btn-info a-btn-slide-text m-2" data-toggle="modal"
+               data-target="#addPrix">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                <span><strong>Définir un prix</strong></span>
+            </a>
+        </div>
+    </div>
+</div>
 </body>
 </html>
 
