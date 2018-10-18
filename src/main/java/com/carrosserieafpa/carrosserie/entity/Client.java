@@ -1,5 +1,7 @@
 package com.carrosserieafpa.carrosserie.entity;
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -12,10 +14,15 @@ public class Client {
 
   private String prenom;
   private String nom;
+
+  @Nullable
   private String adresse;
+
+  @Nullable
   private String email;
+
   private int telephone;
-  private Long numAfpa;
+  private String numAfpa;
 
   @OneToMany(mappedBy = "client")
   private Collection<Voiture> voiture;
@@ -23,21 +30,15 @@ public class Client {
   @OneToMany(mappedBy = "client")
   private Collection<Facturation> facturation;
 
-  public Client(
-      Long id,
-      String prenom,
-      String nom,
-      String adresse,
-      String email,
-      int telephone,
-      Long numAfpa) {
-    this.id = id;
+  public Client(String prenom, String nom, @Nullable String adresse, @Nullable String email, int telephone, String numAfpa, Collection<Voiture> voiture, Collection<Facturation> facturation) {
     this.prenom = prenom;
     this.nom = nom;
     this.adresse = adresse;
     this.email = email;
     this.telephone = telephone;
     this.numAfpa = numAfpa;
+    this.voiture = voiture;
+    this.facturation = facturation;
   }
 
   public Client() {
@@ -91,11 +92,11 @@ public class Client {
     this.telephone = telephone;
   }
 
-  public Long getNumAfpa() {
+  public String getNumAfpa() {
     return numAfpa;
   }
 
-  public void setNumAfpa(Long numAfpa) {
+  public void setNumAfpa(String numAfpa) {
     this.numAfpa = numAfpa;
   }
 

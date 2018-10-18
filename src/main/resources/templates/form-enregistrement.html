@@ -95,7 +95,7 @@
                                             <div class="col-md-10">
                                                 <input id="prenom" name="prenom" placeholder="Prénom"
                                                        class="form-control input-md"
-                                                       type="text">
+                                                       type="text" required>
                                             </div>
                                         </div>
                                     </div>
@@ -105,12 +105,11 @@
                                             <div class="col-md-10">
                                                 <input id="nom" name="nom" placeholder="Nom"
                                                        class="form-control input-md"
-                                                       type="text">
+                                                       type="text" required>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -126,19 +125,18 @@
                                             <div class="col-md-10">
                                                 <input id="telephone" name="telephone" placeholder="Téléphone"
                                                        class="form-control input-md"
-                                                       type="text">
+                                                       type="tel" pattern="[0]{1}[0-9]{9}" maxlength="10" required>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="col-md-10">
                                                 <input id="email" name="email" placeholder="Email"
                                                        class="form-control input-md"
-                                                       type="text">
+                                                       type="email">
                                             </div>
                                         </div>
                                     </div>
@@ -147,19 +145,18 @@
                                             <div class="col-md-10">
                                                 <input id="numAfpa" name="numAfpa" placeholder="Numéro AFPA"
                                                        class="form-control input-md"
-                                                       type="text">
+                                                       type="text" required>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="col-md-10">
                                                 <input id="marque" name="marque" placeholder="Marque de la voiture"
                                                        class="form-control input-md"
-                                                       type="text">
+                                                       type="text" required>
                                             </div>
                                         </div>
                                     </div>
@@ -168,7 +165,7 @@
                                             <div class="col-md-10">
                                                 <input id="immat" name="immat" placeholder="Immatriculation"
                                                        class="form-control input-md"
-                                                       type="text">
+                                                       type="text" required>
                                             </div>
                                         </div>
                                     </div>
@@ -179,7 +176,7 @@
                                             <div class="col-md-10">
                                                 <input id="modele" name="modele" placeholder="Modèle"
                                                        class="form-control input-md"
-                                                       type="text">
+                                                       type="text" required>
                                             </div>
                                         </div>
                                     </div>
@@ -188,7 +185,7 @@
                                             <div class="col-md-10">
                                                 <input id="couleur" name="couleur" placeholder="Couleur"
                                                        class="form-control input-md"
-                                                       type="text">
+                                                       type="text" required>
                                             </div>
                                         </div>
                                     </div>
@@ -197,9 +194,10 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="col-md-10">
-                                                <input id="categorie" name="date" placeholder="Catégorie du véhicule"
+                                                <input id="categorie" name="categorie"
+                                                       placeholder="Catégorie du véhicule"
                                                        class="form-control input-md"
-                                                       type="text">
+                                                       type="text" required>
                                             </div>
                                         </div>
                                     </div>
@@ -208,7 +206,7 @@
                                             <div class="col-md-10">
                                                 <input id="date" name="date" placeholder="Date du véhicule"
                                                        class="form-control input-md"
-                                                       type="date">
+                                                       type="date" required>
                                             </div>
                                         </div>
                                     </div>
@@ -218,7 +216,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <input id="boutonSave" class="btn btn-info" type="submit" value="&#128190; Enregistrer"/>
+                    <input id="boutonSave" class="btn btn-info" type="submit" value="&#128190; Enregistrer" />
                 </div>
             </div>
         </div>
@@ -316,7 +314,7 @@
             <legend>Enregistrement prestation</legend>
             <div class="form-group col-md-6">
                 <div class="col-md-10">
-                    <select id="TypeActe" th:field="*{acte}" class="select2">
+                    <select id="TypeActe" th:field="*{acte}" class="select2" required>
                         <option hidden="" value="">Choisissez une intervention</option>
                         <option th:each="acte : ${actes}" th:value="${acte.id_acte}"
                                 th:text="${acte.libelle}"></option>
@@ -326,10 +324,10 @@
             <!-- Select Basic -->
             <div class="form-group col-md-6">
                 <div class="col-md-10">
-                    <select id="TypeFinition" th:field="*{finition}" class="select2">
+                    <select id="TypeFinition" th:field="*{finition}" class="select2" required>
                         <option hidden="" value="">Choisissez un type de finition</option>
                         <option th:each="finition : ${finitions}"
-                                th:value="${finition.id_finition}" th:text="${finition.libelle}"></option>
+                                th:value="${finition.id_finition}" th:text="${finition.libelle}" th:required></option>
                     </select>
                 </div>
                 <script>
@@ -345,7 +343,7 @@
             </div>
         </div>
     </div>
-</form >
+</form>
 
 
 <!-- ------------------------------------------------------------------------ -->

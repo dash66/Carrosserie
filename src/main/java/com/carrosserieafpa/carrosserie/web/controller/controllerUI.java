@@ -61,15 +61,9 @@ public class controllerUI {
     @GetMapping("/enregistrer")
     public String enregistrer(Model model) {
 
-    /*
-    Pour listes déroulantes
-     */
         List<Finition> finitions = finitionDao.findAll();
         List<Acte> actes = acteDao.findAll();
 
-    /*
-    Pour tableau de prestations
-     */
         List<Facturation> factures = facturationDao.findAll();
         List<Prestation> prestations = null;
 
@@ -82,10 +76,6 @@ public class controllerUI {
         model.addAttribute("finitions", finitions);
         model.addAttribute("prestations", prestations);
         model.addAttribute("client", client);
-
-    /*Facturation facture = new Facturation();
-    facture.setPrestation(prestation);
-    facturationDao.save(facture);*/
 
         return "form-enregistrement";
     }
@@ -103,10 +93,7 @@ public class controllerUI {
         prestation.setId_presta(id);
         prestation.setPrix(prestationDao.findPrixById(prestation.getId_presta()));
         prestations.add(prestation);
-
-        System.out.println(prestation);
         model.addAttribute("prestations", prestations);
-
         return "form-enregistrement";
     }
 
@@ -129,13 +116,13 @@ public class controllerUI {
     }
 
     @PostMapping("/saveClientAndCar")
-    public String ajouterClientEtVoiture(Client client, Voiture voiture, HttpServletRequest request) {
+    public String ajouterClientEtVoiture(Client client, Voiture voiture, HttpServletRequest request, Model model) {
         client.setPrenom(request.getParameter("prenom"));
         client.setNom(request.getParameter("nom"));
         client.setAdresse(request.getParameter("adresse"));
         client.setTelephone(Integer.valueOf(request.getParameter("telephone")));
         client.setEmail(request.getParameter("email"));
-        client.setNumAfpa(Long.valueOf(request.getParameter("numAfpa")));
+        client.setNumAfpa(request.getParameter("numAfpa"));
 
         clientDao.save(client);
 
@@ -155,6 +142,8 @@ public class controllerUI {
         voiture.setClient(client);
 
         voitureDao.save(voiture);
+
+        this.enregistrer(model);
 
         return "form-enregistrement";
     }
@@ -190,4 +179,4 @@ public class controllerUI {
         finitionDao.save(finition);
         return "form-administrateur";
     }
- }
+}
