@@ -21,25 +21,21 @@
 <header>
     <div class="container">
         <div class="row">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3">
-                        <h2>Carrosserie AFPA</h2>
-                    </div>
-                </div>
+            <div class="col-md-12">
+                <h2 class="col-md-12">Carrosserie AFPA</h2>
             </div>
         </div>
         <div class="row">
             <div class="col-md-1">
-                <a th:href="@{|/admin|}" class="btn btn-block a-btn-slide-text">
-                    <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
-                    <span><strong>Administrer</strong></span>
+                <a th:href="@{|/admin|}" class="btn glyphicon glyphicon-home">
+                    <span><strong> Accueil</strong></span>
                 </a>
             </div>
         </div>
+
         <div class="row">
             <div class="offset-md-2 col-md-7">
-                <img th:src="@{/images/anim2.png}" alt="Beau comme un camion tout neuf !"/>
+                <img class="mw-100 mh-100" th:src="@{/images/anim2.png}" alt="Beau comme un camion tout neuf !"/>
             </div>
         </div>
     </div>
