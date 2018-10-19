@@ -293,6 +293,17 @@ public class controllerUI {
     @RequestMapping("/archive")
     public String consulterArchive(Model model) {
 
-        return "form-archive";
-    }
+    return "form-archive";
+  }
+
+  @GetMapping("/enregistrer")
+    public String retrouverCatégorieVoiturePourClientExistant(Model model, HttpServletRequest httpServletRequest) {
+
+     Long clientId =  clientDao.rechercherClientParNometPrenom(
+              httpServletRequest.getParameter("nom"), httpServletRequest.getParameter("prenom"));
+
+     String categorie = voitureDao.rechercherCategorieVoitureParId(clientId);
+
+     return categorie;
+  }
 }
