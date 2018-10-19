@@ -302,8 +302,8 @@ public class controllerUI {
      Long clientId =  clientDao.rechercherClientParNometPrenom(
               httpServletRequest.getParameter("nom"), httpServletRequest.getParameter("prenom"));
 
-     String categorie = voitureDao.rechercherCategorieVoitureParId(clientId);
+     String categorieClientExistant = voitureDao.rechercherCategorieVoitureParId(clientId);
 
-     return categorie;
+     return categorieClientExistant;
   }
 }
