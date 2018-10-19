@@ -14,25 +14,21 @@
 <header>
     <div class="container">
         <div class="row">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3">
-                        <h2>Carrosserie AFPA</h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-1">
-                        <a th:href="@{|/menu|}" class="btn btn-block a-btn-slide-text">
-                            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-                            <span><strong>Accueil</strong></span>
-                        </a>
-                    </div>
-                </div>
+            <div class="col-md-12">
+                <h2 class="col-md-12">Carrosserie AFPA</h2>
             </div>
         </div>
         <div class="row">
+            <div class="col-md-1">
+                <a th:href="@{|/menu|}" class="btn glyphicon glyphicon-home">
+                    <span><strong> Accueil</strong></span>
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
             <div class="offset-md-2 col-md-7">
-                <img th:src="@{/images/anim2.png}" alt="Beau comme un camion tout neuf !"/>
+                <img class="mw-100 mh-100" th:src="@{/images/anim2.png}" alt="Beau comme un camion tout neuf !"/>
             </div>
         </div>
     </div>
@@ -55,8 +51,8 @@
         </div>
     </div>
 
-    <div class="row my-2 ">
-        <div class="col-md-5 border border-primary rounded float-md-left">
+    <div class="row">
+        <div class="col-md-5 border border-primary rounded float-md-left my-2">
             <div class="col-md-12">
                 <h2 class="col-md-6 my-3"><span class="glyphicon glyphicon-road"></span> Véhicule</h2>
                 <p>Modèle : </p>
@@ -67,7 +63,7 @@
                 <p>Marque : </p>
             </div>
         </div>
-        <div class="offset-md-1 col-md-6 border border-primary rounded float-md-right">
+        <div class="offset-md-1 col-md-6 border border-primary rounded float-md-right my-2">
 
             <div class="col-md-12">
                 <h2 class="col-md-6 my-3"><span class="glyphicon glyphicon-list-alt"></span> Facture(s)</h2>
