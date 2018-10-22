@@ -27,7 +27,7 @@
         </div>
 
         <div class="row">
-            <div class="offset-md-2 col-md-7">
+            <div class="offset-md-2 col-md-8">
                 <img class="mw-100 mh-100" th:src="@{/images/anim2.png}" alt="Beau comme un camion tout neuf !"/>
             </div>
         </div>
@@ -35,7 +35,7 @@
 </header>
 
 <div class="container">
-    <legend>Ajout ou Modification en Base De Données</legend>
+    <legend class="text-center">Ajout ou Modification en Base De Données</legend>
     <div class="col-md-offset-3 mt-5">
 
         <!-- ------------------------------------------------------------------------ -->
@@ -205,27 +205,28 @@
 <!-- ------------------------------------------------------------------------ -->
 <div class="container">
     <div class="row">
-        <div class="offset-1 col-md-3">
-            <a href="#addActe" class="btn btn-info a-btn-slide-text m-2" data-toggle="modal"
+        <div class="offset-md-3 col-md-12">
+            <a href="#addActe" class="btn btn-info col-md-6 glyphicon glyphicon-plus m-2"
+               data-toggle="modal"
                data-target="#addActe">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                <span><strong>Ajouter un nouveau type d'acte</strong></span>
-            </a>
-        </div>
-        <div class="offset-3 col-md-3">
-            <a href="#addFinition" class="btn btn-info a-btn-slide-text m-2" data-toggle="modal"
-               data-target="#addFinition">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                <span><strong>Ajouter un nouveau type de finition</strong></span>
+                <strong> Ajouter un nouveau type d'acte</strong>
             </a>
         </div>
     </div>
     <div class="row">
-        <div class="offset-4 col-md-3">
-            <a href="#addPrix" class="btn btn-info a-btn-slide-text m-2" data-toggle="modal"
+        <div class="offset-md-3 col-md-12">
+            <a href="#addFinition" class="btn btn-info col-md-6 glyphicon glyphicon-plus m-2"
+               data-toggle="modal"
+               data-target="#addFinition">
+                <strong> Ajouter un nouveau type de finition</strong>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="offset-md-3 col-md-12">
+            <a href="#addPrix" class="btn btn-info col-md-6 glyphicon glyphicon-plus m-2" data-toggle="modal"
                data-target="#addPrix">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                <span><strong>Définir un prix</strong></span>
+                <strong> Définir un prix</strong>
             </a>
         </div>
     </div>
