@@ -141,7 +141,9 @@ public class controllerUI {
         Finition finition = prestation.getFinition();
 
         prestation.setId_presta(prestationDao.FindIdByActeAndFinition(acte, finition));
-        prestation.setPrix(prestationDao.findPrixById(prestation.getId_presta()));
+        try {
+            prestation.setPrix(prestationDao.findPrixById(prestation.getId_presta()));
+        }catch (NullPointerException e){}
         prestations.add(prestation);
 
         return "form-enregistrement";
@@ -192,7 +194,7 @@ public class controllerUI {
         return "form-archive";
     }
 
-    @GetMapping("/enregistrer")
+    //@GetMapping("/enregistrer")
     public String retrouverCatégorieVoiturePourClientExistant(Model model, HttpServletRequest httpServletRequest) {
 
         Long clientId = clientDao.rechercherClientParNometPrenom(

@@ -70,7 +70,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <input id="boutonSaveActe" class="btn btn-info" type="submit"
-                                                       value="&#128190; Enregistrer"/>
+                                                       value="&#128190; Enregistrer" th:href="@{/administration}"/>
                                             </div>
                                         </div>
                                     </div>
@@ -115,7 +115,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <input id="boutonSaveFinition" class="btn btn-info" type="submit"
-                                                       value="&#128190; Enregistrer"/>
+                                                       value="&#128190; Enregistrer" th:href="@{/administration}"/>
                                             </div>
                                         </div>
                                     </div>
@@ -183,7 +183,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <input id="boutonSavePrix" class="btn btn-info" type="submit"
-                                                       value="&#128190; Enregistrer"/>
+                                                       value="&#128190; Enregistrer" th:href="@{/administration}"/>
                                             </div>
                                         </div>
                                     </div>
@@ -206,26 +206,26 @@
 <div class="container">
     <div class="row">
         <div class="offset-md-3 col-md-12">
-            <a href="#addActe" class="btn btn-info col-md-6 glyphicon glyphicon-plus m-2"
+            <a href="#addActe" class="btn btn-info col-md-5 m-1"
                data-toggle="modal"
-               data-target="#addActe">
-                <strong> Ajouter un nouveau type d'acte</strong>
+               data-target="#addActe"><span class="glyphicon glyphicon-plus"></span>
+                <strong> Définir un acte</strong>
             </a>
         </div>
     </div>
     <div class="row">
         <div class="offset-md-3 col-md-12">
-            <a href="#addFinition" class="btn btn-info col-md-6 glyphicon glyphicon-plus m-2"
+            <a href="#addFinition" class="btn btn-info col-md-5 m-1"
                data-toggle="modal"
-               data-target="#addFinition">
-                <strong> Ajouter un nouveau type de finition</strong>
+               data-target="#addFinition"><span class="glyphicon glyphicon-plus" style="margin-left:33px;"></span>
+                <strong> Définir une finition</strong>
             </a>
         </div>
     </div>
     <div class="row">
         <div class="offset-md-3 col-md-12">
-            <a href="#addPrix" class="btn btn-info col-md-6 glyphicon glyphicon-plus m-2" data-toggle="modal"
-               data-target="#addPrix">
+            <a href="#addPrix" class="btn btn-info col-md-5 m-1" data-toggle="modal"
+               data-target="#addPrix"><span class="glyphicon glyphicon-plus"></span>
                 <strong> Définir un prix</strong>
             </a>
         </div>
