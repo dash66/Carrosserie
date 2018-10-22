@@ -47,10 +47,10 @@
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
 <div class="alert alert-warning" style="text-align: center">
-    <p >Les tarifs présentés sont applicables aux véhicules de catégorie moyenne (Megane, Golf, etc..).</br>
-    Comptez 10% d'abattement pour les petits gabarits (Twingo, 107, etc..). </br>
-    Comptez 10% de majoration pour les gros véhicules (berline, Laguna, etc..).</br>
-    Comptez 20% de majoration pour les fourgons.</p>
+    <p>Les tarifs présentés sont applicables aux véhicules de catégorie moyenne (Megane, Golf, etc..).</br>
+        Comptez 10% d'abattement pour les petits gabarits (Twingo, 107, etc..). </br>
+        Comptez 10% de majoration pour les gros véhicules (berline, Laguna, etc..).</br>
+        Comptez 20% de majoration pour les fourgons.</p>
 </div>
 
 
@@ -61,25 +61,25 @@
 <!-- ------------------------------------------------------------------------ -->
 <div class="container mt-5">
     <div class="row">
-        <div class="col-md-1">
+        <div class="col-md-3">
             <a href="#rechercheClient" class="btn btn-info a-btn-slide-text m-2" data-toggle="modal"
                data-target="#rechercheClient">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                <span><strong>Recherche un client</strong></span>
+                <span class="glyphicon glyphicon-plus mr-md-1"></span>
+                <strong>Recherche un client</strong>
             </a>
         </div>
-        <div class="offset-3 col-md-1">
+        <div class="offset-md-1 col-md-3">
             <a href="#rechercheVoiture" class="btn btn-info a-btn-slide-text m-2" data-toggle="modal"
                data-target="#rechercheVoiture">
-                <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
-                <span><strong>Recherche un véhicule</strong></span>
+                <span class="glyphicon glyphicon-folder-open mr-md-1"></span>
+                <strong>Recherche un véhicule</strong>
             </a>
         </div>
-        <div class="offset-4 col-md-1">
+        <div class="offset-md-1 col-md-3">
             <a href="#rechercheFacture" class="btn btn-info a-btn-slide-text m-2" data-toggle="modal"
                data-target="#rechercheFacture">
-                <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
-                <span><strong>Recherche une facture</strong></span>
+                <span class="glyphicon glyphicon-folder-open mr-md-1"></span>
+                <strong>Recherche une facture</strong>
             </a>
         </div>
     </div>
@@ -98,38 +98,34 @@
                     <h4 class="modal-title">Rechercher par Client</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <form class="modal-body">
+                <div class="modal-body">
                     <form class="form-horizontal mt-5" method="post">
-                        <form>
-                            <!-- Form Name -->
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="col-md-12">
-                                                <input id="prenom3" name="prenom3" placeholder="Prénom"
-                                                       class="form-control input-md"
-                                                       type="text">
-                                            </div>
-                                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input id="prenom3" name="prenom3" placeholder="Prénom"
+                                               class="form-control"
+                                               type="text">
+
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="col-md-10">
-                                                <input id="nom3" name="nom3" placeholder="Nom"
-                                                       class="form-control input-md"
-                                                       type="text">
-                                            </div>
-                                        </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        <input id="nom3" name="nom3" placeholder="Nom"
+                                               class="form-control"
+                                               type="text">
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </form>
-                </form>
-                <div class="modal-footer">
-                    <input id="boutonSave3" class="btn btn-info glyphicon glyphicon-search" type="submit"
-                           value="Rechercher"/>
+
+                    <div class="modal-footer">
+                        <input id="boutonSave3" class="btn btn-info glyphicon glyphicon-search" type="submit"
+                               value="Rechercher"/>
+                    </div>
                 </div>
             </div>
         </div>
@@ -149,48 +145,39 @@
                     <h4 class="modal-title">Rechercher par véhicule</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <form class="modal-body">
+                <div class="modal-body">
                     <form class="form-horizontal mt-5" method="post">
-                        <form>
-                            <!-- Form Name -->
-                            <div class="container">
-                                <!-- 1ere colonne du champ de saisie CLIENT-->
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <div class="col-md-10">
-                                                <input id="Immatriculation" name="Immatriculation" placeholder="Immatriculation"
-                                                       class="form-control input-md"
-                                                       type="text">
-                                            </div>
-                                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input id="Immatriculation" name="Immatriculation"
+                                               placeholder="Immatriculation"
+                                               class="form-control input-md"
+                                               type="text">
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <div class="col-md-10">
-                                                <input id="Marque" name="Marque" placeholder="Marque"
-                                                       class="form-control input-md"
-                                                       type="text">
-                                            </div>
-                                        </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input id="Marque" name="Marque" placeholder="Marque"
+                                               class="form-control input-md"
+                                               type="text">
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <div class="col-md-10">
-                                                <input id="model" name="model" placeholder="Modèle"
-                                                       class="form-control input-md"
-                                                       type="text">
-                                            </div>
-                                        </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input id="model" name="model" placeholder="Modèle"
+                                               class="form-control input-md"
+                                               type="text">
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </form>
-                </form>
-                <div class="modal-footer">
-                    <input id="boutonSave4" class="btn btn-info glyphicon glyphicon-search" type="submit"
-                           value="Rechercher"/>
+                    <div class="modal-footer">
+                        <input id="boutonSave4" class="btn btn-info glyphicon glyphicon-search" type="submit"
+                               value="Rechercher"/>
+                    </div>
                 </div>
             </div>
         </div>
@@ -210,30 +197,24 @@
                     <h4 class="modal-title">Rechercher par Client</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <form class="modal-body">
+                <div class="modal-body">
                     <form class="form-horizontal mt-5" method="post">
-                        <form>
-                            <!-- Form Name -->
-                            <div class="container">
-                                <!-- 1ere colonne du champ de saisie CLIENT-->
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="col-md-10">
-                                                <input id="numFacture" name="id" placeholder="Numéro de facture"
-                                                       class="form-control input-md"
-                                                       type="text">
-                                            </div>
-                                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input id="numFacture" name="id" placeholder="Numéro de facture"
+                                               class="form-control input-md"
+                                               type="text">
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </form>
-                </form>
-                <div class="modal-footer">
-                    <input id="boutonSave5" class="btn btn-info glyphicon glyphicon-search" type="submit"
-                           value="Rechercher"/>
+                    <div class="modal-footer">
+                        <input id="boutonSave5" class="btn btn-info glyphicon glyphicon-search" type="submit"
+                               value="Rechercher"/>
+                    </div>
                 </div>
             </div>
         </div>
@@ -255,10 +236,11 @@
         </thead>
 
         <tbody>
-       <tr th:each="acte : ${actes}">
+        <tr th:each="acte : ${actes}">
             <td th:text="${acte}" style="font-weight: bolder"></td>
             <td th:if="${prestation.acte} == ${acte}" th:each="prestation : ${prestations}"
-                th:text="${prestation.prix} =='0.0' ?  'n/a' : ${prestation.prix}" th:style="${prestation.prix} == '0.0' ? 'color: lightgrey' : 'color: black'"></td>
+                th:text="${prestation.prix} =='0.0' ?  'n/a' : ${prestation.prix}"
+                th:style="${prestation.prix} == '0.0' ? 'color: lightgrey' : 'color: black'"></td>
         </tr>
         </tbody>
     </table>
