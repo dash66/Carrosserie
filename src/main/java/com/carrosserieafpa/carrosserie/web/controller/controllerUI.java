@@ -192,8 +192,7 @@ public class controllerUI {
         return "form-archive";
     }
 
-    @GetMapping("/enregistrer")
-    public String retrouverCatégorieVoiturePourClientExistant(Model model, HttpServletRequest httpServletRequest) {
+      public String retrouverCatégorieVoiturePourClientExistant(Model model, HttpServletRequest httpServletRequest) {
 
         Long clientId = clientDao.rechercherClientParNometPrenom(
                 httpServletRequest.getParameter("nom"), httpServletRequest.getParameter("prenom"));
