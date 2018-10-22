@@ -141,9 +141,8 @@ public class controllerUI {
         Finition finition = prestation.getFinition();
 
         prestation.setId_presta(prestationDao.FindIdByActeAndFinition(acte, finition));
-        try {
-            prestation.setPrix(prestationDao.findPrixById(prestation.getId_presta()));
-        }catch (NullPointerException e){}
+        try {prestation.setPrix(prestationDao.findPrixById(prestation.getId_presta()));}
+        catch(NullPointerException e){}
         prestations.add(prestation);
 
         return "form-enregistrement";
