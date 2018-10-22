@@ -34,7 +34,7 @@
         </div>
 
         <div class="row">
-            <div class="offset-md-2 col-md-7">
+            <div class="offset-md-2 col-md-8">
                 <img class="mw-100 mh-100" th:src="@{/images/anim2.png}" alt="Beau comme un camion tout neuf !"/>
             </div>
         </div>
@@ -70,7 +70,7 @@
 <!-- -------------         FORM MODAL NOUVEAU CLIENT         ---------------- -->
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
-<form method="post" th:action="@{/enregistrer}">
+<form method="post" th:action="@{/saveClient}">
     <div class="modal" id="addClient" tabindex="-1" role="dialog" href="#">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -215,7 +215,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <input id="boutonSave" class="btn btn-info" type="submit" value="&#128190; Enregistrer" />
+                    <input id="boutonSave" class="btn btn-info" type="submit" value="&#128190; Enregistrer" th:href="@{/enregistrer}"/>
                 </div>
             </div>
         </div>

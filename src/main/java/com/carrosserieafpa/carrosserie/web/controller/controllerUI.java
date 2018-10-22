@@ -2,7 +2,6 @@ package com.carrosserieafpa.carrosserie.web.controller;
 
 import com.carrosserieafpa.carrosserie.dao.*;
 import com.carrosserieafpa.carrosserie.entity.*;
-import com.carrosserieafpa.carrosserie.web.controller.exceptions.ClientNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -120,133 +119,32 @@ public class controllerUI {
     }
 
     @RequestMapping("/enregistrer")
-    public String enregistrer(@ModelAttribute("prestation") Prestation prestation, @ModelAttribute("client") Client client, Voiture voiture, Model model, HttpServletRequest request) {
+    public String enregistrer(@ModelAttribute("prestation") Prestation prestation, @ModelAttribute("client") Client client, @ModelAttribute("voiture") Voiture voiture, Model model, HttpServletRequest request) {
 
-    /*
-    Pour listes déroulantes
-     */
         List<Finition> finitions = finitionDao.findAll();
         List<Acte> actes = acteDao.findAll();
-
-    /*
-    Pour tableau de prestations
-     */
         List<Facturation> factures = facturationDao.findAll();
-        List<Prestation> prestations = null;
+        List<Prestation> prestations = new ArrayList<>();
 
-        //Prestation prestation = new Prestation();
-        //Client client = new Client();
-
-        model.addAttribute("prestation", prestation);
         model.addAttribute("factures", factures);
         model.addAttribute("actes", actes);
         model.addAttribute("finitions", finitions);
         model.addAttribute("prestations", prestations);
-        model.addAttribute("client", client);
 
-   /* return "form-enregistrement";
-  }
-
-    @PostMapping("/enregistrer")
-    public String ajouterPresta(@ModelAttribute("prestation") Prestation prestation, Client client, Voiture voiture, Model model, HttpServletRequest request) {*/
-
-
-            client.setPrenom(request.getParameter("prenom"));
-            client.setNom(request.getParameter("nom"));
-            client.setAdresse(request.getParameter("adresse"));
-        try {
-            client.setTelephone(Integer.valueOf(request.getParameter("telephone")));
-        } catch (NumberFormatException e) {
-        }
-            client.setEmail(request.getParameter("email"));
-            client.setNumAfpa(request.getParameter("numAfpa"));
-
-
+        client = this.creationClient(client, request);
         clientDao.save(client);
 
-        voiture.setMarque(request.getParameter("marque"));
-        voiture.setImmat(request.getParameter("immat"));
-        voiture.setModele(request.getParameter("modele"));
-        voiture.setCodeCouleur(request.getParameter("couleur"));
-        SimpleDateFormat dt = new SimpleDateFormat("yyyy-mm-dd");
-        Date date = null;
-        try {
-            date = dt.parse(request.getParameter("date"));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (NullPointerException e){
-
-        }
-        voiture.setDate(date);
-
-        voiture.setClient(client);
-
+        voiture = this.creationVoiture(voiture, request, client);
         voitureDao.save(voiture);
-
-        // List<Prestation> prestations = new ArrayList<Prestation>();
 
         Acte acte = prestation.getActe();
-
         Finition finition = prestation.getFinition();
-        Long id = null;
+
+        prestation.setId_presta(prestationDao.FindIdByActeAndFinition(acte, finition));
         try {
-            id = prestationDao.FindIdByActeAndFinition(acte, finition);
-
-
-            prestation.setId_presta(id);
             prestation.setPrix(prestationDao.findPrixById(prestation.getId_presta()));
-            prestations.add(prestation);
-            model.addAttribute("prestations", prestations);
-        } catch (NullPointerException e) {
-        }
-        return "form-enregistrement";
-    }
-
-  /*  @PostMapping("/saveClientAndCar")
-    public String ajouterClientEtVoiture(Model model, Client client, Voiture voiture, HttpServletRequest request) {
-        client.setPrenom(request.getParameter("prenom"));
-        client.setNom(request.getParameter("nom"));
-        client.setAdresse(request.getParameter("adresse"));
-        client.setTelephone(Integer.valueOf(request.getParameter("telephone")));
-        client.setEmail(request.getParameter("email"));
-        client.setNumAfpa(request.getParameter("numAfpa"));
-
-        clientDao.save(client);
-
-        voiture.setMarque(request.getParameter("marque"));
-        voiture.setImmat(request.getParameter("immat"));
-        voiture.setModele(request.getParameter("modele"));
-        voiture.setCodeCouleur(request.getParameter("couleur"));
-        SimpleDateFormat dt = new SimpleDateFormat("yyyy-mm-dd");
-        Date date = null;
-        try {
-            date = dt.parse(request.getParameter("date"));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        voiture.setDate(date);
-
-        voiture.setClient(client);
-
-        voitureDao.save(voiture);
-        this.enregistrer(model);
-        return "form-enregistrement";
-    }*/
-
-    @PostMapping("/ajouterActe")
-    public String ajouterActe(Acte acte, HttpServletRequest httpServletRequest) {
-
-        acte.setLibelle(httpServletRequest.getParameter("libelle"));
-        acteDao.save(acte);
-
-        return "form-enregistrement";
-    }
-
-    @PostMapping("/ajouterFinition")
-    public String ajouterFinition(Finition finition, HttpServletRequest httpServletRequest) {
-
-        finition.setLibelle(httpServletRequest.getParameter("libelle2"));
-        finitionDao.save(finition);
+        }catch (NullPointerException e){}
+        prestations.add(prestation);
 
         return "form-enregistrement";
     }
@@ -293,16 +191,81 @@ public class controllerUI {
     @RequestMapping("/archive")
     public String consulterArchive(Model model) {
 
-    return "form-archive";
-  }
+        return "form-archive";
+    }
 
       public String retrouverCatégorieVoiturePourClientExistant(Model model, HttpServletRequest httpServletRequest) {
 
-     Long clientId =  clientDao.rechercherClientParNometPrenom(
-              httpServletRequest.getParameter("nom"), httpServletRequest.getParameter("prenom"));
+        Long clientId = clientDao.rechercherClientParNometPrenom(
+                httpServletRequest.getParameter("nom"), httpServletRequest.getParameter("prenom"));
 
-     String categorieClientExistant = voitureDao.rechercherCategorieVoitureParId(clientId);
+        String categorieClientExistant = voitureDao.rechercherCategorieVoitureParId(clientId);
 
-     return categorieClientExistant;
-  }
+        return categorieClientExistant;
+    }
+
+    public Client creationClient(Client client, HttpServletRequest request) {
+        client.setPrenom(request.getParameter("prenom"));
+        client.setNom(request.getParameter("nom"));
+        client.setAdresse(request.getParameter("adresse"));
+        try {
+            client.setTelephone(Integer.valueOf(request.getParameter("telephone")));
+        } catch (NumberFormatException e) {
+        }
+        client.setEmail(request.getParameter("email"));
+        client.setNumAfpa(request.getParameter("numAfpa"));
+
+        return client;
+    }
+
+    public Voiture creationVoiture(Voiture voiture, HttpServletRequest request, Client client) {
+        voiture.setMarque(request.getParameter("marque"));
+        voiture.setImmat(request.getParameter("immat"));
+        voiture.setModele(request.getParameter("modele"));
+        voiture.setCodeCouleur(request.getParameter("couleur"));
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy-mm-dd");
+        Date date = null;
+        try {
+            date = dt.parse(request.getParameter("date"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (NullPointerException e) {
+
+        }
+        voiture.setDate(date);
+        voiture.setClient(client);
+
+        return voiture;
+    }
+    
+
+    public Double calculPrixFinal(List<Prestation> prestations, Voiture voiture) {
+
+        Double prixTotalFacture = null;
+        for (Prestation presta :
+                prestations) {
+            Double prixParPresta = presta.getPrix();
+            prixTotalFacture += prixParPresta;
+        }
+
+        Double prixFinal = null;
+        switch (voiture.getCategorie()) {
+            case "petit":
+                prixFinal -= prixTotalFacture * 0.1;
+                break;
+            case "moyen":
+                prixFinal = prixTotalFacture;
+                break;
+            case "gros":
+                prixFinal += prixTotalFacture * 0.1;
+                break;
+            case "fourgon":
+                prixFinal += prixTotalFacture * 0.2;
+                break;
+        }
+        return prixFinal;
+    }
 }
+
+
+
