@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8">
@@ -26,10 +26,22 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-1">
-                <a th:href="@{|/administration|}" class="btn glyphicon glyphicon-home">
-                    <span><strong> Administrateur</strong></span>
-                </a>
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <a th:href="@{|/|}" class="btn glyphicon glyphicon-home col-md-1">
+                        <span><strong> Accueil</strong></span>
+                    </a>
+
+                    <a class="btn glyphicon glyphicon-user col-md-1" sec:authorize="isAnonymous()" th:href="@{/login}">
+                        <strong> Mode administrateur</strong></a>
+
+                    <a class="btn glyphicon glyphicon-user col-md-1" sec:authorize="isAuthenticated()" th:href="@{/auth}">
+                        <strong> Admin connecté</strong></a>
+
+                    <form class="col-md-1 float-md-right pull-right"sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+                        <span class="btn btn-grey glyphicon glyphicon-remove"><input class="btn btn-grey" type="submit" value="Logout"/></span>
+                    </form>
+                </div>
             </div>
         </div>
 
@@ -39,6 +51,7 @@
             </div>
         </div>
     </div>
+
 </header>
 
 <!-- ------------------------------------------------------------------------ -->
