@@ -144,7 +144,7 @@ public class controllerUI {
         model.addAttribute("prestations", prestations);
         model.addAttribute("client", client);
 
-   /* return "form-enregistrement";
+       /* return "form-enregistrement";
   }
 
     @PostMapping("/enregistrer")
@@ -296,7 +296,7 @@ public class controllerUI {
     return "form-archive";
   }
 
-  @GetMapping("/enregistrer")
+  @GetMapping("/archiveClient")
     public String retrouverCatégorieVoiturePourClientExistant(Model model, HttpServletRequest httpServletRequest) {
 
      Long clientId =  clientDao.rechercherClientParNometPrenom(
