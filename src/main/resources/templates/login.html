@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<div>
+    <header>
+        <nav>
+            <a th:href="@{/}">Accueil</a>
+            <a sec:authorize="isAuthenticated()" th:href="@{/auth}">User connecté log</a>
+            <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+                <input type="submit" value="Logout"/>
+            </form>
+        </nav>
+    </header>
+    <div>
+        <form th:action="@{/login}" method="post">
+            <fieldset>
+                <div>
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="username" required="required"
+                           autofocus="autofocus"/>
+                </div>
+
+                <div>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="password" required="required"/>
+                </div>
+
+                <div>
+                    <input type="submit" value="Log in" th:href="@{|/admin|}"/>
+                </div>
+
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            </fieldset>
+        </form>
+    </div>
+</div>
+</html>

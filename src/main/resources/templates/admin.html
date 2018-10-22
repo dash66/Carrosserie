@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Admin</title>
+</head>
+<body>
+<header>
+    <nav>
+        <a th:href="@{/}">Accueil</a>
+        <a sec:authorize="isAnonymous()" th:href="@{/login}">Se connecter</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/admin}">User connecté admin</a>
+        <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+            <input type="submit" value="Logout"/>
+        </form>
+    </nav>
+</header>
+</body>
+</html>
