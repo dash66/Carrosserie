@@ -6,7 +6,7 @@
     <groupId>com.carrosserieAfpa</groupId>
     <artifactId>carrosserie</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <name>carrosserie</name>
     <description>Demo project for Spring Boot</description>
@@ -18,14 +18,14 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <repositories>
-        <!-- ... possibly other repository elements ... -->
+<!--    <repositories>
+        &lt;!&ndash; ... possibly other repository elements ... &ndash;&gt;
         <repository>
             <id>spring-snapshot</id>
             <name>Spring Snapshot Repository</name>
             <url>http://repo.springsource.org/snapshot</url>
         </repository>
-    </repositories>
+    </repositories>-->
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -86,11 +86,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <dependency>
+        </dependency>-->
+        <!--<dependency>
             <groupId>org.thymeleaf.extras</groupId>
             <artifactId>thymeleaf-extras-springsecurity4</artifactId>
         </dependency>
@@ -107,7 +107,7 @@
             <groupId>org.webjars</groupId>
             <artifactId>webjars-locator</artifactId>
             <version>0.34</version>
-        </dependency>
+        </dependency>-->
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -128,11 +128,11 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-        <resources>
+    <!--    <resources>
             <resource>
                 <directory>src/main/resources/**</directory>
             </resource>
-        </resources>
+        </resources>-->
     </build>
 
 

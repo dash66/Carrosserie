@@ -1,277 +1,365 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.1.3/css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css"
-          href="webjars/bootstrap-glyphicons/bdd2cbfba0/css/bootstrap-glyphicons.css"/>
-    <link rel="stylesheet" type="text/css" href="webjars/select2/4.0.2/css/select2.css"/>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{webjars/bootstrap/4.1.3/css/bootstrap.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{webjars/bootstrap-glyphicons/bdd2cbfba0/css/bootstrap-glyphicons.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{webjars/select2/4.0.5/css/select2.css}" />
     <script type="text/javascript" src="webjars/jquery/3.0.0/jquery.min.js"></script>
     <script type="text/javascript" src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="webjars/select2/4.0.2/js/select2.js"></script>
+    <script type="text/javascript" src="webjars/select2/4.0.5/js/select2.js"></script>
 
 </head>
 
 <body>
-<header>
-    <div class="container">
-        <div class="row">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3">
-                        <h2>Carrosserie AFPA</h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-1">
-                        <a th:href="@{|/menu|}" class="btn btn-block a-btn-slide-text">
-                            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-                            <span><strong>Accueil</strong></span>
-                        </a>
-                    </div>
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- -------------              EN-TÊTE DE PAGE              ---------------- -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="col-md-12">Carrosserie AFPA</h2>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="offset-md-2 col-md-7">
-                <img th:src="@{/images/anim2.png}" alt="Beau comme un camion tout neuf !"/>
+            <div class="row">
+                <div class="col-md-1">
+                    <a th:href="@{|/menu|}" class="btn glyphicon glyphicon-home">
+                    <span><strong> Accueil</strong></span>
+                </a>
+                </div>
             </div>
-        </div>
-    </div>
-</header>
 
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- -------------   BOUTONS NOUVEAU CLIENT/CLIENT EXISTANT  ---------------- -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
-<div class="container mt-5">
-    <div class="row">
-        <div class="offset-3 col-md-1">
-            <a href="#addClient" class="btn btn-info a-btn-slide-text m-2" data-toggle="modal"
-               data-target="#addClient">
+            <div class="row">
+                <div class="offset-md-2 col-md-8">
+                    <img class="mw-100 mh-100" th:src="@{/images/anim2.png}" alt="Beau comme un camion tout neuf !" />
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- -------------   BOUTONS NOUVEAU CLIENT/CLIENT EXISTANT  ---------------- -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="offset-3 col-md-1">
+                <a href="#addClient" class="btn btn-info a-btn-slide-text m-2" data-toggle="modal" data-target="#addClient">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 <span><strong>Nouveau Client</strong></span>
             </a>
-        </div>
-        <div class="offset-2 col-md-1">
-            <a href="#readClient" class="btn btn-info a-btn-slide-text m-2" data-toggle="modal"
-               data-target="#readClient">
+            </div>
+            <div class="offset-2 col-md-1">
+                <a href="#readClient" class="btn btn-info a-btn-slide-text m-2" data-toggle="modal" data-target="#readClient">
                 <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
                 <span><strong>Client Existant</strong></span>
             </a>
+            </div>
         </div>
-    </div>
-</div>
 
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- -------------         FORM MODAL NOUVEAU CLIENT         ---------------- -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
-<form method="post">
-    <div class="modal" id="addClient" tabindex="-1" role="dialog" href="#">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Enregistrer un nouveau client</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal mt-5" method="post">
-                        <fieldset>
-                            <!-- Form Name -->
 
-                            <div class="container">
-                                <!-- 1ere colonne du champ de saisie CLIENT-->
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="col-md-10">
-                                                <input id="prenom" name="prenom" placeholder="Prénom"
-                                                       class="form-control input-md"
-                                                       type="text">
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- -------------         FORM MODAL NOUVEAU CLIENT         ---------------- -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <form method="post" th:action="@{/enregistrer}">
+        <div class="modal" id="addClient" tabindex="-1" role="dialog" href="#">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Enregistrer un nouveau client</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal mt-5" method="post">
+                            <fieldset>
+                                <!-- Form Name -->
+
+                                <div class="container">
+                                    <!-- 1ere colonne du champ de saisie CLIENT-->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-md-10">
+                                                    <label for="prenom">Prenom</label>
+                                                    <input id="prenom" name="prenom" placeholder="Prénom" class="form-control input-md" type="text" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-md-10">
+                                                    <label for="nom">Nom</label>
+                                                    <input id="nom" name="nom" placeholder="Nom" class="form-control input-md" type="text" required>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-md-10">
+                                                    <label for="adresse">Adresse</label>
+                                                    <input id="adresse" name="adresse" placeholder="n° rue CP Ville" class="form-control input-md" type="text">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-md-10">
+                                                    <label for="telephone">Numéro de téléphone</label>
+                                                    <input id="telephone" name="telephone" placeholder="0123456789" class="form-control input-md" type="tel" pattern="[0]{1}[0-9]{9}" maxlength="10" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-md-10">
+                                                    <label for="email">Adresse mail</label>
+                                                    <input id="email" name="email" placeholder="mail@mail.fr" class="form-control input-md" type="email">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-md-10">
+                                                    <label for="numAfpa">Numero Afpa du propriétaire</label>
+                                                    <input id="numAfpa" name="numAfpa" placeholder="XXXXX" class="form-control input-md" type="text" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-md-10">
+                                                    <label for="marque">Marque du véhicule</label>
+                                                    <input id="marque" name="marque" placeholder="Reno" class="form-control input-md" type="text" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-md-10">
+                                                    <label for="immat">Immatriculation du véhicule</label>
+                                                    <input id="immat" name="immat" placeholder="XX123XX / 1234 XX 34" class="form-control input-md" type="text" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-md-10">
+                                                    <label for="modele">Modèle du véhicule</label>
+                                                    <input id="modele" name="modele" placeholder="Clito" class="form-control input-md" type="text" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-md-10">
+                                                    <label for="couleur">Couleur du vehicule</label>
+                                                    <input id="couleur" name="couleur" placeholder="bleu" class="form-control input-md" type="text" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-md-10">
+                                                    <label for="categorie">Categorie du véhicule</label>
+                                                    <select id="categorie" name="categorie" class="form-control input-md" required>
+                                                        <option hidden="" value="">Choisissez une categorie</option>
+                                                        <option value="petit" selected>Petit gabarit</option>
+                                                        <option value="moyen">Moyen gabarit</option>
+                                                        <option value="gros">Gros gabarit</option>
+                                                        <option value="fourgon">Fourgon</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-md-10">
+                                                    <label for="date">Date de premiere mise en service</label>
+                                                    <input id="date" name="date" placeholder="Date du véhicule" class="form-control input-md" type="date" required>
 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="col-md-10">
-                                                <input id="nom" name="nom" placeholder="Nom"
-                                                       class="form-control input-md"
-                                                       type="text">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="col-md-10">
-                                                <input id="adresse" name="adresse" placeholder="Adresse"
-                                                       class="form-control input-md"
-                                                       type="text">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="col-md-10">
-                                                <input id="telephone" name="telephone" placeholder="Téléphone"
-                                                       class="form-control input-md"
-                                                       type="text">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-
-                                            <div class="col-md-10">
-                                                <input id="email" name="email" placeholder="Email"
-                                                       class="form-control input-md"
-                                                       type="text">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="col-md-10">
-                                                <input id="numAfpa" name="numAfpa" placeholder="Numéro AFPA"
-                                                       class="form-control input-md"
-                                                       type="text">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="col-md-10">
-                                                <input id="voiture" name="voiture" placeholder="Voiture"
-                                                       class="form-control input-md"
-                                                       type="text">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="col-md-10">
-                                                <input id="immat" name="immat" placeholder="Immatriculation"
-                                                       class="form-control input-md"
-                                                       type="text">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="col-md-10">
-                                                <input id="modele" name="modele" placeholder="Modèle"
-                                                       class="form-control input-md"
-                                                       type="text">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="col-md-10">
-                                                <input id="couleur" name="couleur" placeholder="Couleur"
-                                                       class="form-control input-md"
-                                                       type="text">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </form>
-                </div>
-                <div class="modal-footer">
-
-                    <input id="boutonSave" class="btn btn-info" type="submit" value="&#128190; Enregistrer"/>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <input id="boutonSave" class="btn btn-info" type="submit" value="&#128190; Enregistrer" />
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</form>
+    </form>
 
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- -------------         LISTES DÉROULANTES PRESTA         ---------------- -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
-<form class="form-horizontal mt-5">
-    <fieldset>
-        <!-- Select Basic -->
-        <div class="container">
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- -------------            FORM MODAL RECHERCHE           ---------------- -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <form method="post" th:action="@{/recherche}">
+        <div class="modal" id="readClient" tabindex="-1" role="dialog" href="#">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Rechercher / Consulter</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <form class="modal-body">
+                        <form class="form-horizontal mt-5" method="post">
+                            <form>
+                                <!-- Form Name -->
+
+                                <div class="container">
+                                    <!-- 1ere colonne du champ de saisie CLIENT-->
+                                    <label>Recherche par client</label>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-md-10">
+                                                    <input id="prenom2" name="prenom" placeholder="Prénom" class="form-control input-md" type="text">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-md-10">
+                                                    <input id="nom2" name="nom" placeholder="Nom" class="form-control input-md" type="text">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <label>Recherche par véhicule</label>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-md-10">
+                                                    <input id="Immatriculation" name="Immat" placeholder="Immatriculation" class="form-control input-md" type="text">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <label>Recherche par facture</label>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-md-10">
+                                                    <input id="facture" name="IdFacture" placeholder="Numéro de facture" class="form-control input-md" type="text">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </form>
+                    </form>
+                    <div class="modal-footer">
+                        <input id="boutonSave2" class="btn btn-info glyphicon glyphicon-search" type="submit" value="Rechercher" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- -------------         LISTES DÉROULANTES PRESTA         ---------------- -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <form class="form-horizontal mt-5 " th:action="@{/enregistrer}" method="post" id="prestaOk" th:object="${prestation}">
+        <div class="container" th:style="${client.nom == null} ? 'display: none'">
             <div class="row">
                 <legend>Enregistrement prestation</legend>
                 <div class="form-group col-md-6">
-                    <label class="col-md-8" control-label for="TypeActe">Choisissez un type d'intervention</label>
                     <div class="col-md-10">
-                        <select id="TypeActe" name="TypeActe" class="form-control select2">
-                            <option value="1">Complet intérieur extérieur</option>
-                            <option value="2">Complet extérieur</option>
-                            <option value="3">Complet sans peinture</option>
-                            <option value="4">Peinture 1 élément</option>
-                            <option value="5">Peinture 2 éléments</option>
-                            <option value="6">Peinture 3 éléments</option>
-                            <option value="7">Peinture 4 éléments</option>
-                            <option value="8">Capot</option>
-                            <option value="9">Pavillon</option>
-                            <option value="10">Peinture d'un bouclier</option>
-                            <option value="11">Raccord adjacent à l'élément</option>
-                            <option value="12">Réfection de phares</option>
-                            <option value="13">Moto. Scooter</option>
-                            <option value="14">Vélomoteur</option>
-                            <option value="15">Cadre de vélo</option>
-                            <option value="16">Réparation plastique</option>
-                            <option value="17">Rénovation VO complète</option>
-                            <option value="18">Vernis hat de gamme</option>
-                        </select>
+                        <select id="TypeActe" th:field="*{acte}" class="select2" required>
+                        <option hidden="" value="">Choisissez une intervention</option>
+                        <option th:each="acte : ${actes}" th:value="${acte.id_acte}"
+                                th:text="${acte.libelle}"></option>
+                    </select>
                     </div>
                 </div>
                 <!-- Select Basic -->
                 <div class="form-group col-md-6">
-                    <label class="col-md-8 control-label" for="TypeFinition">Choississez un type de finition</label>
-
                     <div class="col-md-10">
-                        <select id="TypeFinition" name="TypeFinition" class="form-control select2">
-                            <option value="1">Pas de finition</option>
-                            <option value="2">Opaque et brillant direct</option>
-                            <option value="3">Opaques et métallisées revernies</option>
-                            <option value="4">Nacrées</option>
-                            <option value="5">Nacrées tricouches, teintes à effet</option>
-                        </select>
+                        <select id="TypeFinition" th:field="*{finition}" class="select2" required>
+                        <option hidden="" value="">Choisissez un type de finition</option>
+                        <option th:each="finition : ${finitions}"
+                                th:value="${finition.id_finition}" th:text="${finition.libelle}" th:required></option>
+                    </select>
                     </div>
                     <script>
                         $('.select2').select2();
+
                     </script>
                 </div>
             </div>
-            <div class="col-md-1">
-                <input class="btn btn-info" type="submit" value="&#128190; Enregistrer"/>
-            </div>
-
-            <div class="row">
-                <div class="form-group offset-4 col-md-5 mt-5">
-                    <a href="#" class="btn btn-info">
-                        <span class="glyphicon glyphicon-plus"></span> Ajouter une intervention
-                    </a>
+            <div>
+                <div class="col-md-1">
+                    <div class="form-group col-md-5 mt-5">
+                        <input class="btn btn-info" type="submit" value="Ajouter une intervention" />
+                    </div>
                 </div>
             </div>
         </div>
+    </form>
 
-    </fieldset>
-</form>
 
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- -------------         LISTES Prestations : Facturation  ---------------- -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <form method="post" th:action="@{/enregistrer}" th:style="${prestation.acte == null} ? 'display: none'">
+        <div class="row">
+            <h2>Récapitulatif client :</h2>
+            <div class="col-md-12">
+                <p th:object="${client}" th:text="${client.toString()}"></p>
+            </div>
+        </div>
+
+        <table class="table table-bordered table-striped table-md">
+            <thead class="table-info">
+                <tr>
+                    <th>Prestation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="prestation : ${prestations}">
+                    <td th:text="${prestation.toString()}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <!--</div>-->
+
+        <div class="row">
+            <div class="form-group offset-8 col-md-3 mt-5">
+                <input class="btn btn-info" type="submit" value="&#128190; Enregistrer" />
+            </div>
+        </div>
+    </form>
+    </div>
 </body>
+
 </html>

@@ -32,15 +32,15 @@
                         <span><strong> Accueil</strong></span>
                     </a>
 
-                    <a class="btn glyphicon glyphicon-user col-md-1" sec:authorize="isAnonymous()" th:href="@{/login}">
-                        <strong> Mode administrateur</strong></a>
+                    <a class="btn glyphicon glyphicon-user col-md-1" th:href="@{/admin}">
+                        <strong> Administration</strong></a>
 
-                    <a class="btn glyphicon glyphicon-user col-md-1" sec:authorize="isAuthenticated()" th:href="@{/auth}">
-                        <strong> Admin connecté</strong></a>
+                   <!-- <a class="btn glyphicon glyphicon-user col-md-1" sec:authorize="isAuthenticated()" th:href="@{/auth}">
+                        <strong> Admin connecté</strong></a>&ndash;&gt;-->
 
-                    <form class="col-md-1 float-md-right pull-right"sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+                   <!-- <form class="col-md-1 float-md-right pull-right"sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
                         <input class="btn btn-grey glyphicon glyphicon-step-backward" type="submit" value="Logout"/>
-                    </form>
+                    </form>-->
                 </div>
             </div>
         </div>

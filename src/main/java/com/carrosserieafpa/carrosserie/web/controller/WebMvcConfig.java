@@ -1,3 +1,4 @@
+/*
 package com.carrosserieafpa.carrosserie.web.controller;
 
 import com.carrosserieafpa.carrosserie.dao.UserRepository;
@@ -42,3 +43,4 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("/resources");
     }
 }
+*/

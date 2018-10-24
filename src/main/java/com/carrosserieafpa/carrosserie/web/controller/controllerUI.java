@@ -5,7 +5,6 @@ import com.carrosserieafpa.carrosserie.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -114,7 +113,10 @@ public class controllerUI {
         model.addAttribute("prestations", prestations);
         model.addAttribute("client", client);
 
-        //client = clientDao.findById();
+        this.coupleClientVoitureBase(client, request, voiture);
+        Long id = clientDao.findLastId();
+        Optional<Client> clientTmp = clientDao.findById(id);
+        client = clientTmp.get();
 
         Acte acte = prestation.getActe();
         Finition finition = prestation.getFinition();

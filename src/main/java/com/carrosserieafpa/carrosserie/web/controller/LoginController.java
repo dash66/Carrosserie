@@ -1,3 +1,4 @@
+/*
 package com.carrosserieafpa.carrosserie.web.controller;
 
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -20,4 +21,4 @@ public class LoginController {
         }
         return new ModelAndView("login");
     }
-}
+}*/

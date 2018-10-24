@@ -1,3 +1,4 @@
+/*
 package com.carrosserieafpa.carrosserie.entity;
 
 import com.carrosserieafpa.carrosserie.entity.enums.RoleEnum;
@@ -110,3 +111,4 @@ public class User implements UserDetails {
         }
     }
 }
+*/

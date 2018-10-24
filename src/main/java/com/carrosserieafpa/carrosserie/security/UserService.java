@@ -1,3 +1,4 @@
+/*
 package com.carrosserieafpa.carrosserie.security;
 
 import com.carrosserieafpa.carrosserie.dao.UserRepository;
@@ -8,8 +9,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+*/
 /* class utilisée pour retourner l’utilisateur qui demande une authentification.
-Le fait d’implémenter UserDetailsService est obligatoire afin que Spring Security puisse traiter l’authentification correctement.*/
+Le fait d’implémenter UserDetailsService est obligatoire afin que Spring Security puisse traiter l’authentification correctement.*//*
+
 @Service("userService")
 public class UserService implements UserDetailsService {
 
@@ -30,3 +33,4 @@ public class UserService implements UserDetailsService {
     }
   }
 }
+*/

@@ -10,4 +10,6 @@ public interface ClientDao extends JpaRepository<Client, Long> {
     @Query("SELECT id FROM Client WHERE nom = :nom AND prenom = :prenom")
     Long rechercherClientParNometPrenom(@Param("nom") String nom, @Param("prenom") String prenom);
 
+    @Query("SELECT MAX(id) FROM Client")
+    Long findLastId();
 }

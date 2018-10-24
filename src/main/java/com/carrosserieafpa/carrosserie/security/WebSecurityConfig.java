@@ -1,4 +1,4 @@
-package com.carrosserieafpa.carrosserie.security;
+/*package com.carrosserieafpa.carrosserie.security;
 
 import com.carrosserieafpa.carrosserie.entity.enums.RoleEnum;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,24 +34,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
     auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
   }
+*/
+ // private static final String[] staticResources = {
+ //  "/webjars/**",
+ //   "/css/**",
+ //   "/js/**",
+ //   "/images/**",
+ //   "/",
+ //   "/fonts",
+ //   "/resources/static/images/**",
+ //   "/static/**",
+  //  "/static/images/**",
+ //   "/images/**",
+ //   "/resources/**",
+ //  "**/images/"
 
-  private static final String[] staticResources = {
-    "/webjars/**",
-    "/css/**",
-    "/js/**",
-    "/images/**",
-    "/",
-    "/fonts",
-    "/resources/static/images/**",
-    "/static/**",
-    "/static/images/**",
-    "/images/**",
-    "/resources/**",
-    "**/images/**"
-  };
+ // };
 
+/*
   @Override
   protected void configure(HttpSecurity http) throws Exception {
+
 
     http.authorizeRequests()
         .antMatchers(staticResources)
@@ -88,3 +91,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .expiredUrl("/");
   }
 }
+*/
