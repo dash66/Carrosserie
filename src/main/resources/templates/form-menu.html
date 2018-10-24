@@ -39,7 +39,7 @@
                         <strong> Admin connecté</strong></a>
 
                     <form class="col-md-1 float-md-right pull-right"sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
-                        <span class="btn btn-grey glyphicon glyphicon-remove"><input class="btn btn-grey" type="submit" value="Logout"/></span>
+                        <input class="btn btn-grey glyphicon glyphicon-step-backward" type="submit" value="Logout"/>
                     </form>
                 </div>
             </div>
@@ -69,7 +69,7 @@
             </div>
             <div class="offset-md-1 col-md-1 mt-5">
                 <a th:href="@{|/rechercher|}" class="btn btn-info btn-lg" style="margin-left: 250px">
-                    <span class="glyphicon glyphicon-folder-open"></span> Consultation
+                    <span class="glyphicon glyphicon-folder-open mr-1"></span> Consultation
                 </a>
             </div>
         </div>
@@ -85,10 +85,10 @@
     <div class="container">
         <div class="row mt-5">
             <div class="col-md-4">
-                <img th:src="@{/images/image_5981da9ea71c8.jpg.png}" alt="Qu'ils sont forts !"/>
+                <img th:src="@{images/image_5981da9ea71c8.jpg.png}" alt="Qu'ils sont forts !"/>
             </div>
             <div class="offset-md-4 col-md-4">
-                <img th:src="@{/images/Peinture-monocouche-1.png}" alt="Qu'ils sont forts !"/>
+                <img th:src="@{images/Peinture-monocouche-1.png}" alt="Qu'ils sont forts !"/>
             </div>
         </div>
     </div>

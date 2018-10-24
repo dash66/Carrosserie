@@ -1,8 +1,6 @@
 package com.carrosserieafpa.carrosserie.security;
 
-import com.carrosserieafpa.carrosserie.entity.User;
 import com.carrosserieafpa.carrosserie.entity.enums.RoleEnum;
-import com.carrosserieafpa.carrosserie.dao.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -14,20 +12,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   private final String adminRole = RoleEnum.ADMINISTRATOR.name();
-
   private final UserDetailsService userDetailsService;
 
   @Autowired
@@ -45,10 +35,34 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
   }
 
+  private static final String[] staticResources = {
+    "/webjars/**",
+    "/css/**",
+    "/js/**",
+    "/images/**",
+    "/",
+    "/fonts",
+    "/resources/static/images/**",
+    "/static/**",
+    "/static/images/**",
+    "/images/**",
+    "/resources/**",
+    "**/images/**"
+  };
+
   @Override
   protected void configure(HttpSecurity http) throws Exception {
+
     http.authorizeRequests()
-        .antMatchers("/auth**")
+        .antMatchers(staticResources)
+        .permitAll()
+        .antMatchers("/resources/**", "/static/**", "/images/**")
+        .permitAll()
+        .anyRequest()
+        .authenticated();
+
+    http.authorizeRequests()
+        .antMatchers("/auth")
         .authenticated()
         .antMatchers("/auth/admin**")
         .hasAuthority(adminRole)
@@ -57,7 +71,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
         .formLogin()
         .loginPage("/login")
-        .defaultSuccessUrl("/auth")
+        .defaultSuccessUrl("/admin")
         .failureUrl("/login")
         .usernameParameter("username")
         .passwordParameter("password")
@@ -65,12 +79,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .logout()
         .invalidateHttpSession(true)
         .logoutUrl("/logout")
-        .logoutSuccessUrl("/login")
+        .logoutSuccessUrl("/")
         .and()
         .csrf()
         .and()
         .sessionManagement()
         .maximumSessions(1)
-        .expiredUrl("/login");
+        .expiredUrl("/");
   }
 }
