@@ -20,18 +20,49 @@
 <!-- ------------------------------------------------------------------------ -->
 <header>
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h2 class="col-md-12">Carrosserie AFPA</h2>
+
+        <nav style="height:50px;"
+             class="navbar navbar-expand-lg navbar-light bg-light border border-info rounded-bottom mb-5">
+            <a class="navbar-brand glyphicon glyphicon-home text-info" th:href="@{|/menu|}"> Accueil<span
+                    class="sr-only">(current)</span></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link glyphicon glyphicon-user text-info" th:href="@{/admin}"> Administration</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Disabled</a>
+                    </li>-->
+                </ul>
+                <h1 class="navbar-text text-success m-3">Carrosserie </h1>
+                <img style="max-width:45px; max-height:45px;" class="w-auto h-auto" th:src="@{/images/afpa.png}"
+                     alt="Logo Afpa tout vert">
+                <!-- <form class="form-inline my-2 my-lg-0">
+                      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                  </form>-->
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-1">
-                <a th:href="@{|/menu|}" class="btn glyphicon glyphicon-home">
-                    <span><strong> Accueil</strong></span>
-                </a>
-            </div>
-        </div>
+        </nav>
+
 
         <div class="row">
             <div class="offset-md-2 col-md-8">
@@ -46,11 +77,17 @@
 <!-- -------------           ANNOTATION MAJORATION/ABATTEMENT---------------- -->
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
-<div class="alert alert-warning" style="text-align: center">
-    <p>Les tarifs présentés sont applicables aux véhicules de catégorie moyenne (Megane, Golf, etc..).</br>
-        Comptez 10% d'abattement pour les petits gabarits (Twingo, 107, etc..). </br>
-        Comptez 10% de majoration pour les gros véhicules (berline, Laguna, etc..).</br>
-        Comptez 20% de majoration pour les fourgons.</p>
+<div class="container mt-5">
+    <div class="row m-2">
+        <div class="alert alert-warning col-md-12">
+            <div class="text-center font-weight-bold col-md-12 m-1">
+                <p>Les tarifs présentés sont applicables aux véhicules de catégorie moyenne (Megane, Golf,
+                    etc..).</br>
+                    Comptez 10% d'abattement pour les petits gabarits (Twingo, 107, etc..). </br>
+                    Comptez 10% de majoration pour les gros véhicules (berline, Laguna, etc..).</br>
+                    Comptez 20% de majoration pour les fourgons.</p></div>
+        </div>
+    </div>
 </div>
 
 
@@ -60,27 +97,29 @@
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
 <div class="container mt-5">
-    <div class="row">
-        <div class="col-md-3">
-            <a href="#rechercheClient" class="btn btn-info a-btn-slide-text m-2" data-toggle="modal"
-               data-target="#rechercheClient">
-                <span class="glyphicon glyphicon-plus mr-md-1"></span>
-                <strong>Recherche un client</strong>
-            </a>
-        </div>
-        <div class="offset-md-1 col-md-3">
-            <a href="#rechercheVoiture" class="btn btn-info a-btn-slide-text m-2" data-toggle="modal"
-               data-target="#rechercheVoiture">
-                <span class="glyphicon glyphicon-folder-open mr-md-1"></span>
-                <strong>Recherche un véhicule</strong>
-            </a>
-        </div>
-        <div class="offset-md-1 col-md-3">
-            <a href="#rechercheFacture" class="btn btn-info a-btn-slide-text m-2" data-toggle="modal"
-               data-target="#rechercheFacture">
-                <span class="glyphicon glyphicon-folder-open mr-md-1"></span>
-                <strong>Recherche une facture</strong>
-            </a>
+    <div class="row m-2">
+        <div class="col-md-12">
+            <div class="col-md-4 float-left text-center">
+                <a href="#rechercheClient" class="btn btn-outline-info a-btn-slide-text" data-toggle="modal"
+                   data-target="#rechercheClient">
+                    <span class="glyphicon glyphicon-search mr-md-1"></span>
+                    <strong> Recherche un client</strong>
+                </a>
+            </div>
+            <div class="col-md-4 float-left text-center">
+                <a href="#rechercheVoiture" class="btn btn-outline-info a-btn-slide-text" data-toggle="modal"
+                   data-target="#rechercheVoiture">
+                    <span class="glyphicon glyphicon-search mr-md-1"></span>
+                    <strong> Recherche un véhicule</strong>
+                </a>
+            </div>
+            <div class="col-md-4 float-left text-center">
+                <a href="#rechercheFacture" class="btn btn-outline-info a-btn-slide-text" data-toggle="modal"
+                   data-target="#rechercheFacture">
+                    <span class="glyphicon glyphicon-search mr-md-1"></span>
+                    <strong> Recherche une facture</strong>
+                </a>
+            </div>
         </div>
     </div>
 </div>
@@ -90,7 +129,7 @@
 <!-- -------------         FORM MODAL RECHERCHE  CLIENT      ---------------- -->
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
-<form method="post" th:action="@{/rechercherClient}">
+<form method="post" th:action="@{/rechercher}">
     <div class="modal" id="rechercheClient" tabindex="-1" role="dialog" href="#">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -123,8 +162,8 @@
                     </form>
 
                     <div class="modal-footer">
-                        <input id="boutonSave3" class="btn btn-info glyphicon glyphicon-search" type="submit"
-                               value="Rechercher"/>
+                        <input id="boutonSave3" class="btn btn-outline-info" type="submit"
+                               value="&#128269 Rechercher"/>
                     </div>
                 </div>
             </div>
@@ -175,8 +214,8 @@
                         </div>
                     </form>
                     <div class="modal-footer">
-                        <input id="boutonSave4" class="btn btn-info glyphicon glyphicon-search" type="submit"
-                               value="Rechercher"/>
+                        <input id="boutonSave4" class="btn btn-outline-info" type="submit"
+                               value="&#128269 Rechercher"/>
                     </div>
                 </div>
             </div>
@@ -212,8 +251,8 @@
                         </div>
                     </form>
                     <div class="modal-footer">
-                        <input id="boutonSave5" class="btn btn-info glyphicon glyphicon-search" type="submit"
-                               value="Rechercher"/>
+                        <input id="boutonSave5" class="btn btn-outline-info" type="submit"
+                               value="&#128269 Rechercher"/>
                     </div>
                 </div>
             </div>
@@ -226,24 +265,26 @@
 <!-- -------------         LISTE TARIFS & PRESTA     ---------------- -->
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
-<div class="container">
-    <table class="table table-bordered table-striped table-md" th:object="${prestation}">
-        <thead class="table-info">
-        <tr>
-            <td></td>
-            <td th:each="finition : ${finitions}" th:text="${finition}" style="font-weight: bolder"></td>
-        </tr>
-        </thead>
+<div class="container mt-5">
+    <div class="row m-2">
+        <table class="table table-bordered table-striped table-md m-2 float-" th:object="${prestation}">
+            <thead class="table-info">
+            <tr>
+                <td></td>
+                <td th:each="finition : ${finitions}" th:text="${finition}" style="font-weight: bolder"></td>
+            </tr>
+            </thead>
 
-        <tbody>
-        <tr th:each="acte : ${actes}">
-            <td th:text="${acte}" style="font-weight: bolder"></td>
-            <td th:if="${prestation.acte} == ${acte}" th:each="prestation : ${prestations}"
-                th:text="${prestation.prix} =='0.0' ?  'n/a' : ${prestation.prix}"
-                th:style="${prestation.prix} == '0.0' ? 'color: lightgrey' : 'color: black'"></td>
-        </tr>
-        </tbody>
-    </table>
+            <tbody>
+            <tr th:each="acte : ${actes}">
+                <td th:text="${acte}" style="font-weight: bolder"></td>
+                <td th:if="${prestation.acte} == ${acte}" th:each="prestation : ${prestations}"
+                    th:text="${prestation.prix} =='0.0' ?  'n/a' : ${prestation.prix}"
+                    th:style="${prestation.prix} == '0.0' ? 'color: lightgrey' : 'color: black'"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 </body>
 </html>

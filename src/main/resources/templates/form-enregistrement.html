@@ -3,9 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{webjars/bootstrap/4.1.3/css/bootstrap.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{webjars/bootstrap-glyphicons/bdd2cbfba0/css/bootstrap-glyphicons.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{webjars/select2/4.0.5/css/select2.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{webjars/bootstrap/4.1.3/css/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css"
+          th:href="@{webjars/bootstrap-glyphicons/bdd2cbfba0/css/bootstrap-glyphicons.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{webjars/select2/4.0.5/css/select2.css}"/>
     <script type="text/javascript" src="webjars/jquery/3.0.0/jquery.min.js"></script>
     <script type="text/javascript" src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="webjars/select2/4.0.5/js/select2.js"></script>
@@ -13,54 +14,83 @@
 </head>
 
 <body>
-    <!-- ------------------------------------------------------------------------ -->
-    <!-- ------------------------------------------------------------------------ -->
-    <!-- -------------              EN-TÊTE DE PAGE              ---------------- -->
-    <!-- ------------------------------------------------------------------------ -->
-    <!-- ------------------------------------------------------------------------ -->
-    <header>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h2 class="col-md-12">Carrosserie AFPA</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-1">
-                    <a th:href="@{|/menu|}" class="btn glyphicon glyphicon-home">
-                    <span><strong> Accueil</strong></span>
-                </a>
-                </div>
-            </div>
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- -------------              EN-TÊTE DE PAGE              ---------------- -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<header>
+    <div class="container">
 
-            <div class="row">
-                <div class="offset-md-2 col-md-8">
-                    <img class="mw-100 mh-100" th:src="@{/images/anim2.png}" alt="Beau comme un camion tout neuf !" />
-                </div>
-            </div>
-        </div>
-    </header>
+        <nav style="height:50px;" class="navbar navbar-expand-lg navbar-light bg-light border border-info rounded-bottom mb-5">
+            <a class="navbar-brand glyphicon glyphicon-home text-info" th:href="@{|/menu|}"> Accueil<span class="sr-only">(current)</span></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-    <!-- ------------------------------------------------------------------------ -->
-    <!-- ------------------------------------------------------------------------ -->
-    <!-- -------------   BOUTONS NOUVEAU CLIENT/CLIENT EXISTANT  ---------------- -->
-    <!-- ------------------------------------------------------------------------ -->
-    <!-- ------------------------------------------------------------------------ -->
-    <div class="container mt-5">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link glyphicon glyphicon-user text-info" th:href="@{/admin}"> Administration</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Disabled</a>
+                    </li>-->
+                </ul>
+                <h1 class="navbar-text text-success m-3">Carrosserie </h1>
+                <img style="max-width:45px; max-height:45px;" class="w-auto h-auto" th:src="@{/images/afpa.png}" alt="Logo Afpa tout vert">
+                <!-- <form class="form-inline my-2 my-lg-0">
+                      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                  </form>-->
+            </div>
+        </nav>
+
+
+
         <div class="row">
-            <div class="offset-3 col-md-1">
-                <a href="#addClient" class="btn btn-info a-btn-slide-text m-2" data-toggle="modal" data-target="#addClient">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                <span><strong>Nouveau Client</strong></span>
-            </a>
-            </div>
-            <div class="offset-2 col-md-1">
-                <a href="#readClient" class="btn btn-info a-btn-slide-text m-2" data-toggle="modal" data-target="#readClient">
-                <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
-                <span><strong>Client Existant</strong></span>
-            </a>
+            <div class="offset-md-2 col-md-8">
+                <img class="mw-100 mh-100" th:src="@{/images/anim2.png}" alt="Beau comme un camion tout neuf !"/>
             </div>
         </div>
+    </div>
+</header>
+
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- -------------   BOUTONS NOUVEAU CLIENT/CLIENT EXISTANT  ---------------- -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<div class="container mt-5">
+    <div class="row">
+        <div class="offset-3 col-md-1">
+            <a href="#addClient" class="btn btn-outline-info a-btn-slide-text m-2" data-toggle="modal" data-target="#addClient">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                <strong>Nouveau Client</strong>
+            </a>
+        </div>
+        <div class="offset-2 col-md-1">
+            <a href="#readClient" class="btn btn-outline-info a-btn-slide-text m-2" data-toggle="modal"
+               data-target="#readClient">
+                <span class="glyphicon glyphicon-folder-open m-1" aria-hidden="true"></span>
+                <strong>Client Existant</strong>
+            </a>
+        </div>
+    </div>
 
 
     <!-- ------------------------------------------------------------------------ -->
@@ -68,7 +98,7 @@
     <!-- -------------         FORM MODAL NOUVEAU CLIENT         ---------------- -->
     <!-- ------------------------------------------------------------------------ -->
     <!-- ------------------------------------------------------------------------ -->
-    <form method="post" th:action="@{/enregistrer}">
+    <form method="post" th:action="@{/saveClient}">
         <div class="modal" id="addClient" tabindex="-1" role="dialog" href="#">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -88,7 +118,8 @@
                                             <div class="form-group">
                                                 <div class="col-md-10">
                                                     <label for="prenom">Prenom</label>
-                                                    <input id="prenom" name="prenom" placeholder="Prénom" class="form-control input-md" type="text" required>
+                                                    <input id="prenom" name="prenom" placeholder="Prénom"
+                                                           class="form-control input-md" type="text" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -97,7 +128,8 @@
                                             <div class="form-group">
                                                 <div class="col-md-10">
                                                     <label for="nom">Nom</label>
-                                                    <input id="nom" name="nom" placeholder="Nom" class="form-control input-md" type="text" required>
+                                                    <input id="nom" name="nom" placeholder="Nom"
+                                                           class="form-control input-md" type="text" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -107,7 +139,8 @@
                                             <div class="form-group">
                                                 <div class="col-md-10">
                                                     <label for="adresse">Adresse</label>
-                                                    <input id="adresse" name="adresse" placeholder="n° rue CP Ville" class="form-control input-md" type="text">
+                                                    <input id="adresse" name="adresse" placeholder="n° rue CP Ville"
+                                                           class="form-control input-md" type="text">
                                                 </div>
                                             </div>
                                         </div>
@@ -115,7 +148,9 @@
                                             <div class="form-group">
                                                 <div class="col-md-10">
                                                     <label for="telephone">Numéro de téléphone</label>
-                                                    <input id="telephone" name="telephone" placeholder="0123456789" class="form-control input-md" type="tel" pattern="[0]{1}[0-9]{9}" maxlength="10" required>
+                                                    <input id="telephone" name="telephone" placeholder="0123456789"
+                                                           class="form-control input-md" type="tel"
+                                                           pattern="[0]{1}[0-9]{9}" maxlength="10" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -125,7 +160,8 @@
                                             <div class="form-group">
                                                 <div class="col-md-10">
                                                     <label for="email">Adresse mail</label>
-                                                    <input id="email" name="email" placeholder="mail@mail.fr" class="form-control input-md" type="email">
+                                                    <input id="email" name="email" placeholder="mail@mail.fr"
+                                                           class="form-control input-md" type="email">
                                                 </div>
                                             </div>
                                         </div>
@@ -133,7 +169,8 @@
                                             <div class="form-group">
                                                 <div class="col-md-10">
                                                     <label for="numAfpa">Numero Afpa du propriétaire</label>
-                                                    <input id="numAfpa" name="numAfpa" placeholder="XXXXX" class="form-control input-md" type="text" required>
+                                                    <input id="numAfpa" name="numAfpa" placeholder="XXXXX"
+                                                           class="form-control input-md" type="text" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -143,7 +180,8 @@
                                             <div class="form-group">
                                                 <div class="col-md-10">
                                                     <label for="marque">Marque du véhicule</label>
-                                                    <input id="marque" name="marque" placeholder="Reno" class="form-control input-md" type="text" required>
+                                                    <input id="marque" name="marque" placeholder="Reno"
+                                                           class="form-control input-md" type="text" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -151,7 +189,8 @@
                                             <div class="form-group">
                                                 <div class="col-md-10">
                                                     <label for="immat">Immatriculation du véhicule</label>
-                                                    <input id="immat" name="immat" placeholder="XX123XX / 1234 XX 34" class="form-control input-md" type="text" required>
+                                                    <input id="immat" name="immat" placeholder="XX123XX / 1234 XX 34"
+                                                           class="form-control input-md" type="text" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -161,7 +200,8 @@
                                             <div class="form-group">
                                                 <div class="col-md-10">
                                                     <label for="modele">Modèle du véhicule</label>
-                                                    <input id="modele" name="modele" placeholder="Clito" class="form-control input-md" type="text" required>
+                                                    <input id="modele" name="modele" placeholder="Clito"
+                                                           class="form-control input-md" type="text" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -169,7 +209,8 @@
                                             <div class="form-group">
                                                 <div class="col-md-10">
                                                     <label for="couleur">Couleur du vehicule</label>
-                                                    <input id="couleur" name="couleur" placeholder="bleu" class="form-control input-md" type="text" required>
+                                                    <input id="couleur" name="couleur" placeholder="bleu"
+                                                           class="form-control input-md" type="text" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -179,7 +220,8 @@
                                             <div class="form-group">
                                                 <div class="col-md-10">
                                                     <label for="categorie">Categorie du véhicule</label>
-                                                    <select id="categorie" name="categorie" class="form-control input-md" required>
+                                                    <select id="categorie" name="categorie"
+                                                            class="form-control input-md" required>
                                                         <option hidden="" value="">Choisissez une categorie</option>
                                                         <option value="petit" selected>Petit gabarit</option>
                                                         <option value="moyen">Moyen gabarit</option>
@@ -193,7 +235,8 @@
                                             <div class="form-group">
                                                 <div class="col-md-10">
                                                     <label for="date">Date de premiere mise en service</label>
-                                                    <input id="date" name="date" placeholder="Date du véhicule" class="form-control input-md" type="date" required>
+                                                    <input id="date" name="date" placeholder="Date du véhicule"
+                                                           class="form-control input-md" type="date" required>
 
                                                 </div>
                                             </div>
@@ -204,7 +247,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <input id="boutonSave" class="btn btn-info" type="submit" value="&#128190; Enregistrer" />
+                        <input id="boutonSave" class="btn btn-outline-info" type="submit" value="&#128190; Enregistrer"/>
                     </div>
                 </div>
             </div>
@@ -236,7 +279,8 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <div class="col-md-10">
-                                                    <input id="prenom2" name="prenom" placeholder="Prénom" class="form-control input-md" type="text">
+                                                    <input id="prenom2" name="prenom" placeholder="Prénom"
+                                                           class="form-control input-md" type="text">
                                                 </div>
                                             </div>
                                         </div>
@@ -244,7 +288,8 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <div class="col-md-10">
-                                                    <input id="nom2" name="nom" placeholder="Nom" class="form-control input-md" type="text">
+                                                    <input id="nom2" name="nom" placeholder="Nom"
+                                                           class="form-control input-md" type="text">
                                                 </div>
                                             </div>
                                         </div>
@@ -254,7 +299,9 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <div class="col-md-10">
-                                                    <input id="Immatriculation" name="Immat" placeholder="Immatriculation" class="form-control input-md" type="text">
+                                                    <input id="Immatriculation" name="Immat"
+                                                           placeholder="Immatriculation" class="form-control input-md"
+                                                           type="text">
                                                 </div>
                                             </div>
                                         </div>
@@ -264,7 +311,8 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <div class="col-md-10">
-                                                    <input id="facture" name="IdFacture" placeholder="Numéro de facture" class="form-control input-md" type="text">
+                                                    <input id="facture" name="IdFacture" placeholder="Numéro de facture"
+                                                           class="form-control input-md" type="text">
                                                 </div>
                                             </div>
                                         </div>
@@ -274,7 +322,8 @@
                         </form>
                     </form>
                     <div class="modal-footer">
-                        <input id="boutonSave2" class="btn btn-info glyphicon glyphicon-search" type="submit" value="Rechercher" />
+                        <input id="boutonSave2" class="btn btn-outline-info" type="submit"
+                               value=" &#128269; Rechercher"/>
                     </div>
                 </div>
             </div>
@@ -287,27 +336,29 @@
     <!-- -------------         LISTES DÉROULANTES PRESTA         ---------------- -->
     <!-- ------------------------------------------------------------------------ -->
     <!-- ------------------------------------------------------------------------ -->
-    <form class="form-horizontal mt-5 " th:action="@{/enregistrer}" method="post" id="prestaOk" th:object="${prestation}">
+    <form class="form-horizontal mt-5 " th:action="@{/addPresta}" method="post" id="prestaOk"
+          th:object="${prestation}" modelAttribute="client">
         <div class="container" th:style="${client.nom == null} ? 'display: none'">
             <div class="row">
                 <legend>Enregistrement prestation</legend>
                 <div class="form-group col-md-6">
                     <div class="col-md-10">
                         <select id="TypeActe" th:field="*{acte}" class="select2" required>
-                        <option hidden="" value="">Choisissez une intervention</option>
-                        <option th:each="acte : ${actes}" th:value="${acte.id_acte}"
-                                th:text="${acte.libelle}"></option>
-                    </select>
+                            <option hidden="" value="">Choisissez une intervention</option>
+                            <option th:each="acte : ${actes}" th:value="${acte.id_acte}"
+                                    th:text="${acte.libelle}"></option>
+                        </select>
                     </div>
                 </div>
                 <!-- Select Basic -->
                 <div class="form-group col-md-6">
                     <div class="col-md-10">
                         <select id="TypeFinition" th:field="*{finition}" class="select2" required>
-                        <option hidden="" value="">Choisissez un type de finition</option>
-                        <option th:each="finition : ${finitions}"
-                                th:value="${finition.id_finition}" th:text="${finition.libelle}" th:required></option>
-                    </select>
+                            <option hidden="" value="">Choisissez un type de finition</option>
+                            <option th:each="finition : ${finitions}"
+                                    th:value="${finition.id_finition}" th:text="${finition.libelle}"
+                                    th:required></option>
+                        </select>
                     </div>
                     <script>
                         $('.select2').select2();
@@ -318,9 +369,23 @@
             <div>
                 <div class="col-md-1">
                     <div class="form-group col-md-5 mt-5">
-                        <input class="btn btn-info" type="submit" value="Ajouter une intervention" />
+                        <input class="btn btn-outline-info" type="submit" value="Ajouter une intervention"/>
                     </div>
                 </div>
+                <table class="table table-bordered table-striped table-md">
+                    <thead class="table-info">
+                    <tr>
+                        <th>Client</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Nom : <span class="font-weight-bold" th:text="${client.nom}"></span> Prénom : <span
+                                class="font-weight-bold" th:text="${client.prenom}"></span></td>
+
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </form>
@@ -331,35 +396,27 @@
     <!-- -------------         LISTES Prestations : Facturation  ---------------- -->
     <!-- ------------------------------------------------------------------------ -->
     <!-- ------------------------------------------------------------------------ -->
-    <form method="post" th:action="@{/enregistrer}" th:style="${prestation.acte == null} ? 'display: none'">
-        <div class="row">
-            <h2>Récapitulatif client :</h2>
-            <div class="col-md-12">
-                <p th:object="${client}" th:text="${client.toString()}"></p>
-            </div>
-        </div>
-
+    <form method="post" th:action="@{/savePresta}" th:style="${prestation.acte == null} ? 'display: none'">
         <table class="table table-bordered table-striped table-md">
             <thead class="table-info">
-                <tr>
-                    <th>Prestation</th>
-                </tr>
+            <tr>
+                <th>Prestation</th>
+            </tr>
             </thead>
             <tbody>
-                <tr th:each="prestation : ${prestations}">
-                    <td th:text="${prestation.toString()}"></td>
-                </tr>
+            <tr th:each="prestation : ${prestations}">
+                <td th:text="${prestation.toString()}"></td>
+            </tr>
             </tbody>
         </table>
-        <!--</div>-->
 
         <div class="row">
             <div class="form-group offset-8 col-md-3 mt-5">
-                <input class="btn btn-info" type="submit" value="&#128190; Enregistrer" />
+                <input class="btn btn-outline-info" type="submit" value="&#128190; Enregistrer"/>
             </div>
         </div>
     </form>
-    </div>
+</div>
 </body>
 
 </html>

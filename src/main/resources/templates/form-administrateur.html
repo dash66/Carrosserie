@@ -13,18 +13,48 @@
 <body>
 <header>
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h2 class="col-md-12">Carrosserie AFPA</h2>
+
+        <nav style="height:50px;"
+             class="navbar navbar-expand-lg navbar-light bg-light border border-info rounded-bottom mb-5">
+            <a class="navbar-brand glyphicon glyphicon-home text-info" th:href="@{|/menu|}"> Accueil<span
+                    class="sr-only">(current)</span></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link glyphicon glyphicon-user text-info" th:href="@{/admin}"> Administration</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Disabled</a>
+                    </li>-->
+                </ul>
+                <h1 class="navbar-text text-success m-3">Carrosserie </h1>
+                <img style="max-width:45px; max-height:45px;" class="w-auto h-auto" th:src="@{/images/afpa.png}" alt="Logo Afpa tout vert">
+                <!-- <form class="form-inline my-2 my-lg-0">
+                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                 </form>-->
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-1">
-                <a th:href="@{|/menu|}" class="btn glyphicon glyphicon-home">
-                    <span><strong> Accueil</strong></span>
-                </a>
-            </div>
-        </div>
+        </nav>
+
 
         <div class="row">
             <div class="offset-md-2 col-md-8">
@@ -35,7 +65,7 @@
 </header>
 
 <div class="container">
-    <legend class="text-center">Ajout ou Modification en Base De Données</legend>
+
     <div class="col-md-offset-3 mt-5">
 
         <!-- ------------------------------------------------------------------------ -->
@@ -68,7 +98,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="modal-footer col-md-12 pull-right">
-                                            <input id="boutonSaveActe" class="btn btn-info" type="submit"
+                                            <input id="boutonSaveActe" class="btn btn-outline-info" type="submit"
                                                    value="&#128190; Enregistrer"/>
                                         </div>
                                     </div>
@@ -110,7 +140,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="modal-footer col-md-12 pull-right">
-                                            <input id="boutonSaveFinition" class="btn btn-info" type="submit"
+                                            <input id="boutonSaveFinition" class="btn btn-outline-info" type="submit"
                                                    value="&#128190; Enregistrer"/>
                                         </div>
                                     </div>
@@ -181,7 +211,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="modal-footer col-md-12 pull-right">
-                                        <input id="boutonSavePrix" class="btn btn-info" type="submit"
+                                        <input id="boutonSavePrix" class="btn btn-outline-info" type="submit"
                                                value="&#128190; Enregistrer"/>
                                     </div>
                                 </div>
@@ -193,11 +223,6 @@
         </div>
     </form>
 </div>
-</div>
-</div>
-</div>
-</form>
-</div>
 
 
 <!-- ------------------------------------------------------------------------ -->
@@ -208,7 +233,12 @@
 <div class="container">
     <div class="row">
         <div class="offset-md-3 col-md-12">
-            <a href="#addActe" class="btn btn-info col-md-5 m-1"
+            <div class="alert alert-light text-center font-weight-bold col-md-5 m-1">Ajout ou Modification en Base De Données</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="offset-md-3 col-md-12">
+            <a href="#addActe" class="btn btn-outline-info col-md-5 m-1"
                data-toggle="modal"
                data-target="#addActe"><span class="glyphicon glyphicon-plus"></span>
                 <strong> Définir un acte</strong>
@@ -217,7 +247,7 @@
     </div>
     <div class="row">
         <div class="offset-md-3 col-md-12">
-            <a href="#addFinition" class="btn btn-info col-md-5 m-1"
+            <a href="#addFinition" class="btn btn-outline-info col-md-5 m-1 "
                data-toggle="modal"
                data-target="#addFinition"><span class="glyphicon glyphicon-plus" style="margin-left:33px;"></span>
                 <strong> Définir une finition</strong>
@@ -226,7 +256,7 @@
     </div>
     <div class="row">
         <div class="offset-md-3 col-md-12">
-            <a href="#addPrix" class="btn btn-info col-md-5 m-1" data-toggle="modal"
+            <a href="#addPrix" class="btn btn-outline-info col-md-5 m-1" data-toggle="modal"
                data-target="#addPrix"><span class="glyphicon glyphicon-plus"></span>
                 <strong> Définir un prix</strong>
             </a>

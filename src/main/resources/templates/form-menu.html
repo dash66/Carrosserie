@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -20,30 +20,46 @@
 <!-- ------------------------------------------------------------------------ -->
 <header>
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h2 class="col-md-12">Carrosserie AFPA</h2>
+
+        <nav style="height:50px;" class="navbar navbar-expand-lg navbar-light bg-light border border-info rounded-bottom mb-5">
+            <a class="navbar-brand glyphicon glyphicon-home text-info" th:href="@{|/menu|}"> Accueil<span class="sr-only">(current)</span></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link glyphicon glyphicon-user text-info" th:href="@{/admin}"> Administration</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Disabled</a>
+                    </li>-->
+                </ul>
+                <h1 class="navbar-text text-success m-3">Carrosserie </h1>
+                <img style="max-width:45px; max-height:45px;" class="w-auto h-auto" th:src="@{/images/afpa.png}" alt="Logo Afpa tout vert">
+                <!-- <form class="form-inline my-2 my-lg-0">
+                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                 </form>-->
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-12">
-                    <a th:href="@{|/|}" class="btn glyphicon glyphicon-home col-md-1">
-                        <span><strong> Accueil</strong></span>
-                    </a>
+        </nav>
 
-                    <a class="btn glyphicon glyphicon-user col-md-1" th:href="@{/admin}">
-                        <strong> Administration</strong></a>
 
-                   <!-- <a class="btn glyphicon glyphicon-user col-md-1" sec:authorize="isAuthenticated()" th:href="@{/auth}">
-                        <strong> Admin connecté</strong></a>&ndash;&gt;-->
-
-                   <!-- <form class="col-md-1 float-md-right pull-right"sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
-                        <input class="btn btn-grey glyphicon glyphicon-step-backward" type="submit" value="Logout"/>
-                    </form>-->
-                </div>
-            </div>
-        </div>
 
         <div class="row">
             <div class="offset-md-2 col-md-8">
@@ -51,8 +67,15 @@
             </div>
         </div>
     </div>
-
 </header>
+
+<!-- <a class="btn glyphicon glyphicon-user col-md-1" sec:authorize="isAuthenticated()" th:href="@{/auth}">
+     <strong> Admin connecté</strong></a>&ndash;&gt;-->
+
+<!-- <form class="col-md-1 float-md-right pull-right"sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+     <input class="btn btn-grey glyphicon glyphicon-step-backward" type="submit" value="Logout"/>
+ </form>-->
+
 
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
@@ -63,12 +86,12 @@
     <div class="mx-auto">
         <div class="row mt-5">
             <div class="offset-md-2 col-md-1 mt-5 ">
-                <a th:href="@{|/enregistrer|}" class="btn btn-info btn-lg">
+                <a th:href="@{|/enregistrer|}" class="btn btn-outline-info btn-lg">
                     &#128190; Enregistrement
                 </a>
             </div>
             <div class="offset-md-1 col-md-1 mt-5">
-                <a th:href="@{|/rechercher|}" class="btn btn-info btn-lg" style="margin-left: 250px">
+                <a th:href="@{|/rechercher|}" class="btn btn-outline-info btn-lg" style="margin-left: 250px">
                     <span class="glyphicon glyphicon-folder-open mr-1"></span> Consultation
                 </a>
             </div>
