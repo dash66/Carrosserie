@@ -57,7 +57,7 @@ public class controllerUI {
         return "form-recherche";
     }
 
-    @PostMapping(value = "/rechercher") // fonction de la page archive
+    @PostMapping(value = "/rechercherClient") // fonction de la page archive
     public String recherche2(Model model, HttpServletRequest httpServletRequest) {
 
         String prenom = httpServletRequest.getParameter("prenom3");
@@ -67,9 +67,18 @@ public class controllerUI {
         String modele = httpServletRequest.getParameter("model");
         Long numFacture = Long.valueOf(httpServletRequest.getParameter("numFacture"));
 
+        System.out.println(nom + prenom);
+
         Long id = clientDao.rechercherClientParNometPrenom(nom, prenom);
+        System.out.println(id);
+
+
+
         Optional<Client> client = clientDao.findById(id);
         Client michaelKnight = client.get();
+
+        System.out.println(michaelKnight);
+
 
         Long id1 = voitureDao.rechercherVoitureparImmat(immat);
         Optional<Voiture> voiture = voitureDao.findById(id1);
@@ -77,13 +86,13 @@ public class controllerUI {
 
         Long id2 = facturationDao.rechercherFactureParId(numFacture);
         Optional<Facturation> facturation = facturationDao.findById(id2);
-        Facturation nightRider = facturation.get();
+        Facturation knightRider = facturation.get();
 
         model.addAttribute("client", michaelKnight);
         model.addAttribute("voiture", k2000);
-        model.addAttribute("facturation", nightRider);
+        model.addAttribute("facturation", knightRider);
 
-        return "form-archive";
+        return "redirect:/rechercher";
     }
 
     @GetMapping("/recherche")
@@ -161,7 +170,7 @@ public class controllerUI {
         return "form-administrateur";
     }
 
-    @PostMapping("/prix")
+    @RequestMapping("/prix")
     public String ajouterPrix(HttpServletRequest httpServletRequest, Prestation prestation) {
 
         prestation.setPrix(Double.valueOf(httpServletRequest.getParameter("libelle3")));
