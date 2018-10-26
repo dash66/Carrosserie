@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
@@ -57,7 +58,7 @@ public class controllerUI {
         return "form-recherche";
     }
 
-    @PostMapping(value = "/rechercherClient") // fonction de la page archive
+    @PostMapping(value = "/rechercher") // fonction de la page archive
     public String recherche2(Model model, HttpServletRequest httpServletRequest) {
 
         String prenom = httpServletRequest.getParameter("prenom3");
@@ -67,18 +68,9 @@ public class controllerUI {
         String modele = httpServletRequest.getParameter("model");
         Long numFacture = Long.valueOf(httpServletRequest.getParameter("numFacture"));
 
-        System.out.println(nom + prenom);
-
         Long id = clientDao.rechercherClientParNometPrenom(nom, prenom);
-        System.out.println(id);
-
-
-
         Optional<Client> client = clientDao.findById(id);
         Client michaelKnight = client.get();
-
-        System.out.println(michaelKnight);
-
 
         Long id1 = voitureDao.rechercherVoitureparImmat(immat);
         Optional<Voiture> voiture = voitureDao.findById(id1);
@@ -86,13 +78,13 @@ public class controllerUI {
 
         Long id2 = facturationDao.rechercherFactureParId(numFacture);
         Optional<Facturation> facturation = facturationDao.findById(id2);
-        Facturation knightRider = facturation.get();
+        Facturation nightRider = facturation.get();
 
         model.addAttribute("client", michaelKnight);
         model.addAttribute("voiture", k2000);
-        model.addAttribute("facturation", knightRider);
+        model.addAttribute("facturation", nightRider);
 
-        return "redirect:/rechercher";
+        return "form-archive";
     }
 
     @GetMapping("/recherche")
@@ -110,22 +102,33 @@ public class controllerUI {
         return "form-enregistrement";
     }
 
-    @RequestMapping("/enregistrer")
-    public String enregistrer(@ModelAttribute("prestation") Prestation prestation, Model model, HttpServletRequest request, Voiture voiture) {
-        Client client = new Client();
-        List<Finition> finitions = finitionDao.findAll();
-        List<Acte> actes = acteDao.findAll();
-        List<Prestation> prestations = new ArrayList<>();
+    @GetMapping("/vueEnregistrement")
+    public String enregistrer(@ModelAttribute("prestation") Prestation prestation, @ModelAttribute("client") Client client, @ModelAttribute("prestations") ArrayList<Prestation> prestations, Model model) {
 
-        model.addAttribute("actes", actes);
-        model.addAttribute("finitions", finitions);
+        model.addAttribute("actes", acteDao.findAll());
+        model.addAttribute("finitions", finitionDao.findAll());
         model.addAttribute("prestations", prestations);
-        model.addAttribute("client", client);
 
-        this.coupleClientVoitureBase(client, request, voiture);
-        Long id = clientDao.findLastId();
-        Optional<Client> clientTmp = clientDao.findById(id);
-        client = clientTmp.get();
+        System.out.println(client);
+        return "form-enregistrement";
+    }
+
+    @PostMapping("/saveClient")
+    public String enregistrementClient(HttpServletRequest request, @ModelAttribute("client") Client client, @ModelAttribute("voiture") Voiture voiture, RedirectAttributes redirectAttributes){
+        client = this.creationClient(client, request);
+        voiture = this.creationVoiture(client, request);
+
+        if (client.getNom() != null) {
+            clientDao.save(client);
+            voitureDao.save(voiture);
+        }
+
+        redirectAttributes.addFlashAttribute("client", client);
+        return "redirect:/addPresta";
+    }
+
+    @RequestMapping("/addPresta")
+    public String ajouterPrestaList(@ModelAttribute("prestation") Prestation prestation, @ModelAttribute("client") Client client, @ModelAttribute("prestations") ArrayList<Prestation> prestations, HttpServletRequest request, Voiture voiture, RedirectAttributes redirectAttributes) {
 
         Acte acte = prestation.getActe();
         Finition finition = prestation.getFinition();
@@ -137,22 +140,17 @@ public class controllerUI {
         }
         prestations.add(prestation);
 
-        return "form-enregistrement";
+        redirectAttributes.addFlashAttribute("client", client);
+
+        return "redirect:/vueEnregistrement";
     }
 
-    @PostMapping("/saveClient")
-    public Client coupleClientVoitureBase(Client client, HttpServletRequest request, Voiture voiture) {
-
-        client = this.creationClient(client, request);
-        voiture = this.creationVoiture(client, request);
-
-        if (client.getNom() != null) {
-            clientDao.save(client);
-            voitureDao.save(voiture);
-        }
-
-        return client;
-    }
+   /* @PostMapping("/savePresta")
+    public String sauvegarderPrestas(@ModelAttribute("facture") Facturation facturation, @ModelAttribute("prestations") ArrayList<Prestation> prestations){
+        facturation.setPrestation(prestations);
+        facturationDao.save(facturation);
+        return "redirect:/vueEnregistrement";
+    }*/
 
     @GetMapping("/admin")
     public String affichageMenuAdministrateur(
@@ -170,7 +168,7 @@ public class controllerUI {
         return "form-administrateur";
     }
 
-    @RequestMapping("/prix")
+    @PostMapping("/prix")
     public String ajouterPrix(HttpServletRequest httpServletRequest, Prestation prestation) {
 
         prestation.setPrix(Double.valueOf(httpServletRequest.getParameter("libelle3")));
@@ -205,7 +203,6 @@ public class controllerUI {
         return "form-archive";
     }
 
-
     public String retrouverCatégorieVoiturePourClientExistant(Model model, HttpServletRequest httpServletRequest) {
 
         Long clientId = clientDao.rechercherClientParNometPrenom(
@@ -215,7 +212,6 @@ public class controllerUI {
 
         return categorieClientExistant;
     }
-
 
     public Double calculPrixFinal(List<Prestation> prestations, Voiture voiture) {
 
@@ -243,7 +239,6 @@ public class controllerUI {
         }
         return prixFinal;
     }
-
 
     public Client creationClient(@ModelAttribute("client") Client client, HttpServletRequest request) {
 
