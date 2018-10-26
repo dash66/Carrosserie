@@ -12,54 +12,56 @@
 
 <body>
 <header>
-    <div class="container">
-
-        <nav style="height:50px;" class="navbar navbar-expand-lg navbar-light bg-light border border-info rounded-bottom mb-5">
-            <a class="navbar-brand glyphicon glyphicon-home text-info" th:href="@{|/menu|}"> Accueil<span class="sr-only">(current)</span></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link glyphicon glyphicon-user text-info" th:href="@{/admin}"> Administration</a>
-                    </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Disabled</a>
-                    </li>-->
-                </ul>
-                <h1 class="navbar-text text-success m-3">Carrosserie </h1>
-                <img style="max-width:45px; max-height:45px;" class="w-auto h-auto" th:src="@{/images/afpa.png}" alt="Logo Afpa tout vert">
-                <!-- <form class="form-inline my-2 my-lg-0">
-                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                 </form>-->
-            </div>
-        </nav>
 
 
+    <nav style="height:50px;"
+         class="navbar navbar-expand-lg navbar-light bg-light border rounded-bottom mb-5">
+        <a class="navbar-brand glyphicon glyphicon-home text-info" th:href="@{|/menu|}"> Accueil<span
+                class="sr-only">(current)</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-        <div class="row">
-            <div class="offset-md-2 col-md-8">
-                <img class="mw-100 mh-100" th:src="@{/images/anim2.png}" alt="Beau comme un camion tout neuf !"/>
-            </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link glyphicon glyphicon-user text-info" th:href="@{/admin}"> Administration</a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>-->
+            </ul>
+            <h1 class="navbar-text text-success m-3 pb-3">Carrosserie </h1>
+            <img style="max-width:45px; max-height:45px;" class="w-auto h-auto" th:src="@{/images/afpa.png}" alt="Logo Afpa tout vert">
+            <!-- <form class="form-inline my-2 my-lg-0">
+                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+             </form>-->
+        </div>
+    </nav>
+
+
+    <div class="row m-2">
+        <div class="col-md-12 text-center">
+            <img class="mw-100 mh-100" th:src="@{/images/anim2.png}" alt="Beau comme un camion tout neuf !"/>
         </div>
     </div>
+
 </header>
 
 <div class="container">
@@ -75,13 +77,13 @@
         <div class="col-md-12 bg-light border border-info rounded">
             <h2 class="col-md-12 my-3 glyphicon glyphicon-search text-info"> Fiche client</h2>
             <div class="col-md-6 float-md-left ">
-                <p class="glyphicon glyphicon-user"> Prenom, Nom :</p>
-                <p class="glyphicon glyphicon-home"> Adresse : </p>
-                <p class="glyphicon glyphicon-envelope"> Mail : </p>
+                <p class="glyphicon glyphicon-user"> Prenom, Nom :<span th:text="${client.prenom}"> </span><span th:text="${client.nom}"></span></p>
+                <p class="glyphicon glyphicon-home"> Adresse : <span th:text="${client.adresse}"> </span></p>
+                <p class="glyphicon glyphicon-envelope"> Mail : <span th:text="${client.email}"> </span></p>
             </div>
             <div class="col-md-6 float-md-right">
-                <p><span class="glyphicon glyphicon-phone"></span> Téléphone : </p>
-                <p><span class="glyphicon glyphicon-barcode"></span> N° AFPA : </p>
+                <p><span class="glyphicon glyphicon-phone"></span> Téléphone : <span th:text="${client.telephone}"> </span></p>
+                <p><span class="glyphicon glyphicon-barcode"></span> N° AFPA : <span th:text="${client.numAfpa}"> </span></p>
             </div>
         </div>
     </div>
@@ -90,12 +92,12 @@
         <div class="col-md-5 bg-light border border-info rounded float-md-left my-2">
             <div class="col-md-12">
                 <h2 class="col-md-6 my-3 text-info"><span class="glyphicon glyphicon-road"></span> Véhicule</h2>
-                <p>Modèle : <span></span></p>
-                <p>Immatriculation : <span></span></p>
-                <p>Catégorie : <span></span></p>
-                <p>Date de 1ere mise en service : <span></span></p>
-                <p>Couleur : <span></span></p>
-                <p>Marque : <span></span></p>
+                <p>Modèle : <span th:text="${voiture.modele}"></span></p>
+                <p>Immatriculation :  <span th:text="${voiture.immat}"></span></p>
+                <p>Catégorie :  <span th:text="${voiture.categorie}"></span></p>
+                <p>Date de 1ere mise en service :  <span th:text="${voiture.date}"></span></p>
+                <p>Couleur :  <span th:text="${voiture.codeCouleur}"></span></p>
+                <p>Marque :  <span th:text="${voiture.marque}"></span></p>
             </div>
         </div>
         <div class="offset-md-1 col-md-6 bg-light border border-info rounded float-md-right my-2">

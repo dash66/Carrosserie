@@ -20,54 +20,56 @@
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
 <header>
-    <div class="container">
-
-        <nav style="height:50px;" class="navbar navbar-expand-lg navbar-light bg-light border border-info rounded-bottom mb-5">
-            <a class="navbar-brand glyphicon glyphicon-home text-info" th:href="@{|/menu|}"> Accueil<span class="sr-only">(current)</span></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link glyphicon glyphicon-user text-info" th:href="@{/admin}"> Administration</a>
-                    </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Disabled</a>
-                    </li>-->
-                </ul>
-                <h1 class="navbar-text text-success m-3">Carrosserie </h1>
-                <img style="max-width:45px; max-height:45px;" class="w-auto h-auto" th:src="@{/images/afpa.png}" alt="Logo Afpa tout vert">
-                <!-- <form class="form-inline my-2 my-lg-0">
-                      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                  </form>-->
-            </div>
-        </nav>
 
 
+    <nav style="height:50px;"
+         class="navbar navbar-expand-lg navbar-light bg-light border rounded-bottom mb-5">
+        <a class="navbar-brand glyphicon glyphicon-home text-info" th:href="@{|/menu|}"> Accueil<span
+                class="sr-only">(current)</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-        <div class="row">
-            <div class="offset-md-2 col-md-8">
-                <img class="mw-100 mh-100" th:src="@{/images/anim2.png}" alt="Beau comme un camion tout neuf !"/>
-            </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link glyphicon glyphicon-user text-info" th:href="@{/admin}"> Administration</a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>-->
+            </ul>
+            <h1 class="navbar-text text-success m-3 pb-3">Carrosserie </h1>
+            <img style="max-width:45px; max-height:45px;" class="w-auto h-auto" th:src="@{/images/afpa.png}" alt="Logo Afpa tout vert">
+            <!-- <form class="form-inline my-2 my-lg-0">
+                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+             </form>-->
+        </div>
+    </nav>
+
+
+    <div class="row m-2">
+        <div class="col-md-12 text-center">
+            <img class="mw-100 mh-100" th:src="@{/images/anim2.png}" alt="Beau comme un camion tout neuf !"/>
         </div>
     </div>
+
 </header>
 
 <!-- ------------------------------------------------------------------------ -->
@@ -76,19 +78,21 @@
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
 <div class="container mt-5">
-    <div class="row">
-        <div class="offset-3 col-md-1">
+    <div class="row m-2">
+        <div class="col-md-12">
+        <div class="col-md-6 float-left text-center">
             <a href="#addClient" class="btn btn-outline-info a-btn-slide-text m-2" data-toggle="modal" data-target="#addClient">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 <strong>Nouveau Client</strong>
             </a>
         </div>
-        <div class="offset-2 col-md-1">
+        <div class="col-md-6 float-left text-center">
             <a href="#readClient" class="btn btn-outline-info a-btn-slide-text m-2" data-toggle="modal"
                data-target="#readClient">
                 <span class="glyphicon glyphicon-folder-open m-1" aria-hidden="true"></span>
                 <strong>Client Existant</strong>
             </a>
+        </div>
         </div>
     </div>
 
@@ -259,77 +263,85 @@
     <!-- -------------            FORM MODAL RECHERCHE           ---------------- -->
     <!-- ------------------------------------------------------------------------ -->
     <!-- ------------------------------------------------------------------------ -->
-    <form method="post" th:action="@{/recherche}">
-        <div class="modal" id="readClient" tabindex="-1" role="dialog" href="#">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Rechercher / Consulter</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <form class="modal-body">
-                        <form class="form-horizontal mt-5" method="post">
-                            <form>
-                                <!-- Form Name -->
 
-                                <div class="container">
-                                    <!-- 1ere colonne du champ de saisie CLIENT-->
-                                    <label>Recherche par client</label>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <div class="col-md-10">
-                                                    <input id="prenom2" name="prenom" placeholder="Prénom"
-                                                           class="form-control input-md" type="text">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <div class="col-md-10">
-                                                    <input id="nom2" name="nom" placeholder="Nom"
-                                                           class="form-control input-md" type="text">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <label>Recherche par véhicule</label>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <div class="col-md-10">
-                                                    <input id="Immatriculation" name="Immat"
-                                                           placeholder="Immatriculation" class="form-control input-md"
-                                                           type="text">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <label>Recherche par facture</label>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <div class="col-md-10">
-                                                    <input id="facture" name="IdFacture" placeholder="Numéro de facture"
-                                                           class="form-control input-md" type="text">
-                                                </div>
+    <div class="modal" id="readClient" tabindex="-1" role="dialog" href="#">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Rechercher / Consulter</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form class="modal-body">
+                    <form class="form-horizontal mt-5" method="post">
+                        <form method="post" th:action="@{/rechercheClientExistant}">
+                            <!-- Form Name -->
+                            <div class="container">
+                                <!-- 1ere colonne du champ de saisie CLIENT-->
+                                <label>Recherche par client</label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <input id="prenom2" name="prenom" placeholder="Prénom"
+                                                       class="form-control input-md" type="text">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <input id="nom2" name="nom" placeholder="Nom"
+                                                   class="form-control input-md" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input id="boutonSave10" class="btn btn-outline-info" type="submit"
+                                       value=" &#128269; Rechercher"/>
+                            </div>
+                        </form>
+                        <form method="post" th:action="@{/rechercheVoitureExistant}">
+                            <label>Recherche par véhicule</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <input id="Immatriculation" name="Immat"
+                                                   placeholder="Immatriculation" class="form-control input-md"
+                                                   type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input id="boutonSave11" class="btn btn-outline-info" type="submit"
+                                       value=" &#128269; Rechercher"/>
+                            </div>
+                        </form>
+                        <form method="post" th:action="@{/rechercheFactureExistant}">
+                            <label>Recherche par facture</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <input id="facture" name="IdFacture" placeholder="Numéro de facture"
+                                                   class="form-control input-md" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input id="boutonSave12" class="btn btn-outline-info" type="submit"
+                                       value=" &#128269; Rechercher"/>
+                            </div>
                         </form>
                     </form>
-                    <div class="modal-footer">
-                        <input id="boutonSave2" class="btn btn-outline-info" type="submit"
-                               value=" &#128269; Rechercher"/>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
-
-    </form>
+    </div>
 
     <!-- ------------------------------------------------------------------------ -->
     <!-- ------------------------------------------------------------------------ -->
@@ -339,20 +351,18 @@
     <form class="form-horizontal mt-5 " th:action="@{/addPresta}" method="post" id="prestaOk"
           th:object="${prestation}" modelAttribute="client">
         <div class="container" th:style="${client.nom == null} ? 'display: none'">
-            <div class="row">
-                <legend>Enregistrement prestation</legend>
-                <div class="form-group col-md-6">
-                    <div class="col-md-10">
+            <div class="row m-2">
+                <p class="alert alert-light font-weight-bold p-0">Enregistrement prestation</p>
+                <div class="form-group col-md-12">
+                    <div class="col-md-6 float-left text-center">
                         <select id="TypeActe" th:field="*{acte}" class="select2" required>
                             <option hidden="" value="">Choisissez une intervention</option>
                             <option th:each="acte : ${actes}" th:value="${acte.id_acte}"
                                     th:text="${acte.libelle}"></option>
                         </select>
                     </div>
-                </div>
-                <!-- Select Basic -->
-                <div class="form-group col-md-6">
-                    <div class="col-md-10">
+
+                    <div class="col-md-6 float-left text-center">
                         <select id="TypeFinition" th:field="*{finition}" class="select2" required>
                             <option hidden="" value="">Choisissez un type de finition</option>
                             <option th:each="finition : ${finitions}"
@@ -362,16 +372,15 @@
                     </div>
                     <script>
                         $('.select2').select2();
-
                     </script>
                 </div>
             </div>
-            <div>
-                <div class="col-md-1">
-                    <div class="form-group col-md-5 mt-5">
-                        <input class="btn btn-outline-info" type="submit" value="Ajouter une intervention"/>
+            <div class="row m-2">
+
+                    <div class="form-group col-md-12 mt-3 px-0">
+                        <input class="btn btn-outline-info font-weight-bold" type="submit" value="&#9881; Ajouter une intervention"/>
                     </div>
-                </div>
+
                 <table class="table table-bordered table-striped table-md">
                     <thead class="table-info">
                     <tr>
@@ -380,8 +389,11 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>Nom : <span class="font-weight-bold" th:text="${client.nom}"></span> Prénom : <span
-                                class="font-weight-bold" th:text="${client.prenom}"></span></td>
+                        <td>Nom :
+                            <span class="font-weight-bold" th:text="${client.nom}"></span>
+                            Prénom :
+                            <span class="font-weight-bold" th:text="${client.prenom}"></span>
+                        </td>
 
                     </tr>
                     </tbody>

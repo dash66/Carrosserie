@@ -12,10 +12,10 @@
 
 <body>
 <header>
-    <div class="container">
+
 
         <nav style="height:50px;"
-             class="navbar navbar-expand-lg navbar-light bg-light border border-info rounded-bottom mb-5">
+             class="navbar navbar-expand-lg navbar-light bg-light border rounded-bottom mb-5">
             <a class="navbar-brand glyphicon glyphicon-home text-info" th:href="@{|/menu|}"> Accueil<span
                     class="sr-only">(current)</span></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -46,7 +46,7 @@
                         <a class="nav-link disabled" href="#">Disabled</a>
                     </li>-->
                 </ul>
-                <h1 class="navbar-text text-success m-3">Carrosserie </h1>
+                <h1 class="navbar-text text-success m-3 pb-3">Carrosserie </h1>
                 <img style="max-width:45px; max-height:45px;" class="w-auto h-auto" th:src="@{/images/afpa.png}" alt="Logo Afpa tout vert">
                 <!-- <form class="form-inline my-2 my-lg-0">
                      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -56,12 +56,12 @@
         </nav>
 
 
-        <div class="row">
-            <div class="offset-md-2 col-md-8">
+        <div class="row m-2">
+            <div class="col-md-12 text-center">
                 <img class="mw-100 mh-100" th:src="@{/images/anim2.png}" alt="Beau comme un camion tout neuf !"/>
             </div>
         </div>
-    </div>
+
 </header>
 
 <div class="container">
@@ -230,33 +230,33 @@
 <!-- -------------   BOUTONS NOUVEL ACTE/NOUVELLE FINITION   ---------------- -->
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
-<div class="container">
-    <div class="row">
-        <div class="offset-md-3 col-md-12">
-            <div class="alert alert-light text-center font-weight-bold col-md-5 m-1">Ajout ou Modification en Base De Données</div>
+<div class="container mt-5">
+    <div class="row m-2">
+        <div class="col-md-12 text-center">
+            <p class="alert alert-light font-weight-bold">Ajout ou Modification en Base De Données</p>
         </div>
     </div>
-    <div class="row">
-        <div class="offset-md-3 col-md-12">
-            <a href="#addActe" class="btn btn-outline-info col-md-5 m-1"
+    <div class="row m-2">
+        <div class="col-md-12 text-center">
+            <a href="#addActe" class="btn btn-outline-info col-md-6"
                data-toggle="modal"
                data-target="#addActe"><span class="glyphicon glyphicon-plus"></span>
                 <strong> Définir un acte</strong>
             </a>
         </div>
     </div>
-    <div class="row">
-        <div class="offset-md-3 col-md-12">
-            <a href="#addFinition" class="btn btn-outline-info col-md-5 m-1 "
+    <div class="row m-2">
+        <div class="col-md-12 text-center">
+            <a href="#addFinition" class="btn btn-outline-info col-md-6"
                data-toggle="modal"
                data-target="#addFinition"><span class="glyphicon glyphicon-plus" style="margin-left:33px;"></span>
                 <strong> Définir une finition</strong>
             </a>
         </div>
     </div>
-    <div class="row">
-        <div class="offset-md-3 col-md-12">
-            <a href="#addPrix" class="btn btn-outline-info col-md-5 m-1" data-toggle="modal"
+    <div class="row m-2">
+        <div class="col-md-12 text-center">
+            <a href="#addPrix" class="btn btn-outline-info col-md-6" data-toggle="modal"
                data-target="#addPrix"><span class="glyphicon glyphicon-plus"></span>
                 <strong> Définir un prix</strong>
             </a>
