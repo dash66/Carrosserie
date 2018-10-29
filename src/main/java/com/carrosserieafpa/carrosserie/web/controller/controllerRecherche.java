@@ -86,17 +86,19 @@ public class controllerRecherche {
   public String rechercheFacture(Model model, HttpServletRequest httpServletRequest) {
 
     Long numFacture = Long.valueOf(httpServletRequest.getParameter("numFacture"));
-    Long idFacture = facturationDao.rechercherFactureParId(numFacture);
-    Optional<Facturation> facturation = facturationDao.findById(idFacture);
-    Facturation facturation1 = new Facturation();
 
-    model.addAttribute("facturation", facturation1);
+    Optional<Facturation> facturation = facturationDao.findById(numFacture);
+    Facturation facturation1 = facturation.get();
+    Client clint = clientDao.findByImmat(facturation1.getClient().getId());
+    Voiture granTorino = voitureDao.findVoitureByClient(facturation1.getClient().getId());
+
+    model.addAttribute("client", clint);
+    model.addAttribute("voiture", granTorino);
+
     return "form-archive";
   }
 
   @GetMapping("/rechercheClientExistant")
-  // fonction de la page enregistrement, doit y retourner : trouver un client existant pour préparer
-  // presta
   public String rechercheClientExistant(Model model, HttpServletRequest httpServletRequest) {
 
     String prenom = httpServletRequest.getParameter("prenom3");
@@ -112,8 +114,6 @@ public class controllerRecherche {
   }
 
   @PostMapping("/rechercheVoitureExistant")
-  // fonction de la page enregistrement, doit y retourner : trouver un client existant pour préparer
-  // presta
   public String rechercheVoitureExistant(
       Model model, HttpServletRequest httpServletRequest, @ModelAttribute("client") Client client) {
 
@@ -130,17 +130,18 @@ public class controllerRecherche {
     return "redirect:/vueEnregistrement";
   }
 
-  @GetMapping("/rechercheFactureExistant")
-  // fonction de la page enregistrement, doit y retourner : trouver un client existant pour préparer
-  // presta
+  @PostMapping("/rechercheFactureExistant")
   public String rechercheFactureExistant(Model model, HttpServletRequest httpServletRequest) {
 
-    Long numFacture = Long.valueOf(httpServletRequest.getParameter("numFacture"));
-    Long idFacture = facturationDao.rechercherFactureParId(numFacture);
-    Optional<Facturation> facturation = facturationDao.findById(idFacture);
-    Facturation facturation1 = facturation.get();
+      Long numFacture = Long.valueOf(httpServletRequest.getParameter("facture"));
 
-    model.addAttribute("facturation", facturation1);
+      Optional<Facturation> facturation = facturationDao.findById(numFacture);
+      Facturation facturation1 = facturation.get();
+      Client clint = clientDao.findByImmat(facturation1.getClient().getId());
+      Voiture granTorino = voitureDao.findVoitureByClient(facturation1.getClient().getId());
+
+      model.addAttribute("client", clint);
+      model.addAttribute("voiture", granTorino);
 
     return "redirect:/vueEnregistrement";
   }

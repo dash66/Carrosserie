@@ -12,7 +12,6 @@ public class Facturation {
 
     @Column(nullable = true)
     private double prix;
-    private String codeCouleur;
 
   @ManyToOne()
   @JoinColumn(name = "client_id", referencedColumnName = "id")
@@ -24,7 +23,6 @@ public class Facturation {
 
     public Facturation(double prix, String codeCouleur, Client client, Prestation prestation) {
         this.prix = prix;
-        this.codeCouleur = codeCouleur;
         this.client = client;
         this.prestation = prestation;
     }
@@ -56,15 +54,7 @@ public class Facturation {
         this.prix = prix;
     }
 
-    public String getCodeCouleur() {
-        return codeCouleur;
-    }
-
-    public void setCodeCouleur(String codeCouleur) {
-        this.codeCouleur = codeCouleur;
-    }
-
-    public Client getClient() {
+        public Client getClient() {
         return client;
     }
 
@@ -77,8 +67,8 @@ public class Facturation {
         return "Facturation{" +
                 "id=" + id +
                 ", prix=" + prix +
-                ", codeCouleur='" + codeCouleur + '\'' +
                 ", client=" + client +
+                ", prestation=" + prestation +
                 '}';
     }
 }

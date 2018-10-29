@@ -14,7 +14,7 @@ public class Acte implements Serializable {
 
 
 
-    @OneToMany(mappedBy = "acte")
+    @OneToMany(mappedBy = "acte", cascade = CascadeType.REMOVE)
     private Collection<Prestation> prestations;
 
     public Long getId_acte() {

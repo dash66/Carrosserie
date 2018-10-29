@@ -130,4 +130,4 @@ INSERT INTO Client (id, adresse, email, nom ,num_afpa, prenom, telephone) VALUES
 
 INSERT INTO Voiture (id, categorie, code_couleur, immat, marque, modele, client_id) VALUES (1, 'petit gabarit',  'bleu', '1711YJ78', 'Fiotte', 'ours blanc et noir', 1);
 
-INSERT INTO Facturation (id, code_couleur, prix, client_id, id_presta) VALUES (1, 'bleu', 666.00, 1, 1);
+INSERT INTO Facturation (id, prix, client_id, id_presta) VALUES (1, 666.00, 1, 1);

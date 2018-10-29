@@ -63,12 +63,8 @@ public class controllerAdmin {
   }
 
   @RequestMapping("/admin/delete/acte")
-  public String supprimerUnActe(
-      Acte acte,
-      HttpServletRequest httpServletRequest,
-      @ModelAttribute("prestation") Prestation prestation) /*@PathVariable ("id") Long id*/ {
+  public String supprimerUnActe(@ModelAttribute("prestation") Prestation prestation) {
 
-    String ActeASupprimer = httpServletRequest.getParameter("acte");
     Acte acteSupprimer = prestation.getActe();
     acteDao.delete(acteSupprimer);
 
@@ -76,12 +72,8 @@ public class controllerAdmin {
   }
 
   @RequestMapping("/admin/delete/finition")
-  public String supprimerUneFinition(
-      Finition finition,
-      HttpServletRequest httpServletRequest,
-      @ModelAttribute("prestation") Prestation prestation) /*@PathVariable ("id") Long id*/ {
+  public String supprimerUneFinition(@ModelAttribute("prestation") Prestation prestation) {
 
-    String FinitionASupprimer = httpServletRequest.getParameter("finition");
     Finition finitionSupprimer = prestation.getFinition();
     finitionDao.delete(finitionSupprimer);
 
