@@ -77,13 +77,13 @@
         <div class="col-md-12 bg-light border border-info rounded">
             <h2 class="col-md-12 my-3 glyphicon glyphicon-search text-info"> Fiche client</h2>
             <div class="col-md-6 float-md-left ">
-                <p class="glyphicon glyphicon-user"> Prenom, Nom :<span th:text="${client.prenom}"> </span><span th:text="${client.nom}"></span></p>
-                <p class="glyphicon glyphicon-home"> Adresse : <span th:text="${client.adresse}"> </span></p>
-                <p class="glyphicon glyphicon-envelope"> Mail : <span th:text="${client.email}"> </span></p>
+                <p class="glyphicon glyphicon-user"> Prenom, Nom :<span text="${client.prenom}"> </span><span text="${client.nom}"></span></p>
+                <p class="glyphicon glyphicon-home"> Adresse : <span text="${client.adresse}"> </span></p>
+                <p class="glyphicon glyphicon-envelope"> Mail : <span text="${client.email}"> </span></p>
             </div>
             <div class="col-md-6 float-md-right">
-                <p><span class="glyphicon glyphicon-phone"></span> Téléphone : <span th:text="${client.telephone}"> </span></p>
-                <p><span class="glyphicon glyphicon-barcode"></span> N° AFPA : <span th:text="${client.numAfpa}"> </span></p>
+                <p><span class="glyphicon glyphicon-phone"></span> Téléphone : <span text="${client.telephone}"> </span></p>
+                <p><span class="glyphicon glyphicon-barcode"></span> N° AFPA : <span text="${client.numAfpa}"> </span></p>
             </div>
         </div>
     </div>
@@ -92,12 +92,12 @@
         <div class="col-md-5 bg-light border border-info rounded float-md-left my-2">
             <div class="col-md-12">
                 <h2 class="col-md-6 my-3 text-info"><span class="glyphicon glyphicon-road"></span> Véhicule</h2>
-                <p>Modèle : <span th:text="${voiture.modele}"></span></p>
-                <p>Immatriculation :  <span th:text="${voiture.immat}"></span></p>
-                <p>Catégorie :  <span th:text="${voiture.categorie}"></span></p>
-                <p>Date de 1ere mise en service :  <span th:text="${voiture.date}"></span></p>
-                <p>Couleur :  <span th:text="${voiture.codeCouleur}"></span></p>
-                <p>Marque :  <span th:text="${voiture.marque}"></span></p>
+                <p>Modèle : <span text="${voiture.modele}"></span></p>
+                <p>Immatriculation :  <span text="${voiture.immat}"></span></p>
+                <p>Catégorie :  <span text="${voiture.categorie}"></span></p>
+                <p>Date de 1ere mise en service :  <span text="${voiture.date}"></span></p>
+                <p>Couleur :  <span text="${voiture.codeCouleur}"></span></p>
+                <p>Marque :  <span text="${voiture.marque}"></span></p>
             </div>
         </div>
         <div class="offset-md-1 col-md-6 bg-light border border-info rounded float-md-right my-2">
