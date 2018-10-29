@@ -7,9 +7,12 @@ import org.springframework.data.repository.query.Param;
 
 public interface VoitureDao extends JpaRepository<Voiture, Long> {
 
-    @Query("SELECT '*' FROM Voiture WHERE immat = :immat")
-    Long rechercherVoitureparImmat (@Param("immat") String immat);
+    @Query("SELECT new Voiture (immat, marque, modele, categorie, date, codeCouleur, client) FROM Voiture WHERE immat = :immat")
+    Voiture rechercherVoitureparImmat (@Param("immat") String immat);
 
     @Query("SELECT categorie FROM Voiture WHERE client_id = :id")
     String rechercherCategorieVoitureParId(@Param("id") Long id);
+
+    @Query("SELECT new Voiture (immat, marque, modele, categorie, date, codeCouleur, client) FROM Voiture WHERE client_id = :id")
+    Voiture findVoitureByClient(@Param("id") Long id);
 }

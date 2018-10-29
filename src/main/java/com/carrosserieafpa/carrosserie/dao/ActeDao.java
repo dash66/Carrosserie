@@ -7,6 +7,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface ActeDao extends JpaRepository<Acte, Long> {
 
-
-
+  @Query("SELECT '*' FROM Acte WHERE libelle = :libelle")
+  public Acte findByLibelle(@Param("libelle") String libelle);
 }

@@ -12,4 +12,7 @@ public interface ClientDao extends JpaRepository<Client, Long> {
 
     @Query("SELECT MAX(id) FROM Client")
     Long findLastId();
+
+    @Query("Select new Client(prenom, nom, adresse, email, telephone, numAfpa) FROM Client WHERE id = :id")
+    Client findByImmat(@Param("id") Long id);
 }

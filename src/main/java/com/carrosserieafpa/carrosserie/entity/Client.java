@@ -41,6 +41,15 @@ public class Client {
     this.facturation = facturation;
   }
 
+  public Client(String prenom, String nom, @Nullable String adresse, @Nullable String email, int telephone, String numAfpa) {
+    this.prenom = prenom;
+    this.nom = nom;
+    this.adresse = adresse;
+    this.email = email;
+    this.telephone = telephone;
+    this.numAfpa = numAfpa;
+  }
+
   public Client() {
   }
 
