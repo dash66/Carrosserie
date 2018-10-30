@@ -55,7 +55,8 @@
                 </li>-->
             </ul>
             <h1 class="navbar-text text-success m-3 pb-3">Carrosserie </h1>
-            <img style="max-width:45px; max-height:45px;" class="w-auto h-auto" th:src="@{/images/afpa.png}" alt="Logo Afpa tout vert">
+            <img style="max-width:45px; max-height:45px;" class="w-auto h-auto" th:src="@{/images/afpa.png}"
+                 alt="Logo Afpa tout vert">
             <!-- <form class="form-inline my-2 my-lg-0">
                  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -80,19 +81,20 @@
 <div class="container mt-5">
     <div class="row m-2">
         <div class="col-md-12">
-        <div class="col-md-6 float-left text-center">
-            <a href="#addClient" class="btn btn-outline-info a-btn-slide-text m-2" data-toggle="modal" data-target="#addClient">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                <strong>Nouveau Client</strong>
-            </a>
-        </div>
-        <div class="col-md-6 float-left text-center">
-            <a href="#readClient" class="btn btn-outline-info a-btn-slide-text m-2" data-toggle="modal"
-               data-target="#readClient">
-                <span class="glyphicon glyphicon-folder-open m-1" aria-hidden="true"></span>
-                <strong>Client Existant</strong>
-            </a>
-        </div>
+            <div class="col-md-6 float-left text-center">
+                <a href="#addClient" class="btn btn-outline-info a-btn-slide-text m-2" data-toggle="modal"
+                   data-target="#addClient">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    <strong>Nouveau Client</strong>
+                </a>
+            </div>
+            <div class="col-md-6 float-left text-center">
+                <a href="#readClient" class="btn btn-outline-info a-btn-slide-text m-2" data-toggle="modal"
+                   data-target="#readClient">
+                    <span class="glyphicon glyphicon-folder-open m-1" aria-hidden="true"></span>
+                    <strong>Client Existant</strong>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -251,7 +253,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <input id="boutonSave" class="btn btn-outline-info" type="submit" value="&#128190; Enregistrer"/>
+                        <input id="boutonSave" class="btn btn-outline-info" type="submit"
+                               value="&#128190; Enregistrer"/>
                     </div>
                 </div>
             </div>
@@ -288,11 +291,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="col-md-10">
-                                            <input id="nom2" name="nom" placeholder="Nom"
-                                                   class="form-control input-md" type="text">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <input id="nom2" name="nom" placeholder="Nom"
+                                                       class="form-control input-md" type="text">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -302,15 +307,21 @@
                                        value=" &#128269; Rechercher"/>
                             </div>
                         </form>
+                    </form>
+                </form>
+                <form class="modal-body">
+                    <form class="form-horizontal mt-5" method="post">
                         <form method="post" th:action="@{/rechercheVoitureExistant}">
-                            <label>Recherche par véhicule</label>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="col-md-10">
-                                            <input id="Immatriculation" name="Immatriculation"
-                                                   placeholder="Immatriculation" class="form-control input-md"
-                                                   type="text">
+                            <div class="container">
+                                <label>Recherche par véhicule</label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <input id="Immatriculation" name="Immat"
+                                                       placeholder="Immatriculation" class="form-control input-md"
+                                                       type="text">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -320,14 +331,20 @@
                                        value=" &#128269; Rechercher"/>
                             </div>
                         </form>
+                    </form>
+                </form>
+                <form class="modal-body">
+                    <form class="form-horizontal mt-5" method="post">
                         <form method="post" th:action="@{/rechercheFactureExistant}">
-                            <label>Recherche par facture</label>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="col-md-10">
-                                            <input id="facture" name="facture" placeholder="Numéro de facture"
-                                                   class="form-control input-md" type="text">
+                            <div class="container">
+                                <label>Recherche par facture</label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <input id="facture" name="IdFacture" placeholder="Numéro de facture"
+                                                       class="form-control input-md" type="text">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -377,9 +394,10 @@
             </div>
             <div class="row m-2">
 
-                    <div class="form-group col-md-12 mt-3 px-0">
-                        <input class="btn btn-outline-info font-weight-bold" type="submit" value="&#9881; Ajouter une intervention"/>
-                    </div>
+                <div class="form-group col-md-12 mt-3 px-0">
+                    <input class="btn btn-outline-info font-weight-bold" type="submit"
+                           value="&#9881; Ajouter une intervention"/>
+                </div>
 
                 <table class="table table-bordered table-striped table-md">
                     <thead class="table-info">

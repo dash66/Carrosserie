@@ -72,12 +72,18 @@ public class controllerRecherche {
     String marque = httpServletRequest.getParameter("Marque");
     String modele = httpServletRequest.getParameter("model");
 
+    Long numFacture = Long.valueOf(httpServletRequest.getParameter("numFacture"));
+    Optional<Facturation> facturation = facturationDao.findById(numFacture);
+    Facturation facturation1 = facturation.get();
+
     Voiture k2000 = voitureDao.rechercherVoitureparImmat(immat);
     model.addAttribute("voiture", k2000);
 
     Long id = k2000.getClient().getId();
     Client clint = clientDao.findByImmat(id);
     model.addAttribute("client", clint);
+    model.addAttribute("fature", facturation1);
+
 
     return "form-archive";
   }
@@ -94,6 +100,7 @@ public class controllerRecherche {
 
     model.addAttribute("client", clint);
     model.addAttribute("voiture", granTorino);
+    model.addAttribute("fature", facturation1);
 
     return "form-archive";
   }
@@ -133,15 +140,16 @@ public class controllerRecherche {
   @PostMapping("/rechercheFactureExistant")
   public String rechercheFactureExistant(Model model, HttpServletRequest httpServletRequest) {
 
-      Long numFacture = Long.valueOf(httpServletRequest.getParameter("facture"));
+    Long numFacture = Long.valueOf(httpServletRequest.getParameter("facture"));
 
-      Optional<Facturation> facturation = facturationDao.findById(numFacture);
-      Facturation facturation1 = facturation.get();
-      Client clint = clientDao.findByImmat(facturation1.getClient().getId());
-      Voiture granTorino = voitureDao.findVoitureByClient(facturation1.getClient().getId());
+    Optional<Facturation> facturation = facturationDao.findById(numFacture);
+    Facturation facturation1 = facturation.get();
+    Client clint = clientDao.findByImmat(facturation1.getClient().getId());
+    Voiture granTorino = voitureDao.findVoitureByClient(facturation1.getClient().getId());
 
-      model.addAttribute("client", clint);
-      model.addAttribute("voiture", granTorino);
+    model.addAttribute("client", clint);
+    model.addAttribute("voiture", granTorino);
+    model.addAttribute("fature", facturation1);
 
     return "redirect:/vueEnregistrement";
   }
