@@ -426,7 +426,7 @@
     <!-- -------------         LISTES Prestations : Facturation  ---------------- -->
     <!-- ------------------------------------------------------------------------ -->
     <!-- ------------------------------------------------------------------------ -->
-    <form method="post" th:action="@{/savePresta}" th:style="${prestation.acte == null} ? 'display: none'">
+    <form method="post" th:action="@{/savePresta}" th:style="${prestations.isEmpty()} ? 'display: none'">
         <table class="table table-bordered table-striped table-md">
             <thead class="table-info">
             <tr>
