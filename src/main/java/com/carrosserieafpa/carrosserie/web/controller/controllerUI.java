@@ -1,10 +1,7 @@
 package com.carrosserieafpa.carrosserie.web.controller;
 
 import com.carrosserieafpa.carrosserie.dao.*;
-import com.carrosserieafpa.carrosserie.entity.Acte;
-import com.carrosserieafpa.carrosserie.entity.Client;
-import com.carrosserieafpa.carrosserie.entity.Finition;
-import com.carrosserieafpa.carrosserie.entity.Prestation;
+import com.carrosserieafpa.carrosserie.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,84 +17,98 @@ import java.util.List;
 @Controller
 public class controllerUI {
 
-  @Autowired ActeDao acteDao;
-  @Autowired FinitionDao finitionDao;
-  @Autowired PrestationDao prestationDao;
-  @Autowired FacturationDao facturationDao;
-  @Autowired VoitureDao voitureDao;
-  @Autowired ClientDao clientDao;
+    @Autowired
+    ActeDao acteDao;
+    @Autowired
+    FinitionDao finitionDao;
+    @Autowired
+    PrestationDao prestationDao;
+    @Autowired
+    FacturationDao facturationDao;
+    @Autowired
+    VoitureDao voitureDao;
+    @Autowired
+    ClientDao clientDao;
 
-  @ModelAttribute("client")
-  public Client getClient() {
-    return new Client();
-  }
+    @ModelAttribute("client")
+    public Client getClient() {
+        return new Client();
+    }
 
-  @ModelAttribute("prestation")
-  public Prestation getPrestation() {
-    return new Prestation();
-  }
+    @ModelAttribute("prestation")
+    public Prestation getPrestation() {
+        return new Prestation();
+    }
 
-  @ModelAttribute("prestations")
-  public List<Prestation> getPrestas() {
-    return new ArrayList<>();
-  }
+    @ModelAttribute("prestations")
+    public List<Prestation> getPrestas() {
+        return new ArrayList<>();
+    }
 
-  @RequestMapping(value = {"/menu", "/"})
-  public String menu(Model model) {
-    return "form-menu";
-  }
+    @RequestMapping(value = {"/menu", "/"})
+    public String menu(Model model) {
+        return "form-menu";
+    }
 
-  @GetMapping("/vueEnregistrement")
-  public String afficherPageEnregistrement(
-      @ModelAttribute("prestation") Prestation prestation,
-      @ModelAttribute("client") Client client,
-      @ModelAttribute("prestations") ArrayList<Prestation> prestations,
-      Model model) {
+    @GetMapping("/vueEnregistrement")
+    public String afficherPageEnregistrement(
+            @ModelAttribute("prestation") Prestation prestation,
+            @ModelAttribute("client") Client client,
+            @ModelAttribute("prestations") ArrayList<Prestation> prestations,
+            Model model) {
 
-    model.addAttribute("actes", acteDao.findAll());
-    model.addAttribute("finitions", finitionDao.findAll());
-    model.addAttribute("prestations", prestations);
+        model.addAttribute("actes", acteDao.findAll());
+        model.addAttribute("finitions", finitionDao.findAll());
+        model.addAttribute("prestations", prestations);
 
-    return "form-enregistrement";
-  }
+        return "form-enregistrement";
+    }
 
-  @GetMapping("/admin")
-  public String affichageMenuAdministrateur(
-      Model model, Acte acte, Finition finition, Prestation prestation) {
+    @GetMapping("/admin")
+    public String affichageMenuAdministrateur(
+            Model model, Acte acte, Finition finition, Prestation prestation) {
 
-    List<Finition> finitions = finitionDao.findAll();
-    List<Acte> actes = acteDao.findAll();
+        List<Finition> finitions = finitionDao.findAll();
+        List<Acte> actes = acteDao.findAll();
 
-    model.addAttribute("acte", acte);
-    model.addAttribute("finition", finition);
-    model.addAttribute("actes", actes);
-    model.addAttribute("finitions", finitions);
-    model.addAttribute("prestation", prestation);
+        model.addAttribute("acte", acte);
+        model.addAttribute("finition", finition);
+        model.addAttribute("actes", actes);
+        model.addAttribute("finitions", finitions);
+        model.addAttribute("prestation", prestation);
 
-    return "form-administrateur";
-  }
+        return "form-administrateur";
+    }
 
-  @RequestMapping("/archive")
-  public String consulterArchive(Model model) {
+    @RequestMapping("/archive")
+    public String consulterArchive(Model model, @ModelAttribute("client") Client client) {
+        Voiture voiture = voitureDao.findVoitureByClient(client.getId());
+        model.addAttribute("client", client);
+        model.addAttribute("voiture", voiture);
+        return "form-archive";
+    }
 
-    return "form-archive";
-  }
+    @GetMapping(value = "/rechercher") // fonction de la page archive
+    public String recherche(Model model) {
 
-  @GetMapping(value = "/rechercher") // fonction de la page archive
-  public String recherche(Model model) {
+        List<Finition> finitions = finitionDao.findAll();
+        model.addAttribute("finitions", finitions);
 
-    List<Finition> finitions = finitionDao.findAll();
-    model.addAttribute("finitions", finitions);
+        List<Acte> actes = acteDao.findAll();
+        model.addAttribute("actes", actes);
 
-    List<Acte> actes = acteDao.findAll();
-    model.addAttribute("actes", actes);
+        List<Prestation> prestations = prestationDao.findAll();
+        model.addAttribute("prestations", prestations);
 
-    List<Prestation> prestations = prestationDao.findAll();
-    model.addAttribute("prestations", prestations);
+        Prestation prestation = new Prestation();
+        model.addAttribute("prestation", prestation);
 
-    Prestation prestation = new Prestation();
-    model.addAttribute("prestation", prestation);
+        return "form-recherche";
+    }
 
-    return "form-recherche";
-  }
+    @RequestMapping("/facturation")
+    public String facture() {
+
+        return "form-facturation";
+    }
 }

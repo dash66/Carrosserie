@@ -1,7 +1,9 @@
 package com.carrosserieafpa.carrosserie.entity;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.Date;
 
 @Entity
 public class Facturation {
@@ -13,28 +15,30 @@ public class Facturation {
     @Column(nullable = true)
     private double prix;
 
-  @ManyToOne()
-  @JoinColumn(name = "client_id", referencedColumnName = "id")
-  private Client client;
+    @ManyToOne()
+    @JoinColumn(name = "client_id", referencedColumnName = "id")
+    private Client client;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_presta", referencedColumnName = "id_presta")
-    private Prestation prestation;
+    private LocalDateTime date;
 
-    public Facturation(double prix, String codeCouleur, Client client, Prestation prestation) {
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Collection<Prestation> prestation;
+
+    public Facturation(double prix, Client client, LocalDateTime date, Collection<Prestation> prestation) {
         this.prix = prix;
         this.client = client;
+        this.date = date;
         this.prestation = prestation;
     }
 
     public Facturation() {
     }
 
-    public Prestation getPrestation() {
+    public Collection<Prestation> getPrestation() {
         return prestation;
     }
 
-    public void setPrestation(Prestation prestation) {
+    public void setPrestation(Collection<Prestation> prestation) {
         this.prestation = prestation;
     }
 
@@ -54,7 +58,15 @@ public class Facturation {
         this.prix = prix;
     }
 
-        public Client getClient() {
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    public Client getClient() {
         return client;
     }
 
@@ -68,7 +80,6 @@ public class Facturation {
                 "id=" + id +
                 ", prix=" + prix +
                 ", client=" + client +
-                ", prestation=" + prestation +
                 '}';
     }
 }

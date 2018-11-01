@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" th:href="@{webjars/bootstrap/4.1.3/css/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css"
+          th:href="@{webjars/bootstrap-glyphicons/bdd2cbfba0/css/bootstrap-glyphicons.css}"/>
+    <script type="text/javascript" src="webjars/jquery/3.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<header>
+    <nav style="height:50px;"
+         class="navbar navbar-expand-lg navbar-light bg-light border rounded-bottom mb-5">
+        <a class="navbar-brand glyphicon glyphicon-home text-info" th:href="@{|/menu|}"> Accueil<span
+                class="sr-only">(current)</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link glyphicon glyphicon-user text-info" th:href="@{/admin}"> Administration</a>
+                </li>
+            </ul>
+            <h1 class="navbar-text text-success m-3 pb-3">Carrosserie </h1>
+            <img style="max-width:45px; max-height:45px;" class="w-auto h-auto" th:src="@{/images/afpa.png}"
+                 alt="Logo Afpa tout vert">
+        </div>
+    </nav>
+    <div class="row m-2">
+        <div class="col-md-12 text-center">
+            <img class="mw-100 mh-100" th:src="@{/images/anim2.png}" alt="Beau comme un camion tout neuf !"/>
+        </div>
+    </div>
+</header>
+
+
+<div style="margin-bottom:100px;" class="container border border-info rounded">
+    <div class="row border border-dark rounded my-5 mx-2">
+        <div class="col-md-12">
+            <div class="col-md-8 float-left">
+                <h2>Facture</h2>
+            </div>
+            <div class="col-md-4 float-right">
+                <small>Numéro de facture :</small>
+                </br>
+                <small>Date :</small>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5 mx-2">
+        <div class="col-md-12 p-0">
+            <div class="col-md-4 border border-dark rounded bg-light">
+                <div class="row ml-1 my-2">
+                    <adress>
+                        <strong>Carrosserie AFPA</strong></br>
+                        12 rue Mermoz</br>
+                        34430 ST JEAN DE VEDAS</br>
+                        <span>&#9742; 3936</span>
+                    </adress>
+                </div>
+            </div>
+            <div class="col-md-4 mt-3 border border-dark rounded float-right">
+                <div class="row ml-1 my-2">
+                    <adress>
+                        <strong>nom; prénom</strong></br>
+                        12 rue Mermoz</br>
+                        34430 ST JEAN DE VEDAS</br>
+                        <span>&#9742; 3936</span>
+                    </adress>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mt-5 m-2">
+        <div class="col-md-8 p-0">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Véhicule </h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Marque : Modèle : </p>
+                    <p class="card-text">Immatriculation : Gabarit :</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5 m-2">
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Prestation</th>
+                <th scope="col">Finition</th>
+                <th scope="col">Prix avant majoration</th>
+                <th scope="col">Prix T.T.C</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>acte 1</td>
+                <td>finition 1</td>
+                <td>100 €</td>
+                <td>119.6 €</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>acte 1</td>
+                <td>finition 1</td>
+                <td>100 €</td>
+                <td>119.6 €</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>acte 1</td>
+                <td>finition 1</td>
+                <td>100 €</td>
+                <td>119.6 €</td>
+            </tr>
+            <tr>
+                <th scope="row">4</th>
+                <td>acte 1</td>
+                <td>finition 1</td>
+                <td>100 €</td>
+                <td>119.6 €</td>
+            </tr>
+            <tr>
+                <th scope="row">Total de la prestation</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="bg-light font-weight-bold">119.6€</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row m-2">
+        <div class="alert alert-warning col-md-12 mt-2">
+            <div class="text-center font-weight-bold m-1">
+                <p>Les tarifs présentés sont applicables aux véhicules de catégorie moyenne (Megane, Golf,
+                    etc..).</br>
+                    Comptez 10% d'abattement pour les petits gabarits (Twingo, 107, etc..). </br>
+                    Comptez 10% de majoration pour les gros véhicules (berline, Laguna, etc..).</br>
+                    Comptez 20% de majoration pour les fourgons.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<footer style="height:50px;" class="fixed-bottom bg-light border text-info text-center">
+    <div class="col-md-12">
+        <p class="mb-0 mt-2">&#169; Copyright 2019 Réalisation : Mehdi Salamé, Manuel Da Rocha, Baptiste Lavignon</p>
+    </div>
+</footer>
+
+</body>
+</html>

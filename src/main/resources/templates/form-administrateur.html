@@ -13,6 +13,7 @@
 <body>
 <header>
 
+
     <nav style="height:50px;"
          class="navbar navbar-expand-lg navbar-light bg-light border rounded-bottom mb-5">
         <a class="navbar-brand glyphicon glyphicon-home text-info" th:href="@{|/menu|}"> Accueil<span
@@ -27,12 +28,34 @@
                 <li class="nav-item active">
                     <a class="nav-link glyphicon glyphicon-user text-info" th:href="@{/admin}"> Administration</a>
                 </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>-->
             </ul>
             <h1 class="navbar-text text-success m-3 pb-3">Carrosserie </h1>
             <img style="max-width:45px; max-height:45px;" class="w-auto h-auto" th:src="@{/images/afpa.png}"
                  alt="Logo Afpa tout vert">
+            <!-- <form class="form-inline my-2 my-lg-0">
+                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+             </form>-->
         </div>
     </nav>
+
 
     <div class="row m-2">
         <div class="col-md-12 text-center">
@@ -202,14 +225,13 @@
     </form>
 </div>
 
-
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
 <!-- -------------           FORM MODAL SUPPRIMER ACTE         ---------------- -->
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
 <form method="post" th:action="@{/admin/delete/acte}">
-    <div class="modal" id="supprimerActe" tabindex="-1" role="dialog" href="#">
+    <div class="modal" id="supprimerUnActe" tabindex="-1" role="dialog" href="#">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -253,7 +275,7 @@
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
 <form method="post" th:action="@{/admin/delete/finition}">
-    <div class="modal" id="supprimerFinition" tabindex="-1" role="dialog" href="#">
+    <div class="modal" id="supprimerUneFinition" tabindex="-1" role="dialog" href="#">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -292,53 +314,58 @@
     </div>
 </form>
 
-    <!-- ------------------------------------------------------------------------ -->
-    <!-- ------------------------------------------------------------------------ -->
-    <!-- -------------   BOUTONS NOUVEL ACTE/NOUVELLE FINITION   ---------------- -->
-    <!-- ------------------------------------------------------------------------ -->
-    <!-- ------------------------------------------------------------------------ -->
-    <div class="container mt-5">
-        <div class="row m-2">
-            <div class="col-md-12 text-center">
-                <p class="alert alert-light font-weight-bold">Ajout ou Modification en Base De Données</p>
-            </div>
-        </div>
-        <div class="row m-2">
-            <div class="col-md-12 text-center">
-                <a href="#addActe" class="btn btn-outline-info col-md-4"
-                   data-toggle="modal"
-                   data-target="#addActe"><span class="glyphicon glyphicon-plus"></span>
-                    <strong> Définir un acte</strong>
-                </a>
-                <a href="#addFinition" class="btn btn-outline-info col-md-4"
-                   data-toggle="modal"
-                   data-target="#addFinition"><span class="glyphicon glyphicon-plus"></span>
-                    <strong> Définir une finition</strong>
-                </a>
-            </div>
-        </div>
-        <div class="row m-2">
-            <div class="col-md-12 text-center">
-                <a href="#supprimerActe" class="btn btn-outline-info col-md-4" data-toggle="modal"
-                   data-target="#supprimerActe"><span class="glyphicon glyphicon-minus"></span>
-                    <strong> Supprimer un acte</strong>
-                </a>
-                <a href="#supprimerFinition" class="btn btn-outline-info col-md-4" data-toggle="modal"
-                   data-target="#supprimerFinition"><span class="glyphicon glyphicon-minus"></span>
-                    <strong> Supprimer une finition</strong>
-                </a>
-            </div>
-        </div>
-        <div class="row my-2 mx-1">
-            <div class="col-md-12 text-center">
-                <a href="#addPrix" class="btn btn-outline-info col-md-8" data-toggle="modal"
-                   data-target="#addPrix"><span class="glyphicon glyphicon-plus"></span>
-                    <strong> Définir un prix</strong>
-                </a>
-            </div>
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- -------------   BOUTONS NOUVEL ACTE/NOUVELLE FINITION   ---------------- -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<div style="margin-bottom:100px;" class="container mt-5">
+    <div class="row m-2">
+        <div class="col-md-12 text-center">
+            <p class="alert alert-light font-weight-bold">Ajout ou Modification en Base De Données</p>
         </div>
     </div>
+    <div class="row m-2">
+        <div class="col-md-12 text-center">
+            <a href="#addActe" class="btn btn-outline-info col-md-4"
+               data-toggle="modal"
+               data-target="#addActe"><span class="glyphicon glyphicon-plus"></span>
+                <strong> Définir un acte</strong>
+            </a>
+            <a href="#addFinition" class="btn btn-outline-info col-md-4"
+               data-toggle="modal"
+               data-target="#addFinition"><span class="glyphicon glyphicon-plus"></span>
+                <strong> Définir une finition</strong>
+            </a>
+        </div>
+    </div>
+    <div class="row m-2">
+        <div class="col-md-12 text-center">
+            <a href="#supprimerUnActe" class="btn btn-outline-info col-md-4" data-toggle="modal"
+               data-target="#supprimerUnActe"><span class="glyphicon glyphicon-minus"></span>
+                <strong> Supprimer un acte</strong>
+            </a>
+            <a href="#supprimerUneFinition" class="btn btn-outline-info col-md-4" data-toggle="modal"
+               data-target="#supprimerUneFinition"><span class="glyphicon glyphicon-minus"></span>
+                <strong> Supprimer une finition</strong>
+            </a>
+        </div>
+    </div>
+    <div class="row my-2 mx-1">
+        <div class="col-md-12 text-center">
+            <a href="#addPrix" class="btn btn-outline-info col-md-8" data-toggle="modal"
+               data-target="#addPrix"><span class="glyphicon glyphicon-plus"></span>
+                <strong> Définir un prix</strong>
+            </a>
+        </div>
+    </div>
+
 </div>
+<footer style="height:50px;" class="fixed-bottom bg-light border text-info text-center">
+    <div class="col-md-12">
+        <p class="mb-0 mt-2">&#169; Copyright 2019 Réalisation : Mehdi Salamé, Manuel Da Rocha, Baptiste Lavignon</p>
+    </div>
+</footer>
 </body>
 </html>
 

@@ -187,24 +187,10 @@
                     <form class="form-horizontal mt-5" method="post">
                         <div class="container">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <input id="Immatriculation" name="Immatriculation"
                                                placeholder="Immatriculation"
-                                               class="form-control input-md"
-                                               type="text">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <input id="Marque" name="Marque" placeholder="Marque"
-                                               class="form-control input-md"
-                                               type="text">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <input id="model" name="model" placeholder="Modèle"
                                                class="form-control input-md"
                                                type="text">
                                     </div>
@@ -232,7 +218,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Rechercher par numéro de facture</h4>
+                    <h4 class="modal-title">Rechercher par Client</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -241,7 +227,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input id="numFacture" name="numFacture" placeholder="Numéro de facture"
+                                        <input id="numFacture" name="id" placeholder="Numéro de facture"
                                                class="form-control input-md"
                                                type="text">
                                     </div>
@@ -264,7 +250,7 @@
 <!-- -------------         LISTE TARIFS & PRESTA     ---------------- -->
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
-<div class="container mt-5">
+<div style="margin-bottom:100px;" class="container mt-5">
     <div class="row m-2">
         <table class="table table-bordered table-striped table-md m-2 float-" th:object="${prestation}">
             <thead class="table-info">
@@ -285,5 +271,10 @@
         </table>
     </div>
 </div>
+<footer style="height:50px;" class="fixed-bottom bg-light border text-info text-center">
+    <div class="col-md-12">
+        <p class="mb-0 mt-2">&#169; Copyright 2019 Réalisation : Mehdi Salamé, Manuel Da Rocha, Baptiste Lavignon</p>
+    </div>
+</footer>
 </body>
 </html>

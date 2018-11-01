@@ -13,7 +13,7 @@ public class Finition implements Serializable {
 
   private String libelle;
 
-  @OneToMany(mappedBy = "finition", cascade = CascadeType.REMOVE)
+  @OneToMany(mappedBy = "finition")
   private Collection<Prestation> prestations;
 
   public Finition() {}

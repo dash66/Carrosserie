@@ -25,9 +25,6 @@ public class Prestation {
     @JoinColumn(name = "id_finition", referencedColumnName = "id_finition")
     private Finition finition;
 
-    @OneToMany(mappedBy = "prestation", cascade = CascadeType.ALL)
-    private Collection<Facturation> facturations;
-
 
     public Prestation(double prix, Acte acte, Finition finition, Collection<Facturation> facturations) {
         this.prix = prix;
@@ -69,14 +66,6 @@ public class Prestation {
 
     public void setFinition(Finition finition) {
         this.finition = finition;
-    }
-
-    public Collection<Facturation> getFacturations() {
-        return facturations;
-    }
-
-    public void setFacturations(Collection<Facturation> facturations) {
-        this.facturations = facturations;
     }
 
     @Override
