@@ -76,10 +76,12 @@ public class Facturation {
 
     @Override
     public String toString() {
-        return "Facturation{" +
-                "id=" + id +
-                ", prix=" + prix +
-                ", client=" + client +
-                '}';
+        return "Facture n°"+
+                id + " -- " +
+                "Date : " + date + "\n" +
+                "**********************************" + "\n" +
+                "  Prestation(s) effectuée(s) : " + "\n" +
+                prestation + "\n" +
+                "**********************************" + "\n";
     }
 }

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import java.util.ArrayList;
 import java.util.List;
 
-@SessionAttributes({"client", "prestation", "prestations"})
+@SessionAttributes({"client", "prestation", "prestations", "facturations", "facturation"})
 @Controller
 public class controllerUI {
 
@@ -86,12 +86,22 @@ public class controllerUI {
         Voiture voiture = voitureDao.findVoitureByClient(client.getId());
         List<Prestation> prestations = facturationDao.recherchePrestationDansFactureParClientId(client.getId());
         Double prixFacture  = facturationDao.recherchePrixFactureParIdClient(client.getId());
+        List<Facturation> facturations = clientDao.rechercherFacturationsParClient(client.getId());
 
         model.addAttribute("prestations", prestations);
         model.addAttribute("client", client);
         model.addAttribute("voiture", voiture);
         model.addAttribute("prixFacture", prixFacture);
+        model.addAttribute("facturations", facturations);
 
+
+
+
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(facturations);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(prixFacture);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
 
         return "form-archive";
