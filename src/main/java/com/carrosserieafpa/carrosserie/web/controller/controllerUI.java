@@ -82,9 +82,18 @@ public class controllerUI {
 
     @RequestMapping("/archive")
     public String consulterArchive(Model model, @ModelAttribute("client") Client client) {
+
         Voiture voiture = voitureDao.findVoitureByClient(client.getId());
+        List<Prestation> prestations = facturationDao.recherchePrestationDansFactureParClientId(client.getId());
+        Double prixFacture  = facturationDao.recherchePrixFactureParIdClient(client.getId());
+
+        model.addAttribute("prestations", prestations);
         model.addAttribute("client", client);
         model.addAttribute("voiture", voiture);
+        model.addAttribute("prixFacture", prixFacture);
+
+
+
         return "form-archive";
     }
 

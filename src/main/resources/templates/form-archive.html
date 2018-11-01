@@ -108,7 +108,9 @@
             <div class="col-md-12">
                 <h2 class="col-md-6 my-3 text-info"><span class="glyphicon glyphicon-list-alt"></span> Facture(s)</h2>
                 <ul>
-                    <li><a href="#">prestation 1</a></li>
+                    <li><a href="#">Facture n° <!--<span th:text="${fature.id}"></span>--> du : <!--<span th:text="${facturation.date}"></span>--></a></li>
+                    <br> Détails : </br><span th:each="prestation : ${prestations}"><br th:text="${prestation}"></br></span></p>
+                    <p><span>Prix total des actes effectués : <span th:text="${prixFacture}"></span> Euros.</span></p>
                 </ul>
             </div>
         </div>
