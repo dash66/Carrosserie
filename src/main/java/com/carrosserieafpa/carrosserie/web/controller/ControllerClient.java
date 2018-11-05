@@ -19,11 +19,12 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @SessionAttributes({"client", "prestations"})
 @Controller
-public class controllerClient {
+public class ControllerClient {
 
   @Autowired
   ActeDao acteDao;
@@ -37,6 +38,11 @@ public class controllerClient {
   VoitureDao voitureDao;
   @Autowired
   ClientDao clientDao;
+
+  @ModelAttribute("client")
+  public Client getClient() {
+    return new Client();
+  }
 
   @ModelAttribute("prestations")
   public List<Prestation> getPrestas() {
@@ -115,7 +121,10 @@ public class controllerClient {
     facturation.setPrix(prixFactureCalcule);
     System.out.println(facturation.getPrix());
 
-    facturation.setDate(LocalDateTime.now());
+    LocalDateTime HeureNonFormatee = LocalDateTime.now();
+    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy à HH:mm");
+    String formatDateTime = HeureNonFormatee.format(timeFormatter);
+    facturation.setDate(formatDateTime);
     System.out.println(facturation.getDate());
 
     facturation.setClient(client);
@@ -151,13 +160,7 @@ public class controllerClient {
     Double prixTotalFacture = 0.0;
     for (Prestation presta : prestations) {
       Double prixParPresta = presta.getPrix();
-
       prixTotalFacture = prixTotalFacture + prixParPresta;
-      System.out.println("+++++++++++++++++++++++++++++");
-      System.out.println("*******-------------*********");
-      System.out.println(prixTotalFacture);
-      System.out.println("*******-------------*********");
-      System.out.println("+++++++++++++++++++++++++++++");
     }
 
     Double prixFinal = prixTotalFacture;
@@ -175,14 +178,7 @@ public class controllerClient {
         prixFinal += prixTotalFacture * 0.2;
         break;
     }
-    System.out.println();
-    System.out.println("+++      PRIX FINAL      ++++");
-    System.out.println("+++++++++++++++++++++++++++++");
-    System.out.println("*******-------------*********");
-    System.out.println(prixTotalFacture);
-    System.out.println("*******-------------*********");
-    System.out.println("+++++++++++++++++++++++++++++");
-    return prixFinal;
+     return prixFinal;
   }
 
   public Client creationClient(@ModelAttribute("client") Client client, HttpServletRequest request) {
@@ -200,7 +196,7 @@ public class controllerClient {
     return client;
   }
 
-  public Voiture creationVoiture(Client client, HttpServletRequest request) {
+  public Voiture creationVoiture(@ModelAttribute("client") Client client, HttpServletRequest request) {
 
     Voiture voiture = new Voiture();
     voiture.setMarque(request.getParameter("marque"));

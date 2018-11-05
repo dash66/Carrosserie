@@ -78,25 +78,24 @@
 <!-- -------------   BOUTONS NOUVEAU CLIENT/CLIENT EXISTANT  ---------------- -->
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
-<div style="margin-bottom:100px;" class="container mt-5">
-    <div class="row m-2">
-        <div class="col-md-12">
-            <div class="col-md-6 float-left text-center">
-                <a href="#addClient" class="btn btn-outline-info a-btn-slide-text m-2" data-toggle="modal"
-                   data-target="#addClient">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                    <strong>Nouveau Client</strong>
-                </a>
-            </div>
-            <div class="col-md-6 float-left text-center">
-                <a href="#readClient" class="btn btn-outline-info a-btn-slide-text m-2" data-toggle="modal"
-                   data-target="#readClient">
-                    <span class="glyphicon glyphicon-folder-open m-1" aria-hidden="true"></span>
-                    <strong>Client Existant</strong>
-                </a>
-            </div>
+<div class="row m-2" th:style="${client.nom != null} ? 'display: none'">
+    <div class="col-md-12">
+        <div class="col-md-6 float-left text-center">
+            <a href="#addClient" class="btn btn-outline-info a-btn-slide-text m-2" data-toggle="modal"
+               data-target="#addClient">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                <strong>Nouveau Client</strong>
+            </a>
+        </div>
+        <div class="col-md-6 float-left text-center">
+            <a href="#readClient" class="btn btn-outline-info a-btn-slide-text m-2" data-toggle="modal"
+               data-target="#readClient">
+                <span class="glyphicon glyphicon-folder-open m-1" aria-hidden="true"></span>
+                <strong>Client Existant</strong>
+            </a>
         </div>
     </div>
+</div>
 
 
     <!-- ------------------------------------------------------------------------ -->
@@ -360,6 +359,63 @@
         </div>
     </div>
 
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- -------------             AFFICHAGE DU CLIENT           ---------------- -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<div class="container">
+    <div class="row m-2">
+        <table class="table table-bordered table-striped table-md" th:style="${client.nom == null} ? 'display: none'">
+            <thead class="table-info">
+            <tr>
+                <th>Client</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <div class="row">
+                        <div class="col-md-12 m-1">
+                            <div class="col-md-6 float-left">
+                                Nom : <span class="font-weight-bold" th:text="${client.nom}"></span>
+                            </div>
+                            <div class="col-md-6 float-left">
+                                Prénom : <span class="font-weight-bold" th:text="${client.prenom}"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-10 float-left mt-2">
+                                <select id="vehicule" class="select2" required>
+                                    <option hidden="" value="">Choisissez un vehicule</option>
+                                    <option th:each="voiture : ${client.voiture}" th:value="${voiture.id}"
+                                            th:text="${voiture.marque} + ' ' + ${voiture.modele}"></option>
+                                </select>
+                                <script>
+                                    $('.select2').select2();
+                                </script>
+                                <a href="#addVehicule" class="btn btn-outline-info a-btn-slide-text ml-3"
+                                   data-toggle="modal"
+                                   data-target="#addVehicule">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                    <strong> Ajouter un véhicule</strong>
+                                </a>
+                            </div>
+                            <div class="col-md-2 float-left">
+                                <input class="btn btn-outline-info font-weight-bold float-left mr-2" type="submit"
+                                       value="&#9881; Valider"/>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
     <!-- ------------------------------------------------------------------------ -->
     <!-- ------------------------------------------------------------------------ -->
     <!-- -------------         LISTES DÉROULANTES PRESTA         ---------------- -->
@@ -393,32 +449,16 @@
                 </div>
             </div>
             <div class="row m-2">
-
                 <div class="form-group col-md-12 mt-3 px-0">
                     <input class="btn btn-outline-info font-weight-bold" type="submit"
                            value="&#9881; Ajouter une intervention"/>
                 </div>
-
-                <table class="table table-bordered table-striped table-md">
-                    <thead class="table-info">
-                    <tr>
-                        <th>Client</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Nom :
-                            <span class="font-weight-bold" th:text="${client.nom}"></span>
-                            Prénom :
-                            <span class="font-weight-bold" th:text="${client.prenom}"></span>
-                        </td>
-
-                    </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
     </form>
+
+
+
 
 
     <!-- ------------------------------------------------------------------------ -->
@@ -443,7 +483,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="row">
+            <div class="row"  style="padding-bottom: 50px;">
                 <div class="form-group col-md-12 text-center p-0 m-1">
                     <input class="btn btn-outline-info" type="submit" value="&#128190; Enregistrer"/>
                     <input class="btn btn-outline-warning" type="submit" value="&#10060; Annulation"/>
@@ -451,6 +491,104 @@
             </div>
         </div>
     </form>
+
+
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- -------------        FORM MODAL NOUVEAU VEHICULE        ---------------- -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <form method="post" th:action="@{/saveVehicule}">
+        <div class="modal" id="addVehicule" tabindex="-1" role="dialog" href="#">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Enregistrer un nouveau véhicule</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal mt-5" method="post">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <label for="marque">Marque du véhicule</label>
+                                                <input id="marqueV" name="marque" placeholder="Reno"
+                                                       class="form-control input-md" type="text" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <label for="immat">Immatriculation du véhicule</label>
+                                                <input id="immatV" name="immat" placeholder="XX123XX / 1234 XX 34"
+                                                       class="form-control input-md" type="text" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <label for="modele">Modèle du véhicule</label>
+                                                <input id="modeleV" name="modele" placeholder="Clito"
+                                                       class="form-control input-md" type="text" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <label for="couleur">Couleur du vehicule</label>
+                                                <input id="couleurV" name="couleur" placeholder="bleu"
+                                                       class="form-control input-md" type="text" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <label for="categorie">Categorie du véhicule</label>
+                                                <select id="categorieV" name="categorie"
+                                                        class="form-control input-md" required>
+                                                    <option hidden="" value="">Choisissez une categorie</option>
+                                                    <option value="petit" selected>Petit gabarit</option>
+                                                    <option value="moyen">Moyen gabarit</option>
+                                                    <option value="gros">Gros gabarit</option>
+                                                    <option value="fourgon">Fourgon</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <label for="date">Date de premiere mise en service</label>
+                                                <input id="dateV" name="date" placeholder="Date du véhicule"
+                                                       class="form-control input-md" type="date" required>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <input id="boutonSaveVehicule" class="btn btn-outline-info" type="submit"
+                               value="&#128190; Enregistrer"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
 </div>
 <footer style="height:50px;" class="fixed-bottom bg-light border text-info text-center">
     <div class="col-md-12">

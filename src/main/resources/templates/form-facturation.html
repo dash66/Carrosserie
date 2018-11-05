@@ -46,9 +46,9 @@
                 <h2>Facture</h2>
             </div>
             <div class="col-md-4 float-right">
-                <small>Numéro de facture :</small>
+                <small>Numéro de facture : <span th:text="${facturation.id}"></span></small>
                 </br>
-                <small>Date :</small>
+                <small>Date : <span th:text="${facturation.date}"></span></small>
             </div>
         </div>
     </div>
@@ -67,10 +67,9 @@
             <div class="col-md-4 mt-3 border border-dark rounded float-right">
                 <div class="row ml-1 my-2">
                     <adress>
-                        <strong>nom; prénom</strong></br>
-                        12 rue Mermoz</br>
-                        34430 ST JEAN DE VEDAS</br>
-                        <span>&#9742; 3936</span>
+                        <strong th:text="${client.prenom} + ' ' + ${client.nom}"></strong></br>
+                        <span th:text="${client.adresse}"></span> </br>
+                        <span>&#9742; <span th:text="${client.telephone}"></span></span>
                     </adress>
                 </div>
             </div>
@@ -85,8 +84,9 @@
                     <h5 class="card-title">Véhicule </h5>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">Marque : Modèle : </p>
-                    <p class="card-text">Immatriculation : Gabarit :</p>
+                    <p class="card-text" th:text="${voiture.marque} + ' ' + ${voiture.modele}"></p>
+                    <p class="card-text">Immatriculation : <span th:text="${voiture.immat}"></span></p>
+                    <p class="card-text">Gabarit : <span th:text="${voiture.categorie}"></span></p>
                 </div>
             </div>
         </div>
@@ -99,45 +99,22 @@
                 <th scope="col"></th>
                 <th scope="col">Prestation</th>
                 <th scope="col">Finition</th>
-                <th scope="col">Prix avant majoration</th>
-                <th scope="col">Prix T.T.C</th>
+                <th scope="col">Prix</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>acte 1</td>
-                <td>finition 1</td>
-                <td>100 €</td>
-                <td>119.6 €</td>
+            <tr th:each="prestation : ${prestations}">
+                <th scope="row">*</th>
+                <td><span th:text="${prestation.acte}"></span></td>
+                <td><span th:text="${prestation.finition}"></span></td>
+                <td><span th:text="${prestation.prix}"></span></td>
+                </span>
             </tr>
             <tr>
-                <th scope="row">2</th>
-                <td>acte 1</td>
-                <td>finition 1</td>
-                <td>100 €</td>
-                <td>119.6 €</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>acte 1</td>
-                <td>finition 1</td>
-                <td>100 €</td>
-                <td>119.6 €</td>
-            </tr>
-            <tr>
-                <th scope="row">4</th>
-                <td>acte 1</td>
-                <td>finition 1</td>
-                <td>100 €</td>
-                <td>119.6 €</td>
-            </tr>
-            <tr>
-                <th scope="row">Total de la prestation</th>
+                <th scope="row">Total dû après calcul de la catégorie du véhicule</th>
                 <td></td>
                 <td></td>
-                <td></td>
-                <td class="bg-light font-weight-bold">119.6€</td>
+                <td class="alert-success font-weight-bold"><span th:text="${prixFacture}"></span> €</td>
             </tr>
             </tbody>
         </table>

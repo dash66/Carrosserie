@@ -15,7 +15,7 @@ import java.util.List;
 
 @SessionAttributes({"client", "prestation", "prestations"})
 @Controller
-public class controllerAdmin {
+public class ControllerAdmin {
 
   @Autowired ActeDao acteDao;
   @Autowired FinitionDao finitionDao;

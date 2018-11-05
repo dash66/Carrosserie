@@ -108,12 +108,10 @@
             <div class="col-md-12">
                 <h2 class="col-md-6 my-3 text-info"><span class="glyphicon glyphicon-list-alt"></span> Facture(s)</h2>
                 <ul>
-                    <!--<span th:each="facture : ${facturations}"><span th:text="${facturation}"><br>-->
-                    <li><a><!--Facture n° <span th:text="${facturation.id}"></span> du : <span th:text="${facturation.date}"></span>-->
+                    <li><a th:href="@{/facturation}">
                         <span th:text="${facturations}"></span></a></li>
-                    <!--<br> Détails : </br><span th:each="prestation : ${prestations}"><br th:text="${prestation}"></span></p>-->
-                    <p><br> Prix total des actes effectués après calcul du gabarit Véhicule: <span th:text="${prixFacture}"></span> Euros.</p>
-                        </span>
+                    <p> Prix : <span th:text="${prixFacture}"></span> Euros.</p>
+                    </span>
                     </span>
                 </ul>
             </div>

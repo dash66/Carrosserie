@@ -15,7 +15,7 @@ import java.util.List;
 
 @SessionAttributes({"client", "prestation", "prestations", "facturations", "facturation"})
 @Controller
-public class controllerUI {
+public class ControllerUI {
 
     @Autowired
     ActeDao acteDao;
@@ -29,6 +29,8 @@ public class controllerUI {
     VoitureDao voitureDao;
     @Autowired
     ClientDao clientDao;
+    @Autowired
+    ControllerClient controllerClient;
 
     @ModelAttribute("client")
     public Client getClient() {
@@ -42,6 +44,16 @@ public class controllerUI {
 
     @ModelAttribute("prestations")
     public List<Prestation> getPrestas() {
+        return new ArrayList<>();
+    }
+
+    @ModelAttribute("facturation")
+    public Facturation getFacturation() {
+        return new Facturation();
+    }
+
+    @ModelAttribute("facturations")
+    public List<Facturation> getFacturations() {
         return new ArrayList<>();
     }
 
@@ -102,7 +114,7 @@ public class controllerUI {
         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         System.out.println(prixFacture);
         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
+        System.out.println(prestations);
 
         return "form-archive";
     }
@@ -126,7 +138,27 @@ public class controllerUI {
     }
 
     @RequestMapping("/facturation")
-    public String facture() {
+    public String facture(Model model,  @ModelAttribute("prestations") List<Prestation> prestationList, @ModelAttribute("client") Client client, @ModelAttribute("voiture") Voiture voiture, @ModelAttribute("prestation") Prestation prestation, @ModelAttribute("facturation") Facturation facturation) {
+
+        System.out.println("///////////////********/////////");
+        System.out.println(prestationList);
+        System.out.println("********************************");
+        System.out.println(voiture);
+        System.out.println("********************************");
+        System.out.println("********************************");
+        System.out.println(client);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(client.getFacturation());
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(facturation);
+
+        Double prixFacture  = facturationDao.recherchePrixFactureParIdClient(client.getId());
+        model.addAttribute("prixFacture", prixFacture);
+        Double prixFinal = 0.0;
+
+        model.addAttribute("prixFinal", prixFinal);
+
 
         return "form-facturation";
     }

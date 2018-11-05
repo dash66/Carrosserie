@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @SessionAttributes({"client", "prestation", "prestations"})
 @Controller
-public class controllerRecherche {
+public class ControllerRecherche {
 
     @Autowired
     ActeDao acteDao;

@@ -1,5 +1,7 @@
 package com.carrosserieafpa.carrosserie.entity;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -24,9 +26,10 @@ public class Client {
     private int telephone;
     private String numAfpa;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private Collection<Voiture> voiture;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "client")
     private Collection<Facturation> facturation;
 
@@ -107,6 +110,22 @@ public class Client {
 
     public void setNumAfpa(String numAfpa) {
         this.numAfpa = numAfpa;
+    }
+
+    public Collection<Voiture> getVoiture() {
+        return voiture;
+    }
+
+    public void setVoiture(Collection<Voiture> voiture) {
+        this.voiture = voiture;
+    }
+
+    public Collection<Facturation> getFacturation() {
+        return facturation;
+    }
+
+    public void setFacturation(Collection<Facturation> facturation) {
+        this.facturation = facturation;
     }
 
     @Override

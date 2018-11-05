@@ -19,12 +19,12 @@ public class Facturation {
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     private Client client;
 
-    private LocalDateTime date;
+    private String date;
 
     @ManyToMany(cascade = CascadeType.ALL)
     private Collection<Prestation> prestation;
 
-    public Facturation(double prix, Client client, LocalDateTime date, Collection<Prestation> prestation) {
+    public Facturation(double prix, Client client, String date, Collection<Prestation> prestation) {
         this.prix = prix;
         this.client = client;
         this.date = date;
@@ -58,11 +58,11 @@ public class Facturation {
         this.prix = prix;
     }
 
-    public LocalDateTime getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -76,12 +76,6 @@ public class Facturation {
 
     @Override
     public String toString() {
-        return "Facture n°"+
-                id + " -- " +
-                "Date : " + date + "\n" +
-                "**********************************" + "\n" +
-                "  Prestation(s) effectuée(s) : " + "\n" +
-                prestation + "\n" +
-                "**********************************" + "\n";
+        return "Facture n°" + id + " " + "-- Date : " + date;
     }
 }
