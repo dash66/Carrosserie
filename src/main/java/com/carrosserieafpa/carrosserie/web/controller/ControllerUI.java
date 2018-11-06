@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import java.util.ArrayList;
 import java.util.List;
 
-@SessionAttributes({"client", "prestation", "prestations", "facturations", "facturation"})
+@SessionAttributes({"client", "prestation", "prestations", "facturations", "facturation", "voiture"})
 @Controller
 public class ControllerUI {
 
@@ -31,6 +31,11 @@ public class ControllerUI {
     ClientDao clientDao;
     @Autowired
     ControllerClient controllerClient;
+
+    @ModelAttribute("voiture")
+    public Voiture getVoiture() {
+        return new Voiture();
+    }
 
     @ModelAttribute("client")
     public Client getClient() {
@@ -67,11 +72,13 @@ public class ControllerUI {
             @ModelAttribute("prestation") Prestation prestation,
             @ModelAttribute("client") Client client,
             @ModelAttribute("prestations") ArrayList<Prestation> prestations,
+            @ModelAttribute("voiture") Voiture voiture,
             Model model) {
 
         model.addAttribute("actes", acteDao.findAll());
         model.addAttribute("finitions", finitionDao.findAll());
         model.addAttribute("prestations", prestations);
+        model.addAttribute("voiture", voiture);
 
         return "form-enregistrement";
     }
@@ -93,9 +100,8 @@ public class ControllerUI {
     }
 
     @RequestMapping("/archive")
-    public String consulterArchive(Model model, @ModelAttribute("client") Client client) {
+    public String consulterArchive(Model model, @ModelAttribute("client") Client client, @ModelAttribute("voiture") Voiture voiture) {
 
-        Voiture voiture = voitureDao.findVoitureByClient(client.getId());
         List<Prestation> prestations = facturationDao.recherchePrestationDansFactureParClientId(client.getId());
         Double prixFacture  = facturationDao.recherchePrixFactureParIdClient(client.getId());
         List<Facturation> facturations = clientDao.rechercherFacturationsParClient(client.getId());
@@ -105,16 +111,6 @@ public class ControllerUI {
         model.addAttribute("voiture", voiture);
         model.addAttribute("prixFacture", prixFacture);
         model.addAttribute("facturations", facturations);
-
-
-
-
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        System.out.println(facturations);
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        System.out.println(prixFacture);
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        System.out.println(prestations);
 
         return "form-archive";
     }
@@ -138,27 +134,15 @@ public class ControllerUI {
     }
 
     @RequestMapping("/facturation")
-    public String facture(Model model,  @ModelAttribute("prestations") List<Prestation> prestationList, @ModelAttribute("client") Client client, @ModelAttribute("voiture") Voiture voiture, @ModelAttribute("prestation") Prestation prestation, @ModelAttribute("facturation") Facturation facturation) {
-
-        System.out.println("///////////////********/////////");
-        System.out.println(prestationList);
-        System.out.println("********************************");
-        System.out.println(voiture);
-        System.out.println("********************************");
-        System.out.println("********************************");
-        System.out.println(client);
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        System.out.println(client.getFacturation());
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        System.out.println(facturation);
+    public String facture(Model model,  @ModelAttribute("prestations") List<Prestation> prestationList, @ModelAttribute("client") Client client, @ModelAttribute("voiture") Voiture voiture, @ModelAttribute("prestation") Prestation prestation, @ModelAttribute("facturation") Facturation facturations, @ModelAttribute("facturations") Facturation facturation) {
 
         Double prixFacture  = facturationDao.recherchePrixFactureParIdClient(client.getId());
         model.addAttribute("prixFacture", prixFacture);
         Double prixFinal = 0.0;
 
         model.addAttribute("prixFinal", prixFinal);
-
+        model.addAttribute("facturation", facturation);
+        model.addAttribute("facturations", facturations);
 
         return "form-facturation";
     }

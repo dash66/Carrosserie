@@ -20,4 +20,7 @@ public interface FacturationDao extends JpaRepository<Facturation, Long> {
     @Query("SELECT prestation FROM Facturation WHERE client_id =:id")
     List<Prestation> recherchePrestationDansFactureParClientId(@Param("id") Long id);
 
+    @Query("SELECT new Facturation(prix, date, prestation) FROM Facturation WHERE client_id =:client")
+    List<Facturation> rechercheFacturationParClientId(@Param("client") Client client);
+
 }

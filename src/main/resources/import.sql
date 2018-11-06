@@ -130,5 +130,5 @@ INSERT INTO Client (id, adresse, email, nom ,num_afpa, prenom, telephone) VALUES
 
 INSERT INTO Voiture (id, categorie, code_couleur, immat, marque, modele, client_id) VALUES (1, 'fourgon',  'bleu', '1711YJ78', 'Fiotte', 'ours blanc et noir', 1);
 
---INSERT INTO Voiture (id, categorie, code_couleur, immat, marque, modele, client_id) VALUES (2, 'petit',  'jaune', '123AB34', 'René', 'Twizizi', 1);
---INSERT INTO Voiture (id, categorie, code_couleur, immat, marque, modele, client_id) VALUES (3, 'moyen',  'vert', '456GEGE2', 'Fiotte', 'Multimoche', 1);
+INSERT INTO Voiture (id, categorie, code_couleur, immat, marque, modele, client_id) VALUES (2, 'petit',  'jaune', '123AB34', 'René', 'Twizizi', 1);
+INSERT INTO Voiture (id, categorie, code_couleur, immat, marque, modele, client_id) VALUES (3, 'moyen',  'vert', '456GEGE2', 'Fiotte', 'Multimoche', 1);

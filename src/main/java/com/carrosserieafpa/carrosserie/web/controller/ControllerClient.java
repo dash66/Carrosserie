@@ -2,8 +2,6 @@ package com.carrosserieafpa.carrosserie.web.controller;
 
 import com.carrosserieafpa.carrosserie.dao.*;
 import com.carrosserieafpa.carrosserie.entity.*;
-import com.sun.deploy.util.SessionState;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.method.annotation.SessionAttributesHandler;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,22 +19,16 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-@SessionAttributes({"client", "prestations"})
+@SessionAttributes({"client", "prestations", "voiture"})
 @Controller
 public class ControllerClient {
 
-  @Autowired
-  ActeDao acteDao;
-  @Autowired
-  FinitionDao finitionDao;
-  @Autowired
-  PrestationDao prestationDao;
-  @Autowired
-  FacturationDao facturationDao;
-  @Autowired
-  VoitureDao voitureDao;
-  @Autowired
-  ClientDao clientDao;
+  @Autowired ActeDao acteDao;
+  @Autowired FinitionDao finitionDao;
+  @Autowired PrestationDao prestationDao;
+  @Autowired FacturationDao facturationDao;
+  @Autowired VoitureDao voitureDao;
+  @Autowired ClientDao clientDao;
 
   @ModelAttribute("client")
   public Client getClient() {
@@ -49,13 +40,18 @@ public class ControllerClient {
     return new ArrayList<>();
   }
 
+  @ModelAttribute("voiture")
+  public Voiture getVoiture() {
+    return new Voiture();
+  }
+
   @PostMapping("/saveClient")
   public String enregistrementClient(
-          HttpServletRequest request,
-          @ModelAttribute("client") Client client,
-          @ModelAttribute("voiture") Voiture voiture) {
+      HttpServletRequest request,
+      @ModelAttribute("client") Client client)
+       {
     client = this.creationClient(client, request);
-    voiture = this.creationVoiture(client, request);
+    Voiture voiture = this.creationVoiture(client, request);
 
     if (client.getNom() != null) {
       clientDao.save(client);
@@ -65,10 +61,55 @@ public class ControllerClient {
     return "redirect:/addPresta";
   }
 
+    @RequestMapping("/createNewVehicule")
+    public String creationNewVoiture(@ModelAttribute("client") Client client, HttpServletRequest request) {
+        Voiture voiture = new Voiture();
+        voiture.setMarque(request.getParameter("marque"));
+        voiture.setImmat(request.getParameter("immat"));
+        voiture.setModele(request.getParameter("modele"));
+        voiture.setCodeCouleur(request.getParameter("couleur"));
+        voiture.setCategorie(request.getParameter("categorie"));
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy-mm-dd");
+        Date date = null;
+        try {
+            date = dt.parse(request.getParameter("date"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (NullPointerException e) {
+        }
+        voiture.setDate(date);
+        voiture.setClient(client);
+
+        client.getVoiture().add(voiture);
+
+        voitureDao.save(voiture);
+
+        return "redirect:/vueEnregistrement";
+    }
+
+    @RequestMapping("/setVoitureClient")
+    public String settageVoitureClient(@ModelAttribute("voiture") Voiture voiture, HttpServletRequest request, Model model) {
+        Long id = Long.valueOf(request.getParameter("vehicule"));
+        Optional<Voiture> tuture = voitureDao.findById(id);
+        if (tuture.isPresent()) {
+            voiture = tuture.get();
+        }
+
+        model.addAttribute("voiture", voiture);
+
+        System.out.println("808080808080808008080808080");
+        System.out.println(voiture);
+        System.out.println("808080808080808008080808080");
+
+        return "redirect:/vueEnregistrement";
+    }
+
   @RequestMapping("addPresta")
-  public String ajouterPrestaList(RedirectAttributes ra,
-                                  @ModelAttribute("prestation") Prestation prestation,
-                                  @ModelAttribute("client") Client client/*, @ModelAttribute("prestations") List<Prestation> prestations*/) {
+  public String ajouterPrestaList(
+      RedirectAttributes ra,
+      @ModelAttribute("prestation") Prestation prestation,
+      @ModelAttribute("client")
+          Client client, @ModelAttribute("voiture") Voiture voiture) {
     Acte acte = prestation.getActe();
     Finition finition = prestation.getFinition();
 
@@ -82,14 +123,12 @@ public class ControllerClient {
   }
 
   @RequestMapping("/savePresta")
-  public String sauvegarderPrestas(@ModelAttribute("prestation") Prestation prestation, @ModelAttribute("client") Client client, @ModelAttribute("prestations") List<Prestation> prestations, Model model) {
+  public String sauvegarderPrestas(
+      @ModelAttribute("prestation") Prestation prestation,
+      @ModelAttribute("client") Client client,
+      @ModelAttribute("prestations") List<Prestation> prestations,
+      Model model) {
     prestations.add(prestation);
-
-      for (Prestation presta : prestations) {
-          System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-          System.out.println(presta);
-          System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-      }
 
     model.addAttribute("prestations", prestations);
     model.addAttribute("prestation", prestation);
@@ -97,65 +136,35 @@ public class ControllerClient {
   }
 
   @RequestMapping("/saveFacture")
-  public String sauvegarderFacture(@ModelAttribute("prestations")List <Prestation> prestations, Facturation facturation, @ModelAttribute("client") Client client, RedirectAttributes ra) {
+  public String sauvegarderFacture(
+      @ModelAttribute("prestations") List<Prestation> prestations,
+      Facturation facturation,
+      @ModelAttribute("client") Client client, @ModelAttribute("voiture") Voiture voiture,
+      RedirectAttributes ra,
+      SessionStatus sessionStatus) {
 
     Collection<Prestation> prestationsColl = new HashSet<>();
-
-      for (Prestation presta : prestations) {
-          System.out.println("wmwmwmwmwwmwmmwmwmwmwmwmwmwmwmw");
-          System.out.println(presta);
-          System.out.println("wmwmwmwmwwmwmmwmwmwmwmwmwmwmwmw");
-      }
-
     prestationsColl.addAll(prestations);
     facturation.setPrestation(prestationsColl);
 
-    facturation.setId(Long.parseLong("1"));
-
-    Voiture voiture = voitureDao.findVoitureByClient(client.getId());
-    System.out.println(voiture);
-
     Double prixFactureCalcule = calculPrixFinal(prestations, voiture);
-    System.out.println(prixFactureCalcule);
-
     facturation.setPrix(prixFactureCalcule);
-    System.out.println(facturation.getPrix());
 
     LocalDateTime HeureNonFormatee = LocalDateTime.now();
     DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy à HH:mm");
     String formatDateTime = HeureNonFormatee.format(timeFormatter);
     facturation.setDate(formatDateTime);
-    System.out.println(facturation.getDate());
 
     facturation.setClient(client);
-    System.out.println(facturation.getClient());
-
-      System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-      System.out.println(facturation);
-      System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
     facturationDao.save(facturation);
 
     ra.addAttribute("client", client);
 
-      /*SessionStatus sessionStatus = new SessionStatus() {
-          @Override
-          public void setComplete() {
-
-          }
-
-          @Override
-          public boolean isComplete() {
-              return false;
-          }
-      };
-      sessionStatus.setComplete();*/
-
     return "redirect:/archive";
   }
 
-
-  public Double calculPrixFinal(@ModelAttribute("prestations")List <Prestation> prestations, Voiture voiture) {
+  public Double calculPrixFinal(
+      @ModelAttribute("prestations") List<Prestation> prestations, @ModelAttribute("voiture") Voiture voiture) {
 
     Double prixTotalFacture = 0.0;
     for (Prestation presta : prestations) {
@@ -178,10 +187,11 @@ public class ControllerClient {
         prixFinal += prixTotalFacture * 0.2;
         break;
     }
-     return prixFinal;
+    return prixFinal;
   }
 
-  public Client creationClient(@ModelAttribute("client") Client client, HttpServletRequest request) {
+  public Client creationClient(
+      @ModelAttribute("client") Client client, HttpServletRequest request) {
 
     client.setPrenom(request.getParameter("prenom"));
     client.setNom(request.getParameter("nom"));
@@ -196,7 +206,8 @@ public class ControllerClient {
     return client;
   }
 
-  public Voiture creationVoiture(@ModelAttribute("client") Client client, HttpServletRequest request) {
+  public Voiture creationVoiture(
+      @ModelAttribute("client") Client client, HttpServletRequest request) {
 
     Voiture voiture = new Voiture();
     voiture.setMarque(request.getParameter("marque"));
@@ -211,8 +222,8 @@ public class ControllerClient {
     } catch (ParseException e) {
       e.printStackTrace();
     } catch (NullPointerException e) {
-
     }
+
     voiture.setDate(date);
     voiture.setClient(client);
 

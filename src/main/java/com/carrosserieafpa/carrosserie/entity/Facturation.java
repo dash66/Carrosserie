@@ -21,8 +21,14 @@ public class Facturation {
 
     private String date;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.REMOVE)
     private Collection<Prestation> prestation;
+
+    public Facturation(double prix, String date, Collection<Prestation> prestation) {
+        this.prix = prix;
+        this.date = date;
+        this.prestation = prestation;
+    }
 
     public Facturation(double prix, Client client, String date, Collection<Prestation> prestation) {
         this.prix = prix;

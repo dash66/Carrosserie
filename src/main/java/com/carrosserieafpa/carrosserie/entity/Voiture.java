@@ -3,10 +3,11 @@ package com.carrosserieafpa.carrosserie.entity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Voiture {
+public class Voiture implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

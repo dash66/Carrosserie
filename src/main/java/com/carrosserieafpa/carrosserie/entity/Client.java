@@ -29,7 +29,7 @@ public class Client {
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private Collection<Voiture> voiture;
 
-    @LazyCollection(LazyCollectionOption.FALSE)
+   // @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "client")
     private Collection<Facturation> facturation;
 
