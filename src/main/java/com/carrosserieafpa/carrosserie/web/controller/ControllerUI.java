@@ -117,20 +117,18 @@ public class ControllerUI {
     }
 
     @GetMapping(value = "/rechercher") // fonction de la page archive
-    public String recherche(Model model) {
+    public String recherche(Model model, SessionStatus sessionStatus) {
 
         List<Finition> finitions = finitionDao.findAll();
-        model.addAttribute("finitions", finitions);
-
-        List<Acte> actes = acteDao.findAll();
-        model.addAttribute("actes", actes);
-
         List<Prestation> prestations = prestationDao.findAll();
+        List<Acte> actes = acteDao.findAll();
+
+        model.addAttribute("finitions", finitions);
+        model.addAttribute("actes", actes);
         model.addAttribute("prestations", prestations);
+        model.addAttribute("prestation", new Prestation());
 
-        Prestation prestation = new Prestation();
-        model.addAttribute("prestation", prestation);
-
+        sessionStatus.setComplete();
         return "form-recherche";
     }
 
