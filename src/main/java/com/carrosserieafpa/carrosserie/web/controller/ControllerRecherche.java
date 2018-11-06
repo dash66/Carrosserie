@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -88,12 +89,20 @@ public class ControllerRecherche {
     public String rechercheFacture(Model model, HttpServletRequest httpServletRequest) {
 
         Long numFacture = Long.valueOf(httpServletRequest.getParameter("numFacture"));
-        Long idFacture = facturationDao.rechercherFactureParId(numFacture);
-        Optional<Facturation> facturation = facturationDao.findById(idFacture);
+        Optional<Facturation> facturation = facturationDao.findById(numFacture);
         Facturation facturation1 = facturation.get();
 
+        model.addAttribute("voiture", facturation1.getVoiture());
         model.addAttribute("facturation", facturation1);
-        return "form-archive";
+        model.addAttribute("client", facturation1.getClient());
+        model.addAttribute("prixFacture", facturation1.getPrix());
+        model.addAttribute("prestations", facturation1.getPrestation());
+
+
+
+
+
+        return "form-facturation";
     }
 
     @RequestMapping("/rechercheClientExistant")
@@ -132,8 +141,7 @@ public class ControllerRecherche {
     public String rechercheFactureExistant(Model model, HttpServletRequest httpServletRequest) {
 
         Long numFacture = Long.valueOf(httpServletRequest.getParameter("facture"));
-        Long idFacture = facturationDao.rechercherFactureParId(numFacture);
-        Optional<Facturation> facturation = facturationDao.findById(idFacture);
+        Optional<Facturation> facturation = facturationDao.findById(numFacture);
         Facturation facturation1 = facturation.get();
 
         model.addAttribute("facturation", facturation1);

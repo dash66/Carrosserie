@@ -100,12 +100,7 @@ public class ControllerClient {
     if (tuture.isPresent()) {
       voiture = tuture.get();
     }
-
     model.addAttribute("voiture", voiture);
-
-    System.out.println("808080808080808008080808080");
-    System.out.println(voiture);
-    System.out.println("808080808080808008080808080");
 
     return "redirect:/vueEnregistrement";
   }
@@ -162,6 +157,7 @@ public class ControllerClient {
     String formatDateTime = HeureNonFormatee.format(timeFormatter);
     facturation.setDate(formatDateTime);
     facturation.setClient(client);
+    facturation.setVoiture(voiture);
     facturationDao.save(facturation);
 
     ra.addAttribute("client", client);
