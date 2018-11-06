@@ -18,7 +18,7 @@ public class Voiture implements Serializable {
     private String categorie;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date date;
+    private String date;
     private String codeCouleur;
 
     @ManyToOne()
@@ -28,7 +28,7 @@ public class Voiture implements Serializable {
     public Voiture() {
     }
 
-    public Voiture(String immat, String marque, String modele, String categorie, Date date, String codeCouleur, Client client) {
+    public Voiture(String immat, String marque, String modele, String categorie, String date, String codeCouleur, Client client) {
         this.immat = immat;
         this.marque = marque;
         this.modele = modele;
@@ -78,11 +78,11 @@ public class Voiture implements Serializable {
         this.categorie = categorie;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

@@ -135,24 +135,21 @@ public class ControllerUI {
     }
 
     @RequestMapping("/facturation")
-    public String facture(Model model, @ModelAttribute("prestations") List<Prestation> prestationList,
+    public String facture(Model model,
+                          @ModelAttribute("prestations") List<Prestation> prestationList,
                           @ModelAttribute("client") Client client,
                           @ModelAttribute("voiture") Voiture voiture,
                           @ModelAttribute("prestation") Prestation prestation,
-                          @ModelAttribute("facturation") Facturation facturations,
-                          @ModelAttribute("facturations") Facturation facturation,
+                          @ModelAttribute("facturation") Facturation facturation,
                           SessionStatus sessionStatus) {
 
-        Double prixFacture  = facturationDao.recherchePrixFactureParIdClient(client.getId());
+        Double prixFacture = facturationDao.recherchePrixFactureParIdClient(client.getId());
         model.addAttribute("prixFacture", prixFacture);
         Double prixFinal = 0.0;
 
         model.addAttribute("prixFinal", prixFinal);
-        model.addAttribute("facturation", facturation);
-        model.addAttribute("facturations", facturations);
 
         sessionStatus.setComplete();
-
         return "form-facturation";
     }
 }
