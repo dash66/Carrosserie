@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -134,7 +135,13 @@ public class ControllerUI {
     }
 
     @RequestMapping("/facturation")
-    public String facture(Model model,  @ModelAttribute("prestations") List<Prestation> prestationList, @ModelAttribute("client") Client client, @ModelAttribute("voiture") Voiture voiture, @ModelAttribute("prestation") Prestation prestation, @ModelAttribute("facturation") Facturation facturations, @ModelAttribute("facturations") Facturation facturation) {
+    public String facture(Model model, @ModelAttribute("prestations") List<Prestation> prestationList,
+                          @ModelAttribute("client") Client client,
+                          @ModelAttribute("voiture") Voiture voiture,
+                          @ModelAttribute("prestation") Prestation prestation,
+                          @ModelAttribute("facturation") Facturation facturations,
+                          @ModelAttribute("facturations") Facturation facturation,
+                          SessionStatus sessionStatus) {
 
         Double prixFacture  = facturationDao.recherchePrixFactureParIdClient(client.getId());
         model.addAttribute("prixFacture", prixFacture);
@@ -143,6 +150,8 @@ public class ControllerUI {
         model.addAttribute("prixFinal", prixFinal);
         model.addAttribute("facturation", facturation);
         model.addAttribute("facturations", facturations);
+
+        sessionStatus.setComplete();
 
         return "form-facturation";
     }

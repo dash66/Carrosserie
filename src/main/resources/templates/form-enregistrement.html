@@ -20,8 +20,6 @@
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
 <header>
-
-
     <nav style="height:50px;"
          class="navbar navbar-expand-lg navbar-light bg-light border rounded-bottom mb-5">
         <a class="navbar-brand glyphicon glyphicon-home text-info" th:href="@{|/menu|}"> Accueil<span
@@ -36,23 +34,6 @@
                 <li class="nav-item active">
                     <a class="nav-link glyphicon glyphicon-user text-info" th:href="@{/admin}"> Administration</a>
                 </li>
-                <!-- <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li>-->
             </ul>
             <h1 class="navbar-text text-success m-3 pb-3">Carrosserie </h1>
             <img style="max-width:45px; max-height:45px;" class="w-auto h-auto" th:src="@{/images/afpa.png}"
@@ -63,14 +44,11 @@
              </form>-->
         </div>
     </nav>
-
-
     <div class="row m-2">
         <div class="col-md-12 text-center">
             <img class="mw-100 mh-100" th:src="@{/images/anim2.png}" alt="Beau comme un camion tout neuf !"/>
         </div>
     </div>
-
 </header>
 
 <!-- ------------------------------------------------------------------------ -->
@@ -78,24 +56,25 @@
 <!-- -------------   BOUTONS NOUVEAU CLIENT/CLIENT EXISTANT  ---------------- -->
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
-<div class="row m-2" th:style="${client.nom != null} ? 'display: none'">
-    <div class="col-md-12">
-        <div class="col-md-6 float-left text-center">
-            <a href="#addClient" class="btn btn-outline-info a-btn-slide-text m-2" data-toggle="modal"
-               data-target="#addClient">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                <strong>Nouveau Client</strong>
-            </a>
-        </div>
-        <div class="col-md-6 float-left text-center">
-            <a href="#readClient" class="btn btn-outline-info a-btn-slide-text m-2" data-toggle="modal"
-               data-target="#readClient">
-                <span class="glyphicon glyphicon-folder-open m-1" aria-hidden="true"></span>
-                <strong>Client Existant</strong>
-            </a>
+<div class="container mt-5">
+    <div class="row m-2" th:style="${client.nom != null} ? 'display: none'">
+        <div class="col-md-12">
+            <div class="col-md-6 float-left text-center">
+                <a href="#addClient" class="btn btn-outline-info a-btn-slide-text m-2" data-toggle="modal"
+                   data-target="#addClient">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    <strong>Nouveau Client</strong>
+                </a>
+            </div>
+            <div class="col-md-6 float-left text-center">
+                <a href="#readClient" class="btn btn-outline-info a-btn-slide-text m-2" data-toggle="modal"
+                   data-target="#readClient">
+                    <span class="glyphicon glyphicon-folder-open m-1" aria-hidden="true"></span>
+                    <strong>Client Existant</strong>
+                </a>
+            </div>
         </div>
     </div>
-</div>
 
 
     <!-- ------------------------------------------------------------------------ -->
@@ -113,142 +92,134 @@
                     </div>
                     <div class="modal-body">
                         <form class="form-horizontal mt-5" method="post">
-                            <fieldset>
-                                <!-- Form Name -->
-
-                                <div class="container">
-                                    <!-- 1ere colonne du champ de saisie CLIENT-->
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <div class="col-md-10">
-                                                    <label for="prenom">Prenom</label>
-                                                    <input id="prenom" name="prenom" placeholder="Prénom"
-                                                           class="form-control input-md" type="text" required>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <div class="col-md-10">
-                                                    <label for="nom">Nom</label>
-                                                    <input id="nom" name="nom" placeholder="Nom"
-                                                           class="form-control input-md" type="text" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <div class="col-md-10">
-                                                    <label for="adresse">Adresse</label>
-                                                    <input id="adresse" name="adresse" placeholder="n° rue CP Ville"
-                                                           class="form-control input-md" type="text">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <div class="col-md-10">
-                                                    <label for="telephone">Numéro de téléphone</label>
-                                                    <input id="telephone" name="telephone" placeholder="0123456789"
-                                                           class="form-control input-md" type="tel"
-                                                           pattern="[0]{1}[0-9]{9}" maxlength="10" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <div class="col-md-10">
-                                                    <label for="email">Adresse mail</label>
-                                                    <input id="email" name="email" placeholder="mail@mail.fr"
-                                                           class="form-control input-md" type="email">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <div class="col-md-10">
-                                                    <label for="numAfpa">Numero Afpa du propriétaire</label>
-                                                    <input id="numAfpa" name="numAfpa" placeholder="XXXXX"
-                                                           class="form-control input-md" type="text" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <div class="col-md-10">
-                                                    <label for="marque">Marque du véhicule</label>
-                                                    <input id="marque" name="marque" placeholder="Reno"
-                                                           class="form-control input-md" type="text" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <div class="col-md-10">
-                                                    <label for="immat">Immatriculation du véhicule</label>
-                                                    <input id="immat" name="immat" placeholder="XX123XX / 1234 XX 34"
-                                                           class="form-control input-md" type="text" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <div class="col-md-10">
-                                                    <label for="modele">Modèle du véhicule</label>
-                                                    <input id="modele" name="modele" placeholder="Clito"
-                                                           class="form-control input-md" type="text" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <div class="col-md-10">
-                                                    <label for="couleur">Couleur du vehicule</label>
-                                                    <input id="couleur" name="couleur" placeholder="bleu"
-                                                           class="form-control input-md" type="text" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <div class="col-md-10">
-                                                    <label for="categorie">Categorie du véhicule</label>
-                                                    <select id="categorie" name="categorie"
-                                                            class="form-control input-md" required>
-                                                        <option hidden="" value="">Choisissez une categorie</option>
-                                                        <option value="petit" selected>Petit gabarit</option>
-                                                        <option value="moyen">Moyen gabarit</option>
-                                                        <option value="gros">Gros gabarit</option>
-                                                        <option value="fourgon">Fourgon</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <div class="col-md-10">
-                                                    <label for="date">Date de premiere mise en service</label>
-                                                    <input id="date" name="date" placeholder="Date du véhicule"
-                                                           class="form-control input-md" type="date" required>
-
-                                                </div>
-                                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label for="prenom">Prenom</label>
+                                            <input id="prenom" name="prenom" placeholder="Prénom"
+                                                   class="form-control input-md" type="text" required>
                                         </div>
                                     </div>
                                 </div>
-                            </fieldset>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label for="nom">Nom</label>
+                                            <input id="nom" name="nom" placeholder="Nom"
+                                                   class="form-control input-md" type="text" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label for="adresse">Adresse</label>
+                                            <input id="adresse" name="adresse" placeholder="n° rue CP Ville"
+                                                   class="form-control input-md" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label for="telephone">Numéro de téléphone</label>
+                                            <input id="telephone" name="telephone" placeholder="0123456789"
+                                                   class="form-control input-md" type="tel"
+                                                   pattern="[0]{1}[0-9]{9}" maxlength="10" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label for="email">Adresse mail</label>
+                                            <input id="email" name="email" placeholder="mail@mail.fr"
+                                                   class="form-control input-md" type="email">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label for="numAfpa">Numero Afpa du propriétaire</label>
+                                            <input id="numAfpa" name="numAfpa" placeholder="XXXXX"
+                                                   class="form-control input-md" type="text" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label for="marque">Marque du véhicule</label>
+                                            <input id="marque" name="marque" placeholder="Reno"
+                                                   class="form-control input-md" type="text" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label for="immat">Immatriculation du véhicule</label>
+                                            <input id="immat" name="immat" placeholder="XX123XX / 1234 XX 34"
+                                                   class="form-control input-md" type="text" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label for="modele">Modèle du véhicule</label>
+                                            <input id="modele" name="modele" placeholder="Clito"
+                                                   class="form-control input-md" type="text" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label for="couleur">Couleur du vehicule</label>
+                                            <input id="couleur" name="couleur" placeholder="bleu"
+                                                   class="form-control input-md" type="text" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label for="categorie">Categorie du véhicule</label>
+                                            <select id="categorie" name="categorie"
+                                                    class="form-control input-md" required>
+                                                <option hidden="" value="">Choisissez une categorie</option>
+                                                <option value="petit" selected>Petit gabarit</option>
+                                                <option value="moyen">Moyen gabarit</option>
+                                                <option value="gros">Gros gabarit</option>
+                                                <option value="fourgon">Fourgon</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label for="date">Date de premiere mise en service</label>
+                                            <input id="date" name="date" placeholder="Date du véhicule"
+                                                   class="form-control input-md" type="date" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -276,27 +247,23 @@
                 <div class="modal-body">
                     <div class="form-horizontal mt-5" method="post">
                         <form method="post" th:action="@{/rechercheClientExistant}">
-                            <!-- Form Name -->
-                            <div class="container">
-                                <!-- 1ere colonne du champ de saisie CLIENT-->
-                                <label>Recherche par client</label>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="col-md-10">
-                                                <input id="prenom2" name="prenom" placeholder="Prénom"
-                                                       class="form-control input-md" type="text">
-                                            </div>
+                            <label>Recherche par client</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <input id="prenom2" name="prenom" placeholder="Prénom"
+                                                   class="form-control input-md" type="text">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="col-md-10">
-                                                <input id="nom2" name="nom" placeholder="Nom"
-                                                       class="form-control input-md" type="text">
-                                            </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <input id="nom2" name="nom" placeholder="Nom"
+                                                   class="form-control input-md" type="text">
                                         </div>
                                     </div>
                                 </div>
@@ -311,16 +278,14 @@
                 <div class="modal-body">
                     <div class="form-horizontal mt-5" method="post">
                         <form method="post" th:action="@{/rechercheVoitureExistant}">
-                            <div class="container">
-                                <label>Recherche par véhicule</label>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="col-md-10">
-                                                <input id="Immatriculation" name="Immat"
-                                                       placeholder="Immatriculation" class="form-control input-md"
-                                                       type="text">
-                                            </div>
+                            <label>Recherche par véhicule</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <input id="Immatriculation" name="Immat"
+                                                   placeholder="Immatriculation" class="form-control input-md"
+                                                   type="text">
                                         </div>
                                     </div>
                                 </div>
@@ -335,15 +300,13 @@
                 <div class="modal-body">
                     <div class="form-horizontal mt-5" method="post">
                         <form method="post" th:action="@{/rechercheFactureExistant}">
-                            <div class="container">
-                                <label>Recherche par facture</label>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="col-md-10">
-                                                <input id="facture" name="IdFacture" placeholder="Numéro de facture"
-                                                       class="form-control input-md" type="text">
-                                            </div>
+                            <label>Recherche par facture</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <input id="facture" name="IdFacture" placeholder="Numéro de facture"
+                                                   class="form-control input-md" type="text">
                                         </div>
                                     </div>
                                 </div>
@@ -359,13 +322,12 @@
         </div>
     </div>
 
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- -------------             AFFICHAGE DU CLIENT           ---------------- -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
-<form class="form-horizontal" method="post" th:action="@{/setVoitureClient}" modelAttribute="voiture">
-    <div class="container">
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- -------------             AFFICHAGE DU CLIENT           ---------------- -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <form class="form-horizontal" method="post" th:action="@{/setVoitureClient}" modelAttribute="voiture">
         <div class="row m-2">
             <table class="table table-bordered table-striped table-md"
                    th:style="${client.nom == null} ? 'display: none'">
@@ -406,7 +368,8 @@
                                     </a>
                                 </div>
                                 <div class="col-md-2 float-left">
-                                    <input class="btn btn-outline-info font-weight-bold float-left mr-2" type="submit"
+                                    <input class="btn btn-outline-info font-weight-bold float-left mr-2"
+                                           type="submit"
                                            value="&#9881; Valider"/>
                                 </div>
                             </div>
@@ -416,8 +379,7 @@
                 </tbody>
             </table>
         </div>
-    </div>
-</form>
+    </form>
 
     <!-- ------------------------------------------------------------------------ -->
     <!-- ------------------------------------------------------------------------ -->
@@ -425,43 +387,38 @@
     <!-- ------------------------------------------------------------------------ -->
     <!-- ------------------------------------------------------------------------ -->
     <form class="form-horizontal mt-5" th:action="@{/addPresta}" method="post" id="prestaOk"
-          th:object="${prestation}" modelAttribute="client">
-        <div class="container" th:style="${client.nom == null} ? 'display: none'">
-            <div class="row m-2">
-                <p class="alert alert-light font-weight-bold p-0">Enregistrement prestation</p>
-                <div class="form-group col-md-12">
-                    <div class="col-md-6 float-left text-center">
-                        <select id="TypeActe" th:field="*{acte}" class="select2" required>
-                            <option hidden="" value="">Choisissez une intervention</option>
-                            <option th:each="acte : ${actes}" th:value="${acte.id_acte}"
-                                    th:text="${acte.libelle}"></option>
-                        </select>
-                    </div>
+          th:object="${prestation}" modelAttribute="client" th:style="${client.nom == null} ? 'display: none'">
+        <div class="row m-2">
+            <p class="alert alert-light font-weight-bold p-0">Enregistrement prestation</p>
+            <div class="form-group col-md-12">
+                <div class="col-md-6 float-left text-center">
+                    <select id="TypeActe" th:field="*{acte}" class="select2" required>
+                        <option hidden="" value="">Choisissez une intervention</option>
+                        <option th:each="acte : ${actes}" th:value="${acte.id_acte}"
+                                th:text="${acte.libelle}"></option>
+                    </select>
+                </div>
 
-                    <div class="col-md-6 float-left text-center">
-                        <select id="TypeFinition" th:field="*{finition}" class="select2" required>
-                            <option hidden="" value="">Choisissez un type de finition</option>
-                            <option th:each="finition : ${finitions}"
-                                    th:value="${finition.id_finition}" th:text="${finition.libelle}"
-                                    th:required></option>
-                        </select>
-                    </div>
-                    <script>
-                        $('.select2').select2();
-                    </script>
+                <div class="col-md-6 float-left text-center">
+                    <select id="TypeFinition" th:field="*{finition}" class="select2" required>
+                        <option hidden="" value="">Choisissez un type de finition</option>
+                        <option th:each="finition : ${finitions}"
+                                th:value="${finition.id_finition}" th:text="${finition.libelle}"
+                                th:required></option>
+                    </select>
                 </div>
+                <script>
+                    $('.select2').select2();
+                </script>
             </div>
-            <div class="row m-2">
-                <div class="form-group col-md-12 mt-3 px-0">
-                    <input class="btn btn-outline-info font-weight-bold" type="submit"
-                           value="&#9881; Ajouter une intervention"/>
-                </div>
+        </div>
+        <div class="row m-2">
+            <div class="form-group col-md-12 mt-3 px-0">
+                <input class="btn btn-outline-info font-weight-bold" type="submit"
+                       value="&#9881; Ajouter une intervention"/>
             </div>
         </div>
     </form>
-
-
-
 
 
     <!-- ------------------------------------------------------------------------ -->
@@ -471,26 +428,24 @@
     <!-- ------------------------------------------------------------------------ -->
     <form class="form-horizontal" method="post" th:action="@{/saveFacture}"
           th:style="${prestations.isEmpty()} ? 'display: none'">
-        <div class="container">
-            <div class="row m-2">
-                <table class="table table-bordered table-striped table-md">
-                    <thead class="table-info">
-                    <tr>
-                        <th>Prestation</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="prestation : ${prestations}">
-                        <td th:text="${prestation.toString()}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="row"  style="padding-bottom: 50px;">
-                <div class="form-group col-md-12 text-center p-0 m-1">
-                    <input class="btn btn-outline-info" type="submit" value="&#128190; Enregistrer"/>
-                    <input class="btn btn-outline-warning" type="submit" value="&#10060; Annulation"/>
-                </div>
+        <div class="row m-2">
+            <table class="table table-bordered table-striped table-md">
+                <thead class="table-info">
+                <tr>
+                    <th>Prestation</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="prestation : ${prestations}">
+                    <td th:text="${prestation.toString()}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row" style="padding-bottom: 50px;">
+            <div class="form-group col-md-12 text-center p-0 m-1">
+                <input class="btn btn-outline-info" type="submit" value="&#128190; Enregistrer"/>
+                <input class="btn btn-outline-warning" type="submit" value="&#10060; Annulation"/>
             </div>
         </div>
     </form>
@@ -501,7 +456,7 @@
     <!-- -------------        FORM MODAL NOUVEAU VEHICULE        ---------------- -->
     <!-- ------------------------------------------------------------------------ -->
     <!-- ------------------------------------------------------------------------ -->
-    <form method="post" th:action="@{/saveVehicule}">
+    <form method="post" th:action="@{/createNewVehicule}">
         <div class="modal" id="addVehicule" tabindex="-1" role="dialog" href="#">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -511,75 +466,75 @@
                     </div>
                     <div class="modal-body">
                         <form class="form-horizontal mt-5" method="post">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="col-md-10">
-                                                <label for="marque">Marque du véhicule</label>
-                                                <input id="marqueV" name="marque" placeholder="Reno"
-                                                       class="form-control input-md" type="text" required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="col-md-10">
-                                                <label for="immat">Immatriculation du véhicule</label>
-                                                <input id="immatV" name="immat" placeholder="XX123XX / 1234 XX 34"
-                                                       class="form-control input-md" type="text" required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="col-md-10">
-                                                <label for="modele">Modèle du véhicule</label>
-                                                <input id="modeleV" name="modele" placeholder="Clito"
-                                                       class="form-control input-md" type="text" required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="col-md-10">
-                                                <label for="couleur">Couleur du vehicule</label>
-                                                <input id="couleurV" name="couleur" placeholder="bleu"
-                                                       class="form-control input-md" type="text" required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="col-md-10">
-                                                <label for="categorie">Categorie du véhicule</label>
-                                                <select id="categorieV" name="categorie"
-                                                        class="form-control input-md" required>
-                                                    <option hidden="" value="">Choisissez une categorie</option>
-                                                    <option value="petit" selected>Petit gabarit</option>
-                                                    <option value="moyen">Moyen gabarit</option>
-                                                    <option value="gros">Gros gabarit</option>
-                                                    <option value="fourgon">Fourgon</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="col-md-10">
-                                                <label for="date">Date de premiere mise en service</label>
-                                                <input id="dateV" name="date" placeholder="Date du véhicule"
-                                                       class="form-control input-md" type="date" required>
 
-                                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label for="marque">Marque du véhicule</label>
+                                            <input id="marqueV" name="marque" placeholder="Reno"
+                                                   class="form-control input-md" type="text" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label for="immat">Immatriculation du véhicule</label>
+                                            <input id="immatV" name="immat" placeholder="XX123XX / 1234 XX 34"
+                                                   class="form-control input-md" type="text" required>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label for="modele">Modèle du véhicule</label>
+                                            <input id="modeleV" name="modele" placeholder="Clito"
+                                                   class="form-control input-md" type="text" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label for="couleur">Couleur du vehicule</label>
+                                            <input id="couleurV" name="couleur" placeholder="bleu"
+                                                   class="form-control input-md" type="text" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label for="categorie">Categorie du véhicule</label>
+                                            <select id="categorieV" name="categorie"
+                                                    class="form-control input-md" required>
+                                                <option hidden="" value="">Choisissez une categorie</option>
+                                                <option value="petit" selected>Petit gabarit</option>
+                                                <option value="moyen">Moyen gabarit</option>
+                                                <option value="gros">Gros gabarit</option>
+                                                <option value="fourgon">Fourgon</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label for="date">Date de premiere mise en service</label>
+                                            <input id="dateV" name="date" placeholder="Date du véhicule"
+                                                   class="form-control input-md" type="date" required>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -591,6 +546,7 @@
         </div>
     </form>
 
+</div>
 
 </div>
 <footer style="height:50px;" class="fixed-bottom bg-light border text-info text-center">
