@@ -74,10 +74,12 @@ public class ControllerUI {
             @ModelAttribute("voiture") Voiture voiture,
             Model model, HttpServletRequest request) {
 
+
         model.addAttribute("actes", acteDao.findAll());
         model.addAttribute("finitions", finitionDao.findAll());
         model.addAttribute("prestations", prestations);
         model.addAttribute("voiture", voiture);
+
 
         return "form-enregistrement";
     }
@@ -139,11 +141,8 @@ public class ControllerUI {
                           @ModelAttribute("facturation") Facturation facturation,
                           SessionStatus sessionStatus) {
 
-        Double prixFacture = facturationDao.recherchePrixFactureParIdClient(client.getId());
+        Double prixFacture = facturation.getPrix();
         model.addAttribute("prixFacture", prixFacture);
-        Double prixFinal = 0.0;
-
-        model.addAttribute("prixFinal", prixFinal);
 
         sessionStatus.setComplete();
         return "form-facturation";

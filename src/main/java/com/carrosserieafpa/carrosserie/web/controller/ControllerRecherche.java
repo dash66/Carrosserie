@@ -9,13 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@SessionAttributes({"client", "prestation", "prestations"})
+@SessionAttributes({"client", "prestation", "prestations", "voiture"})
 @Controller
 public class ControllerRecherche {
 
@@ -35,6 +36,11 @@ public class ControllerRecherche {
     @ModelAttribute("client")
     public Client getClient() {
         return new Client();
+    }
+
+    @ModelAttribute("voiture")
+    public Voiture getVoiture() {
+        return new Voiture();
     }
 
     @ModelAttribute("prestation")
@@ -115,15 +121,17 @@ public class ControllerRecherche {
     }
 
     @RequestMapping("/rechercheVoitureExistant") // fonction de la page enregistrement, doit y retourner : trouver un client existant pour préparer presta
-    public String rechercheVoitureExistant(Model model, HttpServletRequest httpServletRequest, @ModelAttribute("client") Client client) {
+    public String rechercheVoitureExistant(Model model, HttpServletRequest httpServletRequest, @ModelAttribute("client") Client client, @ModelAttribute("voiture") Voiture k2000, RedirectAttributes ra) {
 
-        String immat = httpServletRequest.getParameter("immat");
-
-        Voiture k2000 = voitureDao.rechercherVoitureparImmat(immat);
-
+        String Immatriculation = httpServletRequest.getParameter("Immatriculation");
+        k2000 = voitureDao.rechercherVoitureparImmat(Immatriculation);
 
         Client clint = k2000.getClient();
         model.addAttribute("client", clint);
+        model.addAttribute("voiture", k2000);
+
+        System.out.println(k2000);
+        ra.addAttribute(k2000);
 
         return "redirect:/vueEnregistrement";
     }

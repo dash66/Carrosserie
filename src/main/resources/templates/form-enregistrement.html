@@ -10,6 +10,7 @@
     <script type="text/javascript" src="webjars/jquery/3.0.0/jquery.min.js"></script>
     <script type="text/javascript" src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="webjars/select2/4.0.5/js/select2.js"></script>
+    <script type="text/javascript" src="webjars/font-awesome/5.4.1/js/all.js"></script>
 
 </head>
 
@@ -283,7 +284,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="col-md-10">
-                                            <input id="Immatriculation" name="Immat"
+                                            <input id="Immatriculation" name="Immatriculation"
                                                    placeholder="Immatriculation" class="form-control input-md"
                                                    type="text">
                                         </div>
@@ -333,7 +334,7 @@
                    th:style="${client.nom == null} ? 'display: none'">
                 <thead class="table-info">
                 <tr>
-                    <th>Client</th>
+                    <th > Client</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -341,17 +342,24 @@
                     <td>
                         <div class="row">
                             <div class="col-md-12 m-1">
-                                <div class="col-md-6 float-left">
+                                <p class="glyphicon glyphicon-user p-0">
                                     Nom : <span class="font-weight-bold" th:text="${client.nom}"></span>
-                                </div>
-                                <div class="col-md-6 float-left">
                                     Prénom : <span class="font-weight-bold" th:text="${client.prenom}"></span>
-                                </div>
+                                </p>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="col-md-10 float-left mt-2">
+                        <div class="row" th:style="${voiture.marque == null} ? 'display: none'">
+                            <div class="col-md-12 m-1">
+                                <p class="p-0"><i class="fas fa-car"></i>
+                                    Marque : <span class="font-weight-bold" th:text="${voiture.marque}"></span>,
+                                    Modèle : <span class="font-weight-bold" th:text="${voiture.modele}"></span>,
+                                    Immatriculation : <span class="font-weight-bold" th:text="${voiture.immat}"></span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row" th:style="${voiture.marque != null} ? 'display: none'">
+                            <div class="col-md-12 m-1">
+                                <div class="col-md-10 float-left mt-2 p-0"><i class="fas fa-car"></i>
                                     <select id="vehicule" name="vehicule" class="select2" required>
                                         <option hidden="" value="">Choisissez un vehicule</option>
                                         <option th:each="voiture : ${client.voiture}" th:value="${voiture.id}"
@@ -367,8 +375,8 @@
                                         <strong> Ajouter un véhicule</strong>
                                     </a>
                                 </div>
-                                <div class="col-md-2 float-left">
-                                    <input class="btn btn-outline-info font-weight-bold float-left mr-2"
+                                <div class="col-md-2 float-left mt-2">
+                                    <input class="btn btn-outline-info font-weight-bold float-left"
                                            type="submit"
                                            value="&#9881; Valider"/>
                                 </div>
@@ -383,23 +391,52 @@
 
     <!-- ------------------------------------------------------------------------ -->
     <!-- ------------------------------------------------------------------------ -->
+    <!-- -------------         LISTES Prestations : Facturation  ---------------- -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <form class="form-horizontal" method="post" th:action="@{/saveFacture}"
+          th:style="${prestations.isEmpty()} ? 'display: none'">
+        <div class="row m-2">
+            <table class="table table-bordered table-striped table-md">
+                <thead class="table-info">
+                <tr>
+                    <th>Prestation(s)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="prestation : ${prestations}">
+                    <td th:text="${prestation.toString()}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row m-2">
+            <div class="form-group col-md-12 text-right p-0 pull-right">
+                <input class="btn btn-outline-info" type="submit" value="&#128190; Enregistrer la facture"/>
+                <input class="btn btn-outline-warning" type="submit" value="&#10060; Annulation"/>
+            </div>
+        </div>
+    </form>
+
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
     <!-- -------------         LISTES DÉROULANTES PRESTA         ---------------- -->
     <!-- ------------------------------------------------------------------------ -->
     <!-- ------------------------------------------------------------------------ -->
-    <form class="form-horizontal mt-5" th:action="@{/addPresta}" method="post" id="prestaOk"
-          th:object="${prestation}" modelAttribute="client" th:style="${client.nom == null} ? 'display: none'">
+    <form class="form-horizontal mt-2 mb-5" th:action="@{/addPresta}" method="post" id="prestaOk"
+          th:object="${prestation}" modelAttribute="client" th:style="${voiture.marque == null} ? 'display: none'"
+          style="padding-bottom:75px;">
         <div class="row m-2">
             <p class="alert alert-light font-weight-bold p-0">Enregistrement prestation</p>
-            <div class="form-group col-md-12">
-                <div class="col-md-6 float-left text-center">
+            <div class="form-group col-md-12 border rounded">
+                <div class="col-md-4 float-left mt-2 p-0">
                     <select id="TypeActe" th:field="*{acte}" class="select2" required>
                         <option hidden="" value="">Choisissez une intervention</option>
                         <option th:each="acte : ${actes}" th:value="${acte.id_acte}"
                                 th:text="${acte.libelle}"></option>
                     </select>
                 </div>
-
-                <div class="col-md-6 float-left text-center">
+                <div class="col-md-4 float-left mt-2 p-0">
                     <select id="TypeFinition" th:field="*{finition}" class="select2" required>
                         <option hidden="" value="">Choisissez un type de finition</option>
                         <option th:each="finition : ${finitions}"
@@ -410,46 +447,14 @@
                 <script>
                     $('.select2').select2();
                 </script>
-            </div>
-        </div>
-        <div class="row m-2">
-            <div class="form-group col-md-12 mt-3 px-0">
-                <input class="btn btn-outline-info font-weight-bold" type="submit"
-                       value="&#9881; Ajouter une intervention"/>
-            </div>
-        </div>
-    </form>
 
-
-    <!-- ------------------------------------------------------------------------ -->
-    <!-- ------------------------------------------------------------------------ -->
-    <!-- -------------         LISTES Prestations : Facturation  ---------------- -->
-    <!-- ------------------------------------------------------------------------ -->
-    <!-- ------------------------------------------------------------------------ -->
-    <form class="form-horizontal" method="post" th:action="@{/saveFacture}"
-          th:style="${prestations.isEmpty()} ? 'display: none'">
-        <div class="row m-2">
-            <table class="table table-bordered table-striped table-md">
-                <thead class="table-info">
-                <tr>
-                    <th>Prestation</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="prestation : ${prestations}">
-                    <td th:text="${prestation.toString()}"></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="row" style="padding-bottom: 50px;">
-            <div class="form-group col-md-12 text-center p-0 m-1">
-                <input class="btn btn-outline-info" type="submit" value="&#128190; Enregistrer"/>
-                <input class="btn btn-outline-warning" type="submit" value="&#10060; Annulation"/>
+                <div class="col-md-4 text-right float-left p-0">
+                    <input class="btn btn-outline-info font-weight-bold m-1" type="submit"
+                           value="&#9881; Ajouter une intervention"/>
+                </div>
             </div>
         </div>
     </form>
-
 
     <!-- ------------------------------------------------------------------------ -->
     <!-- ------------------------------------------------------------------------ -->
@@ -546,7 +551,6 @@
         </div>
     </form>
 
-</div>
 
 </div>
 <footer style="height:50px;" class="fixed-bottom bg-light border text-info text-center">

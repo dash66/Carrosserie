@@ -164,6 +164,7 @@ public class ControllerClient {
         facturationDao.save(facturation);
 
         ra.addAttribute("client", client);
+        ra.addAttribute("facturation", facturation);
 
         return "redirect:/facturation";
     }
