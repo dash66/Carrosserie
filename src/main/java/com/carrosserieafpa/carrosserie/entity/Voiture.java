@@ -38,6 +38,8 @@ public class Voiture implements Serializable {
         this.client = client;
     }
 
+
+
     public Long getId() {
         return id;
     }

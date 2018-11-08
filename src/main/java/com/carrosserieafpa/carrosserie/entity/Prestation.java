@@ -25,6 +25,8 @@ public class Prestation {
     @JoinColumn(name = "id_finition", referencedColumnName = "id_finition")
     private Finition finition;
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Collection<Facturation> facturations;
 
     public Prestation(double prix, Acte acte, Finition finition, Collection<Facturation> facturations) {
         this.prix = prix;

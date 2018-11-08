@@ -8,19 +8,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface FacturationDao extends JpaRepository<Facturation, Long> {
 
     @Query("SELECT prix FROM Facturation WHERE client_id =:id")
     Double recherchePrixFactureParIdClient(@Param("id") Long id);
 
-    @Query("SELECT '*' FROM Facturation WHERE id = :id")
-    Long rechercherFactureParId (@Param("id") Long Id);
-
     @Query("SELECT prestation FROM Facturation WHERE client_id =:id")
     List<Prestation> recherchePrestationDansFactureParClientId(@Param("id") Long id);
 
-    @Query("SELECT new Facturation(prix, date, prestation) FROM Facturation WHERE client_id =:client")
-    List<Facturation> rechercheFacturationParClientId(@Param("client") Client client);
-
+  List<Facturation> findFacturationByClient(Client client);
 }

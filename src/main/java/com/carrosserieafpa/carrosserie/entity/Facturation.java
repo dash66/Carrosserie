@@ -40,6 +40,11 @@ public class Facturation {
     public Facturation() {
     }
 
+    public Facturation(double prix, String date) {
+        this.prix = prix;
+        this.date = date;
+    }
+
     public Collection<Prestation> getPrestation() {
         return prestation;
     }

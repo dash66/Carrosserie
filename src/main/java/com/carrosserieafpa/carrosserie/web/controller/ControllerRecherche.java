@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@SessionAttributes({"client", "prestation", "prestations", "voiture"})
+@SessionAttributes({"client", "prestation", "prestations", "voiture", "facturations", "facturation"})
 @Controller
 public class ControllerRecherche {
 
@@ -53,6 +53,18 @@ public class ControllerRecherche {
         return new ArrayList<>();
     }
 
+    @ModelAttribute("facturation")
+    public Facturation getFacturation() {
+        return new Facturation();
+    }
+
+    @ModelAttribute("facturations")
+    public List<Facturation> getFacturations() {
+        return new ArrayList<>();
+    }
+
+
+
     @PostMapping(value = "/rechercherClient") // fonction de la page archive
     public String rechercheClient(
             @ModelAttribute("client") Client michaelKnight,
@@ -67,40 +79,74 @@ public class ControllerRecherche {
         michaelKnight = client.get();
 
         Voiture k2000 = voitureDao.findVoitureByClient(id);
-        List<Facturation> facturations = facturationDao.rechercheFacturationParClientId(michaelKnight);
+        List<Facturation> facturations = facturationDao.findFacturationByClient(michaelKnight);
+
+        Double prixFacture = 0.0;
+        for(Facturation facturation1 : facturations){
+            prixFacture = facturation1.getPrix();}
+
 
         model.addAttribute("client", michaelKnight);
         model.addAttribute("voiture", k2000);
         model.addAttribute("facturations", facturations);
+        model.addAttribute("prixFacture", prixFacture);
 
         return "form-archive";
     }
 
     @PostMapping(value = "/rechercherVoiture") // fonction de la page archive
-    public String rechercheVoiture(Model model, HttpServletRequest httpServletRequest) {
+    public String rechercheVoiture(Model model, HttpServletRequest httpServletRequest, @ModelAttribute("client") Client clint) {
 
         String immat = httpServletRequest.getParameter("Immatriculation");
-
         Voiture k2000 = voitureDao.rechercherVoitureparImmat(immat);
-        model.addAttribute("voiture", k2000);
-
         Long id = k2000.getClient().getId();
-        Client clint = clientDao.findByImmat(id);
+        clint = clientDao.findByImmat(id);
+        List<Facturation> facturations = facturationDao.findFacturationByClient(clint);
+
+        Double prixFacture = 0.0;
+        for(Facturation facturation1 : facturations){
+        prixFacture = facturation1.getPrix();}
+
+        model.addAttribute("voiture", k2000);
         model.addAttribute("client", clint);
+        model.addAttribute("facturations", facturations);
+        model.addAttribute("prixFacture", prixFacture);
 
         return "form-archive";
     }
 
     @PostMapping(value = "/rechercherFacture") // fonction de la page archive
-    public String rechercheFacture(Model model, HttpServletRequest httpServletRequest) {
+    public String rechercheFacture( RedirectAttributes ra,
+                                    Model model, HttpServletRequest httpServletRequest, @ModelAttribute("client")Client client,
+                                   @ModelAttribute("voiture")Voiture voiture,
+                                   @ModelAttribute("facturations") List<Facturation> facturations,
+                                   @ModelAttribute("prestations") List<Prestation> prestations,
+                                   @ModelAttribute("prestation") Prestation prestation,
+                                   @ModelAttribute("facturation") Facturation facturation) {
 
         Long numFacture = Long.valueOf(httpServletRequest.getParameter("numFacture"));
-        Long idFacture = facturationDao.rechercherFactureParId(numFacture);
-        Optional<Facturation> facturation = facturationDao.findById(idFacture);
-        Facturation facturation1 = facturation.get();
+        Optional<Facturation> Facture = facturationDao.findById(numFacture);
+        Facturation facturation1 = Facture.get();
 
-        model.addAttribute("facturation", facturation1);
-        return "form-archive";
+       facturations = new ArrayList<>();
+       facturations.add(facturation1);
+
+
+
+        client = clientDao.findClientByFacturation(facturation1);
+        voiture = voitureDao.findVoitureByClient(client.getId());
+        prestations = facturationDao.recherchePrestationDansFactureParClientId(client.getId());
+
+        Double prixFacture = facturation1.getPrix();
+
+        model.addAttribute("prixFacture", prixFacture);
+        model.addAttribute("client", client);
+        model.addAttribute("voiture", voiture);
+        model.addAttribute("facturations", facturations);
+        model.addAttribute("prestations", prestations);
+        model.addAttribute("facturation", facturation);
+
+        return "redirect:/facturation";
     }
 
     @RequestMapping("/rechercheClientExistant")
@@ -142,9 +188,8 @@ public class ControllerRecherche {
     public String rechercheFactureExistant(Model model, HttpServletRequest httpServletRequest) {
 
         Long numFacture = Long.valueOf(httpServletRequest.getParameter("facture"));
-        Long idFacture = facturationDao.rechercherFactureParId(numFacture);
-        Optional<Facturation> facturation = facturationDao.findById(idFacture);
-        Facturation facturation1 = facturation.get();
+        Optional<Facturation> Facture = facturationDao.findById(numFacture);
+             Facturation facturation1 = Facture.get();
 
         model.addAttribute("facturation", facturation1);
 

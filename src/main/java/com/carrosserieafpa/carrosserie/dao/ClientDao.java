@@ -21,4 +21,6 @@ public interface ClientDao extends JpaRepository<Client, Long> {
 
     @Query("SELECT facturation FROM Client WHERE client_id=:id")
     List<Facturation> rechercherFacturationsParClient(@Param("id") Long id);
-}
+
+    Client findClientByFacturation(Facturation facturation);
+    }

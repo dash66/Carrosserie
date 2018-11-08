@@ -14,6 +14,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @SessionAttributes({"client", "prestation", "prestations", "facturations", "facturation", "voiture"})
 @Controller
@@ -101,11 +102,11 @@ public class ControllerUI {
     }
 
     @RequestMapping("/archive")
-    public String consulterArchive(Model model, @ModelAttribute("client") Client client, @ModelAttribute("voiture") Voiture voiture) {
+    public String consulterArchive(Model model, @ModelAttribute("client") Client client, @ModelAttribute("voiture") Voiture voiture){
 
         List<Prestation> prestations = facturationDao.recherchePrestationDansFactureParClientId(client.getId());
         Double prixFacture = facturationDao.recherchePrixFactureParIdClient(client.getId());
-        List<Facturation> facturations = clientDao.rechercherFacturationsParClient(client.getId());
+        List<Facturation> facturations = facturationDao.findFacturationByClient(client);
 
         model.addAttribute("prestations", prestations);
         model.addAttribute("client", client);
@@ -133,16 +134,19 @@ public class ControllerUI {
     }
 
     @RequestMapping("/facturation")
-    public String facture(Model model,
+    public String facture(HttpServletRequest httpServletRequest,
+            Model model,
                           @ModelAttribute("prestations") List<Prestation> prestationList,
                           @ModelAttribute("client") Client client,
                           @ModelAttribute("voiture") Voiture voiture,
                           @ModelAttribute("prestation") Prestation prestation,
                           @ModelAttribute("facturation") Facturation facturation,
+                          @ModelAttribute("facturations") List<Facturation> facturations,
                           SessionStatus sessionStatus) {
 
         Double prixFacture = facturation.getPrix();
         model.addAttribute("prixFacture", prixFacture);
+        model.addAttribute("prestations", prestationList);
 
         sessionStatus.setComplete();
         return "form-facturation";
