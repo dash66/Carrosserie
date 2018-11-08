@@ -19,10 +19,6 @@ public class Facturation {
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     private Client client;
 
-    @ManyToOne()
-    @JoinColumn(name = "voiture_id", referencedColumnName = "id")
-    private Voiture voiture;
-
     private String date;
 
     @ManyToMany(cascade = CascadeType.REMOVE)
@@ -41,8 +37,15 @@ public class Facturation {
         this.prestation = prestation;
     }
 
-
     public Facturation() {
+    }
+
+    public Collection<Prestation> getPrestation() {
+        return prestation;
+    }
+
+    public void setPrestation(Collection<Prestation> prestation) {
+        this.prestation = prestation;
     }
 
     public Long getId() {
@@ -61,22 +64,6 @@ public class Facturation {
         this.prix = prix;
     }
 
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public Voiture getVoiture() {
-        return voiture;
-    }
-
-    public void setVoiture(Voiture voiture) {
-        this.voiture = voiture;
-    }
-
     public String getDate() {
         return date;
     }
@@ -85,12 +72,12 @@ public class Facturation {
         this.date = date;
     }
 
-    public Collection<Prestation> getPrestation() {
-        return prestation;
+    public Client getClient() {
+        return client;
     }
 
-    public void setPrestation(Collection<Prestation> prestation) {
-        this.prestation = prestation;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     @Override

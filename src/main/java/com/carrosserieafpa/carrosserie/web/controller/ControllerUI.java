@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
 @SessionAttributes({"client", "prestation", "prestations", "facturations", "facturation", "voiture"})
 @Controller
 public class ControllerUI {
-
     @Autowired
     ActeDao acteDao;
     @Autowired
@@ -30,17 +30,15 @@ public class ControllerUI {
     VoitureDao voitureDao;
     @Autowired
     ClientDao clientDao;
-    @Autowired
-    ControllerClient controllerClient;
-
-    @ModelAttribute("voiture")
-    public Voiture getVoiture() {
-        return new Voiture();
-    }
 
     @ModelAttribute("client")
     public Client getClient() {
         return new Client();
+    }
+
+    @ModelAttribute("voiture")
+    public Voiture getVoiture() {
+        return new Voiture();
     }
 
     @ModelAttribute("prestation")
@@ -64,7 +62,7 @@ public class ControllerUI {
     }
 
     @RequestMapping(value = {"/menu", "/"})
-    public String menu(Model model) {
+    public String menu() {
         return "form-menu";
     }
 
@@ -74,7 +72,7 @@ public class ControllerUI {
             @ModelAttribute("client") Client client,
             @ModelAttribute("prestations") ArrayList<Prestation> prestations,
             @ModelAttribute("voiture") Voiture voiture,
-            Model model) {
+            Model model, HttpServletRequest request) {
 
         model.addAttribute("actes", acteDao.findAll());
         model.addAttribute("finitions", finitionDao.findAll());
@@ -104,7 +102,7 @@ public class ControllerUI {
     public String consulterArchive(Model model, @ModelAttribute("client") Client client, @ModelAttribute("voiture") Voiture voiture) {
 
         List<Prestation> prestations = facturationDao.recherchePrestationDansFactureParClientId(client.getId());
-        Double prixFacture  = facturationDao.recherchePrixFactureParIdClient(client.getId());
+        Double prixFacture = facturationDao.recherchePrixFactureParIdClient(client.getId());
         List<Facturation> facturations = clientDao.rechercherFacturationsParClient(client.getId());
 
         model.addAttribute("prestations", prestations);

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -75,6 +74,7 @@ public class ControllerRecherche {
     public String rechercheVoiture(Model model, HttpServletRequest httpServletRequest) {
 
         String immat = httpServletRequest.getParameter("Immatriculation");
+
         Voiture k2000 = voitureDao.rechercherVoitureparImmat(immat);
         model.addAttribute("voiture", k2000);
 
@@ -89,20 +89,12 @@ public class ControllerRecherche {
     public String rechercheFacture(Model model, HttpServletRequest httpServletRequest) {
 
         Long numFacture = Long.valueOf(httpServletRequest.getParameter("numFacture"));
-        Optional<Facturation> facturation = facturationDao.findById(numFacture);
+        Long idFacture = facturationDao.rechercherFactureParId(numFacture);
+        Optional<Facturation> facturation = facturationDao.findById(idFacture);
         Facturation facturation1 = facturation.get();
 
-        model.addAttribute("voiture", facturation1.getVoiture());
         model.addAttribute("facturation", facturation1);
-        model.addAttribute("client", facturation1.getClient());
-        model.addAttribute("prixFacture", facturation1.getPrix());
-        model.addAttribute("prestations", facturation1.getPrestation());
-
-
-
-
-
-        return "form-facturation";
+        return "form-archive";
     }
 
     @RequestMapping("/rechercheClientExistant")
@@ -125,7 +117,8 @@ public class ControllerRecherche {
     @RequestMapping("/rechercheVoitureExistant") // fonction de la page enregistrement, doit y retourner : trouver un client existant pour préparer presta
     public String rechercheVoitureExistant(Model model, HttpServletRequest httpServletRequest, @ModelAttribute("client") Client client) {
 
-        String immat = httpServletRequest.getParameter("Immatricualtion");
+        String immat = httpServletRequest.getParameter("immat");
+
         Voiture k2000 = voitureDao.rechercherVoitureparImmat(immat);
 
 
@@ -141,7 +134,8 @@ public class ControllerRecherche {
     public String rechercheFactureExistant(Model model, HttpServletRequest httpServletRequest) {
 
         Long numFacture = Long.valueOf(httpServletRequest.getParameter("facture"));
-        Optional<Facturation> facturation = facturationDao.findById(numFacture);
+        Long idFacture = facturationDao.rechercherFactureParId(numFacture);
+        Optional<Facturation> facturation = facturationDao.findById(idFacture);
         Facturation facturation1 = facturation.get();
 
         model.addAttribute("facturation", facturation1);

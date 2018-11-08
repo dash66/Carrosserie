@@ -76,11 +76,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>font-awesome</artifactId>
-            <version>5.4.1</version>
-        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
