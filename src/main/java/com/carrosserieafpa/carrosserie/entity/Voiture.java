@@ -1,5 +1,6 @@
 package com.carrosserieafpa.carrosserie.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -21,7 +22,7 @@ public class Voiture implements Serializable {
     private String date;
     private String codeCouleur;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     private Client client;
 
