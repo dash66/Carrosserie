@@ -24,7 +24,7 @@ public class Client {
     private int telephone;
     private String numAfpa;
 
-    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "client"/*, fetch = FetchType.EAGER*/)
     private Collection<Voiture> voiture;
 
     @OneToMany(mappedBy = "client")

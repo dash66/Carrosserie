@@ -5,10 +5,11 @@ import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 @Entity
-public class Prestation {
+public class Prestation implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,8 +26,8 @@ public class Prestation {
     @JoinColumn(name = "id_finition", referencedColumnName = "id_finition")
     private Finition finition;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Collection<Facturation> facturations;
+    /*@ManyToMany(cascade = CascadeType.REMOVE *//*mappedBy = "prestation"*//*)
+    private Collection<Facturation> facturations;*/
 
     public Prestation(double prix, Acte acte, Finition finition, Collection<Facturation> facturations) {
         this.prix = prix;

@@ -161,6 +161,7 @@ public class ControllerClient {
         String formatDateTime = HeureNonFormatee.format(timeFormatter);
         facturation.setDate(formatDateTime);
         facturation.setClient(client);
+        facturation.setVoiture(voiture);
         facturationDao.save(facturation);
 
         ra.addAttribute("client", client);

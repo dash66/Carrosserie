@@ -134,9 +134,8 @@ public class ControllerUI {
     }
 
     @RequestMapping("/facturation")
-    public String facture(HttpServletRequest httpServletRequest,
-            Model model,
-                          @ModelAttribute("prestations") List<Prestation> prestationList,
+    public String facture(Model model,
+                          @ModelAttribute("prestations") List<Prestation> prestations,
                           @ModelAttribute("client") Client client,
                           @ModelAttribute("voiture") Voiture voiture,
                           @ModelAttribute("prestation") Prestation prestation,
@@ -144,9 +143,17 @@ public class ControllerUI {
                           @ModelAttribute("facturations") List<Facturation> facturations,
                           SessionStatus sessionStatus) {
 
-        Double prixFacture = facturation.getPrix();
-        model.addAttribute("prixFacture", prixFacture);
-        model.addAttribute("prestations", prestationList);
+        System.out.println("$$$$$$$$$$$$$$$$$$$");
+        System.out.println(facturation);
+        System.out.println("$$$$$$$$$$$$$$$$$$$");
+
+        model.addAttribute("prestations", prestations);
+        model.addAttribute("facturation", facturation);
+        model.addAttribute("client", client);
+        model.addAttribute("voiture", voiture);
+        model.addAttribute("facturations", facturations);
+
+
 
         sessionStatus.setComplete();
         return "form-facturation";
