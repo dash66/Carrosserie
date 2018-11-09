@@ -146,6 +146,9 @@ public class ControllerUI {
         System.out.println("$$$$$$$$$$$$$$$$$$$");
         System.out.println(facturation);
         System.out.println("$$$$$$$$$$$$$$$$$$$");
+        System.out.println("$$$$$$$$$$$$$$$$$$$");
+        System.out.println(facturations);
+        System.out.println("$$$$$$$$$$$$$$$$$$$");
 
         model.addAttribute("prestations", prestations);
         model.addAttribute("facturation", facturation);
@@ -153,6 +156,9 @@ public class ControllerUI {
         model.addAttribute("voiture", voiture);
         model.addAttribute("facturations", facturations);
 
+        for (Facturation factu :  facturations){
+            model.addAttribute(("facturation"), factu);
+        }
 
 
         sessionStatus.setComplete();

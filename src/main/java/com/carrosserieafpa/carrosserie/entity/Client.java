@@ -24,7 +24,7 @@ public class Client {
     private int telephone;
     private String numAfpa;
 
-    @OneToMany(mappedBy = "client"/*, fetch = FetchType.EAGER*/)
+    @OneToMany(mappedBy = "client")
     private Collection<Voiture> voiture;
 
     @OneToMany(mappedBy = "client")
@@ -115,6 +115,14 @@ public class Client {
 
     public void setVoiture(Collection<Voiture> voiture) {
         this.voiture = voiture;
+    }
+
+    public Collection<Facturation> getFacturation() {
+        return facturation;
+    }
+
+    public void setFacturation(Collection<Facturation> facturation) {
+        this.facturation = facturation;
     }
 
     @Override

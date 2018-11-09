@@ -17,182 +17,193 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-@SessionAttributes({"client", "prestation", "prestations", "voiture", "facturations", "facturation"})
+@SessionAttributes({
+  "client",
+  "prestation",
+  "prestations",
+  "voiture",
+  "facturations",
+  "facturation"
+})
 @Controller
 public class ControllerRecherche {
 
-    @Autowired
-    ActeDao acteDao;
-    @Autowired
-    FinitionDao finitionDao;
-    @Autowired
-    PrestationDao prestationDao;
-    @Autowired
-    FacturationDao facturationDao;
-    @Autowired
-    VoitureDao voitureDao;
-    @Autowired
-    ClientDao clientDao;
+  @Autowired ActeDao acteDao;
+  @Autowired FinitionDao finitionDao;
+  @Autowired PrestationDao prestationDao;
+  @Autowired FacturationDao facturationDao;
+  @Autowired VoitureDao voitureDao;
+  @Autowired ClientDao clientDao;
 
-    @ModelAttribute("client")
-    public Client getClient() {
-        return new Client();
+  @ModelAttribute("client")
+  public Client getClient() {
+    return new Client();
+  }
+
+  @ModelAttribute("voiture")
+  public Voiture getVoiture() {
+    return new Voiture();
+  }
+
+  @ModelAttribute("prestation")
+  public Prestation getPrestation() {
+    return new Prestation();
+  }
+
+  @ModelAttribute("prestations")
+  public List<Prestation> getPrestas() {
+    return new ArrayList<>();
+  }
+
+  @ModelAttribute("facturation")
+  public Facturation getFacturation() {
+    return new Facturation();
+  }
+
+  @ModelAttribute("facturations")
+  public List<Facturation> getFacturations() {
+    return new ArrayList<>();
+  }
+
+  @RequestMapping(value = "/rechercherClient") // fonction de la page archive
+  public String rechercheClient(
+      @ModelAttribute("client") Client michaelKnight,
+      @ModelAttribute("voiture") Voiture bumblebee,
+      Model model,
+      HttpServletRequest httpServletRequest) {
+
+    String prenom = httpServletRequest.getParameter("prenom3");
+    String nom = httpServletRequest.getParameter("nom3");
+
+    michaelKnight = clientDao.findClientByNomAndPrenom(nom, prenom);
+
+    System.out.println("$£$££$£$££$£$££$£$££$£$££$£$££");
+    System.out.println(michaelKnight);
+    System.out.println("$£$££$£$££$£$££$£$££$£$££$£$££");
+
+    Collection<Voiture> k2000 = michaelKnight.getVoiture();
+
+    Collection<Facturation> facturations = michaelKnight.getFacturation();
+
+    model.addAttribute("client", michaelKnight);
+    model.addAttribute("facturations", facturations);
+    model.addAttribute("voitures", k2000);
+    model.addAttribute("voiture", bumblebee);
+
+    return "redirect:/archive";
+  }
+
+  @PostMapping(value = "/rechercherVoiture") // fonction de la page archive
+  public String rechercheVoiture(
+      RedirectAttributes ra,
+      Model model,
+      HttpServletRequest httpServletRequest,
+      @ModelAttribute("client") Client clint) {
+
+    String immat = httpServletRequest.getParameter("Immatriculation");
+    Voiture k2000 = voitureDao.findByImmat(immat);
+
+    Long id = k2000.getClient().getId();
+    clint = k2000.getClient();
+    List<Facturation> facturations = facturationDao.findFacturationByVoiture(k2000);
+
+    Double prixFacture = 0.0;
+    for (Facturation facturation1 : facturations) {
+      prixFacture = facturation1.getPrix();
     }
 
-    @ModelAttribute("voiture")
-    public Voiture getVoiture() {
-        return new Voiture();
-    }
+    model.addAttribute("voiture", k2000);
+    model.addAttribute("client", clint);
+    model.addAttribute("facturations", facturations);
 
-    @ModelAttribute("prestation")
-    public Prestation getPrestation() {
-        return new Prestation();
-    }
+    ra.addAttribute("facturations", facturations);
+    return "form-archive";
+  }
 
-    @ModelAttribute("prestations")
-    public List<Prestation> getPrestas() {
-        return new ArrayList<>();
-    }
+  @RequestMapping(value = "/rechercherFacture") // fonction de la page archive
+  public String rechercheFacture(
+      Model model,
+      RedirectAttributes ra,
+      HttpServletRequest httpServletRequest,
+      @ModelAttribute("client") Client client,
+      @ModelAttribute("voiture") Voiture voiture,
+      @ModelAttribute("facturations") List<Facturation> facturations,
+      @ModelAttribute("prestations") Collection<Prestation> prestations,
+      @ModelAttribute("prestation") Prestation prestation,
+      @ModelAttribute("facturation") Facturation facturation) {
 
-    @ModelAttribute("facturation")
-    public Facturation getFacturation() {
-        return new Facturation();
-    }
+    Long numFacture = Long.valueOf(httpServletRequest.getParameter("Robert"));
+    Optional<Facturation> facture = facturationDao.findById(numFacture);
+    facturation = facture.get();
 
-    @ModelAttribute("facturations")
-    public List<Facturation> getFacturations() {
-        return new ArrayList<>();
-    }
+    facturations = new ArrayList<>();
+    facturations.add(facturation);
 
+    client = clientDao.findClientByFacturation(facturation);
+    voiture = voitureDao.findVoitureByClient(client);
+    prestations = facturation.getPrestation();
 
+    System.out.println("*******************");
+    System.out.println(numFacture);
+    System.out.println("*******************");
 
-    @PostMapping(value = "/rechercherClient") // fonction de la page archive
-    public String rechercheClient(
-            @ModelAttribute("client") Client michaelKnight,
-            Model model,
-            HttpServletRequest httpServletRequest) {
+    model.addAttribute("prestations", prestations);
+    model.addAttribute("facturation", facturation);
+    model.addAttribute("client", client);
+    model.addAttribute("voiture", voiture);
+    model.addAttribute("facturations", facturations);
 
-        String prenom = httpServletRequest.getParameter("prenom3");
-        String nom = httpServletRequest.getParameter("nom3");
+    return "redirect:/facturation";
+  }
 
-        Long id = clientDao.rechercherClientParNometPrenom(nom, prenom);
-        Optional<Client> client = clientDao.findById(id);
-        michaelKnight = client.get();
+  @RequestMapping("/rechercheClientExistant")
+  // fonction de la page enregistrement, doit y retourner : trouver un client existant pour préparer
+  // presta
+  public String rechercheClientExistant(Model model, HttpServletRequest httpServletRequest) {
 
-        Voiture k2000 = voitureDao.findVoitureByClient(michaelKnight);
-        List<Facturation> facturations = facturationDao.findFacturationByClient(michaelKnight);
+    String prenom = httpServletRequest.getParameter("prenom");
+    String nom = httpServletRequest.getParameter("nom");
+    Client michaelKnight = clientDao.findClientByNomAndPrenom(nom, prenom);
 
-        Double prixFacture = 0.0;
-        for(Facturation facturation1 : facturations){
-            prixFacture = facturation1.getPrix();}
+    model.addAttribute("client", michaelKnight);
 
+    return "redirect:/vueEnregistrement";
+  }
 
-        model.addAttribute("client", michaelKnight);
-        model.addAttribute("voiture", k2000);
-        model.addAttribute("facturations", facturations);
-        model.addAttribute("prixFacture", prixFacture);
+  @RequestMapping(
+      "/rechercheVoitureExistant") // fonction de la page enregistrement, doit y retourner : trouver
+                                   // un client existant pour préparer presta
+  public String rechercheVoitureExistant(
+      Model model,
+      HttpServletRequest httpServletRequest,
+      @ModelAttribute("client") Client client,
+      @ModelAttribute("voiture") Voiture k2000,
+      RedirectAttributes ra) {
 
-        return "form-archive";
-    }
+    String Immatriculation = httpServletRequest.getParameter("Immatriculation");
+    k2000 = voitureDao.findByImmat(Immatriculation);
 
-    @PostMapping(value = "/rechercherVoiture") // fonction de la page archive
-    public String rechercheVoiture(Model model, HttpServletRequest httpServletRequest, @ModelAttribute("client") Client clint) {
+    Client clint = k2000.getClient();
+    model.addAttribute("client", clint);
+    model.addAttribute("voiture", k2000);
 
-        String immat = httpServletRequest.getParameter("Immatriculation");
-        Voiture k2000 = voitureDao.rechercherVoitureparImmat(immat);
-        Long id = k2000.getClient().getId();
-        clint = clientDao.findByImmat(id);
-        List<Facturation> facturations = facturationDao.findFacturationByClient(clint);
+    System.out.println(k2000);
+    ra.addAttribute(k2000);
 
-        Double prixFacture = 0.0;
-        for(Facturation facturation1 : facturations){
-        prixFacture = facturation1.getPrix();}
+    return "redirect:/vueEnregistrement";
+  }
 
-        model.addAttribute("voiture", k2000);
-        model.addAttribute("client", clint);
-        model.addAttribute("facturations", facturations);
-        model.addAttribute("prixFacture", prixFacture);
+  @GetMapping("/rechercheFactureExistant")
+  // fonction de la page enregistrement, doit y retourner : trouver un client existant pour préparer
+  // presta
+  public String rechercheFactureExistant(Model model, HttpServletRequest httpServletRequest) {
 
-        return "form-archive";
-    }
+    Long numFacture = Long.valueOf(httpServletRequest.getParameter("facture"));
+    Optional<Facturation> Facture = facturationDao.findById(numFacture);
+    Facturation facturation1 = Facture.get();
 
-    @RequestMapping(value = "/rechercherFacture") // fonction de la page archive
-    public String rechercheFacture(Model model, RedirectAttributes ra, HttpServletRequest httpServletRequest,
-                                   @ModelAttribute("client")Client client,
-                                   @ModelAttribute("voiture")Voiture voiture,
-                                   @ModelAttribute("facturations") List<Facturation> facturations,
-                                   @ModelAttribute("prestations") Collection<Prestation> prestations,
-                                   @ModelAttribute("prestation") Prestation prestation,
-                                   @ModelAttribute("facturation") Facturation facturation) {
+    model.addAttribute("facturation", facturation1);
 
-        Long numFacture = Long.valueOf(httpServletRequest.getParameter("Robert"));
-        Optional<Facturation> facture = facturationDao.findById(numFacture);
-        facturation = facture.get();
-
-       facturations = new ArrayList<>();
-       facturations.add(facturation);
-
-        client = clientDao.findClientByFacturation(facturation);
-        voiture = voitureDao.findVoitureByClient(client);
-        prestations = facturation.getPrestation();
-
-        System.out.println("*******************");
-        System.out.println(numFacture);
-        System.out.println("*******************");
-
-        model.addAttribute("prestations", prestations);
-        model.addAttribute("facturation", facturation);
-        model.addAttribute("client", client);
-        model.addAttribute("voiture", voiture);
-        model.addAttribute("facturations", facturations);
-
-        return "redirect:/facturation";
-    }
-
-    @RequestMapping("/rechercheClientExistant")
-    // fonction de la page enregistrement, doit y retourner : trouver un client existant pour préparer
-    // presta
-    public String rechercheClientExistant(Model model, HttpServletRequest httpServletRequest) {
-
-        String prenom = httpServletRequest.getParameter("prenom");
-        String nom = httpServletRequest.getParameter("nom");
-
-        Long id = clientDao.rechercherClientParNometPrenom(nom, prenom);
-        Optional<Client> client = clientDao.findById(id);
-        Client michaelKnight = client.get();
-
-        model.addAttribute("client", michaelKnight);
-
-        return "redirect:/vueEnregistrement";
-    }
-
-    @RequestMapping("/rechercheVoitureExistant") // fonction de la page enregistrement, doit y retourner : trouver un client existant pour préparer presta
-    public String rechercheVoitureExistant(Model model, HttpServletRequest httpServletRequest, @ModelAttribute("client") Client client, @ModelAttribute("voiture") Voiture k2000, RedirectAttributes ra) {
-
-        String Immatriculation = httpServletRequest.getParameter("Immatriculation");
-        k2000 = voitureDao.rechercherVoitureparImmat(Immatriculation);
-
-        Client clint = k2000.getClient();
-        model.addAttribute("client", clint);
-        model.addAttribute("voiture", k2000);
-
-        System.out.println(k2000);
-        ra.addAttribute(k2000);
-
-        return "redirect:/vueEnregistrement";
-    }
-
-    @GetMapping("/rechercheFactureExistant")
-    // fonction de la page enregistrement, doit y retourner : trouver un client existant pour préparer
-    // presta
-    public String rechercheFactureExistant(Model model, HttpServletRequest httpServletRequest) {
-
-        Long numFacture = Long.valueOf(httpServletRequest.getParameter("facture"));
-        Optional<Facturation> Facture = facturationDao.findById(numFacture);
-             Facturation facturation1 = Facture.get();
-
-        model.addAttribute("facturation", facturation1);
-
-        return "redirect:/vueEnregistrement";
-    }
+    return "redirect:/vueEnregistrement";
+  }
 }

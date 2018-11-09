@@ -26,9 +26,6 @@ public class Prestation implements Serializable {
     @JoinColumn(name = "id_finition", referencedColumnName = "id_finition")
     private Finition finition;
 
-    /*@ManyToMany(cascade = CascadeType.REMOVE *//*mappedBy = "prestation"*//*)
-    private Collection<Facturation> facturations;*/
-
     public Prestation(double prix, Acte acte, Finition finition, Collection<Facturation> facturations) {
         this.prix = prix;
         this.acte = acte;
