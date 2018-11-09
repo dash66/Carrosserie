@@ -21,7 +21,7 @@ public class Voiture implements Serializable {
     private String date;
     private String codeCouleur;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     private Client client;
 

@@ -143,13 +143,6 @@ public class ControllerUI {
                           @ModelAttribute("facturations") List<Facturation> facturations,
                           SessionStatus sessionStatus) {
 
-        System.out.println("$$$$$$$$$$$$$$$$$$$");
-        System.out.println(facturation);
-        System.out.println("$$$$$$$$$$$$$$$$$$$");
-        System.out.println("$$$$$$$$$$$$$$$$$$$");
-        System.out.println(facturations);
-        System.out.println("$$$$$$$$$$$$$$$$$$$");
-
         model.addAttribute("prestations", prestations);
         model.addAttribute("facturation", facturation);
         model.addAttribute("client", client);

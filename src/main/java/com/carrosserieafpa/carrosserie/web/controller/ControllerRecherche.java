@@ -107,11 +107,6 @@ public class ControllerRecherche {
     clint = k2000.getClient();
     List<Facturation> facturations = facturationDao.findFacturationByVoiture(k2000);
 
-    Double prixFacture = 0.0;
-    for (Facturation facturation1 : facturations) {
-      prixFacture = facturation1.getPrix();
-    }
-
     model.addAttribute("voiture", k2000);
     model.addAttribute("client", clint);
     model.addAttribute("facturations", facturations);
@@ -142,10 +137,6 @@ public class ControllerRecherche {
     client = clientDao.findClientByFacturation(facturation);
     voiture = voitureDao.findVoitureByClient(client);
     prestations = facturation.getPrestation();
-
-    System.out.println("*******************");
-    System.out.println(numFacture);
-    System.out.println("*******************");
 
     model.addAttribute("prestations", prestations);
     model.addAttribute("facturation", facturation);

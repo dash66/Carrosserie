@@ -179,23 +179,30 @@ public class ControllerClient {
             prixTotalFacture = prixTotalFacture + prixParPresta;
         }
 
-        Double prixFinal = prixTotalFacture;
+        Double prixFinal1 = prixTotalFacture;
         switch (voiture.getCategorie()) {
             case "petit":
-                prixFinal -= prixTotalFacture * 0.1;
+                prixFinal1 -= prixTotalFacture * 0.1;
                 break;
             case "moyen":
-                prixFinal = prixTotalFacture;
+                prixFinal1 = prixTotalFacture;
                 break;
             case "gros":
-                prixFinal += prixTotalFacture * 0.1;
+                prixFinal1 += prixTotalFacture * 0.1;
                 break;
             case "fourgon":
-                prixFinal += prixTotalFacture * 0.2;
+                prixFinal1 += prixTotalFacture * 0.2;
                 break;
         }
 
+        Double prixFinal = arrondir(prixFinal1, 2);
+
         return prixFinal;
+    }
+
+    public double arrondir(double nombre,double nbApVirg)
+    {
+        return(double)((int)(nombre * Math.pow(10,nbApVirg) + .5)) / Math.pow(10,nbApVirg);
     }
 
     public Client creationClient(@ModelAttribute("client") Client client, HttpServletRequest request) {
@@ -237,17 +244,4 @@ public class ControllerClient {
         return voiture;
     }
 
-    public Double calculPrixFactureDansListeFacture(@ModelAttribute("facturations") List<Facturation> facturations,
-                                                    @ModelAttribute("prestations") List<Prestation> prestations,
-                                                    @ModelAttribute("prestation") Prestation prestation,
-                                                    @ModelAttribute("voiture") Voiture voiture){
-
-        Double prix = 0.0;
-        for (Facturation facturation : facturations){
-
-         prix = calculPrixFinal(prestations, voiture);
-        }
-
-        return prix;
-    }
 }
