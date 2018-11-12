@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" th:href="@{webjars/bootstrap/4.1.3/css/bootstrap.css}"/>
-    <link rel="stylesheet" type="text/css"
-          th:href="@{webjars/bootstrap-glyphicons/bdd2cbfba0/css/bootstrap-glyphicons.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{webjars/bootstrap-glyphicons/bdd2cbfba0/css/bootstrap-glyphicons.css}"/>
+    <link rel="stylesheet" type="text/css" href="webjars/font-awesome/5.4.1/css/all.css">
     <script type="text/javascript" src="webjars/jquery/3.0.0/jquery.min.js"></script>
     <script type="text/javascript" src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </head>
@@ -94,27 +94,53 @@
 
     <div class="row m-2">
         <div class="col-md-5 bg-light border border-info rounded float-md-left my-2">
-            <div class="col-md-12">
-                <h2 class="col-md-6 my-3 text-info"><span class="glyphicon glyphicon-road"></span> Véhicule</h2>
-                <p>Modèle : <span th:text="${voiture.modele}"></span></p>
-                <p>Immatriculation : <span th:text="${voiture.immat}"></span></p>
-                <p>Catégorie : <span th:text="${voiture.categorie}"></span></p>
-                <p>Date de 1ere mise en service : <span th:text="${voiture.date}"></span></p>
-                <p>Couleur : <span th:text="${voiture.codeCouleur}"></span></p>
-                <p>Marque : <span th:text="${voiture.marque}"></span></p>
-            </div>
+            <form class="form-horizontal" method="post" th:action="@{/setVoitureClientRecherche}" modelAttribute="voiture">
+                <div class="col-md-12" th:style="${voiture.marque == null} ? 'display: none'">
+
+                    <h2 class="col-md-6 my-3 text-info p-0"><span class="fa fa-car"></span> Véhicule</h2>
+
+                    <p>Modèle : <span th:text="${voiture.modele}"></span></p>
+                    <p>Immatriculation : <span th:text="${voiture.immat}"></span></p>
+                    <p>Catégorie : <span th:text="${voiture.categorie}"></span></p>
+                    <p>Date de 1ere mise en service : <span th:text="${voiture.date}"></span></p>
+                    <p>Couleur : <span th:text="${voiture.codeCouleur}"></span></p>
+                    <p>Marque : <span th:text="${voiture.marque}"></span></p>
+                </div>
+
+                <div class="col-md-12"th:style="${voiture.marque != null} ? 'display: none'">
+                    <h2 class="col-md-6 my-3 text-info p-0"><span class="fa fa-car"></span> Véhicule</h2>
+                        <select id="vehicule" name="vehicule" class="select2" required>
+                            <option hidden="" value="">Choisissez un vehicule</option>
+                            <option th:each="voiture : ${client.voiture}" th:value="${voiture.id}"
+                                    th:text="${voiture.marque} + ' ' + ${voiture.modele}"></option>
+                        </select>
+                        <script>
+                            $('.select2').select2();
+                        </script>
+
+                    <div class="col-md-2 my-2 p-0">
+                        <input class="btn btn-outline-info font-weight-bold"
+                               type="submit"
+                               value="&#9881; Valider"/>
+                    </div>
+                </div>
+            </form>
         </div>
+
         <div class="offset-md-1 col-md-6 bg-light border border-info rounded float-md-right my-2">
             <div class="col-md-12">
-                <h2 class="col-md-6 my-3 text-info"><span class="glyphicon glyphicon-list-alt"></span> Facture(s)</h2>
+                <h2 class="col-md-6 my-3 text-info"><span class="glyphicon glyphicon-list-alt"></span> Facture(s)
+                </h2>
                 <ul>
-                    <li th:each="facturation : ${facturations}"><a th:href="@{/facturation}">
+                    <li th:each="facturation : ${facturations}"><a target="_blank" th:href="@{/facturation}">
                         <span th:text="${facturation}"></span></a>
-                        <p> Prix : <span th:text="${facturation.prix}"></span> €.</p></li>
+                        <p> Prix : <span th:text="${facturation.prix}"></span> Euros.</p></li>
                 </ul>
             </div>
         </div>
     </div>
+
+</div>
 </div>
 <footer style="height:50px;" class="fixed-bottom bg-light border text-info text-center">
     <div class="col-md-12">

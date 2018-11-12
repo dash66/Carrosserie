@@ -33,15 +33,10 @@
                  alt="Logo Afpa tout vert">
         </div>
     </nav>
-    <div class="row m-2">
-        <div class="col-md-12 text-center">
-            <img class="mw-100 mh-100" th:src="@{/images/anim2.png}" alt="Beau comme un camion tout neuf !"/>
-        </div>
-    </div>
 </header>
 
 
-<div style="margin-bottom:100px;" class="container border border-info rounded">
+<div class="container border border-info rounded">
     <div class="row border border-dark rounded my-5 mx-2">
         <div class="col-md-12">
             <div class="col-md-8 float-left">
@@ -132,11 +127,19 @@
         </div>
     </div>
 </div>
-<footer style="height:50px;" class="fixed-bottom bg-light border text-info text-center">
-    <div class="col-md-12">
-        <p class="mb-0 mt-2">&#169; Copyright 2019 Réalisation : Mehdi Salamé, Manuel Da Rocha, Baptiste Lavignon</p>
-    </div>
-</footer>
 
+<div class="row m-2">
+    <div class="col-md-12 text-center m-2">
+        <form  method="post" th:action="@{/rechercherClient}">
+            <input id="prenom3" name="prenom3"
+                   class="form-control d-none"
+                   type="text" th:value="${client.prenom}">
+            <input id="nom3" name="nom3"
+                   class="form-control d-none"
+                   type="text" th:value="${client.nom}">
+            <input type="submit" class="btn btn-outline-info font-weight-bold" value="&#8630; Retour"/>
+        </form>
+    </div>
+</div>
 </body>
 </html>

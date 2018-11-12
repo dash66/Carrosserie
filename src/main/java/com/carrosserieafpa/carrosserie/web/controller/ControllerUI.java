@@ -5,12 +5,10 @@ import com.carrosserieafpa.carrosserie.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
+import javax.persistence.OrderBy;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,8 +61,11 @@ public class ControllerUI {
     }
 
     @RequestMapping(value = {"/menu", "/"})
-    public String menu() {
+    public String menu(SessionStatus status) {
+
+        status.setComplete();
         return "form-menu";
+
     }
 
     @GetMapping("/vueEnregistrement")
@@ -105,13 +106,14 @@ public class ControllerUI {
     public String consulterArchive(Model model, @ModelAttribute("client") Client client, @ModelAttribute("voiture") Voiture voiture){
 
         List<Prestation> prestations = facturationDao.recherchePrestationDansFactureParClientId(client.getId());
-        Double prixFacture = facturationDao.recherchePrixFactureParIdClient(client.getId());
         List<Facturation> facturations = facturationDao.findFacturationByClient(client);
+        List<Voiture> voitures = voitureDao.findVoitureByClient(client);
+
 
         model.addAttribute("prestations", prestations);
         model.addAttribute("client", client);
         model.addAttribute("voiture", voiture);
-        model.addAttribute("prixFacture", prixFacture);
+        model.addAttribute("voitures", voitures);
         model.addAttribute("facturations", facturations);
 
         return "form-archive";
@@ -133,7 +135,7 @@ public class ControllerUI {
         return "form-recherche";
     }
 
-    @RequestMapping("/facturation")
+    @RequestMapping("/facturation/{id}")
     public String facture(Model model,
                           @ModelAttribute("prestations") List<Prestation> prestations,
                           @ModelAttribute("client") Client client,
@@ -141,18 +143,19 @@ public class ControllerUI {
                           @ModelAttribute("prestation") Prestation prestation,
                           @ModelAttribute("facturation") Facturation facturation,
                           @ModelAttribute("facturations") List<Facturation> facturations,
+                          @PathVariable Long id,
                           SessionStatus sessionStatus) {
+
+        Optional<Facturation> facture = facturationDao.findById(id);
+        if(facture.isPresent()){
+            facturation = facture.get();
+        }
 
         model.addAttribute("prestations", prestations);
         model.addAttribute("facturation", facturation);
         model.addAttribute("client", client);
         model.addAttribute("voiture", voiture);
         model.addAttribute("facturations", facturations);
-
-        for (Facturation factu :  facturations){
-            model.addAttribute(("facturation"), factu);
-        }
-
 
         sessionStatus.setComplete();
         return "form-facturation";

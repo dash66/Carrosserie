@@ -9,11 +9,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -106,12 +104,7 @@ public class ControllerClient {
         if (tuture.isPresent()) {
             voiture = tuture.get();
         }
-
         model.addAttribute("voiture", voiture);
-
-        System.out.println("808080808080808008080808080");
-        System.out.println(voiture);
-        System.out.println("808080808080808008080808080");
 
         return "redirect:/vueEnregistrement";
     }
@@ -167,7 +160,7 @@ public class ControllerClient {
         ra.addAttribute("client", client);
         ra.addAttribute("facturation", facturation);
 
-        return "redirect:/facturation";
+        return "redirect:/facturation/" + facturation.getId();
     }
 
     public Double calculPrixFinal(@ModelAttribute("prestations") List<Prestation> prestations, @ModelAttribute("voiture") Voiture voiture) {

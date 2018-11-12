@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity
@@ -25,6 +26,9 @@ public class Voiture implements Serializable {
     @ManyToOne()
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     private Client client;
+
+    @OneToMany(mappedBy = "voiture")
+    private Collection<Facturation> facturation;
 
     public Voiture() {
     }

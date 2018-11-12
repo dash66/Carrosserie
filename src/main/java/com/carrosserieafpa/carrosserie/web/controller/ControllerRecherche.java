@@ -67,19 +67,13 @@ public class ControllerRecherche {
 
   @RequestMapping(value = "/rechercherClient") // fonction de la page archive
   public String rechercheClient(
-      @ModelAttribute("client") Client michaelKnight,
-      @ModelAttribute("voiture") Voiture bumblebee,
-      Model model,
+      @ModelAttribute("client") Client michaelKnight, Model model,
       HttpServletRequest httpServletRequest) {
 
     String prenom = httpServletRequest.getParameter("prenom3");
     String nom = httpServletRequest.getParameter("nom3");
 
     michaelKnight = clientDao.findClientByNomAndPrenom(nom, prenom);
-
-    System.out.println("$£$££$£$££$£$££$£$££$£$££$£$££");
-    System.out.println(michaelKnight);
-    System.out.println("$£$££$£$££$£$££$£$££$£$££$£$££");
 
     Collection<Voiture> k2000 = michaelKnight.getVoiture();
 
@@ -88,7 +82,6 @@ public class ControllerRecherche {
     model.addAttribute("client", michaelKnight);
     model.addAttribute("facturations", facturations);
     model.addAttribute("voitures", k2000);
-    model.addAttribute("voiture", bumblebee);
 
     return "redirect:/archive";
   }
@@ -135,8 +128,9 @@ public class ControllerRecherche {
     facturations.add(facturation);
 
     client = clientDao.findClientByFacturation(facturation);
-    voiture = voitureDao.findVoitureByClient(client);
     prestations = facturation.getPrestation();
+
+    voiture = voitureDao.findVoitureByFacturation(facturation);
 
     model.addAttribute("prestations", prestations);
     model.addAttribute("facturation", facturation);
@@ -144,7 +138,7 @@ public class ControllerRecherche {
     model.addAttribute("voiture", voiture);
     model.addAttribute("facturations", facturations);
 
-    return "redirect:/facturation";
+    return "redirect:/facturation/" + facturation.getId();
   }
 
   @RequestMapping("/rechercheClientExistant")
@@ -163,7 +157,7 @@ public class ControllerRecherche {
 
   @RequestMapping(
       "/rechercheVoitureExistant") // fonction de la page enregistrement, doit y retourner : trouver
-                                   // un client existant pour préparer presta
+  // un client existant pour préparer presta
   public String rechercheVoitureExistant(
       Model model,
       HttpServletRequest httpServletRequest,
@@ -196,5 +190,23 @@ public class ControllerRecherche {
     model.addAttribute("facturation", facturation1);
 
     return "redirect:/vueEnregistrement";
+  }
+
+  @RequestMapping("/setVoitureClientRecherche")
+  public String settageVoitureClient(
+      @ModelAttribute("voiture") Voiture voiture,
+      @ModelAttribute("client") Client client,
+      HttpServletRequest request,
+      Model model,
+      RedirectAttributes ra) {
+    Long id = Long.valueOf(request.getParameter("vehicule"));
+    Optional<Voiture> tuture = voitureDao.findById(id);
+    if (tuture.isPresent()) {
+      voiture = tuture.get();
+    }
+
+    model.addAttribute("voiture", voiture);
+
+    return "redirect:/archive";
   }
 }

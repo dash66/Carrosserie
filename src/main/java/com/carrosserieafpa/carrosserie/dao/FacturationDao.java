@@ -21,4 +21,5 @@ public interface FacturationDao extends JpaRepository<Facturation, Long> {
   List<Facturation> findFacturationByClient(Client client);
 
   List<Facturation> findFacturationByVoiture (Voiture voiture);
+
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -54,10 +55,10 @@ public class ControllerAdmin {
   }
 
   @PostMapping("/prix")
-  public String ajouterPrix(HttpServletRequest httpServletRequest, Prestation prestation) {
+  public String ajouterPrix(@ModelAttribute("prestation") Prestation prestation, SessionStatus status) {
 
-    prestation.setPrix(Double.valueOf(httpServletRequest.getParameter("libelle3")));
     prestationDao.save(prestation);
+    status.setComplete();
 
     return "redirect:/admin";
   }

@@ -144,7 +144,7 @@
                                     <div class="form-group">
                                         <input id="prenom3" name="prenom3" placeholder="Prénom"
                                                class="form-control"
-                                               type="text">
+                                               type="text" required>
 
                                     </div>
                                 </div>
@@ -153,7 +153,7 @@
 
                                         <input id="nom3" name="nom3" placeholder="Nom"
                                                class="form-control"
-                                               type="text">
+                                               type="text" required>
                                     </div>
                                 </div>
                             </div>
@@ -192,7 +192,7 @@
                                         <input id="Immatriculation" name="Immatriculation"
                                                placeholder="Immatriculation"
                                                class="form-control input-md"
-                                               type="text">
+                                               type="text" required>
                                     </div>
                                 </div>
                             </div>
@@ -229,7 +229,7 @@
                                     <div class="form-group">
                                         <input id="numFacture" name="Robert" placeholder="Numéro de facture"
                                                class="form-control input-md"
-                                               type="text">
+                                               type="text" required>
                                     </div>
                                 </div>
                             </div>
@@ -252,7 +252,7 @@
 <!-- ------------------------------------------------------------------------ -->
 <div style="margin-bottom:100px;" class="container mt-5">
     <div class="row m-2">
-        <table class="table table-bordered table-striped table-md m-2 float-" th:object="${prestation}">
+        <table class="table table-bordered table-striped table-md float-" th:object="${prestation}">
             <thead class="table-info">
             <tr>
                 <td></td>
