@@ -81,9 +81,9 @@
                     <h5 class="card-title">Véhicule </h5>
                 </div>
                 <div class="card-body">
-                    <p class="card-text" th:text="${voiture.marque} + ' ' + ${voiture.modele}"></p>
-                    <p class="card-text">Immatriculation : <span th:text="${voiture.immat}"></span></p>
-                    <p class="card-text">Gabarit : <span th:text="${voiture.categorie}"></span></p>
+                    <p class="card-text" th:text="${facturation.voiture.marque} + ' ' + ${facturation.voiture.modele}"></p>
+                    <p class="card-text">Immatriculation : <span th:text="${facturation.voiture.immat}"></span></p>
+                    <p class="card-text">Gabarit : <span th:text="${facturation.voiture.categorie}"></span></p>
                 </div>
             </div>
         </div>
