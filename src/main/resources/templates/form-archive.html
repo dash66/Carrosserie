@@ -132,7 +132,7 @@
                 <h2 class="col-md-6 my-3 text-info"><span class="glyphicon glyphicon-list-alt"></span> Facture(s)
                 </h2>
                 <ul>
-                    <li th:each="facturation : ${facturations}"><a target="_blank" th:href="@{/facturation}">
+                    <li th:each="facturation : ${facturations}"><a target="_blank" th:href="@{'/facturation/' + ${facturation.id}}">
                         <span th:text="${facturation}"></span></a>
                         <p> Prix : <span th:text="${facturation.prix}"></span> Euros.</p></li>
                 </ul>
