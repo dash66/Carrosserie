@@ -334,7 +334,7 @@
                    th:style="${client.nom == null} ? 'display: none'">
                 <thead class="table-info">
                 <tr>
-                    <th > Client</th>
+                    <th> Client</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -388,7 +388,10 @@
             </table>
         </div>
     </form>
-
+    <form class="form-horizontal" method="post" th:action="@{/retireVoiturePresta}" modelAttribute="voiture">
+        <input class="btn btn-outline-info font-weight-bold float-left"
+               type="submit"
+               value="&#9881; Annuler"/></form>
     <!-- ------------------------------------------------------------------------ -->
     <!-- ------------------------------------------------------------------------ -->
     <!-- -------------         LISTES Prestations : Facturation  ---------------- -->
@@ -413,7 +416,7 @@
         <div class="row m-2">
             <div class="form-group col-md-12 text-right p-0 pull-right">
                 <input class="btn btn-outline-success" type="submit" value="&#128190; Enregistrer la facture"/>
-                <input class="btn btn-outline-danger" type="reset" value="&#10060; Annulation" />
+                <input class="btn btn-outline-danger" type="reset" value="&#10060; Annulation"/>
             </div>
         </div>
     </form>

@@ -2,6 +2,8 @@ package com.carrosserieafpa.carrosserie.web.controller;
 
 import com.carrosserieafpa.carrosserie.dao.*;
 import com.carrosserieafpa.carrosserie.entity.*;
+import org.hibernate.Session;
+import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -59,8 +62,12 @@ public class ControllerClient {
 
     @PostMapping("/saveClient")
     public String enregistrementClient(HttpServletRequest request, @ModelAttribute("client") Client client) {
+
         client = this.creationClient(client, request);
         Voiture voiture = this.creationVoiture(client, request);
+        Collection<Voiture> tutures = new HashSet<>();
+        tutures.add(voiture);
+        client.setVoiture(tutures);
 
         if (client.getNom() != null) {
             clientDao.save(client);
@@ -70,8 +77,8 @@ public class ControllerClient {
     }
 
     @RequestMapping("/createNewVehicule")
-    public String creationNewVoiture(@ModelAttribute("client") Client client, HttpServletRequest request) {
-        Voiture voiture = new Voiture();
+    public String creationNewVoiture(@ModelAttribute("client") Client client, HttpServletRequest request, @ModelAttribute("voiture") Voiture voiture) {
+
         voiture.setMarque(request.getParameter("marque"));
         voiture.setImmat(request.getParameter("immat"));
         voiture.setModele(request.getParameter("modele"));
@@ -237,4 +244,11 @@ public class ControllerClient {
         return voiture;
     }
 
+    @RequestMapping("/retireVoiturePresta")
+    public String retirerVoitureDeClient(@ModelAttribute("voiture") Voiture voiture, Session session){
+
+        session.evict(voiture);
+
+        return "redirect:/vueEnregistrement";
+    }
 }
