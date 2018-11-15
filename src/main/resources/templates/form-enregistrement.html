@@ -388,10 +388,7 @@
             </table>
         </div>
     </form>
-    <form class="form-horizontal" method="post" th:action="@{/retireVoiturePresta}" modelAttribute="voiture">
-        <input class="btn btn-outline-info font-weight-bold float-left"
-               type="submit"
-               value="&#9881; Annuler"/></form>
+
     <!-- ------------------------------------------------------------------------ -->
     <!-- ------------------------------------------------------------------------ -->
     <!-- -------------         LISTES Prestations : Facturation  ---------------- -->
@@ -562,5 +559,21 @@
     </div>
 </footer>
 </body>
+<script type="text/javascript">
+    if($("#nom").empty() || $("#prenom").empty() || $("#numAfpa").empty() || $("#telephone").empty() || $("#marque").empty() || $("#modele").empty() || $("#immat").empty() || $("#couleur").empty() || $("#categorie").empty() && $("#date").empty()){
+        $('#autoclosable-btn-success').prop("disabled", true);
+    }
+    $(document).ready(function () {
+        $('.alert-autocloseable-success').hide();
+        $('#autoclosable-btn-success').click(function () {
+            $('#autoclosable-btn-success').prop("disabled", true);
+            $('.alert-autocloseable-success').show();
+            $('.alert-autocloseable-success').delay(2500).fadeOut("slow", function() {
+                document.addClient.submit();
+            });
+        });
+    });
+
+</script>
 
 </html>
