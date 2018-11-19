@@ -39,10 +39,6 @@
             <h1 class="navbar-text text-success m-3 pb-3">Carrosserie </h1>
             <img style="max-width:45px; max-height:45px;" class="w-auto h-auto" th:src="@{/images/afpa.png}"
                  alt="Logo Afpa tout vert">
-            <!-- <form class="form-inline my-2 my-lg-0">
-                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-             </form>-->
         </div>
     </nav>
     <div class="row m-2">
@@ -349,11 +345,21 @@
                         </div>
                         <div class="row" th:style="${voiture.marque == null} ? 'display: none'">
                             <div class="col-md-12 m-1">
-                                <p class="p-0"><i class="fas fa-car"></i>
-                                    Marque : <span class="font-weight-bold" th:text="${voiture.marque}"></span>,
-                                    Modèle : <span class="font-weight-bold" th:text="${voiture.modele}"></span>,
-                                    Immatriculation : <span class="font-weight-bold" th:text="${voiture.immat}"></span>
-                                </p>
+                                <div class="col-md-9 float-left mt-2 p-0">
+                                    <p class="p-0"><i class="fas fa-car"></i>
+                                        Marque : <span class="font-weight-bold" th:text="${voiture.marque}"></span>,
+                                        Modèle : <span class="font-weight-bold" th:text="${voiture.modele}"></span>,
+                                        Immatriculation : <span class="font-weight-bold"
+                                                                th:text="${voiture.immat}"></span>
+                                    </p>
+                                </div>
+                                <div class="col-md-3 float-left text-right p-0">
+                                    <a href="#changerVehicule" class="btn btn-outline-info a-btn-slide-text mr-3"
+                                       data-toggle="modal"
+                                       data-target="#changerVehicule">
+                                        <span class="fas fa-car" aria-hidden="true"></span>
+                                        <strong> changer de véhicule</strong></a>
+                                </div>
                             </div>
                         </div>
                         <div class="row" th:style="${voiture.marque != null} ? 'display: none'">
@@ -398,10 +404,15 @@
         <div class="row m-2">
             <table class="table table-bordered table-striped table-md">
                 <thead class="table-info">
-                <tr>
-                    <th>Prestation(s) <a href="#deletePresta" class="pull-right btn btn-outline-danger border border-0 text-danger"
-                                         title="supprimer l'intervention" data-toggle="modal" data-target="#deletePresta">
-                        <span class="glyphicon glyphicon-minus"> Supprimer une prestation</span></a></th>
+                <tr class="col-md-12">
+                    <th class="px-2 py-1 pr-3 align-middle m-1">
+                        <div class="col-md-9 py-2 px-1 float-left">Prestation(s)</div>
+                        <div class="col-md-3 p-0 text-right float-left">
+                            <a href="#deletePresta" class="btn btn-outline-danger text-danger"
+                               title="supprimer l'intervention" data-toggle="modal" data-target="#deletePresta">
+                                <span class="glyphicon glyphicon-minus"> Supprimer une prestation</span></a>
+                        </div>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -594,6 +605,55 @@
         </div>
     </form>
 
+
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- -------------        FORM MODAL Changer de véhicule     ---------------- -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+
+    <form method="post" modelAttribute="prestation" th:action="@{/setVoitureClient}">
+        <div class="modal" id="changerVehicule" tabindex="-1" role="dialog" href="#">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Changer de Véhicule</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal mt-5" method="post">
+                            <div class="row">
+                                <div class="col-md-12 m-1">
+                                    <div class="col-md-12 float-left mt-2 p-0"><i class="fas fa-car"></i>
+                                        <select id="idVehicule" name="vehicule" class="select2" required>
+                                            <option hidden="" value="">Choisissez un vehicule</option>
+                                            <option th:each="voiture : ${client.voiture}" th:value="${voiture.id}"
+                                                    th:text="${voiture.marque} + ' ' + ${voiture.modele}"></option>
+                                        </select>
+                                        <script>
+                                            $('.select2').select2();
+                                        </script>
+                                        <a href="#addVehicule" data-dismiss="modal"
+                                           class="btn btn-outline-info a-btn-slide-text ml-3"
+                                           data-toggle="modal"
+                                           data-target="#addVehicule">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                            <strong> Ajouter un véhicule</strong>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <input class="btn btn-outline-info font-weight-bold float-left"
+                               type="submit"
+                               value="&#9881; Valider"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 <footer style="height:50px;" class="fixed-bottom bg-light border text-info text-center">
     <div class="col-md-12">

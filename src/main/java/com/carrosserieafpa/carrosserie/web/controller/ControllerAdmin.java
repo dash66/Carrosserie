@@ -77,7 +77,7 @@ public class ControllerAdmin {
     public String supprimerUnActe(
             Acte acte,
             HttpServletRequest httpServletRequest,
-            @ModelAttribute("prestation") Prestation prestation) /*@PathVariable ("id") Long id*/ {
+            @ModelAttribute("prestation") Prestation prestation) {
 
         String ActeASupprimer = httpServletRequest.getParameter("acte");
         Acte acteSupprimer = prestation.getActe();
@@ -118,7 +118,6 @@ public class ControllerAdmin {
     @RequestMapping("/admin/delete/voiture")
     public String supprimerUnVehicule(HttpServletRequest request, Model model, @ModelAttribute("client") Client client) {
 
-
         Long id = Long.valueOf(request.getParameter("proprio"));
         Optional<Client> cleint = clientDao.findById(id);
         if (cleint.isPresent()) {
@@ -133,7 +132,7 @@ public class ControllerAdmin {
     public String supprimerUneFinition(
             Finition finition,
             HttpServletRequest httpServletRequest,
-            @ModelAttribute("prestation") Prestation prestation) /*@PathVariable ("id") Long id*/ {
+            @ModelAttribute("prestation") Prestation prestation) {
 
         String FinitionASupprimer = httpServletRequest.getParameter("finition");
         Finition finitionSupprimer = prestation.getFinition();

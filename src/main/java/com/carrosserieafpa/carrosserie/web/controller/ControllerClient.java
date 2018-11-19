@@ -6,6 +6,7 @@ import com.itextpdf.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -98,10 +99,6 @@ public class ControllerClient {
 
         voiture.setDate(dateDef);
         voiture.setClient(client);
-
-        System.out.println("#€#€#€#€#€#€#€#€#€#€#€#");
-        System.out.println(client);
-        System.out.println("#€#€#€#€#€#€#€#€#€#€#€#");
 
         client.getVoiture().add(voiture);
 
@@ -303,5 +300,4 @@ public class ControllerClient {
         sessionStatus.setComplete();
        return "redirect:/facturation/" + facturation.getId();
     }
-
-}
+  }
