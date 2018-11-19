@@ -220,7 +220,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -334,7 +333,7 @@
                    th:style="${client.nom == null} ? 'display: none'">
                 <thead class="table-info">
                 <tr>
-                    <th > Client</th>
+                    <th> Client</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -400,12 +399,14 @@
             <table class="table table-bordered table-striped table-md">
                 <thead class="table-info">
                 <tr>
-                    <th>Prestation(s)</th>
+                    <th>Prestation(s) <a href="#deletePresta" class="pull-right btn btn-outline-danger border border-0 text-danger"
+                                         title="supprimer l'intervention" data-toggle="modal" data-target="#deletePresta">
+                        <span class="glyphicon glyphicon-minus"> Supprimer une prestation</span></a></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="prestation : ${prestations}">
-                    <td th:text="${prestation.toString()}"></td>
+                    <td><span th:text="${prestation.toString()}"></span></td>
                 </tr>
                 </tbody>
             </table>
@@ -413,7 +414,8 @@
         <div class="row m-2">
             <div class="form-group col-md-12 text-right p-0 pull-right">
                 <input class="btn btn-outline-success" type="submit" value="&#128190; Enregistrer la facture"/>
-                <input class="btn btn-outline-danger" type="reset" value="&#10060; Annulation"/>
+                <a class="btn btn-outline-danger" th:href="@{/}" title="Annuler et revenir à l'Accueil">&#10060; Annuler
+                    la facture</a>
             </div>
         </div>
     </form>
@@ -471,7 +473,6 @@
                     </div>
                     <div class="modal-body">
                         <form class="form-horizontal mt-5" method="post">
-
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -534,12 +535,10 @@
                                             <label for="date">Date de premiere mise en service</label>
                                             <input id="dateV" name="date" placeholder="Date du véhicule"
                                                    class="form-control input-md" type="date" required>
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -552,6 +551,49 @@
     </form>
 
 
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- -------------        FORM MODAL supprimer prestation    ---------------- -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <form method="post" modelAttribute="prestation" th:action="@{/deletePresta}" th:object="${prestation}">
+        <div class="modal" id="deletePresta" tabindex="-1" role="dialog" href="#">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Supprimer une prestation</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal mt-5" method="post">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label for="idPresta">Prestation</label>
+                                            <select id="idPresta" name="idPresta" th:field="*{id_presta}"
+                                                    class="form-control input-md" required>
+                                                <option hidden="" value="">Choisissez une prestation</option>
+                                                <option th:each="prestation : ${prestations}"
+                                                        th:value="${prestation.id_presta}" th:text="${prestation}"
+                                                        th:required></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <input id="boutonDeletePresta" class="btn btn-outline-info" type="submit"
+                               value="&#128190; supprimer"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
 </div>
 <footer style="height:50px;" class="fixed-bottom bg-light border text-info text-center">
     <div class="col-md-12">
@@ -559,5 +601,4 @@
     </div>
 </footer>
 </body>
-
 </html>

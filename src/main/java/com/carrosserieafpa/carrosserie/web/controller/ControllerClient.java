@@ -2,16 +2,20 @@ package com.carrosserieafpa.carrosserie.web.controller;
 
 import com.carrosserieafpa.carrosserie.dao.*;
 import com.carrosserieafpa.carrosserie.entity.*;
+import com.itextpdf.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -21,6 +25,7 @@ import java.util.*;
 @SessionAttributes({"client", "prestations", "voiture", "facturation"})
 @Controller
 public class ControllerClient {
+
 
     @Autowired
     ActeDao acteDao;
@@ -34,6 +39,7 @@ public class ControllerClient {
     VoitureDao voitureDao;
     @Autowired
     ClientDao clientDao;
+
 
     @ModelAttribute("client")
     public Client getClient() {
@@ -55,23 +61,26 @@ public class ControllerClient {
         return new Facturation();
     }
 
-
-
-    @PostMapping("/saveClient")
+    @RequestMapping("/saveClient")
     public String enregistrementClient(HttpServletRequest request, @ModelAttribute("client") Client client) {
         client = this.creationClient(client, request);
+
         Voiture voiture = this.creationVoiture(client, request);
+        Collection<Voiture> tutures = new HashSet<>();
+        tutures.add(voiture);
+        client.setVoiture(tutures);
 
         if (client.getNom() != null) {
             clientDao.save(client);
             voitureDao.save(voiture);
         }
+
         return "redirect:/vueEnregistrement";
     }
 
     @RequestMapping("/createNewVehicule")
-    public String creationNewVoiture(@ModelAttribute("client") Client client, HttpServletRequest request) {
-        Voiture voiture = new Voiture();
+    public String creationNewVoiture(@ModelAttribute("client") Client client, HttpServletRequest request, @ModelAttribute("voiture") Voiture voiture) {
+
         voiture.setMarque(request.getParameter("marque"));
         voiture.setImmat(request.getParameter("immat"));
         voiture.setModele(request.getParameter("modele"));
@@ -90,6 +99,10 @@ public class ControllerClient {
         voiture.setDate(dateDef);
         voiture.setClient(client);
 
+        System.out.println("#€#€#€#€#€#€#€#€#€#€#€#");
+        System.out.println(client);
+        System.out.println("#€#€#€#€#€#€#€#€#€#€#€#");
+
         client.getVoiture().add(voiture);
 
         voitureDao.save(voiture);
@@ -98,13 +111,16 @@ public class ControllerClient {
     }
 
     @RequestMapping("/setVoitureClient")
-    public String settageVoitureClient(@ModelAttribute("voiture") Voiture voiture, HttpServletRequest request, Model model) {
+    public String settageVoitureClient(HttpServletRequest request, Model model) {
+        Voiture voiture = new Voiture();
+
         Long id = Long.valueOf(request.getParameter("vehicule"));
         Optional<Voiture> tuture = voitureDao.findById(id);
         if (tuture.isPresent()) {
             voiture = tuture.get();
         }
         model.addAttribute("voiture", voiture);
+
 
         return "redirect:/vueEnregistrement";
     }
@@ -160,6 +176,7 @@ public class ControllerClient {
         ra.addAttribute("client", client);
         ra.addAttribute("facturation", facturation);
 
+
         return "redirect:/facturation/" + facturation.getId();
     }
 
@@ -193,9 +210,8 @@ public class ControllerClient {
         return prixFinal;
     }
 
-    public double arrondir(double nombre,double nbApVirg)
-    {
-        return(double)((int)(nombre * Math.pow(10,nbApVirg) + .5)) / Math.pow(10,nbApVirg);
+    public double arrondir(double nombre, double nbApVirg) {
+        return (double) ((int) (nombre * Math.pow(10, nbApVirg) + .5)) / Math.pow(10, nbApVirg);
     }
 
     public Client creationClient(@ModelAttribute("client") Client client, HttpServletRequest request) {
@@ -232,9 +248,60 @@ public class ControllerClient {
         String dateDef = new SimpleDateFormat("dd-MM-yyyy").format(date1);
 
         voiture.setDate(dateDef);
+
+
         voiture.setClient(client);
 
         return voiture;
+    }
+
+    @RequestMapping("/deletePresta")
+    public String supprimerPrestation(@ModelAttribute("prestation") Prestation prestation,
+                                      @ModelAttribute("prestations") List<Prestation> prestations,
+                                      Model model) {
+
+        Optional<Prestation> prestationTmp = prestationDao.findById(prestation.getId_presta());
+
+        if (prestationTmp.isPresent()) {
+            prestation = prestationTmp.get();
+        }
+        if (prestations != null && !prestations.isEmpty()) {
+            int number = -1;
+
+            for (Prestation presta : prestations) {
+                if (presta.getId_presta() == prestation.getId_presta()) {
+
+                    number = prestations.indexOf(presta);
+                }
+            }
+            prestations.remove(number);
+            model.addAttribute("prestations", prestations);
+            model.addAttribute("prestation", prestation);
+        }
+        return "redirect:/vueEnregistrement";
+    }
+
+    @RequestMapping(value = "/html2pdf", consumes = {"application/x-www-form-urlencoded"} )
+    public String html2pdf(Map<String, Object> data, @ModelAttribute("facturation") Facturation facturation, TemplateEngine templateEngine, SessionStatus sessionStatus) throws IOException, DocumentException {
+
+        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+        templateResolver.setSuffix(".html");
+        templateResolver.setTemplateMode("HTML");
+
+        templateEngine.setTemplateResolver(templateResolver);
+        Context context = new Context();
+        context.setVariables(data);
+        String html = templateEngine.process("/templates/facture", context);
+
+        OutputStream outputStream = new FileOutputStream("facture.pdf");
+        ITextRenderer renderer = new ITextRenderer();
+        renderer.setDocumentFromString(html);
+        renderer.layout();
+        renderer.createPDF(outputStream);
+        outputStream.close();
+
+        sessionStatus.setComplete();
+       return "redirect:/facturation/" + facturation.getId();
     }
 
 }

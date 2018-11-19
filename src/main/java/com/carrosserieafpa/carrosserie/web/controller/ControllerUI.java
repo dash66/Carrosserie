@@ -74,13 +74,14 @@ public class ControllerUI {
             @ModelAttribute("client") Client client,
             @ModelAttribute("prestations") ArrayList<Prestation> prestations,
             @ModelAttribute("voiture") Voiture voiture,
-            Model model, HttpServletRequest request) {
+            Model model) {
 
 
-        model.addAttribute("actes", acteDao.findAll());
-        model.addAttribute("finitions", finitionDao.findAll());
+        model.addAttribute("actes", acteDao.findActesOrderByNom());
+        model.addAttribute("finitions", finitionDao.findFinitionsOrderByNom());
         model.addAttribute("prestations", prestations);
         model.addAttribute("voiture", voiture);
+        model.addAttribute("client", client);
 
 
         return "form-enregistrement";
@@ -90,14 +91,17 @@ public class ControllerUI {
     public String affichageMenuAdministrateur(
             Model model, Acte acte, Finition finition, Prestation prestation) {
 
-        List<Finition> finitions = finitionDao.findAll();
-        List<Acte> actes = acteDao.findAll();
+        List<Finition> finitions = finitionDao.findFinitionsOrderByNom();
+        List<Acte> actes = acteDao.findActesOrderByNom();
+        List<Client> clients = clientDao.findAllClientOrderByNom();
+
 
         model.addAttribute("acte", acte);
         model.addAttribute("finition", finition);
         model.addAttribute("actes", actes);
         model.addAttribute("finitions", finitions);
         model.addAttribute("prestation", prestation);
+        model.addAttribute("clients", clients);
 
         return "form-administrateur";
     }
@@ -107,13 +111,11 @@ public class ControllerUI {
 
         List<Prestation> prestations = facturationDao.recherchePrestationDansFactureParClientId(client.getId());
         List<Facturation> facturations = facturationDao.findFacturationByClient(client);
-        List<Voiture> voitures = voitureDao.findVoitureByClient(client);
 
 
         model.addAttribute("prestations", prestations);
         model.addAttribute("client", client);
         model.addAttribute("voiture", voiture);
-        model.addAttribute("voitures", voitures);
         model.addAttribute("facturations", facturations);
 
         return "form-archive";
@@ -122,9 +124,9 @@ public class ControllerUI {
     @GetMapping(value = "/rechercher") // fonction de la page archive
     public String recherche(Model model, SessionStatus sessionStatus) {
 
-        List<Finition> finitions = finitionDao.findAll();
+        List<Finition> finitions = finitionDao.findFinitionsOrderByNom();
         List<Prestation> prestations = prestationDao.findAll();
-        List<Acte> actes = acteDao.findAll();
+        List<Acte> actes = acteDao.findActesOrderByNom();
 
         model.addAttribute("finitions", finitions);
         model.addAttribute("actes", actes);
@@ -143,8 +145,7 @@ public class ControllerUI {
                           @ModelAttribute("prestation") Prestation prestation,
                           @ModelAttribute("facturation") Facturation facturation,
                           @ModelAttribute("facturations") List<Facturation> facturations,
-                          @PathVariable Long id,
-                          SessionStatus sessionStatus) {
+                          @PathVariable Long id) {
 
         Optional<Facturation> facture = facturationDao.findById(id);
         if(facture.isPresent()){
@@ -157,7 +158,8 @@ public class ControllerUI {
         model.addAttribute("voiture", voiture);
         model.addAttribute("facturations", facturations);
 
-        sessionStatus.setComplete();
         return "form-facturation";
     }
+
+
 }

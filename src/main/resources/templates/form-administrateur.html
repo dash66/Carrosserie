@@ -58,7 +58,6 @@
         </div>
     </nav>
 
-
     <div class="row m-2">
         <div class="col-md-12 text-center">
             <img class="mw-100 mh-100" th:src="@{/images/anim2.png}" alt="Beau comme un camion tout neuf !"/>
@@ -67,169 +66,166 @@
 
 </header>
 
-<div class="container">
 
-    <div class="col-md-offset-3 mt-5">
-
-        <!-- ------------------------------------------------------------------------ -->
-        <!-- ------------------------------------------------------------------------ -->
-        <!-- -------------           FORM MODAL NOUVEL ACTE          ---------------- -->
-        <!-- ------------------------------------------------------------------------ -->
-        <!-- ------------------------------------------------------------------------ -->
-        <form method="post" th:action="@{/acte}">
-            <div class="modal" id="addActe" tabindex="-1" role="dialog" href="#">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Enregistrer un nouvel acte</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times</button>
-                        </div>
-                        <div class="modal-body">
-                            <form class="form-horizontal mt-5" method="post">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <div class="col-md-12">
-                                                    <input id="libelle" name="libelle"
-                                                           placeholder="Nouvel Acte"
-                                                           class="form-control input-md"
-                                                           type="text" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="modal-footer col-md-12 pull-right">
-                                            <input id="boutonSaveActe" class="btn btn-outline-info" type="submit"
-                                                   value="&#128190; Enregistrer"/>
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- -------------           FORM MODAL NOUVEL ACTE          ---------------- -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<form method="post" th:action="@{/acte}">
+    <div class="modal" id="addActe" tabindex="-1" role="dialog" href="#">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Enregistrer un nouvel acte</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times</button>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal mt-5" method="post">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <input id="libelle" name="libelle"
+                                                   placeholder="Nouvel Acte"
+                                                   class="form-control input-md"
+                                                   type="text" required>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-
-        <!-- ------------------------------------------------------------------------ -->
-        <!-- ------------------------------------------------------------------------ -->
-        <!-- -------------         FORM MODAL NOUVEL FINITION        ---------------- -->
-        <!-- ------------------------------------------------------------------------ -->
-        <!-- ------------------------------------------------------------------------ -->
-        <form method="post" th:action="@{/finition}">
-            <div class="modal" id="addFinition" tabindex="-1" role="dialog" href="#">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Enregistrer une nouvelle finition</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <form class="form-horizontal mt-5" method="post">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <div class="col-md-12">
-                                                    <input id="libelle2" name="libelle2"
-                                                           placeholder="Nouveau type de finition"
-                                                           class="form-control input-md"
-                                                           type="text" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="modal-footer col-md-12 pull-right">
-                                            <input id="boutonSaveFinition" class="btn btn-outline-info" type="submit"
-                                                   value="&#128190; Enregistrer"/>
-                                        </div>
-                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="modal-footer col-md-12 pull-right">
+                                    <input id="boutonSaveActe" class="btn btn-outline-info" type="submit"
+                                           value="&#128190; Enregistrer"/>
                                 </div>
-                            </form>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
+</form>
 
-    <!-- ------------------------------------------------------------------------ -->
-    <!-- ------------------------------------------------------------------------ -->
-    <!-- -------------           FORM MODAL NOUVEAU PRIX         ---------------- -->
-    <!-- ------------------------------------------------------------------------ -->
-    <!-- ------------------------------------------------------------------------ -->
-    <form method="post" th:action="@{/prix}" th:object="${prestation}">
-        <div class="modal" id="addPrix" tabindex="-1" role="dialog" href="#" >
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Définir un prix</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-horizontal mt-5" method="post" >
-                            <fieldset>
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="form-group col-md-6">
-                                            <div class="col-md-10">
-                                                <select id="TypeActe1"name="TypeActe1" th:field="*{acte}" class="select2" required>
-                                                    <option hidden="" value="">Choisissez une intervention</option>
-                                                    <option th:each="acte : ${actes}" th:value="${acte.id_acte}"
-                                                            th:text="${acte.libelle}"></option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <div class="col-md-10">
-                                                <select id="TypeFinition1" name="TypeFinition1" th:field="*{finition}" class="select2" required>
-                                                    <option hidden="" value="">Choisissez un type de finition</option>
-                                                    <option th:each="finition : ${finitions}"
-                                                            th:value="${finition.id_finition}"
-                                                            th:text="${finition.libelle}"></option>
-                                                </select>
-                                            </div>
-                                            <script>
-                                                $('.select2').select2();
-                                            </script>
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- -------------         FORM MODAL NOUVEL FINITION        ---------------- -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<form method="post" th:action="@{/finition}">
+    <div class="modal" id="addFinition" tabindex="-1" role="dialog" href="#">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Enregistrer une nouvelle finition</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal mt-5" method="post">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <input id="libelle2" name="libelle2"
+                                                   placeholder="Nouveau type de finition"
+                                                   class="form-control input-md"
+                                                   type="text" required>
                                         </div>
                                     </div>
-                                    <div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <div class="col-md-10">
-                                                        <input id="libelle3" name="libelle3"
-                                                               placeholder="Définir un prix"
-                                                               class="form-control input-md"
-                                                               type="text" required th:field="*{prix}">
-                                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="modal-footer col-md-12 pull-right">
+                                    <input id="boutonSaveFinition" class="btn btn-outline-info" type="submit"
+                                           value="&#128190; Enregistrer"/>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- -------------           FORM MODAL NOUVEAU PRIX         ---------------- -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<form method="post" th:action="@{/prix}" th:object="${prestation}">
+    <div class="modal" id="addPrix" tabindex="-1" role="dialog" href="#">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Définir un prix</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal mt-5" method="post">
+                        <fieldset>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <div class="col-md-10">
+                                            <select id="TypeActe1" name="TypeActe1" th:field="*{acte}" class="select2"
+                                                    required>
+                                                <option hidden="" value="">Choisissez une intervention</option>
+                                                <option th:each="acte : ${actes}" th:value="${acte.id_acte}"
+                                                        th:text="${acte.libelle}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <div class="col-md-10">
+                                            <select id="TypeFinition1" name="TypeFinition1" th:field="*{finition}"
+                                                    class="select2" required>
+                                                <option hidden="" value="">Choisissez un type de finition</option>
+                                                <option th:each="finition : ${finitions}"
+                                                        th:value="${finition.id_finition}"
+                                                        th:text="${finition.libelle}"></option>
+                                            </select>
+                                        </div>
+                                        <script>
+                                            $('.select2').select2();
+                                        </script>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-md-10">
+                                                    <input id="libelle3" name="libelle3"
+                                                           placeholder="Définir un prix"
+                                                           class="form-control input-md"
+                                                           type="text" required th:field="*{prix}">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="modal-footer col-md-12 pull-right">
-                                        <input id="boutonSavePrix" class="btn btn-outline-info" type="submit"
-                                               value="&#128190; Enregistrer"/>
-                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="modal-footer col-md-12 pull-right">
+                                    <input id="boutonSavePrix" class="btn btn-outline-info" type="submit"
+                                           value="&#128190; Enregistrer"/>
                                 </div>
-                            </fieldset>
-                        </div>
+                            </div>
+                        </fieldset>
                     </div>
                 </div>
             </div>
         </div>
-    </form>
-</div>
+    </div>
+</form>
 
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
-<!-- -------------   BOUTONS NOUVEL ACTE/NOUVELLE FINITION   ---------------- -->
+<!-- -------------          FORM MODAL SUPPRIMER ACTE        ---------------- -->
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
 <form method="post" th:action="@{/admin/delete/acte}">
@@ -273,7 +269,7 @@
 
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
-<!-- -------------           FORM MODAL SUPPRIMER FINITION         ---------------- -->
+<!-- -------------     FORM MODAL SUPPRIMER FINITION         ---------------- -->
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
 <form method="post" th:action="@{/admin/delete/finition}">
@@ -315,6 +311,117 @@
         </div>
     </div>
 </form>
+
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- -------------        FORM MODAL SUPPRIMER CLIENT        ---------------- -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<form method="post" th:action="@{/admin/delete/client}">
+    <div class="modal" id="deleteClient" tabindex="-1" role="dialog" href="#">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Supprimer un client</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal mt-5" method="post">
+                        <fieldset>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <div class="col-md-10">
+                                            <select id="client" name="client" class="select2" required>
+                                                <option hidden="" value="">Choisissez un client</option>
+                                                <option th:each="client : ${clients}" th:value="${client.id}"
+                                                        th:text="${client.nom} + ' ' + ${client.prenom}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="modal-footer col-md-12 pull-right">
+                                    <input id="SupprimerClient" class="btn btn-outline-info" type="submit"
+                                           value="&#128190; Supprimer"/>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- -------------        FORM MODAL SUPPRIMER VOITURE       ---------------- -->
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+
+<div class="modal" id="deleteVoiture" tabindex="-1" role="dialog" href="#">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Supprimer la voiture d'un client</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal mt-5" method="post">
+                    <div class="container">
+                        <div class="row">
+                            <form method="post" th:action="@{/admin/setClient}">
+                                <div class="form-group col-md-6" th:style="${client.nom != null} ? 'display: none'">
+                                    <div class="col-md-10">
+                                        <select id="proprio" name="proprio" class="select2" required>
+                                            <option hidden="" value="">Choisissez le propriétaire du véhicule
+                                            </option>
+                                            <option th:each="client : ${clients}" th:value="${client.id}"
+                                                    th:text="${client.nom} + ' ' + ${client.prenom}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <input id="choisirClient" class="btn btn-outline-info" type="submit"
+                                       value="&#128190; Choisir"/>
+                            </form>
+                            <div class="form-group col-md-6" th:style="${client.nom == null} ? 'display: none'">
+                                <p class="glyphicon glyphicon-user p-0">
+                                    Nom : <span class="font-weight-bold" th:text="${client.nom}"></span>
+                                    Prénom : <span class="font-weight-bold" th:text="${client.prenom}"></span>
+                                </p>
+                            </div>
+                            <form method="post" th:action="@{/admin/delete/voiture}">
+                                <div class="form-group col-md-6" th:style="${client.nom == null} ? 'display: none'">
+                                    <div class="col-md-10">
+                                        <select id="voiture" name="voiture" class="select2" required>
+                                            <option hidden="" value="">Choisissez le véhicule à supprimer</option>
+                                            <option th:each="voiture : ${client.voiture}"
+                                                    th:value="${voiture.id}"
+                                                    th:text="${voiture.marque} + ' ' + ${voiture.modele}"></option>
+                                        </select>
+                                    </div>
+                                    <script>
+                                        $('.select2').select2();
+                                    </script>
+                                </div>
+                            </form>
+                            <div class="row">
+                                <div class="modal-footer col-md-12 pull-right">
+                                    <input id="boutonDeleteVoiture" class="btn btn-outline-info" type="submit"
+                                           value="&#128190; Supprimer"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
@@ -361,11 +468,29 @@
             </a>
         </div>
     </div>
+    <div class="row my-2 mx-1">
+        <div class="col-md-12 text-center">
+            <a href="#deleteClient" class="btn btn-outline-info col-md-8" data-toggle="modal"
+               data-target="#deleteClient"><span class="glyphicon glyphicon-plus"></span>
+                <strong> Supprimer un client</strong>
+            </a>
+        </div>
+    </div>
+    <div class="row my-2 mx-1">
+        <div class="col-md-12 text-center">
+            <a href="#deleteVoiture" class="btn btn-outline-info col-md-8" data-toggle="modal"
+               data-target="#deleteVoiture"><span class="glyphicon glyphicon-plus"></span>
+                <strong> Supprimer la voiture d'un client</strong>
+            </a>
+        </div>
+    </div>
 
 </div>
+
 <footer style="height:50px;" class="fixed-bottom bg-light border text-info text-center">
     <div class="col-md-12">
-        <p class="mb-0 mt-2">&#169; Copyright 2019 Réalisation : Mehdi Salamé, Manuel Da Rocha, Baptiste Lavignon</p>
+        <p class="mb-0 mt-2">&#169; Copyright 2019 Réalisation : Mehdi Salamé, Manuel Da Rocha, Baptiste
+            Lavignon</p>
     </div>
 </footer>
 </body>

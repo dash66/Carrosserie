@@ -17,4 +17,7 @@ public interface ClientDao extends JpaRepository<Client, Long> {
     Client findByImmat(@Param("id") Long id);
 
     Client findClientByFacturation(Facturation facturation);
+
+    @Query("SELECT c FROM Client c ORDER BY nom")
+    List<Client> findAllClientOrderByNom();
     }

@@ -43,9 +43,9 @@
                 <h2>Facture</h2>
             </div>
             <div class="col-md-4 float-right">
-                <small>Numéro de facture : <span th:text="${facturation.id}"></span></small>
+                <small>Numéro de facture : <span>[(${facturation.id})]</span></small>
                 </br>
-                <small>Date : <span th:text="${facturation.date}"></span></small>
+                <small>Date : <span>[(${facturation.date})]</span></small>
             </div>
         </div>
     </div>
@@ -64,9 +64,9 @@
             <div class="col-md-4 mt-3 border border-dark rounded float-right">
                 <div class="row ml-1 my-2">
                     <adress>
-                        <strong th:text="${client.prenom} + ' ' + ${client.nom}"></strong></br>
-                        <span th:text="${client.adresse}"></span> </br>
-                        <span>&#9742; <span th:text="${client.telephone}"></span></span>
+                        <strong>[(${client.prenom})]</strong> <strong>[(${client.nom})]</strong></br>
+                        <span>[(${client.adresse})]</span> </br>
+                        <span>&#9742; <span>[(${client.telephone})]</span></span>
                     </adress>
                 </div>
             </div>
@@ -81,9 +81,9 @@
                     <h5 class="card-title">Véhicule </h5>
                 </div>
                 <div class="card-body">
-                    <p class="card-text" th:text="${voiture.marque} + ' ' + ${voiture.modele}"></p>
-                    <p class="card-text">Immatriculation : <span th:text="${voiture.immat}"></span></p>
-                    <p class="card-text">Gabarit : <span th:text="${voiture.categorie}"></span></p>
+                    <p class="card-text">[(${facturation.voiture.marque})]</p> <p>[(${facturation.voiture.modele})]</p>
+                    <p class="card-text">Immatriculation : <span>[(${facturation.voiture.immat})]</span></p>
+                    <p class="card-text">Gabarit : <span>[(${facturation.voiture.categorie})]</span></p>
                 </div>
             </div>
         </div>
@@ -102,14 +102,14 @@
             <tbody>
             <tr th:each="prestation : ${facturation.prestation}">
                 <th scope="row"><i class="fas fa-car"></i></th>
-                <td><span th:text="${prestation.acte}"></span></td>
-                <td><span th:text="${prestation.finition}"></span></td>
-                <td><span th:text="${prestation.prix}"></span></td>
+                <td><span>[(${prestation.acte})]</span></td>
+                <td><span>[(${prestation.finition})]</span></td>
+                <td><span>[(${prestation.prix})]</span></td>
                 </span>
             </tr>
             <tr>
                 <th scope="row" colspan="3">Total dû après calcul de la catégorie du véhicule</th>
-                <td class="alert-success font-weight-bold"><span th:text="${facturation.prix}"></span> €</td>
+                <td class="alert-success font-weight-bold"><span>[(${facturation.prix})]</span> €</td>
             </tr>
             </tbody>
         </table>
@@ -118,7 +118,7 @@
     <div class="row m-2">
         <div class="alert alert-warning col-md-12 mt-2">
             <div class="text-center font-weight-bold m-1">
-                <p>Les tarifs présentés sont applicables aux véhicules de catégorie moyenne (Megane, Golf,
+                <p>Les tarifs présentés sont applicables aux véhicules de catégorie moyenne (Megane, Golf,841
                     etc..).</br>
                     Comptez 10% d'abattement pour les petits gabarits (Twingo, 107, etc..). </br>
                     Comptez 10% de majoration pour les gros véhicules (berline, Laguna, etc..).</br>
@@ -138,6 +138,19 @@
                    class="form-control d-none"
                    type="text" th:value="${client.nom}">
             <input type="submit" class="btn btn-outline-info font-weight-bold" value="&#8630; Retour"/>
+        </form>
+    </div>
+</div>
+<div class="row m-2">
+    <div class="col-md-12 text-center m-2">
+        <form  method="post" th:action="@{/html2pdf}">
+            <input id="prenom4" name="prenom3"
+                   class="form-control d-none"
+                   type="text" th:value="${client.prenom}">
+            <input id="nom4" name="nom3"
+                   class="form-control d-none"
+                   type="text" th:value="${client.nom}">
+            <input type="submit" class="btn btn-outline-info font-weight-bold" value="&#8630; PDF"/>
         </form>
     </div>
 </div>

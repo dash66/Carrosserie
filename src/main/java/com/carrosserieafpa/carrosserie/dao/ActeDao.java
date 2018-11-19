@@ -9,5 +9,7 @@ import java.util.List;
 
 public interface ActeDao extends JpaRepository<Acte, Long> {
 
+    @Query("SELECT a FROM Acte a ORDER BY libelle")
+    List<Acte> findActesOrderByNom();
 }
 

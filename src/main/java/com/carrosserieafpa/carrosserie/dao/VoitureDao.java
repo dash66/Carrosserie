@@ -14,7 +14,5 @@ public interface VoitureDao extends JpaRepository<Voiture, Long> {
 
     Voiture findByImmat (String immat);
 
-    List<Voiture> findVoitureByClient(Client client);
-
     Voiture findVoitureByFacturation(Facturation facturation);
 }
