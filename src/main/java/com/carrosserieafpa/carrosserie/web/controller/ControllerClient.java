@@ -298,6 +298,6 @@ public class ControllerClient {
         outputStream.close();
 
         sessionStatus.setComplete();
-       return "redirect:/facturation/" + facturation.getId();
+       return "redirect:/menu";
     }
   }
