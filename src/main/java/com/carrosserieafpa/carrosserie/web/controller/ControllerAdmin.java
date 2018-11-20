@@ -40,30 +40,31 @@ public class ControllerAdmin {
   }
 
   @PostMapping("/acte")
-  public String ajouterNouveauActe(HttpServletRequest httpServletRequest, Acte acte) {
+  public String ajouterNouveauActe(HttpServletRequest httpServletRequest, Acte acte, RedirectAttributes ra) {
 
     acte.setLibelle(httpServletRequest.getParameter("libelle"));
-
     acteDao.save(acte);
+    ra.addFlashAttribute("message3", "Acte ajouté en base !!");
 
     return "redirect:/admin";
   }
 
   @PostMapping("/finition")
-  public String ajouterNouveauFinition(HttpServletRequest httpServletRequest, Finition finition) {
+  public String ajouterNouveauFinition(HttpServletRequest httpServletRequest, Finition finition, RedirectAttributes ra) {
 
     finition.setLibelle(httpServletRequest.getParameter("libelle2"));
     finitionDao.save(finition);
-
+    ra.addFlashAttribute("message4", "Finition ajouté en base !!");
     return "redirect:/admin";
   }
 
   @PostMapping("/prix")
   public String ajouterPrix(
-      @ModelAttribute("prestation") Prestation prestation, SessionStatus status) {
+      @ModelAttribute("prestation") Prestation prestation, SessionStatus status, RedirectAttributes ra) {
 
     prestationDao.save(prestation);
     status.setComplete();
+    ra.addFlashAttribute("message5", "Prix ajouté en base !!");
 
     return "redirect:/admin";
   }
@@ -72,17 +73,18 @@ public class ControllerAdmin {
   public String supprimerUnActe(
       Acte acte,
       HttpServletRequest httpServletRequest,
-      @ModelAttribute("prestation") Prestation prestation) {
+      @ModelAttribute("prestation") Prestation prestation, RedirectAttributes ra) {
 
     String ActeASupprimer = httpServletRequest.getParameter("acte");
     Acte acteSupprimer = prestation.getActe();
     acteDao.delete(acteSupprimer);
+    ra.addFlashAttribute("message6", "Acte supprimé de la base !!");
 
     return "redirect:/admin";
   }
 
   @RequestMapping("/admin/delete/client")
-  public String supprimerUnClient(HttpServletRequest httpServletRequest, Client client) {
+  public String supprimerUnClient(HttpServletRequest httpServletRequest, Client client, RedirectAttributes ra) {
 
     Long idToDelete = Long.valueOf(httpServletRequest.getParameter("client"));
     Optional<Client> clientTmp = clientDao.findById(idToDelete);
@@ -90,6 +92,7 @@ public class ControllerAdmin {
       client = clientTmp.get();
     }
     clientDao.delete(client);
+    ra.addFlashAttribute("message8", "Client supprimé de la base !!");
 
     return "redirect:/admin";
   }
@@ -110,29 +113,16 @@ public class ControllerAdmin {
     return "redirect:/admin/delete/voiture";
   }
 
-  @RequestMapping("/admin/delete/voiture")
-  public String supprimerUnVehicule(
-      HttpServletRequest request, Model model, @ModelAttribute("client") Client client) {
-
-    Long id = Long.valueOf(request.getParameter("proprio"));
-    Optional<Client> cleint = clientDao.findById(id);
-    if (cleint.isPresent()) {
-      client = cleint.get();
-    }
-    model.addAttribute("client", client);
-
-    return "redirect:/admin";
-  }
-
   @RequestMapping("/admin/delete/finition")
   public String supprimerUneFinition(
       Finition finition,
       HttpServletRequest httpServletRequest,
-      @ModelAttribute("prestation") Prestation prestation) {
+      @ModelAttribute("prestation") Prestation prestation, RedirectAttributes ra) {
 
     String FinitionASupprimer = httpServletRequest.getParameter("finition");
     Finition finitionSupprimer = prestation.getFinition();
     finitionDao.delete(finitionSupprimer);
+    ra.addFlashAttribute("message7", "Finition supprimée de la base !!");
 
     return "redirect:/admin";
   }
