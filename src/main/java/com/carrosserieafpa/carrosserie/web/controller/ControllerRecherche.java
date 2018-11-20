@@ -8,14 +8,14 @@ import com.carrosserieafpa.carrosserie.entity.Voiture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @SessionAttributes({
   "client",
@@ -67,17 +67,25 @@ public class ControllerRecherche {
 
   @RequestMapping(value = "/rechercherClient") // fonction de la page archive
   public String rechercheClient(
-      @ModelAttribute("client") Client michaelKnight, Model model,
-      HttpServletRequest httpServletRequest) {
+      @ModelAttribute("client") Client michaelKnight,
+      Model model,
+      HttpServletRequest httpServletRequest,
+      RedirectAttributes ra) {
 
     String prenom = httpServletRequest.getParameter("prenom3");
     String nom = httpServletRequest.getParameter("nom3");
 
-    michaelKnight = clientDao.findClientByNomAndPrenom(nom, prenom);
+    Collection<Facturation> facturations = new HashSet<>();
+    Collection<Voiture> k2000 = new HashSet<>();
 
-    Collection<Voiture> k2000 = michaelKnight.getVoiture();
-
-    Collection<Facturation> facturations = michaelKnight.getFacturation();
+    try {
+      michaelKnight = clientDao.findClientByNomAndPrenom(nom, prenom);
+      k2000 = michaelKnight.getVoiture();
+      facturations = michaelKnight.getFacturation();
+    } catch (NullPointerException e) {
+      ra.addFlashAttribute("message", "Ce client n'existe pas !");
+      return "redirect:/rechercher";
+    }
 
     model.addAttribute("client", michaelKnight);
     model.addAttribute("facturations", facturations);
@@ -94,11 +102,18 @@ public class ControllerRecherche {
       @ModelAttribute("client") Client clint) {
 
     String immat = httpServletRequest.getParameter("Immatriculation");
-    Voiture k2000 = voitureDao.findByImmat(immat);
+    Voiture k2000 = new Voiture();
+    List<Facturation> facturations = new ArrayList<>();
 
-    Long id = k2000.getClient().getId();
-    clint = k2000.getClient();
-    List<Facturation> facturations = facturationDao.findFacturationByVoiture(k2000);
+    try {
+      k2000 = voitureDao.findByImmat(immat);
+      Long id = k2000.getClient().getId();
+      clint = k2000.getClient();
+      facturations = facturationDao.findFacturationByVoiture(k2000);
+    } catch (NullPointerException e) {
+      ra.addFlashAttribute("message", "Ce véhicule n'existe pas !");
+      return "redirect:/rechercher";
+    }
 
     model.addAttribute("voiture", k2000);
     model.addAttribute("client", clint);
@@ -121,16 +136,19 @@ public class ControllerRecherche {
       @ModelAttribute("facturation") Facturation facturation) {
 
     Long numFacture = Long.valueOf(httpServletRequest.getParameter("Robert"));
-    Optional<Facturation> facture = facturationDao.findById(numFacture);
-    facturation = facture.get();
 
-    facturations = new ArrayList<>();
-    facturations.add(facturation);
+    try {
+      Optional<Facturation> facture = facturationDao.findById(numFacture);
+      facturation = facture.get();
+      facturations = new ArrayList<>();
+      facturations.add(facturation);
+      client = clientDao.findClientByFacturation(facturation);
+      prestations = facturation.getPrestation();
 
-    client = clientDao.findClientByFacturation(facturation);
-    prestations = facturation.getPrestation();
-
-    voiture = voitureDao.findVoitureByFacturation(facturation);
+      voiture = voitureDao.findVoitureByFacturation(facturation);
+    } catch (NoSuchElementException e) {
+      ra.addFlashAttribute("message", "Cette facture n'existe pas !");
+      return "redirect:/rechercher";}
 
     model.addAttribute("prestations", prestations);
     model.addAttribute("facturation", facturation);
@@ -144,11 +162,20 @@ public class ControllerRecherche {
   @RequestMapping("/rechercheClientExistant")
   // fonction de la page enregistrement, doit y retourner : trouver un client existant pour préparer
   // presta
-  public String rechercheClientExistant(Model model, HttpServletRequest httpServletRequest) {
+  public String rechercheClientExistant(
+      Model model, HttpServletRequest httpServletRequest, RedirectAttributes ra) {
 
     String prenom = httpServletRequest.getParameter("prenom");
     String nom = httpServletRequest.getParameter("nom");
-    Client michaelKnight = clientDao.findClientByNomAndPrenom(nom, prenom);
+    Client michaelKnight = new Client();
+
+    try {
+      michaelKnight = clientDao.findClientByNomAndPrenom(nom, prenom);
+      michaelKnight.getPrenom();
+    } catch (NullPointerException e) {
+      ra.addFlashAttribute("message", "Ce client n'existe pas !");
+      return "redirect:/vueEnregistrement";
+    }
 
     model.addAttribute("client", michaelKnight);
 
@@ -166,9 +193,15 @@ public class ControllerRecherche {
       RedirectAttributes ra) {
 
     String Immatriculation = httpServletRequest.getParameter("Immatriculation");
-    k2000 = voitureDao.findByImmat(Immatriculation);
+    Client clint = new Client();
 
-    Client clint = k2000.getClient();
+    try {
+      k2000 = voitureDao.findByImmat(Immatriculation);
+      clint = k2000.getClient();
+    } catch (NullPointerException e) {
+      ra.addFlashAttribute("message", "Ce véhicule n'existe pas !");
+      return "redirect:/vueEnregistrement";
+    }
     model.addAttribute("client", clint);
     model.addAttribute("voiture", k2000);
 
@@ -178,14 +211,22 @@ public class ControllerRecherche {
     return "redirect:/vueEnregistrement";
   }
 
-  @GetMapping("/rechercheFactureExistant")
+  @RequestMapping("/rechercheFactureExistant")
   // fonction de la page enregistrement, doit y retourner : trouver un client existant pour préparer
   // presta
-  public String rechercheFactureExistant(Model model, HttpServletRequest httpServletRequest) {
+  public String rechercheFactureExistant(
+      Model model, HttpServletRequest httpServletRequest, RedirectAttributes ra) {
 
-    Long numFacture = Long.valueOf(httpServletRequest.getParameter("facture"));
-    Optional<Facturation> Facture = facturationDao.findById(numFacture);
-    Facturation facturation1 = Facture.get();
+    Facturation facturation1 = new Facturation();
+    try {
+      Long numFacture = Long.valueOf(httpServletRequest.getParameter("facture"));
+
+      Optional<Facturation> Facture = facturationDao.findById(numFacture);
+      facturation1 = Facture.get();
+    } catch (NumberFormatException e) {
+      ra.addFlashAttribute("message", "Cette facture n'existe pas !");
+      return "redirect:/vueEnregistrement";
+    }
 
     model.addAttribute("facturation", facturation1);
 

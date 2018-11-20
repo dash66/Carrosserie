@@ -66,7 +66,10 @@
                     Comptez 10% de majoration pour les gros véhicules (berline, Laguna, etc..).</br>
                     Comptez 20% de majoration pour les fourgons.</p></div>
         </div>
+        <div class="text-center font-weight-bold col-md-12 m-1 alert alert-danger" th:if="${message}"
+             th:text="${message}"></div>
     </div>
+
 </div>
 
 
@@ -198,7 +201,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Rechercher par Client</h4>
+                    <h4 class="modal-title">Rechercher par Facture</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -209,7 +212,7 @@
                                     <div class="form-group">
                                         <input id="numFacture" name="Robert" placeholder="Numéro de facture"
                                                class="form-control input-md"
-                                               type="text" required>
+                                               type="text"  pattern="[0-9].{0,}" required>
                                     </div>
                                 </div>
                             </div>
