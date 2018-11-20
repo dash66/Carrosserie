@@ -132,3 +132,4 @@ INSERT INTO Voiture (id, categorie, code_couleur, immat, marque, modele, client_
 INSERT INTO Voiture (id, categorie, code_couleur, immat, marque, modele, client_id) VALUES (2, 'petit',  'jaune', '123AB34', 'René', 'Twizizi', 1);
 INSERT INTO Voiture (id, categorie, code_couleur, immat, marque, modele, client_id) VALUES (3, 'moyen',  'vert', '456GEGE2', 'Fiotte', 'Multimoche', 1);
 
+INSERT INTO Administrateur (id, mot_de_passe) VALUES (1, 'cul');

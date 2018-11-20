@@ -161,5 +161,11 @@ public class ControllerUI {
         return "form-facturation";
     }
 
+    @RequestMapping(value = "/login")
+    public String login() {
+
+        return "login";
+
+    }
 
 }

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{webjars/bootstrap/4.1.3/css/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css"
+          th:href="@{webjars/bootstrap-glyphicons/bdd2cbfba0/css/bootstrap-glyphicons.css}"/>
+    <link rel="stylesheet" type="text/css" href="webjars/select2/4.0.5/css/select2.css"/>
+    <script type="text/javascript" src="webjars/jquery/3.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="webjars/select2/4.0.5/js/select2.js"></script>
+
+</head>
+
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+    <div id="login-row" class="row justify-content-center align-items-center">
+        <div id="login-column" class="col-md-6" th:style="'background: white url('+ @{/images/login.png} +') top center no-repeat; width:471px; height:471px; margin-top:25px'">
+            <div class="box">
+                <div class="float">
+                    <form class="form" th:action="@{/verifierLogin}" style="margin-top: 481px">
+                        <div class="form-group">
+                           <input type="text" name="password" id="password" class="form-control text-center" placeholder="Mot de passe">
+                        </div>
+                        <div class="form-group col-md-12 text-right p-0">
+                            <input type="submit" name="submit" class="btn btn-info btn-md" value="Valider">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
