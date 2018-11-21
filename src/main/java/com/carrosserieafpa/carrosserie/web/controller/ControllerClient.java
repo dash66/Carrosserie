@@ -112,7 +112,7 @@ public class ControllerClient {
     @RequestMapping("/addPresta")
     public String ajouterPrestaList(@ModelAttribute("prestation") Prestation prestation,
                                     @ModelAttribute("prestations") List<Prestation> prestations) {
-        prestation.setId_presta(prestationDao.FindIdByActeAndFinition(prestation.getActe(), prestation.getFinition()));
+        prestation.setId_presta(prestationDao.findIdByActeAndFinition(prestation.getActe(), prestation.getFinition()));
         prestation.setPrix(prestationDao.findPrixById(prestation.getId_presta()));
         prestations.add(prestation);
         return "redirect:" + ENREGISTREMENT;
