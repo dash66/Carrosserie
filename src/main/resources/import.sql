@@ -1,4 +1,5 @@
 ALTER TABLE Prestation CHANGE prix prix DOUBLE NULL;
+ALTER TABLE Facturation CHANGE remarque remarque LONGTEXT NULL;
 
 INSERT INTO Acte (libelle) VALUES ('Complet intérieur extérieur');
 INSERT INTO Acte (libelle) VALUES ('Complet extérieur');

@@ -33,7 +33,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link glyphicon glyphicon-user text-info" th:href="@{/admin}"> Administration</a>
+                    <a class="nav-link glyphicon glyphicon-user text-info" th:href="@{/login}"> Administration</a>
                 </li>
             </ul>
             <h1 class="navbar-text text-success m-3 pb-3">Carrosserie </h1>
@@ -75,6 +75,9 @@
                 </a>
             </div>
         </div>
+        <div class="text-center font-weight-bold col-md-12 m-1 alert alert-danger" th:if="${message}"
+             th:text="${message}"></div>
+    </div>
     </div>
 
     <!-- ------------------------------------------------------------------------ -->
@@ -418,49 +421,11 @@
 
     <!-- ------------------------------------------------------------------------ -->
     <!-- ------------------------------------------------------------------------ -->
-    <!-- -------------         LISTES Prestations : Facturation  ---------------- -->
-    <!-- ------------------------------------------------------------------------ -->
-    <!-- ------------------------------------------------------------------------ -->
-    <form class="form-horizontal" method="post" th:action="@{/saveFacture}"
-          th:style="${prestations.isEmpty()} ? 'display: none'">
-        <div class="row m-2">
-            <table class="table table-bordered table-striped table-md">
-                <thead class="table-info">
-                <tr class="col-md-12">
-                    <th class="px-2 py-1 pr-3 align-middle m-1">
-                        <div class="col-md-9 py-2 px-1 float-left">Prestation(s)</div>
-                        <div class="col-md-3 p-0 text-right float-left">
-                            <a href="#deletePresta" class="btn btn-outline-danger text-danger"
-                               title="supprimer l'intervention" data-toggle="modal" data-target="#deletePresta">
-                                <span class="glyphicon glyphicon-minus"> Supprimer une prestation</span></a>
-                        </div>
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="prestation : ${prestations}">
-                    <td><span th:text="${prestation.toString()}"></span></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="row m-2">
-            <div class="form-group col-md-12 text-right p-0 pull-right">
-                <input class="btn btn-outline-success" type="submit" value="&#128190; Enregistrer la facture"/>
-                <a class="btn btn-outline-danger" th:href="@{/}" title="Annuler et revenir à l'Accueil">&#10060; Annuler
-                    la facture</a>
-            </div>
-        </div>
-    </form>
-
-    <!-- ------------------------------------------------------------------------ -->
-    <!-- ------------------------------------------------------------------------ -->
     <!-- -------------         LISTES DÉROULANTES PRESTA         ---------------- -->
     <!-- ------------------------------------------------------------------------ -->
     <!-- ------------------------------------------------------------------------ -->
-    <form class="form-horizontal mt-2 mb-5" th:action="@{/addPresta}" method="post" id="prestaOk"
-          th:object="${prestation}" modelAttribute="client" th:style="${voiture.marque == null} ? 'display: none'"
-          style="padding-bottom:75px;">
+    <form class="form-horizontal mt-2" th:action="@{/addPresta}" method="post" id="prestaOk"
+          th:object="${prestation}" modelAttribute="client" th:style="${voiture.marque == null} ? 'display: none'">
         <div class="row m-2">
             <p class="alert alert-light font-weight-bold p-0">Enregistrement prestation</p>
             <div class="form-group col-md-12 border rounded">
@@ -490,6 +455,48 @@
             </div>
         </div>
     </form>
+
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- -------------         LISTES Prestations : Facturation  ---------------- -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <form class="form-horizontal" method="post" th:action="@{/saveFacture}"
+          th:style="${prestations.isEmpty()} ? 'display: none'">
+        <div class="row m-2">
+            <table class="table table-bordered table-striped table-md">
+                <thead class="table-info">
+                <tr class="col-md-12">
+                    <th class="px-2 py-1 pr-3 align-middle m-1">
+                        <div class="col-md-9 py-2 px-1 float-left">Prestation(s)</div>
+                        <div class="col-md-3 p-0 text-right float-left">
+                            <a href="#deletePresta" class="btn btn-outline-danger text-danger"
+                               title="supprimer l'intervention" data-toggle="modal" data-target="#deletePresta">
+                                <span class="glyphicon glyphicon-minus"> Supprimer une prestation</span></a>
+                        </div>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="prestation : ${prestations}">
+                    <td><span th:text="${prestation.toString()}"></span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row m-2">
+            <textarea name="remarque" id="remarque" cols="170" rows="3" style="resize:none;" placeholder="ici les remarques sur le véhicule... Si aucune taper RAS" required></textarea>
+        </div>
+        <div class="row m-2" style="padding-bottom:75px;">
+            <div class="form-group col-md-12 text-right p-0 pull-right">
+                <input class="btn btn-outline-success" type="submit" value="&#128190; Enregistrer la facture"/>
+                <a class="btn btn-outline-danger" th:href="@{/}" title="Annuler et revenir à l'Accueil">&#10060; Annuler
+                    la facture</a>
+            </div>
+        </div>
+    </form>
+
+
 
     <!-- ------------------------------------------------------------------------ -->
     <!-- ------------------------------------------------------------------------ -->

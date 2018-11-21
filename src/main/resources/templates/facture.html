@@ -85,18 +85,11 @@
 
         #vehicule {
             display: inline-block;
-            width: 350px;
+            width: 510px;
             padding: 0 0 0 0;
             margin: 10px 20px 0 20px;
-        }
-
-        #description {
-            padding: 5px 0 5px 10px;
-            border-left: 1px solid #dee2e6;
-            border-right: 1px solid #dee2e6;
-            border-bottom: 1px solid #dee2e6;
-            border-bottom-left-radius: 5px;
-            border-bottom-right-radius: 5px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
         }
 
         #tableau {
@@ -116,7 +109,7 @@
 
         table, th, td {
             border-top: 2px solid #dee2e6;
-            margin:5px;
+            margin: 10px 0 5px 0;
         }
 
         #prix {
@@ -135,6 +128,21 @@
             margin: 50px 20px 20px 20px;
             font-weight: bold;
             padding: 10px 0 10px 0;
+        }
+
+        #dark {
+            width: 100%;
+            text-align: justify;
+            color: #1b1e21;
+            background-color: #d6d8d9;
+            border-color: #c6c8ca;
+            margin: 50px 20px 20px 20px;
+            font-weight: bold;
+            padding: 10px 0 10px 0;
+        }
+
+        span {
+            font-weight: bold;
         }
 
     </style>
@@ -166,10 +174,18 @@
     </div>
     <div id="vehicule">
         <h3>Véhicule</h3>
-        <div id="description">
-            <p>Marque : [(${facturation.voiture.marque})], Modèle : [(${facturation.voiture.modele})]</p>
-            <p>Immatriculation : [(${facturation.voiture.immat})], Gabarit : [(${facturation.voiture.categorie})]</p>
-        </div>
+        <table>
+            <tbody>
+            <tr>
+                <td><span>Marque : </span>[(${facturation.voiture.marque})]</td>
+                <td><span>Modèle :  </span>[(${facturation.voiture.modele})]</td>
+            </tr>
+            <tr>
+                <td><span>Immatriculation :  </span>[(${facturation.voiture.immat})]</td>
+                <td><span>Gabarit :  </span>[(${facturation.voiture.categorie})]</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 
     <div id="tableau">
@@ -204,7 +220,9 @@
         <p>Comptez 10% de majoration pour les gros véhicules (berline, Laguna, etc..).</p>
         <p style="margin-bottom:10px">Comptez 20% de majoration pour les fourgons.</p>
     </div>
-
+    <div id="dark">
+        <p>Remarque : [(${facturation.remarque})]</p>
+    </div>
 </div>
 </body>
 </html>

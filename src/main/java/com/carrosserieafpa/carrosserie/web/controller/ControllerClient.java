@@ -144,7 +144,7 @@ public class ControllerClient {
     public String sauvegarderFacture(@ModelAttribute("prestations") List<Prestation> prestations,
                                      @ModelAttribute("client") Client client,
                                      @ModelAttribute("voiture") Voiture voiture,
-                                     @ModelAttribute("facturation") Facturation facturation) {
+                                     @ModelAttribute("facturation") Facturation facturation, HttpServletRequest request) {
 
         LocalDateTime HeureNonFormatee = LocalDateTime.now();
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy à HH:mm");
@@ -159,8 +159,7 @@ public class ControllerClient {
         facturation.setPrestation(prestations);
         facturation.setPrix(calculPrixFinal(prestations, voiture));
         facturation.setDate(formatDateTime);
-        System.out.println(client);
-        System.out.println(voiture);
+        facturation.setRemarque(request.getParameter("remarque"));
         facturation.setClient(client);
         facturation.setVoiture(voiture);
         facturationDao.save(facturation);

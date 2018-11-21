@@ -16,6 +16,8 @@ public class Facturation implements Serializable{
     @Column(nullable = true)
     private double prix;
 
+    private String remarque;
+
     @ManyToOne()
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     private Client client;
@@ -50,20 +52,21 @@ public class Facturation implements Serializable{
         this.voiture = voiture;
     }
 
+    public Facturation(double prix, String remarque, Client client, String date, Collection<Prestation> prestation, Voiture voiture) {
+        this.prix = prix;
+        this.remarque = remarque;
+        this.client = client;
+        this.date = date;
+        this.prestation = prestation;
+        this.voiture = voiture;
+    }
+
     public Facturation() {
     }
 
     public Facturation(double prix, String date) {
         this.prix = prix;
         this.date = date;
-    }
-
-    public Collection<Prestation> getPrestation() {
-        return prestation;
-    }
-
-    public void setPrestation(Collection<Prestation> prestation) {
-        this.prestation = prestation;
     }
 
     public Long getId() {
@@ -82,12 +85,12 @@ public class Facturation implements Serializable{
         this.prix = prix;
     }
 
-    public String getDate() {
-        return date;
+    public String getRemarque() {
+        return remarque;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setRemarque(String remarque) {
+        this.remarque = remarque;
     }
 
     public Client getClient() {
@@ -96,6 +99,22 @@ public class Facturation implements Serializable{
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public Collection<Prestation> getPrestation() {
+        return prestation;
+    }
+
+    public void setPrestation(Collection<Prestation> prestation) {
+        this.prestation = prestation;
     }
 
     public Voiture getVoiture() {

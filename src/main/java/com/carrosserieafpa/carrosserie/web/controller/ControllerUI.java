@@ -130,4 +130,11 @@ public class ControllerUI {
         return FACTURE;
     }
 
+    @RequestMapping(value = "/login")
+    public String login() {
+
+        return "login";
+
+    }
+
 }
