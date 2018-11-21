@@ -6,7 +6,6 @@ import com.itextpdf.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -16,6 +15,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,6 +27,9 @@ import java.util.*;
 @Controller
 public class ControllerClient {
 
+    public static final String ENREGISTREMENT = "/enregistrement";
+    public static final String FACTURE = "/facturation/";
+    public static final String ACCUEIL = "/menu";
 
     @Autowired
     ActeDao acteDao;
@@ -40,7 +43,6 @@ public class ControllerClient {
     VoitureDao voitureDao;
     @Autowired
     ClientDao clientDao;
-
 
     @ModelAttribute("client")
     public Client getClient() {
@@ -63,10 +65,10 @@ public class ControllerClient {
     }
 
     @RequestMapping("/saveClient")
-    public String enregistrementClient(HttpServletRequest request, @ModelAttribute("client") Client client) {
-        client = this.creationClient(client, request);
+    public String enregistrementClient(HttpServletRequest request, @ModelAttribute("client") Client client, @ModelAttribute("voiture") Voiture voiture, Model model) {
+        client = this.creationClient(request);
 
-        Voiture voiture = this.creationVoiture(client, request);
+        voiture = this.creationVoiture(client, request);
         Collection<Voiture> tutures = new HashSet<>();
         tutures.add(voiture);
         client.setVoiture(tutures);
@@ -75,19 +77,12 @@ public class ControllerClient {
             clientDao.save(client);
             voitureDao.save(voiture);
         }
-
-        return "redirect:/vueEnregistrement";
+        model.addAttribute("client", client);
+        return "redirect:" + ENREGISTREMENT;
     }
 
     @RequestMapping("/createNewVehicule")
-    public String creationNewVoiture(@ModelAttribute("client") Client client, HttpServletRequest request, @ModelAttribute("voiture") Voiture voiture) {
-
-        voiture.setMarque(request.getParameter("marque"));
-        voiture.setImmat(request.getParameter("immat"));
-        voiture.setModele(request.getParameter("modele"));
-        voiture.setCodeCouleur(request.getParameter("couleur"));
-        voiture.setCategorie(request.getParameter("categorie"));
-        SimpleDateFormat dt = new SimpleDateFormat("yyyy-mm-dd");
+    public String creationNewVoiture(@ModelAttribute("client") Client client, @ModelAttribute("voiture") Voiture voiture, HttpServletRequest request) {
         String date = request.getParameter("date");
         Date date1 = null;
         try {
@@ -97,165 +92,35 @@ public class ControllerClient {
         }
         String dateDef = new SimpleDateFormat("dd-MM-yyyy").format(date1);
 
+        voiture.setMarque(request.getParameter("marque"));
+        voiture.setImmat(request.getParameter("immat"));
+        voiture.setModele(request.getParameter("modele"));
+        voiture.setCodeCouleur(request.getParameter("couleur"));
+        voiture.setCategorie(request.getParameter("categorie"));
         voiture.setDate(dateDef);
         voiture.setClient(client);
+
+        System.out.println(client.getVoiture());
 
         client.getVoiture().add(voiture);
 
         voitureDao.save(voiture);
 
-        return "redirect:/vueEnregistrement";
-    }
-
-    @RequestMapping("/setVoitureClient")
-    public String settageVoitureClient(HttpServletRequest request, Model model) {
-        Voiture voiture = new Voiture();
-
-        Long id = Long.valueOf(request.getParameter("vehicule"));
-        Optional<Voiture> tuture = voitureDao.findById(id);
-        if (tuture.isPresent()) {
-            voiture = tuture.get();
-        }
-        model.addAttribute("voiture", voiture);
-
-
-        return "redirect:/vueEnregistrement";
+        return "redirect:" + ENREGISTREMENT;
     }
 
     @RequestMapping("/addPresta")
-    public String ajouterPrestaList(RedirectAttributes ra,
-                                    @ModelAttribute("prestation") Prestation prestation,
-                                    @ModelAttribute("client") Client client, @ModelAttribute("voiture") Voiture voiture) {
-        Acte acte = prestation.getActe();
-        Finition finition = prestation.getFinition();
-
-        prestation.setId_presta(prestationDao.FindIdByActeAndFinition(acte, finition));
-        try {
-            prestation.setPrix(prestationDao.findPrixById(prestation.getId_presta()));
-        } catch (NullPointerException e) {
-        }
-        ra.addAttribute(prestation);
-        return "redirect:/savePresta";
-    }
-
-    @RequestMapping("/savePresta")
-    public String sauvegarderPrestas(@ModelAttribute("prestation") Prestation prestation, @ModelAttribute("client") Client client, @ModelAttribute("prestations") List<Prestation> prestations, Model model) {
+    public String ajouterPrestaList(@ModelAttribute("prestation") Prestation prestation,
+                                    @ModelAttribute("prestations") List<Prestation> prestations) {
+        prestation.setId_presta(prestationDao.FindIdByActeAndFinition(prestation.getActe(), prestation.getFinition()));
+        prestation.setPrix(prestationDao.findPrixById(prestation.getId_presta()));
         prestations.add(prestation);
-
-        model.addAttribute("prestations", prestations);
-        model.addAttribute("prestation", prestation);
-        return "redirect:/vueEnregistrement";
-    }
-
-    @RequestMapping("/saveFacture")
-    public String sauvegarderFacture(@ModelAttribute("prestations") List<Prestation> prestations,
-                                     @ModelAttribute("client") Client client,
-                                     @ModelAttribute("voiture") Voiture voiture,
-                                     @ModelAttribute("facturation") Facturation facturation,
-                                     RedirectAttributes ra) {
-
-        Collection<Prestation> prestationsColl = new HashSet<>();
-
-        prestationsColl.addAll(prestations);
-        facturation.setPrestation(prestationsColl);
-
-        Double prixFactureCalcule = calculPrixFinal(prestations, voiture);
-
-        facturation.setPrix(prixFactureCalcule);
-        LocalDateTime HeureNonFormatee = LocalDateTime.now();
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy à HH:mm");
-        String formatDateTime = HeureNonFormatee.format(timeFormatter);
-        facturation.setDate(formatDateTime);
-        facturation.setClient(client);
-        facturation.setVoiture(voiture);
-        facturationDao.save(facturation);
-
-        ra.addAttribute("client", client);
-        ra.addAttribute("facturation", facturation);
-
-
-        return "redirect:/facturation/" + facturation.getId();
-    }
-
-    public Double calculPrixFinal(@ModelAttribute("prestations") List<Prestation> prestations, @ModelAttribute("voiture") Voiture voiture) {
-
-        Double prixTotalFacture = 0.0;
-        for (Prestation presta : prestations) {
-            Double prixParPresta = presta.getPrix();
-
-            prixTotalFacture = prixTotalFacture + prixParPresta;
-        }
-
-        Double prixFinal1 = prixTotalFacture;
-        switch (voiture.getCategorie()) {
-            case "petit":
-                prixFinal1 -= prixTotalFacture * 0.1;
-                break;
-            case "moyen":
-                prixFinal1 = prixTotalFacture;
-                break;
-            case "gros":
-                prixFinal1 += prixTotalFacture * 0.1;
-                break;
-            case "fourgon":
-                prixFinal1 += prixTotalFacture * 0.2;
-                break;
-        }
-
-        Double prixFinal = arrondir(prixFinal1, 2);
-
-        return prixFinal;
-    }
-
-    public double arrondir(double nombre, double nbApVirg) {
-        return (double) ((int) (nombre * Math.pow(10, nbApVirg) + .5)) / Math.pow(10, nbApVirg);
-    }
-
-    public Client creationClient(@ModelAttribute("client") Client client, HttpServletRequest request) {
-
-        client.setPrenom(request.getParameter("prenom"));
-        client.setNom(request.getParameter("nom"));
-        client.setAdresse(request.getParameter("adresse"));
-        try {
-            client.setTelephone(Integer.valueOf(request.getParameter("telephone")));
-        } catch (NumberFormatException e) {
-        }
-        client.setEmail(request.getParameter("email"));
-        client.setNumAfpa(request.getParameter("numAfpa"));
-
-        return client;
-    }
-
-    public Voiture creationVoiture(@ModelAttribute("client") Client client, HttpServletRequest request) {
-
-        Voiture voiture = new Voiture();
-        voiture.setMarque(request.getParameter("marque"));
-        voiture.setImmat(request.getParameter("immat"));
-        voiture.setModele(request.getParameter("modele"));
-        voiture.setCodeCouleur(request.getParameter("couleur"));
-        voiture.setCategorie(request.getParameter("categorie"));
-        SimpleDateFormat dt = new SimpleDateFormat("yyyy-mm-dd");
-        String date = request.getParameter("date");
-        Date date1 = null;
-        try {
-            date1 = new SimpleDateFormat("yyyy-MM-dd").parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        String dateDef = new SimpleDateFormat("dd-MM-yyyy").format(date1);
-
-        voiture.setDate(dateDef);
-
-
-        voiture.setClient(client);
-
-        return voiture;
+        return "redirect:" + ENREGISTREMENT;
     }
 
     @RequestMapping("/deletePresta")
     public String supprimerPrestation(@ModelAttribute("prestation") Prestation prestation,
-                                      @ModelAttribute("prestations") List<Prestation> prestations,
-                                      Model model) {
+                                      @ModelAttribute("prestations") List<Prestation> prestations) {
 
         Optional<Prestation> prestationTmp = prestationDao.findById(prestation.getId_presta());
 
@@ -266,20 +131,117 @@ public class ControllerClient {
             int number = -1;
 
             for (Prestation presta : prestations) {
-                if (presta.getId_presta() == prestation.getId_presta()) {
-
+                if (presta.getId_presta().equals(prestation.getId_presta())) {
                     number = prestations.indexOf(presta);
                 }
             }
             prestations.remove(number);
-            model.addAttribute("prestations", prestations);
-            model.addAttribute("prestation", prestation);
         }
-        return "redirect:/vueEnregistrement";
+        return "redirect:" + ENREGISTREMENT;
     }
 
-    @RequestMapping(value = "/html2pdf", consumes = {"application/x-www-form-urlencoded"} )
-    public String html2pdf(Map<String, Object> data, @ModelAttribute("facturation") Facturation facturation, TemplateEngine templateEngine, SessionStatus sessionStatus) throws IOException, DocumentException {
+    @RequestMapping("/saveFacture")
+    public String sauvegarderFacture(@ModelAttribute("prestations") List<Prestation> prestations,
+                                     @ModelAttribute("client") Client client,
+                                     @ModelAttribute("voiture") Voiture voiture,
+                                     @ModelAttribute("facturation") Facturation facturation) {
+
+        LocalDateTime HeureNonFormatee = LocalDateTime.now();
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy à HH:mm");
+        String formatDateTime = HeureNonFormatee.format(timeFormatter);
+
+        Client clientTmp = clientDao.findClientByNomAndPrenom(client.getNom(), client.getPrenom());
+        client.setId(clientTmp.getId());
+
+        Voiture voitTmp = voitureDao.findByImmat(voiture.getImmat());
+        voiture.setId(voitTmp.getId());
+
+        facturation.setPrestation(prestations);
+        facturation.setPrix(calculPrixFinal(prestations, voiture));
+        facturation.setDate(formatDateTime);
+        System.out.println(client);
+        System.out.println(voiture);
+        facturation.setClient(client);
+        facturation.setVoiture(voiture);
+        facturationDao.save(facturation);
+
+        return "redirect:" + FACTURE + facturation.getId();
+    }
+
+
+
+    private Client creationClient(HttpServletRequest request) {
+        Client client = new Client();
+        client.setPrenom(request.getParameter("prenom"));
+        client.setNom(request.getParameter("nom"));
+        client.setRue(request.getParameter("rue"));
+        client.setCodePostal(request.getParameter("codePostal"));
+        client.setVille(request.getParameter("ville"));
+        client.setTelephone(request.getParameter("telephone"));
+        client.setEmail(request.getParameter("email"));
+        client.setNumAfpa(request.getParameter("numAfpa"));
+
+        return client;
+    }
+    private Voiture creationVoiture(Client client, HttpServletRequest request) {
+        Voiture voiture = new Voiture();
+        String date = request.getParameter("date");
+        Date date1 = null;
+        try {
+            date1 = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String dateDef = new SimpleDateFormat("dd-MM-yyyy").format(date1);
+
+        voiture.setMarque(request.getParameter("marque"));
+        voiture.setImmat(request.getParameter("immat"));
+        voiture.setModele(request.getParameter("modele"));
+        voiture.setCodeCouleur(request.getParameter("couleur"));
+        voiture.setCategorie(request.getParameter("categorie"));
+        voiture.setDate(dateDef);
+        voiture.setClient(client);
+
+        return voiture;
+    }
+    private Double calculPrixFinal(List<Prestation> prestations, Voiture voiture) {
+
+        double prixTotalFacture = 0.0;
+        for (Prestation presta : prestations) {
+            prixTotalFacture += presta.getPrix();
+        }
+
+        switch (voiture.getCategorie()) {
+            case "petit":
+                prixTotalFacture -= prixTotalFacture * 0.1;
+                break;
+            case "gros":
+                prixTotalFacture += prixTotalFacture * 0.1;
+                break;
+            case "fourgon":
+                prixTotalFacture += prixTotalFacture * 0.2;
+                break;
+        }
+
+        prixTotalFacture = arrondir(prixTotalFacture, 2);
+
+        return prixTotalFacture;
+    }
+    private double arrondir(double nombre, int nbApVirg) {
+        return (double) ((int) (nombre * Math.pow(10, nbApVirg) + .5)) / Math.pow(10, nbApVirg);
+    }
+
+    @RequestMapping(
+            value = "/html2pdf",
+            consumes = {"application/x-www-form-urlencoded"})
+    public String html2pdf(
+            Map<String, Object> data,
+            @ModelAttribute("facturation") Facturation facturation,
+            TemplateEngine templateEngine,
+            SessionStatus sessionStatus)
+            throws IOException, DocumentException {
+
+        String desktopPath = System.getProperty("user.home") + "\\Desktop";
 
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
         templateResolver.setSuffix(".html");
@@ -290,7 +252,7 @@ public class ControllerClient {
         context.setVariables(data);
         String html = templateEngine.process("/templates/facture", context);
 
-        OutputStream outputStream = new FileOutputStream("facture.pdf");
+        OutputStream outputStream = new FileOutputStream(desktopPath + "\\facture" + facturation.getId() + ".pdf");
         ITextRenderer renderer = new ITextRenderer();
         renderer.setDocumentFromString(html);
         renderer.layout();
@@ -298,6 +260,6 @@ public class ControllerClient {
         outputStream.close();
 
         sessionStatus.setComplete();
-       return "redirect:/menu";
+        return "redirect:/menu";
     }
-  }
+}

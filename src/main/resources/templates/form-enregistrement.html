@@ -39,6 +39,10 @@
             <h1 class="navbar-text text-success m-3 pb-3">Carrosserie </h1>
             <img style="max-width:45px; max-height:45px;" class="w-auto h-auto" th:src="@{/images/afpa.png}"
                  alt="Logo Afpa tout vert">
+            <!-- <form class="form-inline my-2 my-lg-0">
+                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+             </form>-->
         </div>
     </nav>
     <div class="row m-2">
@@ -48,12 +52,12 @@
     </div>
 </header>
 
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- -------------   BOUTONS NOUVEAU CLIENT/CLIENT EXISTANT  ---------------- -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
 <div class="container mt-5">
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- -------------   BOUTONS NOUVEAU CLIENT/CLIENT EXISTANT  ---------------- -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
     <div class="row m-2" th:style="${client.nom != null} ? 'display: none'">
         <div class="col-md-12">
             <div class="col-md-6 float-left text-center">
@@ -71,11 +75,7 @@
                 </a>
             </div>
         </div>
-        <div class="text-center font-weight-bold col-md-12 m-1 alert alert-danger" th:if="${message}"
-             th:text="${message}"></div>
     </div>
-    </div>
-
 
     <!-- ------------------------------------------------------------------------ -->
     <!-- ------------------------------------------------------------------------ -->
@@ -116,8 +116,28 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="col-md-10">
-                                            <label for="adresse">Adresse</label>
-                                            <input id="adresse" name="adresse" placeholder="n° rue CP Ville"
+                                            <label for="rue">Rue</label>
+                                            <input id="rue" name="rue" placeholder="n° rue et rue"
+                                                   class="form-control input-md" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label for="codePostal">Code Postal</label>
+                                            <input id="codePostal" name="codePostal" placeholder="code Postal"
+                                                   class="form-control input-md" type="number" pattern="[0-9]{5}" maxlength="5">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label for="ville">Ville</label>
+                                            <input id="ville" name="ville" placeholder="Ville"
                                                    class="form-control input-md" type="text">
                                         </div>
                                     </div>
@@ -235,7 +255,6 @@
     <!-- -------------            FORM MODAL RECHERCHE           ---------------- -->
     <!-- ------------------------------------------------------------------------ -->
     <!-- ------------------------------------------------------------------------ -->
-
     <div class="modal" id="readClient" tabindex="-1" role="dialog" href="#">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -564,7 +583,6 @@
         </div>
     </form>
 
-
     <!-- ------------------------------------------------------------------------ -->
     <!-- ------------------------------------------------------------------------ -->
     <!-- -------------        FORM MODAL supprimer prestation    ---------------- -->
@@ -608,13 +626,11 @@
         </div>
     </form>
 
-
     <!-- ------------------------------------------------------------------------ -->
     <!-- ------------------------------------------------------------------------ -->
     <!-- -------------        FORM MODAL Changer de véhicule     ---------------- -->
     <!-- ------------------------------------------------------------------------ -->
     <!-- ------------------------------------------------------------------------ -->
-
     <form method="post" modelAttribute="prestation" th:action="@{/setVoitureClient}">
         <div class="modal" id="changerVehicule" tabindex="-1" role="dialog" href="#">
             <div class="modal-dialog modal-lg">
@@ -657,6 +673,7 @@
             </div>
         </div>
     </form>
+
 </div>
 <footer style="height:50px;" class="fixed-bottom bg-light border text-info text-center">
     <div class="col-md-12">

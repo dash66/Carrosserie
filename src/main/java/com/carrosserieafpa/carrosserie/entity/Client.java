@@ -19,39 +19,37 @@ public class Client {
     private String nom;
 
     @Nullable
-    private String adresse;
+    private String rue;
+    @Nullable
+    private String codePostal;
+    @Nullable
+    private String ville;
 
     @Nullable
     private String email;
 
-    private int telephone;
+    private String telephone;
     private String numAfpa;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @LazyCollection(LazyCollectionOption.FALSE)
     private Collection<Voiture> voiture;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @LazyCollection(LazyCollectionOption.FALSE)
     private Collection<Facturation> facturation;
 
-    public Client(String prenom, String nom, @Nullable String adresse, @Nullable String email, int telephone, String numAfpa, Collection<Voiture> voiture, Collection<Facturation> facturation) {
+    public Client(String prenom, String nom, @Nullable String rue, @Nullable String codePostal, @Nullable String ville, @Nullable String email, String telephone, String numAfpa, Collection<Voiture> voiture, Collection<Facturation> facturation) {
         this.prenom = prenom;
         this.nom = nom;
-        this.adresse = adresse;
+        this.rue = rue;
+        this.codePostal = codePostal;
+        this.ville = ville;
         this.email = email;
         this.telephone = telephone;
         this.numAfpa = numAfpa;
         this.voiture = voiture;
         this.facturation = facturation;
-    }
-
-    public Client(String prenom, String nom, @Nullable String adresse, @Nullable String email, int telephone, String numAfpa) {
-        this.prenom = prenom;
-        this.nom = nom;
-        this.adresse = adresse;
-        this.email = email;
-        this.telephone = telephone;
-        this.numAfpa = numAfpa;
     }
 
     public Client() {
@@ -81,12 +79,31 @@ public class Client {
         this.nom = nom;
     }
 
-    public String getAdresse() {
-        return adresse;
+    @Nullable
+    public String getRue() {
+        return rue;
     }
 
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
+    public void setRue(@Nullable String rue) {
+        this.rue = rue;
+    }
+
+    @Nullable
+    public String getCodePostal() {
+        return codePostal;
+    }
+
+    public void setCodePostal(@Nullable String codePostal) {
+        this.codePostal = codePostal;
+    }
+
+    @Nullable
+    public String getVille() {
+        return ville;
+    }
+
+    public void setVille(@Nullable String ville) {
+        this.ville = ville;
     }
 
     public String getEmail() {
@@ -97,11 +114,11 @@ public class Client {
         this.email = email;
     }
 
-    public int getTelephone() {
+    public String getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(int telephone) {
+    public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 
@@ -142,7 +159,7 @@ public class Client {
                 + nom
                 + '\''
                 + ", adresse='"
-                + adresse
+                + rue + ' ' + codePostal + ' ' + ville +
                 + '\''
                 + ", email='"
                 + email

@@ -13,7 +13,7 @@ public interface ClientDao extends JpaRepository<Client, Long> {
 
     Client findClientByNomAndPrenom(String nom, String prenom);
 
-    @Query("Select new Client(prenom, nom, adresse, email, telephone, numAfpa) FROM Client WHERE id = :id")
+    @Query("Select c FROM Client c WHERE id = :id")
     Client findByImmat(@Param("id") Long id);
 
     Client findClientByFacturation(Facturation facturation);

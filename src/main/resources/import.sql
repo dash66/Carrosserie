@@ -126,7 +126,7 @@ INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (17, 3, 0.0);
 INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (17, 4, 0.0);
 INSERT INTO Prestation (id_acte, id_finition, prix) VALUES (17, 5, 100.00);
 
-INSERT INTO Client (id, adresse, email, nom ,num_afpa, prenom, telephone) VALUES (1,'rue Raimon de Trencavel 34070 Montpellier', 'test@test.com', 'DaRocha', 00001, 'Manuel', 0123456789);
+INSERT INTO Client (id, rue, code_postal, ville, email, nom ,num_afpa, prenom, telephone) VALUES (1,'rue Raimon de Trencavel', 34070, 'Montpellier', 'test@test.com', 'DaRocha', 00001, 'Manuel', 0123456789);
 
 INSERT INTO Voiture (id, categorie, code_couleur, immat, marque, modele, client_id) VALUES (1, 'fourgon',  'bleu', '1711YJ78', 'Fiotte', 'ours blanc et noir', 1);
 INSERT INTO Voiture (id, categorie, code_couleur, immat, marque, modele, client_id) VALUES (2, 'petit',  'jaune', '123AB34', 'René', 'Twizizi', 1);

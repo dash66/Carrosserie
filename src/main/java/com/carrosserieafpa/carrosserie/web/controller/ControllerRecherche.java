@@ -174,12 +174,12 @@ public class ControllerRecherche {
       michaelKnight.getPrenom();
     } catch (NullPointerException e) {
       ra.addFlashAttribute("message", "Ce client n'existe pas !");
-      return "redirect:/vueEnregistrement";
+      return "redirect:/enregistrement";
     }
 
     model.addAttribute("client", michaelKnight);
 
-    return "redirect:/vueEnregistrement";
+    return "redirect:/enregistrement";
   }
 
   @RequestMapping(
@@ -200,7 +200,7 @@ public class ControllerRecherche {
       clint = k2000.getClient();
     } catch (NullPointerException e) {
       ra.addFlashAttribute("message", "Ce véhicule n'existe pas !");
-      return "redirect:/vueEnregistrement";
+      return "redirect:/enregistrement";
     }
     model.addAttribute("client", clint);
     model.addAttribute("voiture", k2000);
@@ -208,7 +208,7 @@ public class ControllerRecherche {
     System.out.println(k2000);
     ra.addAttribute(k2000);
 
-    return "redirect:/vueEnregistrement";
+    return "redirect:/enregistrement";
   }
 
   @RequestMapping("/rechercheFactureExistant")
@@ -225,12 +225,12 @@ public class ControllerRecherche {
       facturation1 = Facture.get();
     } catch (NumberFormatException e) {
       ra.addFlashAttribute("message", "Cette facture n'existe pas !");
-      return "redirect:/vueEnregistrement";
+      return "redirect:/enregistrement";
     }
 
     model.addAttribute("facturation", facturation1);
 
-    return "redirect:/vueEnregistrement";
+    return "redirect:/enregistrement";
   }
 
   @RequestMapping("/setVoitureClientRecherche")
