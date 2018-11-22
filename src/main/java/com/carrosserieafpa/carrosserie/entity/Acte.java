@@ -1,9 +1,14 @@
 package com.carrosserieafpa.carrosserie.entity;
 
+import lombok.Data;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
 
+@ToString(exclude = {"client"})
+@Data
 @Entity
 public class Acte implements Serializable {
 
@@ -16,33 +21,6 @@ public class Acte implements Serializable {
 
     @OneToMany(mappedBy = "acte", cascade = CascadeType.REMOVE)
     private Collection<Prestation> prestations;
-
-    public Long getId_acte() {
-        return id_acte;
-    }
-
-    public void setId_acte(Long id_acte) {
-        this.id_acte = id_acte;
-    }
-
-    public String getLibelle() {
-        return libelle;
-    }
-
-    public void setLibelle(String libelle) {
-        this.libelle = libelle;
-    }
-
-    public Collection<Prestation> getPrestations() {
-        return prestations;
-    }
-
-    public void setPrestations(Collection<Prestation> prestations) {
-        this.prestations = prestations;
-    }
-
-    public Acte() {
-    }
 
     @Override
     public String toString() {

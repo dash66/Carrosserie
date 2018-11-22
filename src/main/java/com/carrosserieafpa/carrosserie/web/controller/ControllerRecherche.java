@@ -109,27 +109,25 @@ public class ControllerRecherche {
         return "form-archive";
     }
 
-    @RequestMapping("/rechercherFacture")
+    @RequestMapping(value = "/rechercherFacture")
     public String rechercheFacture(Model model, RedirectAttributes ra, HttpServletRequest httpServletRequest, @ModelAttribute("facturations") List<Facturation> facturations, @ModelAttribute("facturation") Facturation facturation) {
 
         Long numFacture = Long.valueOf(httpServletRequest.getParameter("Robert"));
 
         try {
             Optional<Facturation> facture = facturationDao.findById(numFacture);
-            if (facture.isPresent()) {
-                facturation = facture.get();
-            }
+            facturation = facture.get();
             facturations = new ArrayList<>();
             facturations.add(facturation);
         } catch (NoSuchElementException e) {
             ra.addFlashAttribute("message", "Cette facture n'existe pas !");
-            return "redirect:/rechercher";
-        }
+            return "redirect:/rechercher";}
 
         model.addAttribute("prestations", facturation.getPrestation());
         model.addAttribute("facturation", facturation);
         model.addAttribute("client", facturation.getClient());
         model.addAttribute("voiture", facturation.getVoiture());
+        model.addAttribute("facturations", facturations);
 
         return "redirect:/facturation/" + facturation.getId();
     }

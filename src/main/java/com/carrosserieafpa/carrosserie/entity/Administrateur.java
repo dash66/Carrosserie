@@ -1,10 +1,12 @@
 package com.carrosserieafpa.carrosserie.entity;
 
+import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Data
 @Entity
 public class Administrateur {
 
@@ -25,19 +27,11 @@ public class Administrateur {
         this.motDePasse = motDePasse;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getMotDePasse() {
-        return motDePasse;
-    }
-
-    public void setMotDePasse(String motDePasse) {
-        this.motDePasse = motDePasse;
+    @Override
+    public String toString() {
+        return "Administrateur{" +
+                "id=" + id +
+                ", motDePasse='" + motDePasse + '\'' +
+                '}';
     }
 }

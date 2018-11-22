@@ -65,7 +65,7 @@ public class ControllerClient {
     }
 
     @RequestMapping("/saveClient")
-    public String enregistrementClient(HttpServletRequest request, @ModelAttribute("client") Client client, @ModelAttribute("voiture") Voiture voiture, Model model) {
+    public String enregistrementClient(HttpServletRequest request, @ModelAttribute("client") Client client, @ModelAttribute("voiture") Voiture voiture, Model model, RedirectAttributes ra) {
         client = this.creationClient(request);
 
         voiture = this.creationVoiture(client, request);
@@ -78,11 +78,13 @@ public class ControllerClient {
             voitureDao.save(voiture);
         }
         model.addAttribute("client", client);
+        ra.addFlashAttribute("message1", "Client & voiture ajoutés en base !!");
+
         return "redirect:" + ENREGISTREMENT;
     }
 
     @RequestMapping("/createNewVehicule")
-    public String creationNewVoiture(@ModelAttribute("client") Client client, @ModelAttribute("voiture") Voiture voiture, HttpServletRequest request) {
+    public String creationNewVoiture(@ModelAttribute("client") Client client, @ModelAttribute("voiture") Voiture voiture, HttpServletRequest request, RedirectAttributes ra) {
         String date = request.getParameter("date");
         Date date1 = null;
         try {
@@ -99,12 +101,10 @@ public class ControllerClient {
         voiture.setCategorie(request.getParameter("categorie"));
         voiture.setDate(dateDef);
         voiture.setClient(client);
-
-        System.out.println(client.getVoiture());
-
         client.getVoiture().add(voiture);
 
         voitureDao.save(voiture);
+        ra.addFlashAttribute("message2", "Voiture ajoutée en base !!");
 
         return "redirect:" + ENREGISTREMENT;
     }
@@ -237,7 +237,7 @@ public class ControllerClient {
             Map<String, Object> data,
             @ModelAttribute("facturation") Facturation facturation,
             TemplateEngine templateEngine,
-            SessionStatus sessionStatus)
+            SessionStatus sessionStatus, RedirectAttributes ra)
             throws IOException, DocumentException {
 
         String desktopPath = System.getProperty("user.home") + "\\Desktop";
@@ -258,6 +258,7 @@ public class ControllerClient {
         renderer.createPDF(outputStream);
         outputStream.close();
 
+        ra.addFlashAttribute("message1", "Votre facture a bien été exportée en pdf sur votre bureau !!");
         sessionStatus.setComplete();
         return "redirect:/menu";
     }

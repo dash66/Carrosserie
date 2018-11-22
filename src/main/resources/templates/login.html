@@ -23,12 +23,6 @@
     </nav>
 </header>
 
-
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
 <div class="container">
     <div id="login-row" class="row justify-content-center align-items-center">
         <div id="login-column" class="col-md-6"
@@ -37,12 +31,14 @@
                 <div class="float">
                     <form class="form" th:action="@{/verifierLogin}" style="margin-top: 481px">
                         <div class="form-group">
-                            <input type="text" name="password" id="password" class="form-control text-center"
+                            <input type="password" name="password" id="password" class="form-control text-center"
                                    placeholder="Mot de passe">
                         </div>
                         <div class="form-group col-md-12 text-right p-0">
                             <input type="submit" name="submit" class="btn btn-info btn-md" value="Valider">
                         </div>
+                        <div class="text-center font-weight-bold col-md-12 m-1 alert alert-danger" th:if="${message}"
+                             th:text="${message}"></div>
                     </form>
                 </div>
             </div>

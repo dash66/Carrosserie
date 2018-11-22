@@ -1,13 +1,15 @@
 package com.carrosserieafpa.carrosserie.entity;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
+import lombok.Data;
+import lombok.ToString;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.lang.Nullable;
-
 import javax.persistence.*;
 import java.util.Collection;
 
+@ToString(exclude = {"voiture"})
+@Data
 @Entity
 public class Client {
 
@@ -55,119 +57,5 @@ public class Client {
     public Client() {
     }
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    @Nullable
-    public String getRue() {
-        return rue;
-    }
-
-    public void setRue(@Nullable String rue) {
-        this.rue = rue;
-    }
-
-    @Nullable
-    public String getCodePostal() {
-        return codePostal;
-    }
-
-    public void setCodePostal(@Nullable String codePostal) {
-        this.codePostal = codePostal;
-    }
-
-    @Nullable
-    public String getVille() {
-        return ville;
-    }
-
-    public void setVille(@Nullable String ville) {
-        this.ville = ville;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
-    public String getNumAfpa() {
-        return numAfpa;
-    }
-
-    public void setNumAfpa(String numAfpa) {
-        this.numAfpa = numAfpa;
-    }
-
-    @Ignore
-    public Collection<Voiture> getVoiture() {
-        return voiture;
-    }
-
-    public void setVoiture(Collection<Voiture> voiture) {
-        this.voiture = voiture;
-    }
-
-    public Collection<Facturation> getFacturation() {
-        return facturation;
-    }
-
-    public void setFacturation(Collection<Facturation> facturation) {
-        this.facturation = facturation;
-    }
-
-    @Override
-    public String toString() {
-        return "Client{"
-                + "id="
-                + id
-                + ", prenom='"
-                + prenom
-                + '\''
-                + ", nom='"
-                + nom
-                + '\''
-                + ", adresse='"
-                + rue + ' ' + codePostal + ' ' + ville +
-                + '\''
-                + ", email='"
-                + email
-                + '\''
-                + ", telephone="
-                + telephone
-                + ", numAfpa="
-                + numAfpa
-                + '}';
-    }
 }

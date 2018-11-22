@@ -7,8 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.List;
-
 public interface PrestationDao extends JpaRepository<Prestation, Long> {
 
     @Query("SELECT id_presta FROM Prestation WHERE id_acte = :acte AND id_finition = :finition")

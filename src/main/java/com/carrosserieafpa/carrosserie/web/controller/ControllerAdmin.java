@@ -36,14 +36,14 @@ public class ControllerAdmin {
     public String ajouterNouveauActe(HttpServletRequest httpServletRequest, Acte acte, RedirectAttributes ra) {
         acte.setLibelle(httpServletRequest.getParameter("libelle"));
         acteDao.save(acte);
-        ra.addFlashAttribute("message3", "Acte ajouté en base !!");
+        ra.addFlashAttribute("message1", "Acte ajouté en base !!");
         return "redirect:" + ADMINISTRATION;
     }
 
     @PostMapping("/finition")
     public String ajouterNouveauFinition(HttpServletRequest httpServletRequest, Finition finition, RedirectAttributes ra) {
         finition.setLibelle(httpServletRequest.getParameter("libelle2"));
-        ra.addFlashAttribute("message4", "Finition ajouté en base !!");
+        ra.addFlashAttribute("message1", "Finition ajouté en base !!");
         finitionDao.save(finition);
 
         return "redirect:" + ADMINISTRATION;
@@ -58,7 +58,7 @@ public class ControllerAdmin {
         }
         prestationDao.save(prestation);
         status.setComplete();
-        ra.addFlashAttribute("message5", "Prix ajouté en base !!");
+        ra.addFlashAttribute("message1", "Prix ajouté en base !!");
 
         return "redirect:" + ADMINISTRATION;
     }
@@ -67,7 +67,7 @@ public class ControllerAdmin {
     public String supprimerUnActe(@ModelAttribute("prestation") Prestation prestation, RedirectAttributes ra){
         Acte acteSupprimer = prestation.getActe();
         acteDao.delete(acteSupprimer);
-        ra.addFlashAttribute("message6", "Acte supprimé de la base !!");
+        ra.addFlashAttribute("message", "Acte supprimé de la base !!");
         return "redirect:" + ADMINISTRATION;
     }
 
@@ -75,7 +75,7 @@ public class ControllerAdmin {
     public String supprimerUneFinition(@ModelAttribute("prestation") Prestation prestation, RedirectAttributes ra){
         Finition finitionSupprimer = prestation.getFinition();
         finitionDao.delete(finitionSupprimer);
-        ra.addFlashAttribute("message7", "Finition supprimée de la base !!");
+        ra.addFlashAttribute("message", "Finition supprimée de la base !!");
         return "redirect:" + ADMINISTRATION;
     }
 
@@ -88,12 +88,12 @@ public class ControllerAdmin {
             client = clientTmp.get();
         }
         clientDao.delete(client);
-        ra.addFlashAttribute("message8", "Client supprimé de la base !!");
+        ra.addFlashAttribute("message", "Client supprimé de la base !!");
         return "redirect:" + ADMINISTRATION;
     }
 
     @RequestMapping("/verifierLogin")
-    public String verifierMotDepasse(HttpServletRequest request) {
+    public String verifierMotDepasse(HttpServletRequest request, RedirectAttributes ra) {
         String entryPwd = request.getParameter("password");
         List<Administrateur> admins = adminDao.findAll();
 
@@ -105,7 +105,8 @@ public class ControllerAdmin {
         if (passwords.contains(entryPwd)) {
             return "redirect:" + ADMINISTRATION;
         } else {
-            return "/login";
+            ra.addFlashAttribute("message", "Mot de passe erroné !!");
+            return "redirect:/login";
         }
     }
 
@@ -117,13 +118,13 @@ public class ControllerAdmin {
             admin = adminDao.findByMotDePasse(ancienMdp);
             admin.getMotDePasse();
         } catch (NullPointerException e) {
-            ra.addFlashAttribute("message", "Ancien mot de passe incorrect !!");
+            ra.addFlashAttribute("message1", "Ancien mot de passe incorrect !!");
             return "redirect:" + ADMINISTRATION;
         }
         String nouveauMdp = request.getParameter("nouveauMdp");
         admin.setMotDePasse(nouveauMdp);
         adminDao.save(admin);
-        ra.addFlashAttribute("message2", "Mot de passe mis à jour !!");
+        ra.addFlashAttribute("message", "Mot de passe mis à jour !!");
         return "redirect:" + ADMINISTRATION;
     }
 }

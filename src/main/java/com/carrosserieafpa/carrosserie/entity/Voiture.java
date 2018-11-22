@@ -1,13 +1,16 @@
 package com.carrosserieafpa.carrosserie.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
 
+
+@ToString(exclude = {"client"})
+@Data
 @Entity
 public class Voiture implements Serializable {
 
@@ -43,85 +46,6 @@ public class Voiture implements Serializable {
         this.client = client;
     }
 
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getImmat() {
-        return immat;
-    }
-
-    public void setImmat(String immat) {
-        this.immat = immat;
-    }
-
-    public String getMarque() {
-        return marque;
-    }
-
-    public void setMarque(String marque) {
-        this.marque = marque;
-    }
-
-    public String getModele() {
-        return modele;
-    }
-
-    public void setModele(String modele) {
-        this.modele = modele;
-    }
-
-    public String getCategorie() {
-        return categorie;
-    }
-
-    public void setCategorie(String categorie) {
-        this.categorie = categorie;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getCodeCouleur() {
-        return codeCouleur;
-    }
-
-    public void setCodeCouleur(String codeCouleur) {
-        this.codeCouleur = codeCouleur;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    @Override
-    public String toString() {
-        return "Voiture{" +
-                "id=" + id +
-                ", immat='" + immat + '\'' +
-                ", marque='" + marque + '\'' +
-                ", modele='" + modele + '\'' +
-                ", categorie='" + categorie + '\'' +
-                ", date=" + date +
-                ", codeCouleur='" + codeCouleur + '\'' +
-                ", client=" + client +
-                '}';
-    }
 }
 
 

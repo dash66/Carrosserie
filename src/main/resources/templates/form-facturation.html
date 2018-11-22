@@ -88,11 +88,11 @@
                 <tbody>
                 <tr>
                     <td><strong>Marque : </strong>[(${facturation.voiture.marque})]</td>
-                    <td><strong>Modèle :  </strong>[(${facturation.voiture.modele})]</td>
+                    <td><strong>Modèle : </strong>[(${facturation.voiture.modele})]</td>
                 </tr>
                 <tr>
-                    <td><strong>Immatriculation :  </strong>[(${facturation.voiture.immat})]</td>
-                    <td><strong>Gabarit :  </strong>[(${facturation.voiture.categorie})]</td>
+                    <td><strong>Immatriculation : </strong>[(${facturation.voiture.immat})]</td>
+                    <td><strong>Gabarit : </strong>[(${facturation.voiture.categorie})]</td>
                 </tr>
 
                 </tbody>
@@ -163,12 +163,6 @@
 <div class="row m-2">
     <div class="col-md-12 text-center m-2">
         <form method="post" th:action="@{/html2pdf}">
-            <input id="prenom4" name="prenom3"
-                   class="form-control d-none"
-                   type="text" th:value="${client.prenom}">
-            <input id="nom4" name="nom3"
-                   class="form-control d-none"
-                   type="text" th:value="${client.nom}">
             <input type="submit" class="btn btn-outline-info font-weight-bold" value="&#8630; PDF"/>
         </form>
     </div>

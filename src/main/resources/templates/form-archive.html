@@ -53,7 +53,8 @@
             <div class="col-md-6 float-md-left ">
                 <p class="glyphicon glyphicon-user"> Prenom, Nom : <span th:text="${client.prenom} "></span> <span
                         th:text="${client.nom}"></span></p>
-                <p class="glyphicon glyphicon-home"> Adresse : <span th:text="${client.adresse}"> </span></p>
+                <p class="glyphicon glyphicon-home"> Adresse : <span>[(${client.rue})]</span></br>
+                    <span style="margin-left: 88px">[(${client.codePostal})] [(${client.ville})]</span></br></p>
                 <p class="glyphicon glyphicon-envelope"> Mail : <span th:text="${client.email}"> </span></p>
             </div>
             <div class="col-md-6 float-md-right">

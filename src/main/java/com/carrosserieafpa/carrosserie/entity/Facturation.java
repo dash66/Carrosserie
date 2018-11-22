@@ -1,11 +1,13 @@
 package com.carrosserieafpa.carrosserie.entity;
 
+import lombok.Data;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Date;
 
+@Data
 @Entity
 public class Facturation implements Serializable{
 
@@ -67,62 +69,6 @@ public class Facturation implements Serializable{
     public Facturation(double prix, String date) {
         this.prix = prix;
         this.date = date;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public double getPrix() {
-        return prix;
-    }
-
-    public void setPrix(double prix) {
-        this.prix = prix;
-    }
-
-    public String getRemarque() {
-        return remarque;
-    }
-
-    public void setRemarque(String remarque) {
-        this.remarque = remarque;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public Collection<Prestation> getPrestation() {
-        return prestation;
-    }
-
-    public void setPrestation(Collection<Prestation> prestation) {
-        this.prestation = prestation;
-    }
-
-    public Voiture getVoiture() {
-        return voiture;
-    }
-
-    public void setVoiture(Voiture voiture) {
-        this.voiture = voiture;
     }
 
     @Override

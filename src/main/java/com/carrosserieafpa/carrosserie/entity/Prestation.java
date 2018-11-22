@@ -1,6 +1,7 @@
 package com.carrosserieafpa.carrosserie.entity;
 
-import org.springframework.data.jpa.repository.Query;
+import lombok.Data;
+
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
 
+@Data
 @Entity
 public class Prestation implements Serializable {
 
@@ -34,38 +36,6 @@ public class Prestation implements Serializable {
     }
 
     public Prestation() {
-    }
-
-    public Long getId_presta() {
-        return id_presta;
-    }
-
-    public void setId_presta(Long id_presta) {
-        this.id_presta = id_presta;
-    }
-
-    public double getPrix() {
-        return prix;
-    }
-
-    public void setPrix(double prix) {
-        this.prix = prix;
-    }
-
-    public Acte getActe() {
-        return acte;
-    }
-
-    public void setActe(Acte acte) {
-        this.acte = acte;
-    }
-
-    public Finition getFinition() {
-        return finition;
-    }
-
-    public void setFinition(Finition finition) {
-        this.finition = finition;
     }
 
     @Override
