@@ -6,7 +6,7 @@
     <groupId>com.carrosserieAfpa</groupId>
     <artifactId>carrosserie</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <name>carrosserie</name>
     <description>Demo project for Spring Boot</description>
@@ -121,6 +121,7 @@
     </dependencyManagement>
 
     <build>
+        <finalName>Carrosserie</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

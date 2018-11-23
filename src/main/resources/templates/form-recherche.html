@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{webjars/bootstrap/4.1.3/css/bootstrap.css}"/>
-    <link rel="stylesheet" type="text/css"
-          th:href="@{webjars/bootstrap-glyphicons/bdd2cbfba0/css/bootstrap-glyphicons.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{webjars/bootstrap-glyphicons/bdd2cbfba0/css/bootstrap-glyphicons.css}"/>
     <link rel="stylesheet" type="text/css" href="webjars/select2/4.0.5/css/select2.css"/>
     <script type="text/javascript" src="webjars/jquery/3.0.0/jquery.min.js"></script>
     <script type="text/javascript" src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
@@ -13,50 +12,14 @@
 </head>
 
 <body>
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- -------------              EN-TÊTE DE PAGE              ---------------- -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
-<header>
+<header th:replace="fragments/header :: header"></header>
 
-
-    <nav style="height:50px;"
-         class="navbar navbar-expand-lg navbar-light bg-light border rounded-bottom mb-5">
-        <a class="navbar-brand glyphicon glyphicon-home text-info" th:href="@{|/menu|}"> Accueil<span
-                class="sr-only">(current)</span></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link glyphicon glyphicon-user text-info" th:href="@{/login}"> Administration</a>
-                </li>
-            </ul>
-            <h1 class="navbar-text text-success m-3 pb-3">Carrosserie </h1>
-            <img style="max-width:45px; max-height:45px;" class="w-auto h-auto" th:src="@{/images/afpa.png}"
-                 alt="Logo Afpa tout vert">
-        </div>
-    </nav>
-
-
-    <div class="row m-2">
-        <div class="col-md-12 text-center">
-            <img class="mw-100 mh-100" th:src="@{/images/anim2.png}" alt="Beau comme un camion tout neuf !"/>
-        </div>
-    </div>
-
-</header>
-
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- -------------           ANNOTATION MAJORATION/ABATTEMENT---------------- -->
+    <!-- ------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- -------------           ANNOTATION MAJORATION/ABATTEMENT---------------- -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
-<div class="container mt-5">
+<div class="container mt-5" style="margin-bottom:100px;">
     <div class="row m-2">
         <div class="alert alert-warning col-md-12">
             <div class="text-center font-weight-bold col-md-12 m-1">
@@ -69,17 +32,12 @@
         <div class="text-center font-weight-bold col-md-12 m-1 alert alert-danger" th:if="${message}"
              th:text="${message}"></div>
     </div>
-
-</div>
-
-
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- -------------   BOUTONS NOUVEAU CLIENT/CLIENT EXISTANT  ---------------- -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
-<div class="container mt-5">
-    <div class="row m-2">
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- -------------   BOUTONS NOUVEAU CLIENT/CLIENT EXISTANT  ---------------- -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <div class="row m-2 mt-5">
         <div class="col-md-12">
             <div class="col-md-4 float-left text-center">
                 <a href="#rechercheClient" class="btn btn-outline-info a-btn-slide-text" data-toggle="modal"
@@ -104,137 +62,12 @@
             </div>
         </div>
     </div>
-</div>
-
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- -------------         FORM MODAL RECHERCHE  CLIENT      ---------------- -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
-<form method="post" th:action="@{/rechercherClient}">
-    <div class="modal" id="rechercheClient" tabindex="-1" role="dialog" href="#">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Rechercher par Client</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal mt-5" method="post">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input id="prenom3" name="prenom3" placeholder="Prénom"
-                                               class="form-control"
-                                               type="text" required>
-
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-
-                                        <input id="nom3" name="nom3" placeholder="Nom"
-                                               class="form-control"
-                                               type="text" required>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-
-                    <div class="modal-footer">
-                        <input id="boutonSave3" class="btn btn-outline-info" type="submit"
-                               value="&#128269 Rechercher"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
-
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- -------------         FORM MODAL RECHERCHE  VOITURE     ---------------- -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
-<form method="post" th:action="@{/rechercherVoiture}">
-    <div class="modal" id="rechercheVoiture" tabindex="-1" role="dialog" href="#">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Rechercher par véhicule</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal mt-5" method="post">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input id="Immatriculation" name="Immatriculation"
-                                               placeholder="Immatriculation"
-                                               class="form-control input-md"
-                                               type="text" required>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                    <div class="modal-footer">
-                        <input id="boutonSave4" class="btn btn-outline-info" type="submit"
-                               value="&#128269 Rechercher"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
-
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- -------------         FORM MODAL RECHERCHE  FACTURE     ---------------- -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
-<form method="post" th:action="@{/rechercherFacture}">
-    <div class="modal" id="rechercheFacture" tabindex="-1" role="dialog" href="#">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Rechercher par Facture</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal mt-5" method="post">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input id="numFacture" name="Robert" placeholder="Numéro de facture"
-                                               class="form-control input-md"
-                                               type="text"  pattern="[0-9].{0,}" required>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                    <div class="modal-footer">
-                        <input id="boutonSave5" class="btn btn-outline-info" type="submit"
-                               value="&#128269 Rechercher"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
-
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- -------------         LISTE TARIFS & PRESTA     ---------------- -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
-<div style="margin-bottom:100px;" class="container mt-5">
-    <div class="row m-2">
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- -------------         LISTE TARIFS & PRESTA     ---------------- -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <div class="row m-2 mt-5">
         <table class="table table-bordered table-striped table-md float-" th:object="${prestation}">
             <thead class="table-info">
             <tr>
@@ -242,7 +75,6 @@
                 <td th:each="finition : ${finitions}" th:text="${finition}" style="font-weight: bolder"></td>
             </tr>
             </thead>
-
             <tbody>
             <tr th:each="acte : ${actes}">
                 <td th:text="${acte}" style="font-weight: bolder"></td>
@@ -254,10 +86,129 @@
         </table>
     </div>
 </div>
-<footer style="height:50px;" class="fixed-bottom bg-light border text-info text-center">
-    <div class="col-md-12">
-        <p class="mb-0 mt-2">&#169; Copyright 2019 Réalisation : Mehdi Salamé, Manuel Da Rocha, Baptiste Lavignon</p>
-    </div>
-</footer>
+
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- -------------         FORM MODAL RECHERCHE  CLIENT      ---------------- -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <form method="post" th:action="@{/rechercherClient}">
+        <div class="modal" id="rechercheClient" tabindex="-1" role="dialog" href="#">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Rechercher par Client</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal mt-5" method="post">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input id="prenom3" name="prenom3" placeholder="Prénom"
+                                                   class="form-control"
+                                                   type="text" required>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+
+                                            <input id="nom3" name="nom3" placeholder="Nom"
+                                                   class="form-control"
+                                                   type="text" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="modal-footer">
+                            <input id="boutonSave3" class="btn btn-outline-info" type="submit"
+                                   value="&#128269 Rechercher"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- -------------         FORM MODAL RECHERCHE  VOITURE     ---------------- -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <form method="post" th:action="@{/rechercherVoiture}">
+        <div class="modal" id="rechercheVoiture" tabindex="-1" role="dialog" href="#">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Rechercher par véhicule</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal mt-5" method="post">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input id="Immatriculation" name="Immatriculation"
+                                                   placeholder="Immatriculation"
+                                                   class="form-control input-md"
+                                                   type="text" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="modal-footer">
+                            <input id="boutonSave4" class="btn btn-outline-info" type="submit"
+                                   value="&#128269 Rechercher"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- -------------         FORM MODAL RECHERCHE  FACTURE     ---------------- -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <form method="post" th:action="@{/rechercherFacture}">
+        <div class="modal" id="rechercheFacture" tabindex="-1" role="dialog" href="#">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Rechercher par Facture</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal mt-5" method="post">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input id="numFacture" name="Robert" placeholder="Numéro de facture"
+                                                   class="form-control input-md"
+                                                   type="text"  pattern="[0-9].{0,}" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="modal-footer">
+                            <input id="boutonSave5" class="btn btn-outline-info" type="submit"
+                                   value="&#128269 Rechercher"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+<footer th:replace="fragments/footer :: footer"></footer>
 </body>
 </html>

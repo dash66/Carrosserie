@@ -3,61 +3,25 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" th:href="@{webjars/bootstrap/4.1.3/css/bootstrap.css}"/>
-
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.css}"/>
     <link rel="stylesheet" type="text/css"
-          th:href="@{webjars/bootstrap-glyphicons/bdd2cbfba0/css/bootstrap-glyphicons.css}"/>
-
-    <script type="text/javascript" src="webjars/jquery/3.0.0/jquery.min.js"></script>
-    <script type="text/javascript" src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+          th:href="@{/webjars/bootstrap-glyphicons/bdd2cbfba0/css/bootstrap-glyphicons.css}"/>
+    <link rel="stylesheet" type="text/css" href="/webjars/font-awesome/5.4.1/css/all.css">
+    <script type="text/javascript" src="/webjars/font-awesome/5.4.1/js/all.js"></script>
+    <script type="text/javascript" src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </head>
 
+
 <body>
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- -------------              EN-TÊTE DE PAGE              ---------------- -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
-<header>
+<header th:replace="fragments/header :: header"></header>
 
-
-    <nav style="height:50px;"
-         class="navbar navbar-expand-lg navbar-light bg-light border rounded-bottom mb-5">
-        <a class="navbar-brand glyphicon glyphicon-home text-info" th:href="@{|/menu|}"> Accueil<span
-                class="sr-only">(current)</span></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link glyphicon glyphicon-user text-info" th:href="@{/login}"> Administration</a>
-                </li>
-            </ul>
-            <h1 class="navbar-text text-success m-3 pb-3">Carrosserie </h1>
-            <img style="max-width:45px; max-height:45px;" class="w-auto h-auto" th:src="@{/images/afpa.png}"
-                 alt="Logo Afpa tout vert">
-        </div>
-    </nav>
-
-
-    <div class="row m-2">
-        <div class="col-md-12 text-center">
-            <img class="mw-100 mh-100" th:src="@{/images/anim2.png}" alt="Beau comme un camion tout neuf !"/>
-        </div>
-    </div>
-
-</header>
-
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- -------------      BOUTONS LIENS VERS AUTRES PAGES      ---------------- -->
-<!-- ------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------ -->
 <div style="margin-bottom:100px;" class="container mt-5">
-
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- -------------      BOUTONS LIENS VERS AUTRES PAGES      ---------------- -->
+    <!-- ------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------ -->
     <div class="row m-2">
         <div class="col-md-12">
             <div class="col-md-6 float-left text-center">
@@ -77,41 +41,31 @@
     </div>
     <div class="row m-2">
         <div class="col-md-12">
-            <div class="text-center font-weight-bold col-md-12 m-1 alert alert-success" th:if="${message1}"
-                 th:text="${message1}"></div>
+            <p class="text-center font-weight-bold col-md-12 m-1 alert alert-success" th:if="${message1}"
+                 th:text="${message1}"></p>
         </div>
     </div>
-
     <!-- ------------------------------------------------------------------------ -->
     <!-- ------------------------------------------------------------------------ -->
     <!-- -------------        BAS DE PAGE BUSES PEINTURE         ---------------- -->
     <!-- ------------------------------------------------------------------------ -->
     <!-- ------------------------------------------------------------------------ -->
-    <footer>
-        <div class="container mt-5">
-            <div class="row m-2">
-                <div class="col-md-12">
-                    <div class="col-md-6 float-left text-center">
-                        <img class="mw-100 mh-100" th:src="@{images/image_5981da9ea71c8.jpg.png}"
-                             alt="Qu'ils sont forts !"/>
-                    </div>
-
-
-                    <div class="col-md-6 float-left text-center">
-                        <img class="mw-100 mh-100" th:src="@{images/Peinture-monocouche-1.png}"
-                             alt="Qu'ils sont forts !"/>
-                    </div>
-
-                </div>
+    <div class="row mt-5 m-2">
+        <div class="col-md-12">
+            <div class="col-md-6 float-left text-center">
+                <img class="mw-100 mh-100" th:src="@{images/image_5981da9ea71c8.jpg.png}"
+                     alt="Qu'ils sont forts !"/>
             </div>
-        </div>
-    </footer>
-</div>
-<footer style="height:50px;" class="fixed-bottom bg-light border text-info text-center">
-    <div class="col-md-12">
-        <p class="mb-0 mt-2">&#169; Copyright 2019 Réalisation : Mehdi Salamé, Manuel Da Rocha, Baptiste Lavignon</p>
-    </div>
-</footer>
-</body>
+            <div class="col-md-6 float-left text-center">
+                <img class="mw-100 mh-100" th:src="@{images/Peinture-monocouche-1.png}"
+                     alt="Qu'ils sont forts !"/>
+            </div>
 
+        </div>
+    </div>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+</div>
+</body>
 </html>

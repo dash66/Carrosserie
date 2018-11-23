@@ -11,32 +11,11 @@
     <script type="text/javascript" src="/webjars/jquery/3.0.0/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </head>
-
 <body>
-<header>
-    <nav style="height:50px;"
-         class="navbar navbar-expand-lg navbar-light bg-light border rounded-bottom mb-5">
-        <a class="navbar-brand glyphicon glyphicon-home text-info" th:href="@{|/menu|}"> Accueil<span
-                class="sr-only">(current)</span></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link glyphicon glyphicon-user text-info" th:href="@{/login}"> Administration</a>
-                </li>
-            </ul>
-            <h1 class="navbar-text text-success m-3 pb-3">Carrosserie </h1>
-            <img style="max-width:45px; max-height:45px;" class="w-auto h-auto" th:src="@{/images/afpa.png}"
-                 alt="Logo Afpa tout vert">
-        </div>
-    </nav>
-</header>
 
+<header th:replace="fragments/header :: header"></header>
 
-<div class="container border border-info rounded">
+<div style="margin-bottom:100px;" class="container border border-info rounded">
     <div class="row border border-dark rounded my-5 mx-2">
         <div class="col-md-12">
             <div class="col-md-8 float-left">
@@ -82,7 +61,6 @@
                 <tr>
                     <th scope="col">Véhicule</th>
                     <th scope="col"></th>
-
                 </tr>
                 </thead>
                 <tbody>
@@ -94,12 +72,10 @@
                     <td><strong>Immatriculation : </strong>[(${facturation.voiture.immat})]</td>
                     <td><strong>Gabarit : </strong>[(${facturation.voiture.categorie})]</td>
                 </tr>
-
                 </tbody>
             </table>
         </div>
     </div>
-
     <div class="row mt-5 m-2">
         <table class="table">
             <thead class="thead-light">
@@ -116,7 +92,6 @@
                 <td><span>[(${prestation.acte})]</span></td>
                 <td><span>[(${prestation.finition})]</span></td>
                 <td><span>[(${prestation.prix})]</span></td>
-                </span>
             </tr>
             <tr>
                 <th scope="row" colspan="3">Total dû après calcul de la catégorie du véhicule</th>
@@ -125,7 +100,6 @@
             </tbody>
         </table>
     </div>
-
     <div class="row m-2">
         <div class="alert alert-warning col-md-12 mt-2">
             <div class="text-center font-weight-bold m-1">
@@ -145,27 +119,26 @@
             </div>
         </div>
     </div>
+    <div class="row m-2">
+        <div class="col-md-12 text-center p-0">
+            <form method="post" th:action="@{/rechercherClient}" >
+                <input id="prenom3" name="prenom3"
+                       class="form-control d-none"
+                       type="text" th:value="${client.prenom}">
+                <input id="nom3" name="nom3"
+                       class="form-control d-none"
+                       type="text" th:value="${client.nom}">
+                <input type="submit" class="btn btn-outline-info col-md-5 font-weight-bold float-left"
+                       value="&#8630; Retour"/>
+            </form>
+            <form method="post" th:action="@{/html2pdf}">
+                <input type="submit" class="btn btn-outline-info col-md-5 font-weight-bold float-right"
+                       value="&#8630; PDF"/>
+            </form>
+        </div>
+    </div>
 </div>
 
-<div class="row m-2">
-    <div class="col-md-12 text-center m-2">
-        <form method="post" th:action="@{/rechercherClient}">
-            <input id="prenom3" name="prenom3"
-                   class="form-control d-none"
-                   type="text" th:value="${client.prenom}">
-            <input id="nom3" name="nom3"
-                   class="form-control d-none"
-                   type="text" th:value="${client.nom}">
-            <input type="submit" class="btn btn-outline-info font-weight-bold" value="&#8630; Retour"/>
-        </form>
-    </div>
-</div>
-<div class="row m-2">
-    <div class="col-md-12 text-center m-2">
-        <form method="post" th:action="@{/html2pdf}">
-            <input type="submit" class="btn btn-outline-info font-weight-bold" value="&#8630; PDF"/>
-        </form>
-    </div>
-</div>
+<footer th:replace="fragments/footer :: footer"></footer>
 </body>
 </html>

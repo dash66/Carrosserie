@@ -93,7 +93,7 @@ public class ControllerRecherche {
         List<Facturation> facturations;
 
         try {
-            k2000 = voitureDao.findByImmat(httpServletRequest.getParameter("Immatriculation"));
+            k2000 = voitureDao.findByImmat(httpServletRequest.getParameter("Immatriculation").replaceAll("[^\\w\\t\\f\\r[\\s]]", ""));
             clint = k2000.getClient();
             facturations = facturationDao.findFacturationByVoiture(k2000);
         } catch (NullPointerException e) {
@@ -157,7 +157,7 @@ public class ControllerRecherche {
         Voiture k2000;
 
         try {
-            k2000 = voitureDao.findByImmat(httpServletRequest.getParameter("Immatriculation"));
+            k2000 = voitureDao.findByImmat(httpServletRequest.getParameter("Immatriculation").replaceAll("[^\\w\\t\\f\\r[\\s]]", ""));
             clint = k2000.getClient();
         } catch (NullPointerException e) {
             ra.addFlashAttribute("message", "Ce véhicule n'existe pas !");
